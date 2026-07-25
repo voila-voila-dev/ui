@@ -1,7 +1,7 @@
 import { QuotesIcon, StarIcon } from "@phosphor-icons/react";
 import {
-	accentOrangeStarClass,
-	accentOrangeTintClass,
+	accentHighlightStarClass,
+	accentHighlightTintClass,
 } from "#/landing/lib/tones.ts";
 import { cva, type VariantProps } from "#/lib/cva.ts";
 import { cn } from "#/lib/utils.ts";
@@ -69,7 +69,7 @@ function Footer({ className, ...props }: React.ComponentProps<"div">) {
 		<div
 			data-slot="testimonial-footer"
 			className={cn(
-				"mt-6 flex items-center gap-3 border-t border-border/60 pt-5",
+				"mt-6 flex flex-wrap items-center gap-3 border-t border-border/60 pt-5",
 				className,
 			)}
 			{...props}
@@ -82,7 +82,7 @@ const testimonialAvatarVariants = cva({
 	variants: {
 		accent: {
 			primary: "bg-primary/10 text-primary",
-			orange: accentOrangeTintClass,
+			highlight: accentHighlightTintClass,
 		},
 	},
 	defaultVariants: {
@@ -94,7 +94,7 @@ type TestimonialAvatarVariants = VariantProps<typeof testimonialAvatarVariants>;
 
 const testimonialAvatarAccentOptions = [
 	"primary",
-	"orange",
+	"highlight",
 ] as const satisfies readonly NonNullable<
 	TestimonialAvatarVariants["accent"]
 >[];
@@ -160,7 +160,7 @@ function Rating({ count = 5, className, ...props }: TestimonialRatingProps) {
 					// Stars are a static decorative sequence — the index is the identity.
 					key={index}
 					weight="fill"
-					className={cn("h-3.5 w-3.5", accentOrangeStarClass)}
+					className={cn("h-3.5 w-3.5", accentHighlightStarClass)}
 				/>
 			))}
 		</div>

@@ -9,8 +9,8 @@ import {
 import { cn } from "#/lib/utils.ts";
 
 /**
- * The badge pill that opens most sections ("Nouvelle plateforme", "Pour les
- * clubs"…): tinted rounded-full chip with an optional pulse dot or icon and a
+ * The badge pill that opens most sections ("New platform", "For
+ * clients"…): tinted rounded-full chip with an optional pulse dot or icon and a
  * label in the tone color. Reproduces the inline pattern of
  * the source design.
  */

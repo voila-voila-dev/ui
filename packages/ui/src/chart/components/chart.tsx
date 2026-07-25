@@ -34,7 +34,7 @@ import { useChartContext } from "#/chart/context/chart-context.tsx";
  * `Chart.Root` frames the picture and `Chart.*` draws into it:
  *
  * ```tsx
- * <Chart.Root config={config} data={data} x={{ key: "month" }} y={{ keys: ["missions"] }}>
+ * <Chart.Root config={config} data={data} x={{ key: "month" }} y={{ keys: ["projects"] }}>
  *   <Chart.Grid />
  *   <Chart.XAxis />
  *   <Chart.Cursor />

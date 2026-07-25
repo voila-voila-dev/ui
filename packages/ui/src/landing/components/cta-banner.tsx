@@ -6,7 +6,7 @@ import { Heading, type HeadingProps } from "#/landing/components/heading.tsx";
 import { Section, type SectionProps } from "#/landing/components/section.tsx";
 import { Text, type TextProps } from "#/landing/components/text.tsx";
 import {
-	accentOrangeBlobClass,
+	accentHighlightBlobClass,
 	brandGradientClass,
 } from "#/landing/lib/tones.ts";
 import { cn } from "#/lib/utils.ts";
@@ -47,7 +47,7 @@ function Root({
 					<div
 						className={cn(
 							"pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full blur-3xl",
-							accentOrangeBlobClass,
+							accentHighlightBlobClass,
 						)}
 					/>
 

@@ -8,7 +8,7 @@ import { cva, type VariantProps } from "#/lib/cva.ts";
 import { cn } from "#/lib/utils.ts";
 
 /**
- * Grid of numbered step cards ("Étape 1/2/3"). Compose: Root (tone, columns) > Card >
+ * Grid of numbered step cards ("Step 1/2/3"). Compose: Root (tone, columns) > Card >
  * CardHeader (CardIcon + CardLabel) + CardTitle + CardDescription.
  */
 
@@ -99,7 +99,7 @@ function CardIcon({ className, ...props }: React.ComponentProps<"span">) {
 	);
 }
 
-/** The "Étape N" label next to the icon. */
+/** The "Step N" label next to the icon. */
 function CardLabel({ className, ...props }: React.ComponentProps<"span">) {
 	return (
 		<span

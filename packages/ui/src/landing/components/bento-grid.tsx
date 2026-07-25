@@ -1,5 +1,5 @@
 import {
-	accentOrangeBlobClass,
+	accentHighlightBlobClass,
 	brandGradientClass,
 } from "#/landing/lib/tones.ts";
 import { cn } from "#/lib/utils.ts";
@@ -40,7 +40,7 @@ function FeaturedItem({
 			<div
 				className={cn(
 					"pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full blur-3xl",
-					accentOrangeBlobClass,
+					accentHighlightBlobClass,
 				)}
 			/>
 			{children}
