@@ -69,7 +69,10 @@ import {
 	TableHeader,
 	TableRow,
 } from "#/components/table.tsx";
-import { PAGINATION_ELLIPSIS, usePagination } from "#/datatable/hooks/use-pagination.ts";
+import {
+	PAGINATION_ELLIPSIS,
+	usePagination,
+} from "#/datatable/hooks/use-pagination.ts";
 import { cn } from "#/lib/utils.ts";
 
 // Re-exported so consumers can type their `columns` without depending on

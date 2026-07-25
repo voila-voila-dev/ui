@@ -41,9 +41,7 @@
 		"**/*.css"
 	],
 	"exports": {
-		"./styles.css": "./src/styles.css",
-		"./styles/globals.css": "./src/styles/globals.css",
-		"./design-tokens.css": "./src/styles/design-tokens.css",
+		"./styles/*.css": "./src/styles/*.css",
 		"./lib/utils": "./src/lib/utils.ts",
 		"./lib/time-math": "./src/lib/time-math.ts",
 		"./cva": "./src/lib/cva.ts",

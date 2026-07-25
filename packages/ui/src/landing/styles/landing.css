@@ -1,7 +1,7 @@
 /*
  * Side-effect styles for the landing components of @voila.dev/ui. Import once
  * from the consuming app's global stylesheet, alongside
- * `@voila.dev/ui/styles.css` so Tailwind emits the classes the components use.
+ * `@voila.dev/ui/styles/sources.css` so Tailwind emits the classes the components use.
  */
 
 /* Seamless logo marquee: the track renders its children twice, so sliding by

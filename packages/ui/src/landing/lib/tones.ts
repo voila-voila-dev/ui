@@ -1,6 +1,6 @@
 /**
  * Shared "tone" axis for landing sections. A tone maps the brand roles from
- * `@voila.dev/ui/design-tokens.css` onto the coordinated class sets marketing sections
+ * `@voila.dev/ui/styles/themes/default.css` onto the coordinated class sets marketing sections
  * need (tinted chip, solid badge, connector line…). Class strings are full
  * literals — never composed at runtime — so Tailwind's scanner sees them.
  */
@@ -74,7 +74,7 @@ export const tonePanelClass: Record<Tone, string> = {
 
 /*
  * Accent classes for marketing highlights - built on the brand roles from
- * `@voila.dev/ui/design-tokens.css` so a rebrand is a token change, not a find-and-replace.
+ * `@voila.dev/ui/styles/themes/default.css` so a rebrand is a token change, not a find-and-replace.
  */
 
 export const accentHighlightTintClass = "bg-highlight/10 text-highlight";

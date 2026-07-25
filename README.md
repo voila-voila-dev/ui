@@ -42,7 +42,7 @@ One package, one version — each domain behind its own subpath:
 | Subpath | |
 | --- | --- |
 | `@voila.dev/ui/components/*` | 85 components, one convention. The floor everything else stands on. |
-| `@voila.dev/ui/design-tokens.css` | Your whole brand in one CSS file. Change it, everything follows. |
+| `@voila.dev/ui/styles/themes/default.css` | Your whole brand in one CSS file. Change it, everything follows. |
 | `@voila.dev/ui/email-block-editor` | The email template editor that lives in your app, not someone else's SaaS. |
 | `@voila.dev/ui/spreadsheet/*` | An editable, virtualized grid your users will mistake for a native app. |
 | `@voila.dev/ui/datatable` | Sorting, pinning, CSV export — the table you keep rebuilding, finished. |

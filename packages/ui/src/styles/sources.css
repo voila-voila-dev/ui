@@ -6,5 +6,5 @@
  * wherever the package ends up: node_modules in an app, a symlink in a
  * workspace. Consumers import this file and add nothing of their own.
  */
-@source "./";
-@source not "./**/*.test.*";
+@source "../";
+@source not "../**/*.test.*";
