@@ -4,8 +4,8 @@
  */
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@voila.dev/ui-tokens/design-tokens.css";
-@import "@voila.dev/ui-landing/styles/landing.css";
+@import "@voila.dev/ui/design-tokens.css";
+@import "@voila.dev/ui/landing/landing.css";
 
 /*
  * Live previews render real components, so their classes must be generated.
@@ -14,13 +14,6 @@
  */
 @import "@voila.dev/ui/styles.css";
 @import "@voila.dev/ui-branding/styles.css";
-@import "@voila.dev/ui-chart/styles.css";
-@import "@voila.dev/ui-datatable/styles.css";
-@import "@voila.dev/ui-email-block-editor/styles.css";
-@import "@voila.dev/ui-filter/styles.css";
-@import "@voila.dev/ui-icon/styles.css";
-@import "@voila.dev/ui-map/styles.css";
-@import "@voila.dev/ui-spreadsheet/styles.css";
 
 @custom-variant dark (&:is(.dark *));
 
