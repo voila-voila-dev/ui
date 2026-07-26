@@ -11,17 +11,17 @@ import { Input } from "#/input/components/input.tsx";
 import { ResponsiveDialog } from "#/responsive-dialog/components/responsive-dialog.tsx";
 
 interface Props {
-	readonly open: boolean;
-	readonly onOpenChange: (open: boolean) => void;
-	readonly definitions: ReadonlyArray<FilterDefinition>;
-	readonly values: FilterValues;
+	open: boolean;
+	onOpenChange: (open: boolean) => void;
+	definitions: ReadonlyArray<FilterDefinition>;
+	values: FilterValues;
 	/** Called once, on apply, with the committed record. */
-	readonly onValuesChange: (values: FilterValues) => void;
-	readonly labels: FilterLabels;
-	readonly locale: string;
+	onValuesChange: (values: FilterValues) => void;
+	labels: FilterLabels;
+	locale: string;
 	/** Free-text search, kept beside the filters when the list has one. */
-	readonly searchValue?: string;
-	readonly onSearchChange?: (value: string) => void;
+	searchValue?: string;
+	onSearchChange?: (value: string) => void;
 }
 
 /**

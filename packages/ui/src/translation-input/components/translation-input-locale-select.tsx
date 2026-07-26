@@ -1,7 +1,9 @@
+import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 import type { TranslationValue } from "#/translation-input/lib/translation-value.ts";
 
-interface Props {
+interface Props
+	extends Omit<React.ComponentProps<"select">, "value" | "onChange"> {
 	value: TranslationValue;
 	locale: string;
 	locales: ReadonlyArray<string>;
@@ -22,6 +24,8 @@ export function TranslationInputLocaleSelect({
 	onLocaleChange,
 	localeLabel,
 	localeCodes,
+	className,
+	...props
 }: Props) {
 	return (
 		<select
@@ -30,8 +34,10 @@ export function TranslationInputLocaleSelect({
 			value={locale}
 			onChange={(event) => onLocaleChange(event.target.value)}
 			className={cn(
-				"cursor-pointer appearance-none bg-transparent pr-1 text-sm font-medium text-muted-foreground outline-none",
+				"cursor-pointer appearance-none bg-transparent pr-1 font-medium text-muted-foreground text-sm outline-none",
+				className,
 			)}
+			{...props}
 		>
 			{locales.map((tag) => {
 				const filled = (value[tag] ?? "").trim().length > 0;

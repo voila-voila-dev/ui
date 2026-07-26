@@ -8,10 +8,10 @@ import type {
 } from "#/filter/types.ts";
 
 interface Props {
-	readonly definition: NumberFilterDefinition;
-	readonly value: NumberFilterValue | undefined;
-	readonly onValueChange: (value: NumberFilterValue) => void;
-	readonly labels: FilterLabels;
+	definition: NumberFilterDefinition;
+	value: NumberFilterValue | undefined;
+	onValueChange: (value: NumberFilterValue) => void;
+	labels: FilterLabels;
 }
 
 /** A single numeric value. */

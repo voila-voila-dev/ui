@@ -5,9 +5,10 @@ import {
 	PAGINATION_ELLIPSIS,
 	usePagination,
 } from "#/datatable/hooks/use-pagination.ts";
+import { cn } from "#/lib/utils.ts";
 import { Pagination } from "#/pagination/components/pagination.tsx";
 
-interface Props {
+interface Props extends Omit<React.ComponentProps<"div">, "children"> {
 	/** Zero-based page index. */
 	page: number;
 	pageSize: number;
@@ -45,6 +46,8 @@ export function DataTablePagination({
 	rangeText = ({ from, to, total: totalRows }) =>
 		`${from}-${to} of ${totalRows}`,
 	pageLabel = (pageNumber) => `Go to page ${pageNumber}`,
+	className,
+	...props
 }: Props) {
 	const pageCount = Math.max(1, Math.ceil(total / pageSize));
 	const from = total === 0 ? 0 : page * pageSize + 1;
@@ -54,7 +57,11 @@ export function DataTablePagination({
 	return (
 		<div
 			data-slot="data-table-pagination"
-			className="flex items-center justify-between gap-4 px-1 pt-3"
+			className={cn(
+				"flex items-center justify-between gap-4 px-1 pt-3",
+				className,
+			)}
+			{...props}
 		>
 			<span className="text-muted-foreground text-sm">
 				{rangeText({ from, to, total })}

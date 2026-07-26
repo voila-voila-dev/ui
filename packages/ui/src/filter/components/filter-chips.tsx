@@ -1,4 +1,5 @@
 import { XIcon } from "@phosphor-icons/react";
+import type * as React from "react";
 import { Chip } from "#/chip/components/chip.tsx";
 import {
 	clearFilterValue,
@@ -11,15 +12,14 @@ import type {
 } from "#/filter/types.ts";
 import { cn } from "#/lib/utils.ts";
 
-interface Props {
-	readonly definitions: ReadonlyArray<FilterDefinition>;
-	readonly values: FilterValues;
-	readonly onValuesChange: (values: FilterValues) => void;
-	readonly labels: FilterLabels;
-	readonly locale: string;
+interface Props extends React.ComponentProps<"div"> {
+	definitions: ReadonlyArray<FilterDefinition>;
+	values: FilterValues;
+	onValuesChange: (values: FilterValues) => void;
+	labels: FilterLabels;
+	locale: string;
 	/** Opens the editor, usually scrolled to the clicked filter. */
-	readonly onChipClick?: (key: string) => void;
-	readonly className?: string;
+	onChipClick?: (key: string) => void;
 }
 
 /**
@@ -35,6 +35,7 @@ export function FilterChips({
 	locale,
 	onChipClick,
 	className,
+	...props
 }: Props) {
 	const entries = Object.entries(values);
 	if (entries.length === 0) {
@@ -45,6 +46,7 @@ export function FilterChips({
 		<div
 			data-slot="filter-chips"
 			className={cn("flex flex-wrap items-center gap-2", className)}
+			{...props}
 		>
 			{entries.map(([key, value]) => {
 				const description = describeFilterValue({

@@ -1,15 +1,16 @@
+import type * as React from "react";
 import type { FilterLabels } from "#/filter/types.ts";
 import { cn } from "#/lib/utils.ts";
 
-interface Props {
-	readonly excluded: boolean;
-	readonly onExcludedChange: (excluded: boolean) => void;
-	readonly labels: FilterLabels;
+interface Props extends React.ComponentProps<"fieldset"> {
+	excluded: boolean;
+	onExcludedChange: (excluded: boolean) => void;
+	labels: FilterLabels;
 	/**
 	 * An empty field has nothing to invert — "is not <nothing>" filters nothing —
 	 * so the switch stays inert until the field holds a value.
 	 */
-	readonly disabled?: boolean;
+	disabled?: boolean;
 }
 
 /**
@@ -22,6 +23,8 @@ export function FilterOperatorToggle({
 	onExcludedChange,
 	labels,
 	disabled = false,
+	className,
+	...props
 }: Props) {
 	return (
 		<fieldset
@@ -30,7 +33,9 @@ export function FilterOperatorToggle({
 			className={cn(
 				"inline-flex items-center gap-0.5 rounded-full bg-muted p-1",
 				disabled && "opacity-50",
+				className,
 			)}
+			{...props}
 		>
 			<legend className="sr-only">{`${labels.is} / ${labels.isNot}`}</legend>
 			{[false, true].map((isExcluded) => (

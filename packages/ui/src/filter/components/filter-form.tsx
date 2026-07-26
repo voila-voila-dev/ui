@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { Fragment } from "react";
 import { FilterField } from "#/filter/components/filter-field.tsx";
 import { setFilterValue } from "#/filter/lib/filter-values.ts";
@@ -6,14 +7,15 @@ import type {
 	FilterLabels,
 	FilterValues,
 } from "#/filter/types.ts";
+import { cn } from "#/lib/utils.ts";
 import { Separator } from "#/separator/components/separator.tsx";
 
-interface Props {
-	readonly definitions: ReadonlyArray<FilterDefinition>;
-	readonly values: FilterValues;
-	readonly onValuesChange: (values: FilterValues) => void;
-	readonly labels: FilterLabels;
-	readonly locale: string;
+interface Props extends React.ComponentProps<"div"> {
+	definitions: ReadonlyArray<FilterDefinition>;
+	values: FilterValues;
+	onValuesChange: (values: FilterValues) => void;
+	labels: FilterLabels;
+	locale: string;
 }
 
 /**
@@ -27,9 +29,15 @@ export function FilterForm({
 	onValuesChange,
 	labels,
 	locale,
+	className,
+	...props
 }: Props) {
 	return (
-		<div className="flex flex-col gap-5" data-slot="filter-form">
+		<div
+			data-slot="filter-form"
+			className={cn("flex flex-col gap-5", className)}
+			{...props}
+		>
 			{definitions.map((definition, index) => (
 				<Fragment key={definition.key}>
 					{index > 0 && <Separator />}

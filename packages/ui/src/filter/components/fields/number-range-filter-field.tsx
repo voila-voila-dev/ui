@@ -13,10 +13,10 @@ const toInputValue = (bound: number | undefined): string =>
 	bound === undefined ? "" : String(bound);
 
 interface Props {
-	readonly definition: NumberRangeFilterDefinition;
-	readonly value: NumberRangeFilterValue | undefined;
-	readonly onValueChange: (value: NumberRangeFilterValue) => void;
-	readonly labels: FilterLabels;
+	definition: NumberRangeFilterDefinition;
+	value: NumberRangeFilterValue | undefined;
+	onValueChange: (value: NumberRangeFilterValue) => void;
+	labels: FilterLabels;
 }
 
 /** A lower and an upper bound, either of which may be left open. */

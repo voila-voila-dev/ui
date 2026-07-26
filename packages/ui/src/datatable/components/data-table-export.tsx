@@ -1,13 +1,13 @@
 import { DownloadSimpleIcon } from "@phosphor-icons/react";
 import type { Table as TanstackTable } from "@tanstack/react-table";
+import type * as React from "react";
 import { Button } from "#/button/components/button.tsx";
 import { dataTableToCsv } from "#/datatable/libs/to-csv.ts";
 
-interface Props<TData> {
+interface Props<TData> extends React.ComponentProps<typeof Button> {
 	table: TanstackTable<TData>;
 	filename?: string;
 	label?: string;
-	className?: string;
 }
 
 /** Downloads the current view as CSV. */
@@ -15,7 +15,7 @@ export function DataTableExport<TData>({
 	table,
 	filename = "export.csv",
 	label = "Export",
-	className,
+	...props
 }: Props<TData>) {
 	const download = () => {
 		const blob = new Blob([dataTableToCsv(table)], {
@@ -32,7 +32,8 @@ export function DataTableExport<TData>({
 		<Button
 			variant="outline"
 			size="sm"
-			className={className}
+			data-slot="data-table-export"
+			{...props}
 			onClick={download}
 		>
 			<DownloadSimpleIcon />

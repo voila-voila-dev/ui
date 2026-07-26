@@ -1,6 +1,7 @@
 import { PlusIcon, XIcon } from "@phosphor-icons/react";
 import { Button } from "#/button/components/button.tsx";
 import type { EmailEditorOfferBlock } from "#/email-block-editor/document/types.ts";
+import { Input } from "#/input/components/input.tsx";
 
 interface Props {
 	block: EmailEditorOfferBlock;
@@ -13,7 +14,7 @@ export function OfferFeatureSettings({ block, onChange }: Props) {
 			<span className="font-medium text-sm">Included features</span>
 			{block.features.map((feature, index) => (
 				<div key={index} className="flex items-center gap-2">
-					<input
+					<Input
 						aria-label={`Included feature ${index + 1}`}
 						value={feature}
 						onChange={(event) =>
@@ -24,7 +25,7 @@ export function OfferFeatureSettings({ block, onChange }: Props) {
 								),
 							})
 						}
-						className="h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+						className="h-8"
 					/>
 					<Button
 						variant="ghost"

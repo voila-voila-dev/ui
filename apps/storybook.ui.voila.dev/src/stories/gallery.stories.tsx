@@ -22,12 +22,12 @@ const images = [
 
 const meta = {
 	title: "UI/Gallery",
-	component: Gallery,
+	component: Gallery.Root,
 	tags: ["autodocs"],
 	args: {
 		images,
 	},
-} satisfies Meta<typeof Gallery>;
+} satisfies Meta<typeof Gallery.Root>;
 
 export default meta;
 

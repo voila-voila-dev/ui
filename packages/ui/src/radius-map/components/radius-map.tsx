@@ -1,5 +1,6 @@
 import type maplibregl from "maplibre-gl";
-import { type ReactNode, useCallback, useEffect, useState } from "react";
+import type * as React from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
 	circleBounds,
 	circlePolygon,
@@ -13,14 +14,15 @@ const FILL_LAYER = `${SOURCE_ID}-fill`;
 const LINE_LAYER = `${SOURCE_ID}-line`;
 const CENTER_LAYER = `${SOURCE_ID}-center`;
 
-interface Props {
-	readonly center: GeoPoint;
-	readonly radiusKm: number;
+interface Props
+	extends Omit<
+		React.ComponentProps<typeof MapView>,
+		"center" | "zoom" | "onReady"
+	> {
+	center: GeoPoint;
+	radiusKm: number;
 	/** Circle fill/stroke colour. Defaults to the kit's deep blue. */
-	readonly color?: string;
-	readonly className?: string;
-	/** Shown when the environment has no WebGL; this package ships no copy. */
-	readonly unavailableFallback?: ReactNode;
+	color?: string;
 }
 
 /**
@@ -34,6 +36,7 @@ export function RadiusMap({
 	color = "#1e3a8a",
 	className,
 	unavailableFallback,
+	...props
 }: Props) {
 	const [map, setMap] = useState<maplibregl.Map | null>(null);
 
@@ -128,6 +131,8 @@ export function RadiusMap({
 			options={{ attributionControl: false }}
 			onReady={handleReady}
 			unavailableFallback={unavailableFallback}
+			data-slot="radius-map"
+			{...props}
 		/>
 	);
 }

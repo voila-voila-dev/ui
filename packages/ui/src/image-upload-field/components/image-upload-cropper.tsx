@@ -1,10 +1,10 @@
 import type * as React from "react";
 import { ImageCropper } from "#/image-cropper/components/image-cropper.tsx";
-import { CropControls } from "#/image-upload-field/components/crop-controls.tsx";
+import { ImageUploadFieldCropControls } from "#/image-upload-field/components/image-upload-field-crop-controls.tsx";
 import type { ImageUploadShape } from "#/image-upload-field/lib/image-upload-field-types.ts";
 import { Progress } from "#/progress/components/progress.tsx";
 
-interface Props {
+interface Props extends React.ComponentProps<typeof ImageCropper.Root> {
 	shape: ImageUploadShape;
 	aspectRatio: number;
 	isUploading: boolean;
@@ -31,6 +31,7 @@ export function ImageUploadCropper({
 	hasPicked,
 	onPickedChange,
 	onFileCropped,
+	...props
 }: Props) {
 	const isCircle = shape === "circle";
 	// The dropzone renders its own chrome around plain text, so a rich node has
@@ -43,6 +44,7 @@ export function ImageUploadCropper({
 			aspectRatio={aspectRatio}
 			disabled={isUploading}
 			onImageChange={(file) => onPickedChange(file !== null)}
+			{...props}
 		>
 			<ImageCropper.Dropzone
 				label={dropzoneLabel}
@@ -53,7 +55,7 @@ export function ImageUploadCropper({
 			{isUploading ? (
 				<Progress.Root value={null} data-slot="image-upload-field-progress" />
 			) : null}
-			<CropControls
+			<ImageUploadFieldCropControls
 				hasPicked={hasPicked}
 				isUploading={isUploading}
 				cancelLabel={cancelLabel}

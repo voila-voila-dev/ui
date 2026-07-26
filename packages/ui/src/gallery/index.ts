@@ -1,1 +1,2 @@
-export { Gallery, type GalleryImage } from "#/gallery/components/gallery.tsx";
+export { Gallery } from "#/gallery/components/gallery.tsx";
+export type { GalleryImage } from "#/gallery/lib/gallery-types.ts";

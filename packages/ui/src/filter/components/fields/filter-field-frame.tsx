@@ -1,23 +1,25 @@
 import { XIcon } from "@phosphor-icons/react";
+import type * as React from "react";
 import type { ReactNode } from "react";
 import { Button } from "#/button/components/button.tsx";
 import type { FilterLabels } from "#/filter/types.ts";
+import { cn } from "#/lib/utils.ts";
 
-interface Props {
-	readonly label: string;
-	readonly description?: string;
+interface Props extends React.ComponentProps<"div"> {
+	label: string;
+	description?: string;
 	/**
 	 * Ties the visible label to the control it names. Omitted by the group
 	 * fields (a `<label>` would otherwise rename their first button), which name
 	 * themselves through their fieldset legend.
 	 */
-	readonly controlId?: string;
+	controlId?: string;
 	/** The "is / is not" switch, when the field supports exclusion. */
-	readonly operator?: ReactNode;
+	operator?: ReactNode;
 	/** Omitted while the field is empty — nothing to clear. */
-	readonly onClear?: () => void;
-	readonly labels: FilterLabels;
-	readonly children: ReactNode;
+	onClear?: () => void;
+	labels: FilterLabels;
+	children: ReactNode;
 }
 
 /**
@@ -33,9 +35,15 @@ export function FilterFieldFrame({
 	onClear,
 	labels,
 	children,
+	className,
+	...props
 }: Props) {
 	return (
-		<div className="flex min-w-0 flex-col gap-2" data-slot="filter-field">
+		<div
+			data-slot="filter-field"
+			className={cn("flex min-w-0 flex-col gap-2", className)}
+			{...props}
+		>
 			{/* `min-h-9` is the clear button's height: the row reserves it whether or
 			    not the button is there, so filling a field doesn't shove the one
 			    below it down. */}

@@ -9,11 +9,11 @@ import type {
 } from "#/filter/types.ts";
 
 interface Props {
-	readonly definition: DateRangeFilterDefinition;
-	readonly value: DateRangeFilterValue | undefined;
-	readonly onValueChange: (value: DateRangeFilterValue) => void;
-	readonly labels: FilterLabels;
-	readonly locale: string;
+	definition: DateRangeFilterDefinition;
+	value: DateRangeFilterValue | undefined;
+	onValueChange: (value: DateRangeFilterValue) => void;
+	labels: FilterLabels;
+	locale: string;
 }
 
 /** A start and an end date, either of which may be left open. */

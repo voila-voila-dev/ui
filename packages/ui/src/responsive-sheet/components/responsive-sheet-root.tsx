@@ -1,15 +1,11 @@
 import * as React from "react";
 import { Drawer } from "#/drawer/components/drawer.tsx";
 import { useIsMobile } from "#/hooks/use-mobile.ts";
+import type { ResponsiveOverlayRootProps } from "#/lib/responsive-overlay.ts";
 import { ResponsiveSheetContext } from "#/responsive-sheet/context/responsive-sheet-context.ts";
 import { Sheet } from "#/sheet/components/sheet.tsx";
 
-interface Props {
-	open?: boolean;
-	defaultOpen?: boolean;
-	onOpenChange?: (open: boolean) => void;
-	children?: React.ReactNode;
-}
+interface Props extends ResponsiveOverlayRootProps {}
 
 // The root owns the open state so it survives crossing the breakpoint while
 // open: the two halves are different component trees, so uncontrolled state

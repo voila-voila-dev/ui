@@ -4,7 +4,7 @@ import {
 	SortableContext,
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import type { ReactNode } from "react";
+import type * as React from "react";
 import {
 	CONTAINER_PREFIX,
 	ROOT_CONTAINER,
@@ -14,13 +14,10 @@ import type { EmailEditorContainerId } from "#/email-block-editor/document/reduc
 const containerDroppableId = (containerId: EmailEditorContainerId): string =>
 	containerId === null ? ROOT_CONTAINER : `${CONTAINER_PREFIX}${containerId}`;
 
-interface Props {
+interface Props extends React.ComponentProps<"div"> {
 	containerId: EmailEditorContainerId;
 	blockIds: ReadonlyArray<string>;
 	layout: "list" | "grid";
-	className?: string;
-	style?: React.CSSProperties;
-	children: ReactNode;
 }
 
 /**
@@ -33,9 +30,8 @@ export function SortableBlockContainer({
 	containerId,
 	blockIds,
 	layout,
-	className,
-	style,
 	children,
+	...props
 }: Props) {
 	const { setNodeRef } = useDroppable({
 		id: containerDroppableId(containerId),
@@ -47,7 +43,7 @@ export function SortableBlockContainer({
 				layout === "grid" ? rectSortingStrategy : verticalListSortingStrategy
 			}
 		>
-			<div ref={setNodeRef} className={className} style={style}>
+			<div ref={setNodeRef} {...props}>
 				{children}
 			</div>
 		</SortableContext>

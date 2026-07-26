@@ -1,4 +1,5 @@
 import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox";
+import type * as React from "react";
 import { useMemo, useState } from "react";
 import { Button } from "#/button/components/button.tsx";
 import { Combobox } from "#/combobox/components/combobox.tsx";
@@ -33,7 +34,14 @@ const chunkIntoRows = (
 	return rows;
 };
 
-interface Props {
+// Extends the trigger `Button`: the picker's own root is a headless
+// `Combobox.Root`, so the trigger is the only element a consumer can style
+// or address.
+interface Props
+	extends Omit<
+		React.ComponentProps<typeof Button>,
+		"value" | "defaultValue" | "onChange" | "children"
+	> {
 	/** Controlled selection; omit to let the picker manage its own state. */
 	value?: PhosphorIconName | (string & {}) | null;
 	/** Initial selection for uncontrolled usage. */
@@ -46,10 +54,8 @@ interface Props {
 	moreLabel?: (count: number) => string;
 	/** When set, renders a hidden input so plain form posts include the icon. */
 	name?: string;
-	disabled?: boolean;
 	/** Keep the popover open after a pick, for rapid-compare flows. */
 	closeOnSelect?: boolean;
-	className?: string;
 }
 
 export function IconPicker({
@@ -65,6 +71,7 @@ export function IconPicker({
 	disabled = false,
 	closeOnSelect = true,
 	className,
+	...props
 }: Props) {
 	const [query, setQuery] = useState("");
 
@@ -119,6 +126,7 @@ export function IconPicker({
 						variant="outline"
 						disabled={disabled}
 						className={cn("w-full justify-start gap-2", className)}
+						{...props}
 					/>
 				}
 			>

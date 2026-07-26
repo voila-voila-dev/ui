@@ -19,10 +19,10 @@ import { ResponsiveSelectValue } from "#/responsive-select/components/responsive
  */
 export const ResponsiveSelect = {
 	Root: ResponsiveSelectRoot,
-	Trigger: ResponsiveSelectTrigger,
-	Value: ResponsiveSelectValue,
 	Content: ResponsiveSelectContent,
 	Group: ResponsiveSelectGroup,
-	Label: ResponsiveSelectLabel,
 	Item: ResponsiveSelectItem,
+	Label: ResponsiveSelectLabel,
+	Trigger: ResponsiveSelectTrigger,
+	Value: ResponsiveSelectValue,
 };

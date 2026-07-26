@@ -14,6 +14,7 @@ interface Props extends SheetPrimitive.Popup.Props {
 	size?: SheetContentSize;
 	showCloseButton?: boolean;
 	closeButtonLabel?: string;
+	overlayClassName?: string;
 }
 
 export function SheetContent({
@@ -23,11 +24,12 @@ export function SheetContent({
 	size = "default",
 	showCloseButton = true,
 	closeButtonLabel = "Close",
+	overlayClassName,
 	...props
 }: Props) {
 	return (
 		<SheetPortal>
-			<SheetOverlay />
+			<SheetOverlay className={overlayClassName} />
 			<SheetPrimitive.Popup
 				data-slot="sheet-content"
 				data-side={side}

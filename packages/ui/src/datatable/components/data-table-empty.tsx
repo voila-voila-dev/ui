@@ -1,7 +1,8 @@
 import { ListMagnifyingGlassIcon } from "@phosphor-icons/react";
+import type * as React from "react";
 import { Empty } from "#/empty/components/empty.tsx";
 
-interface Props {
+interface Props extends React.ComponentProps<typeof Empty.Root> {
 	title?: string;
 	description?: string;
 }
@@ -10,9 +11,10 @@ interface Props {
 export function DataTableEmpty({
 	title = "No results",
 	description = "Try adjusting your search or filters.",
+	...props
 }: Props) {
 	return (
-		<Empty.Root className="py-8">
+		<Empty.Root className="py-8" {...props}>
 			<Empty.Header>
 				<Empty.Media variant="icon">
 					<ListMagnifyingGlassIcon />

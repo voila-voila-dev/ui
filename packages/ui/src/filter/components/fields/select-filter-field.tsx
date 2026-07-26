@@ -23,10 +23,10 @@ function toggleValue(
 }
 
 interface Props {
-	readonly definition: SelectFilterDefinition;
-	readonly value: SelectFilterValue | undefined;
-	readonly onValueChange: (value: SelectFilterValue) => void;
-	readonly labels: FilterLabels;
+	definition: SelectFilterDefinition;
+	value: SelectFilterValue | undefined;
+	onValueChange: (value: SelectFilterValue) => void;
+	labels: FilterLabels;
 }
 
 /** Single or multiple choice among a known set, optionally inverted. */

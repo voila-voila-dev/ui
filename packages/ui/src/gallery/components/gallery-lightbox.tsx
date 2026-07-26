@@ -4,10 +4,8 @@ import type { CarouselApi } from "#/carousel/context/carousel-context.tsx";
 import { Dialog } from "#/dialog/components/dialog.tsx";
 import type { GalleryImage } from "#/gallery/lib/gallery-types.ts";
 
-interface Props {
+interface Props extends React.ComponentProps<typeof Dialog.Root> {
 	images: ReadonlyArray<GalleryImage>;
-	open: boolean;
-	onOpenChange: (open: boolean) => void;
 	startIndex?: number;
 }
 
@@ -16,11 +14,12 @@ interface Props {
  * / `onOpenChange`; `startIndex` selects which image is shown first. Swipe or
  * use the prev/next controls (embla handles touch on mobile).
  */
-export function Lightbox({
+export function GalleryLightbox({
 	images,
 	open,
 	onOpenChange,
 	startIndex = 0,
+	...props
 }: Props) {
 	const [api, setApi] = React.useState<CarouselApi>();
 
@@ -30,7 +29,7 @@ export function Lightbox({
 	}, [open, api, startIndex]);
 
 	return (
-		<Dialog.Root open={open} onOpenChange={onOpenChange}>
+		<Dialog.Root open={open} onOpenChange={onOpenChange} {...props}>
 			<Dialog.Content
 				size="xl"
 				closeButtonLabel="Close gallery"

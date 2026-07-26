@@ -1,38 +1,21 @@
+import type * as React from "react";
 import { InputGroup } from "#/input-group/components/input-group.tsx";
 
-interface Props {
-	readonly id?: string;
-	readonly value: string;
-	readonly onChange: (raw: string) => void;
-	readonly unit?: string;
-	readonly placeholder?: string;
-	readonly min?: number;
-	readonly max?: number;
-	readonly step?: number;
+interface Props
+	extends Omit<React.ComponentProps<typeof InputGroup.Input>, "onChange"> {
+	onChange: (raw: string) => void;
+	/** Rendered as a trailing addon, e.g. `km` or `€`. */
+	unit?: string;
 }
 
-export function NumberField({
-	id,
-	value,
-	onChange,
-	unit,
-	placeholder,
-	min,
-	max,
-	step,
-}: Props) {
+export function NumberField({ onChange, unit, ...props }: Props) {
 	return (
-		<InputGroup.Root>
+		<InputGroup.Root data-slot="filter-number-field">
 			<InputGroup.Input
-				id={id}
 				type="number"
 				inputMode="decimal"
-				value={value}
-				placeholder={placeholder}
-				min={min}
-				max={max}
-				step={step}
 				onChange={(event) => onChange(event.target.value)}
+				{...props}
 			/>
 			{unit !== undefined && (
 				<InputGroup.Addon align="inline-end">{unit}</InputGroup.Addon>

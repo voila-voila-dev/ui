@@ -22,8 +22,8 @@ function usePlaceSearch(
 	query: string,
 	searchPlaces: GeoRadiusFilterDefinition["searchPlaces"],
 ): {
-	readonly results: ReadonlyArray<PlaceSuggestion>;
-	readonly busy: boolean;
+	results: ReadonlyArray<PlaceSuggestion>;
+	busy: boolean;
 } {
 	const [results, setResults] = useState<ReadonlyArray<PlaceSuggestion>>([]);
 	const [busy, setBusy] = useState(false);
@@ -65,10 +65,10 @@ function usePlaceSearch(
 }
 
 interface Props {
-	readonly definition: GeoRadiusFilterDefinition;
-	readonly value: GeoRadiusFilterValue | undefined;
-	readonly onValueChange: (value: GeoRadiusFilterValue | undefined) => void;
-	readonly labels: FilterLabels;
+	definition: GeoRadiusFilterDefinition;
+	value: GeoRadiusFilterValue | undefined;
+	onValueChange: (value: GeoRadiusFilterValue | undefined) => void;
+	labels: FilterLabels;
 }
 
 /**

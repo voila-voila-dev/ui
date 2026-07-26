@@ -7,10 +7,10 @@ import type {
 import { cn } from "#/lib/utils.ts";
 
 interface Props {
-	readonly definition: BooleanFilterDefinition;
-	readonly value: BooleanFilterValue | undefined;
-	readonly onValueChange: (value: BooleanFilterValue | undefined) => void;
-	readonly labels: FilterLabels;
+	definition: BooleanFilterDefinition;
+	value: BooleanFilterValue | undefined;
+	onValueChange: (value: BooleanFilterValue | undefined) => void;
+	labels: FilterLabels;
 }
 
 /**

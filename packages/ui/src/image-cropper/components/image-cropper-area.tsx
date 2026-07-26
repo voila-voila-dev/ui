@@ -23,17 +23,16 @@ const KEYBOARD_PAN_OFFSETS: Record<string, ImageCropperPoint> = {
 	ArrowDown: { x: 0, y: KEYBOARD_PAN_STEP },
 };
 
-interface Props {
+interface Props extends React.ComponentProps<"div"> {
 	/** Visual mask drawn over the viewport; "circle" pairs with aspectRatio 1. */
 	shape?: "rectangle" | "circle";
-	"aria-label"?: string;
-	className?: string;
 }
 
 export function ImageCropperArea({
 	shape = "rectangle",
 	"aria-label": ariaLabel = "Drag to move the image, pinch or scroll to zoom",
 	className,
+	...props
 }: Props) {
 	const context = useImageCropperContext("ImageCropper.Area");
 	const {
@@ -241,6 +240,7 @@ export function ImageCropperArea({
 			onPointerCancel={releasePointer}
 			onLostPointerCapture={releasePointer}
 			onKeyDown={handleKeyDown}
+			{...props}
 		>
 			{/* translate(-50%, -50%) centers the image; the screen-space offset and
 			    cover scale × zoom come from the crop transform. */}

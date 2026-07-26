@@ -1,4 +1,5 @@
 import { ResponsiveSheetBody } from "#/responsive-sheet/components/responsive-sheet-body.tsx";
+import { ResponsiveSheetClose } from "#/responsive-sheet/components/responsive-sheet-close.tsx";
 import { ResponsiveSheetContent } from "#/responsive-sheet/components/responsive-sheet-content.tsx";
 import { ResponsiveSheetDescription } from "#/responsive-sheet/components/responsive-sheet-description.tsx";
 import { ResponsiveSheetFooter } from "#/responsive-sheet/components/responsive-sheet-footer.tsx";
@@ -17,6 +18,7 @@ import { ResponsiveSheetTrigger } from "#/responsive-sheet/components/responsive
 export const ResponsiveSheet = {
 	Root: ResponsiveSheetRoot,
 	Body: ResponsiveSheetBody,
+	Close: ResponsiveSheetClose,
 	Content: ResponsiveSheetContent,
 	Description: ResponsiveSheetDescription,
 	Footer: ResponsiveSheetFooter,

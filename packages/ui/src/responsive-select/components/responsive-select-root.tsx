@@ -36,6 +36,18 @@ function buildItemsRecord(children: React.ReactNode): Record<string, string> {
 	return record;
 }
 
+// Item/Label content must be plain text so a native `<option>` can render it.
+interface Props {
+	value?: string;
+	defaultValue?: string;
+	onValueChange?: (value: string) => void;
+	/** Submitted under this name (hidden input on desktop, the `<select>` on mobile). */
+	name?: string;
+	disabled?: boolean;
+	required?: boolean;
+	children?: React.ReactNode;
+}
+
 export function ResponsiveSelectRoot({
 	value,
 	defaultValue,
@@ -131,16 +143,4 @@ export function ResponsiveSelectRoot({
 			</NativeOptionsFromContent>
 		</NativeSelect.Root>
 	);
-}
-
-// Item/Label content must be plain text so a native `<option>` can render it.
-interface Props {
-	value?: string;
-	defaultValue?: string;
-	onValueChange?: (value: string) => void;
-	/** Submitted under this name (hidden input on desktop, the `<select>` on mobile). */
-	name?: string;
-	disabled?: boolean;
-	required?: boolean;
-	children?: React.ReactNode;
 }

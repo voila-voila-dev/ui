@@ -4,12 +4,13 @@ import { ChartTooltipContent } from "#/chart/components/chart-tooltip-content.ts
 import { useChartContext } from "#/chart/context/chart-context.tsx";
 import { cn } from "#/lib/utils.ts";
 
-interface Props {
+// `content` is omitted from the base: React declares it on every element as
+// the `<meta content>` string.
+interface Props extends Omit<React.ComponentProps<"div">, "content"> {
 	/** Replaces the default body. */
-	readonly content?: React.ReactNode;
+	content?: React.ReactNode;
 	/** Pixels between the pointer and the panel. */
-	readonly offset?: number;
-	readonly className?: string;
+	offset?: number;
 }
 
 /** Room the panel needs above the pointer before it stops flipping upwards. */
@@ -27,7 +28,12 @@ function clamp(value: number, low: number, high: number): number {
  * separate component so a caller can replace the body without reimplementing
  * the positioning, which is the fiddly half.
  */
-export function ChartTooltip({ content, offset = 12, className }: Props) {
+export function ChartTooltip({
+	content,
+	offset = 12,
+	className,
+	...props
+}: Props) {
 	const { active, chartId, margin, overlay } = useChartContext();
 
 	if (active === null || overlay === null) {
@@ -65,6 +71,7 @@ export function ChartTooltip({ content, offset = 12, className }: Props) {
 				className,
 			)}
 			style={{ left, top }}
+			{...props}
 		>
 			{content ?? <ChartTooltipContent />}
 		</div>,

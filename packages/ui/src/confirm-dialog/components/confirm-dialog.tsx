@@ -3,14 +3,19 @@ import { AlertDialog } from "#/alert-dialog/components/alert-dialog.tsx";
 import { Button } from "#/button/components/button.tsx";
 import type { ButtonVariant } from "#/button/components/button-variants.ts";
 
-interface Props {
+interface Props
+	extends Omit<
+		React.ComponentProps<typeof AlertDialog.Root>,
+		"children" | "onOpenChange"
+	> {
 	/**
 	 * Element rendered as the dialog trigger, carrying its own label, e.g.
 	 * `<Button variant="destructive">Delete</Button>`. Omit it to drive the
 	 * dialog through `open`/`onOpenChange` instead.
 	 */
 	trigger?: React.ReactElement<Record<string, unknown>>;
-	open?: boolean;
+	// Narrower than Base UI's `(open, eventDetails)`: the dialog also opens and
+	// closes itself around `onConfirm`, where there is no originating event.
 	onOpenChange?: (open: boolean) => void;
 	title: React.ReactNode;
 	description?: React.ReactNode;
@@ -48,6 +53,7 @@ export function ConfirmDialog({
 	variant = "default",
 	onConfirm,
 	onCancel,
+	...props
 }: Props) {
 	const [uncontrolledOpen, setUncontrolledOpen] = React.useState(false);
 	const [pending, setPending] = React.useState(false);
@@ -84,7 +90,7 @@ export function ConfirmDialog({
 	};
 
 	return (
-		<AlertDialog.Root open={open} onOpenChange={handleOpenChange}>
+		<AlertDialog.Root {...props} open={open} onOpenChange={handleOpenChange}>
 			{trigger ? <AlertDialog.Trigger render={trigger} /> : null}
 			<AlertDialog.Content size={size}>
 				<AlertDialog.Header>

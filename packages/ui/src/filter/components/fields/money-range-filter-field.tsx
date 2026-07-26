@@ -19,10 +19,10 @@ const toMinorUnits = (raw: string): number | undefined =>
 		: Math.round(Number(raw) * 100);
 
 interface Props {
-	readonly definition: MoneyRangeFilterDefinition;
-	readonly value: MoneyRangeFilterValue | undefined;
-	readonly onValueChange: (value: MoneyRangeFilterValue) => void;
-	readonly labels: FilterLabels;
+	definition: MoneyRangeFilterDefinition;
+	value: MoneyRangeFilterValue | undefined;
+	onValueChange: (value: MoneyRangeFilterValue) => void;
+	labels: FilterLabels;
 }
 
 /** A price floor and ceiling, either of which may be left open. */

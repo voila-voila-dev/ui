@@ -1,12 +1,12 @@
 import { ColumnsIcon } from "@phosphor-icons/react";
 import type { Table as TanstackTable } from "@tanstack/react-table";
+import type * as React from "react";
 import { Button } from "#/button/components/button.tsx";
 import { DropdownMenu } from "#/dropdown-menu/components/dropdown-menu.tsx";
 
-interface Props<TData> {
+interface Props<TData> extends React.ComponentProps<typeof Button> {
 	table: TanstackTable<TData>;
 	label?: string;
-	className?: string;
 }
 
 /**
@@ -16,7 +16,7 @@ interface Props<TData> {
 export function DataTableViewOptions<TData>({
 	table,
 	label = "Columns",
-	className,
+	...props
 }: Props<TData>) {
 	const columns = table
 		.getAllLeafColumns()
@@ -25,7 +25,12 @@ export function DataTableViewOptions<TData>({
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger
 				render={
-					<Button variant="outline" size="sm" className={className}>
+					<Button
+						variant="outline"
+						size="sm"
+						data-slot="data-table-view-options"
+						{...props}
+					>
 						<ColumnsIcon />
 						{label}
 					</Button>

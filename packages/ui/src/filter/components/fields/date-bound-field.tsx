@@ -16,13 +16,13 @@ const fromIsoDay = (isoDate: string | undefined): Date | null => {
 };
 
 interface Props {
-	readonly id?: string;
-	readonly value: string | undefined;
-	readonly onValueChange: (isoDate: string | undefined) => void;
-	readonly placeholder: string;
-	readonly min?: string;
-	readonly max?: string;
-	readonly locale: string;
+	id?: string;
+	value: string | undefined;
+	onValueChange: (isoDate: string | undefined) => void;
+	placeholder: string;
+	min?: string;
+	max?: string;
+	locale: string;
 }
 
 /**

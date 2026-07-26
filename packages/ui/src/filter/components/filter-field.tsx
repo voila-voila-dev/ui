@@ -13,11 +13,11 @@ import type {
 } from "#/filter/types.ts";
 
 interface Props {
-	readonly definition: FilterDefinition;
-	readonly value: FilterValue | undefined;
-	readonly onValueChange: (value: FilterValue | undefined) => void;
-	readonly labels: FilterLabels;
-	readonly locale: string;
+	definition: FilterDefinition;
+	value: FilterValue | undefined;
+	onValueChange: (value: FilterValue | undefined) => void;
+	labels: FilterLabels;
+	locale: string;
 }
 
 /**

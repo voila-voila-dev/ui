@@ -8,9 +8,9 @@ import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"button"> {
 	/** Current search text, or the placeholder when nothing is searched yet. */
-	readonly summary?: string;
-	readonly activeCount: number;
-	readonly labels: FilterLabels;
+	summary?: string;
+	activeCount: number;
+	labels: FilterLabels;
 }
 
 /**

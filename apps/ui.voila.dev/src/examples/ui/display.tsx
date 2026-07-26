@@ -423,7 +423,7 @@ const galleryImages = [
 ];
 
 export function GalleryExample() {
-	return <Gallery images={galleryImages} />;
+	return <Gallery.Root images={galleryImages} />;
 }
 
 export function CarouselExample() {

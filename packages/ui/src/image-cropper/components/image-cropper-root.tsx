@@ -14,7 +14,7 @@ import {
 } from "#/image-cropper/lib/image-cropper-geometry.ts";
 import { cn } from "#/lib/utils.ts";
 
-interface Props {
+interface Props extends React.ComponentProps<"div"> {
 	/** Width / height ratio of the crop viewport, e.g. 1 for avatars or 16 / 9 for covers. */
 	aspectRatio?: number;
 	/** Lowest zoom level; 1 means the image exactly covers the viewport. */
@@ -35,8 +35,6 @@ interface Props {
 	onImageChange?: (file: File | null) => void;
 	/** Reports the crop rectangle in natural image pixels whenever it moves. */
 	onCropChange?: (cropArea: ImageCropperCropArea) => void;
-	className?: string;
-	children?: React.ReactNode;
 }
 
 export function ImageCropperRoot({
@@ -51,6 +49,7 @@ export function ImageCropperRoot({
 	onCropChange,
 	className,
 	children,
+	...props
 }: Props) {
 	const fileInputRef = React.useRef<HTMLInputElement>(null);
 	const imageElementRef = React.useRef<HTMLImageElement | null>(null);
@@ -287,6 +286,7 @@ export function ImageCropperRoot({
 			<div
 				data-slot="image-cropper"
 				className={cn("flex w-full flex-col gap-3", className)}
+				{...props}
 			>
 				{children}
 				<input

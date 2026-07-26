@@ -9,7 +9,9 @@ import {
 } from "#/datatable/hooks/use-data-table.ts";
 import type { DataTableDensity } from "#/datatable/libs/density.ts";
 
-interface Props<TData, TValue> extends UseDataTableOptions<TData, TValue> {
+interface Props<TData, TValue>
+	extends UseDataTableOptions<TData, TValue>,
+		Omit<React.ComponentProps<"div">, "children"> {
 	/** When set, rows become clickable and invoke this with the row's data. */
 	onRowClick?: (row: TData) => void;
 	/** Refetch in progress: keeps the current rows visible under a spinner. */
@@ -42,7 +44,6 @@ interface Props<TData, TValue> extends UseDataTableOptions<TData, TValue> {
 	renderMobileCard?: (row: TData) => React.ReactNode;
 	/** Row height. `compact` fits about a third more rows on a screen. */
 	density?: DataTableDensity;
-	className?: string;
 }
 
 /**
@@ -85,6 +86,7 @@ export function DataTableRoot<TData, TValue>({
 	renderExpandedRow,
 	globalFilter,
 	className,
+	...props
 }: Props<TData, TValue>) {
 	const table = useDataTable({
 		columns,
@@ -111,7 +113,7 @@ export function DataTableRoot<TData, TValue>({
 	const rows = table.getRowModel().rows;
 
 	return (
-		<div data-slot="data-table" className={className}>
+		<div data-slot="data-table" className={className} {...props}>
 			{toolbar !== undefined && (
 				<div className="pb-3">
 					{typeof toolbar === "function" ? toolbar(table) : toolbar}

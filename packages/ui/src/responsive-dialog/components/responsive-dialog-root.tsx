@@ -2,14 +2,10 @@ import * as React from "react";
 import { Dialog } from "#/dialog/components/dialog.tsx";
 import { Drawer } from "#/drawer/components/drawer.tsx";
 import { useIsMobile } from "#/hooks/use-mobile.ts";
+import type { ResponsiveOverlayRootProps } from "#/lib/responsive-overlay.ts";
 import { ResponsiveDialogContext } from "#/responsive-dialog/context/responsive-dialog-context.ts";
 
-interface Props {
-	open?: boolean;
-	defaultOpen?: boolean;
-	onOpenChange?: (open: boolean) => void;
-	children?: React.ReactNode;
-}
+interface Props extends ResponsiveOverlayRootProps {}
 
 // The root owns the open state so it survives crossing the breakpoint while
 // open — the two halves are different component trees, so uncontrolled state

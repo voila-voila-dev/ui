@@ -2,12 +2,11 @@ import { CheckIcon, CopyIcon } from "@phosphor-icons/react";
 import * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-interface Props {
+interface Props extends React.ComponentProps<"button"> {
 	/** The text written to the clipboard. */
 	value: string;
 	/** What's rendered, when it differs from the copied value (e.g. a short id). */
 	label?: string;
-	className?: string;
 	/** Render the label in muted secondary text. */
 	muted?: boolean;
 	copyLabel?: string;
@@ -28,6 +27,7 @@ export function CopyableText({
 	muted = false,
 	copyLabel = "Copy",
 	copiedLabel = "Copied",
+	...props
 }: Props) {
 	const [copied, setCopied] = React.useState(false);
 
@@ -49,8 +49,10 @@ export function CopyableText({
 				muted && "text-muted-foreground",
 				className,
 			)}
+			{...props}
 			onClick={(event) => {
 				event.stopPropagation();
+				props.onClick?.(event);
 				copy();
 			}}
 		>

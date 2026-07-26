@@ -9,10 +9,10 @@ import type {
 import { Input } from "#/input/components/input.tsx";
 
 interface Props {
-	readonly definition: TextFilterDefinition;
-	readonly value: TextFilterValue | undefined;
-	readonly onValueChange: (value: TextFilterValue) => void;
-	readonly labels: FilterLabels;
+	definition: TextFilterDefinition;
+	value: TextFilterValue | undefined;
+	onValueChange: (value: TextFilterValue) => void;
+	labels: FilterLabels;
 }
 
 /** Free-text contains/does-not-contain filter. */

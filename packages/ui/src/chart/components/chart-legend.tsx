@@ -4,10 +4,11 @@ import { ChartLegendContent } from "#/chart/components/chart-legend-content.tsx"
 import { useChartContext } from "#/chart/context/chart-context.tsx";
 import { cn } from "#/lib/utils.ts";
 
-interface Props {
-	readonly content?: React.ReactNode;
-	readonly align?: "top" | "bottom";
-	readonly className?: string;
+// `content` is omitted from the base: React declares it on every element as
+// the `<meta content>` string.
+interface Props extends Omit<React.ComponentProps<"div">, "content"> {
+	content?: React.ReactNode;
+	align?: "top" | "bottom";
 }
 
 /**
@@ -15,7 +16,12 @@ interface Props {
  * `Chart.Root` like every other part while still being ordinary HTML — leave
  * room for it in the root's `margin`.
  */
-export function ChartLegend({ content, align = "bottom", className }: Props) {
+export function ChartLegend({
+	content,
+	align = "bottom",
+	className,
+	...props
+}: Props) {
 	const { overlay } = useChartContext();
 	if (overlay === null) {
 		return null;
@@ -30,6 +36,7 @@ export function ChartLegend({ content, align = "bottom", className }: Props) {
 				align === "top" ? "top-0" : "bottom-0",
 				className,
 			)}
+			{...props}
 		>
 			{content ?? <ChartLegendContent />}
 		</div>,

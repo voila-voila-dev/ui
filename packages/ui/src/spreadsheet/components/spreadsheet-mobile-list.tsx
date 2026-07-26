@@ -1,6 +1,7 @@
 import type * as React from "react";
+import { cn } from "#/lib/utils.ts";
 
-interface Props {
+interface Props extends React.ComponentProps<"div"> {
 	rowCount: number | undefined;
 	renderMobileRow: (index: number) => React.ReactNode;
 	mobileAddRow: React.ReactNode;
@@ -11,9 +12,15 @@ export function SpreadsheetMobileList({
 	rowCount,
 	renderMobileRow,
 	mobileAddRow,
+	className,
+	...props
 }: Props) {
 	return (
-		<div data-slot="spreadsheet-mobile-list" className="flex flex-col gap-3">
+		<div
+			data-slot="spreadsheet-mobile-list"
+			className={cn("flex flex-col gap-3", className)}
+			{...props}
+		>
 			{rowCount !== undefined && rowCount > 0 ? (
 				<ul className="flex flex-col gap-2">
 					{Array.from({ length: rowCount }, (_, index) => (

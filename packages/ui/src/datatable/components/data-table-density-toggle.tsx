@@ -1,14 +1,14 @@
 import { RowsIcon } from "@phosphor-icons/react";
+import type * as React from "react";
 import { Button } from "#/button/components/button.tsx";
 import type { DataTableDensity } from "#/datatable/libs/density.ts";
 import { DropdownMenu } from "#/dropdown-menu/components/dropdown-menu.tsx";
 
-interface Props {
+interface Props extends Omit<React.ComponentProps<typeof Button>, "onChange"> {
 	density: DataTableDensity;
 	onDensityChange: (density: DataTableDensity) => void;
 	label?: string;
 	labels?: Record<DataTableDensity, string>;
-	className?: string;
 }
 
 /** Row-height switch, for tables people scan rather than read. */
@@ -17,13 +17,18 @@ export function DataTableDensityToggle({
 	onDensityChange,
 	label = "Density",
 	labels = { comfortable: "Comfortable", compact: "Compact" },
-	className,
+	...props
 }: Props) {
 	return (
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger
 				render={
-					<Button variant="outline" size="sm" className={className}>
+					<Button
+						variant="outline"
+						size="sm"
+						data-slot="data-table-density-toggle"
+						{...props}
+					>
 						<RowsIcon />
 						{label}
 					</Button>

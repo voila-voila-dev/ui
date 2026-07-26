@@ -10,6 +10,14 @@ interface Props {
 	size?: SheetContentSize;
 	showCloseButton?: boolean;
 	closeButtonLabel?: string;
+	overlayClassName?: string;
+	/**
+	 * Whether opening moves focus into the content (the default). Pass `false`
+	 * when the first field is a text input you don't want to focus on open —
+	 * on a phone that focus opens the keyboard over the content you just asked to
+	 * see. The content stays reachable by tab either way.
+	 */
+	autoFocus?: boolean;
 }
 
 export function ResponsiveSheetContent({
@@ -18,6 +26,8 @@ export function ResponsiveSheetContent({
 	size = "default",
 	showCloseButton = true,
 	closeButtonLabel = "Close",
+	overlayClassName,
+	autoFocus = true,
 }: Props) {
 	const isMobile = useResponsiveSheetIsMobile("ResponsiveSheet.Content");
 	if (isMobile) {
@@ -26,6 +36,10 @@ export function ResponsiveSheetContent({
 				className={className}
 				showCloseButton={showCloseButton}
 				closeButtonLabel={closeButtonLabel}
+				overlayClassName={overlayClassName}
+				onOpenAutoFocus={
+					autoFocus ? undefined : (event) => event.preventDefault()
+				}
 			>
 				{children}
 			</Drawer.Content>
@@ -37,6 +51,8 @@ export function ResponsiveSheetContent({
 			size={size}
 			showCloseButton={showCloseButton}
 			closeButtonLabel={closeButtonLabel}
+			overlayClassName={overlayClassName}
+			initialFocus={autoFocus}
 		>
 			{children}
 		</Sheet.Content>

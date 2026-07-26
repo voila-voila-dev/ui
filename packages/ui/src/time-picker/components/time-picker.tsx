@@ -6,14 +6,20 @@ import { usePickerState } from "#/hooks/use-picker-state.ts";
 import { parseTimeToMinutes } from "#/lib/time-math.ts";
 import { cn } from "#/lib/utils.ts";
 import { Popover } from "#/popover/components/popover.tsx";
-import { HiddenTimeInput } from "#/time-picker/components/time-picker-hidden-input.tsx";
+import { TimePickerHiddenInput } from "#/time-picker/components/time-picker-hidden-input.tsx";
 import { TimePickerOption } from "#/time-picker/components/time-picker-option.tsx";
 import {
 	formatTimeLabel,
 	timeOptionValues,
 } from "#/time-picker/lib/time-picker-options.ts";
 
-interface Props {
+// Extends the trigger `Button`: `Popover.Root` is headless, so the trigger is
+// the element a consumer styles and labels.
+interface Props
+	extends Omit<
+		React.ComponentProps<typeof Button>,
+		"value" | "defaultValue" | "onChange" | "children"
+	> {
 	/** Controlled "HH:mm" value; pass `null` for a controlled empty selection. */
 	value?: string | null;
 	defaultValue?: string;
@@ -26,7 +32,6 @@ interface Props {
 	formatOptions?: Intl.DateTimeFormatOptions;
 	/** BCP-47 locale (e.g. "fr-FR"), applied to the trigger and option labels. */
 	locale?: string;
-	disabled?: boolean;
 	/** Minutes between two options. Defaults to 30. */
 	step?: number;
 	/** First selectable time, "HH:mm" inclusive. */
@@ -35,39 +40,30 @@ interface Props {
 	max?: string;
 	/** Name for the hidden form input; the value is serialized as HH:mm. */
 	name?: string;
-	id?: string;
-	className?: string;
-	"aria-invalid"?: React.AriaAttributes["aria-invalid"];
-	"aria-label"?: string;
-	variant?: React.ComponentProps<typeof Button>["variant"];
 	defaultOpen?: boolean;
 	open?: boolean;
 	onOpenChange?: (open: boolean) => void;
 }
 
-export function TimePicker(props: Props) {
-	const {
-		value: controlledValue,
-		defaultValue,
-		onValueChange,
-		placeholder = "Pick a time",
-		formatOptions,
-		locale,
-		disabled = false,
-		step = 30,
-		min = "00:00",
-		max = "23:59",
-		name,
-		id,
-		className,
-		"aria-invalid": ariaInvalid,
-		"aria-label": ariaLabel,
-		variant,
-		defaultOpen,
-		open: controlledOpen,
-		onOpenChange,
-	} = props;
-
+export function TimePicker({
+	value: controlledValue,
+	defaultValue,
+	onValueChange,
+	placeholder = "Pick a time",
+	formatOptions,
+	locale,
+	disabled = false,
+	step = 30,
+	min = "00:00",
+	max = "23:59",
+	name,
+	className,
+	"aria-label": ariaLabel,
+	defaultOpen,
+	open: controlledOpen,
+	onOpenChange,
+	...props
+}: Props) {
 	const { isControlled, value, setUncontrolledValue, open, setOpen } =
 		usePickerState<string>({
 			value: controlledValue,
@@ -109,17 +105,15 @@ export function TimePicker(props: Props) {
 			<DatePicker.Trigger
 				slot="time-picker-trigger"
 				icon={<ClockIcon className="size-4 shrink-0 text-muted-foreground" />}
-				id={id}
 				className={cn("min-w-32", className)}
 				disabled={disabled}
 				empty={!value}
-				aria-invalid={ariaInvalid}
 				aria-label={ariaLabel}
-				variant={variant}
+				{...props}
 			>
 				{value ? formatTimeLabel(value, locale, formatOptions) : placeholder}
 			</DatePicker.Trigger>
-			<HiddenTimeInput name={name} value={value} />
+			<TimePickerHiddenInput name={name} value={value} />
 			<Popover.Content
 				data-slot="time-picker-content"
 				className="w-auto min-w-(--anchor-width) p-1"
@@ -140,7 +134,7 @@ export function TimePicker(props: Props) {
 								selectedMinutes !== null &&
 								parseTimeToMinutes(time) === selectedMinutes
 							}
-							selectedOptionRef={setSelectedOption}
+							ref={setSelectedOption}
 							onSelect={handleSelect}
 						/>
 					))}

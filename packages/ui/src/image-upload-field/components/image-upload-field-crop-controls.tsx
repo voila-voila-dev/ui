@@ -1,7 +1,9 @@
+import type * as React from "react";
 import { Button } from "#/button/components/button.tsx";
 import { useImageCropper } from "#/image-cropper/context/image-cropper-context.tsx";
+import { cn } from "#/lib/utils.ts";
 
-interface Props {
+interface Props extends React.ComponentProps<"div"> {
 	hasPicked: boolean;
 	isUploading: boolean;
 	cancelLabel: string;
@@ -16,18 +18,24 @@ interface Props {
  * picked. On confirm it produces a Blob and hands it to the parent — this
  * component never performs the network upload itself.
  */
-export function CropControls({
+export function ImageUploadFieldCropControls({
 	hasPicked,
 	isUploading,
 	cancelLabel,
 	confirmLabel,
 	outputSize,
 	onCropped,
+	className,
+	...props
 }: Props) {
 	const { cropToBlob, removeImage } = useImageCropper();
 	if (!hasPicked) return null;
 	return (
-		<div data-slot="image-upload-field-crop-controls" className="flex gap-2">
+		<div
+			data-slot="image-upload-field-crop-controls"
+			className={cn("flex gap-2", className)}
+			{...props}
+		>
 			<Button
 				type="button"
 				variant="ghost"
