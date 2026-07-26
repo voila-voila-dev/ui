@@ -1,18 +1,18 @@
 import { CalendarDotsIcon } from "@phosphor-icons/react";
 import * as React from "react";
 import { DatePicker } from "#/date-picker/components/date-picker.tsx";
+import { ShiftPickerBody } from "#/date-time-picker/components/shift-picker-body.tsx";
+import { ShiftStepTabs } from "#/date-time-picker/components/shift-step-tabs.tsx";
 import {
 	type DateTimeRange,
 	useDateTimeRangeState,
-} from "#/date-time-picker/components/date-time-range.ts";
-import { ShiftPickerBody } from "#/date-time-picker/components/shift-picker-body.tsx";
-import { ShiftStepTabs } from "#/date-time-picker/components/shift-step-tabs.tsx";
+} from "#/date-time-picker/lib/date-time-range.ts";
 import {
 	rangeWithDay,
 	rangeWithTime,
 	type ShiftStep,
 	shiftRangeLabel,
-} from "#/date-time-picker/components/shift-time-range.ts";
+} from "#/date-time-picker/lib/shift-time-range.ts";
 import { cn } from "#/lib/utils.ts";
 import { Popover } from "#/popover/components/popover.tsx";
 

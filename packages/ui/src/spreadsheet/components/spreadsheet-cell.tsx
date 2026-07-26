@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cn } from "#/lib/utils.ts";
-import { controlCellClassName } from "#/spreadsheet/components/spreadsheet-styles.ts";
 import { SpreadsheetContext } from "#/spreadsheet/context/spreadsheet-context.ts";
+import { controlCellClassName } from "#/spreadsheet/lib/spreadsheet-styles.ts";
 
 interface Props extends React.ComponentProps<"td"> {
 	/**

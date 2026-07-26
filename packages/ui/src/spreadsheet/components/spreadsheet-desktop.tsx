@@ -1,6 +1,5 @@
 import * as React from "react";
 import { SpreadsheetDesktopTable } from "#/spreadsheet/components/spreadsheet-desktop-table.tsx";
-import { editableTableClassName } from "#/spreadsheet/components/spreadsheet-styles.ts";
 import type { SpreadsheetSort } from "#/spreadsheet/context/spreadsheet-context.ts";
 import { useSpreadsheetContextValue } from "#/spreadsheet/hooks/use-spreadsheet-context-value.ts";
 import type { SpreadsheetDropLine } from "#/spreadsheet/hooks/use-spreadsheet-drag.ts";
@@ -9,6 +8,7 @@ import {
 	useSpreadsheetGrid,
 } from "#/spreadsheet/hooks/use-spreadsheet-grid.ts";
 import { useSpreadsheetScrolledX } from "#/spreadsheet/hooks/use-spreadsheet-scrolled-x.ts";
+import { editableTableClassName } from "#/spreadsheet/lib/spreadsheet-styles.ts";
 
 interface Props extends React.ComponentProps<"table"> {
 	containerClassName?: string;

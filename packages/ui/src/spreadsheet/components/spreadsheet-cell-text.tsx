@@ -1,6 +1,6 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
-import { textCellClassName } from "#/spreadsheet/components/spreadsheet-styles.ts";
+import { textCellClassName } from "#/spreadsheet/lib/spreadsheet-styles.ts";
 
 interface Props extends React.ComponentProps<"td"> {}
 

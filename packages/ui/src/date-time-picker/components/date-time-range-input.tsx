@@ -1,11 +1,11 @@
 import type * as React from "react";
+import { ResponsiveDateTimeInput } from "#/date-time-picker/components/responsive-date-time-input.tsx";
 import {
 	type DateTimeRange,
 	endFieldBounds,
 	resolveEndFieldId,
 	useDateTimeRangeState,
-} from "#/date-time-picker/components/date-time-range.ts";
-import { ResponsiveDateTimeInput } from "#/date-time-picker/components/responsive-date-time-input.tsx";
+} from "#/date-time-picker/lib/date-time-range.ts";
 import { Label } from "#/label/components/label.tsx";
 import { cn } from "#/lib/utils.ts";
 

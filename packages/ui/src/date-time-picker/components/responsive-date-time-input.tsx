@@ -1,7 +1,7 @@
 import type * as React from "react";
-import type { DateTimeShared } from "#/date-time-picker/components/date-time-picker-props.ts";
 import { DateTimePickerRoot } from "#/date-time-picker/components/date-time-picker-root.tsx";
 import { NativeDateTimeInput } from "#/date-time-picker/components/native-date-time-input.tsx";
+import type { DateTimeShared } from "#/date-time-picker/lib/date-time-picker-props.ts";
 import { useIsMobile } from "#/hooks/use-mobile.ts";
 import { cn } from "#/lib/utils.ts";
 

@@ -5,12 +5,12 @@ import { Calendar } from "#/calendar/components/calendar.tsx";
 import { DatePicker } from "#/date-picker/components/date-picker.tsx";
 import { DateTimeHiddenInput } from "#/date-time-picker/components/date-time-hidden-input.tsx";
 import { DateTimeOptionList } from "#/date-time-picker/components/date-time-option-list.tsx";
-import type { DateTimeShared } from "#/date-time-picker/components/date-time-picker-props.ts";
+import { useTimeOptions } from "#/date-time-picker/hooks/use-time-options.ts";
+import type { DateTimeShared } from "#/date-time-picker/lib/date-time-picker-props.ts";
 import {
 	createDateTimeSelectionHandlers,
 	dateTimeTriggerLabel,
-} from "#/date-time-picker/components/date-time-picker-selection.ts";
-import { useTimeOptions } from "#/date-time-picker/hooks/use-time-options.ts";
+} from "#/date-time-picker/lib/date-time-picker-selection.ts";
 import { DEFAULT_DATE_TIME_FORMAT } from "#/date-time-picker/lib/date-time-values.ts";
 import { usePickerState } from "#/hooks/use-picker-state.ts";
 import { minutesOfDay } from "#/lib/time-math.ts";

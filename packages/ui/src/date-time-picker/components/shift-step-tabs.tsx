@@ -1,11 +1,11 @@
-import type { DateTimeRange } from "#/date-time-picker/components/date-time-range.ts";
 import { ShiftStepTab } from "#/date-time-picker/components/shift-step-tab.tsx";
+import type { DateTimeRange } from "#/date-time-picker/lib/date-time-range.ts";
 import {
 	endLabelText,
 	type ShiftStep,
 	shiftStepLabel,
 	startLabelText,
-} from "#/date-time-picker/components/shift-time-range.ts";
+} from "#/date-time-picker/lib/shift-time-range.ts";
 
 interface Props {
 	step: ShiftStep;

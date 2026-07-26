@@ -1,4 +1,4 @@
-import type { DateTimeRange } from "#/date-time-picker/components/date-time-range.ts";
+import type { DateTimeRange } from "#/date-time-picker/lib/date-time-range.ts";
 import {
 	DEFAULT_MINUTES,
 	startOfDay,
