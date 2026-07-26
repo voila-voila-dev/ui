@@ -8,7 +8,9 @@ import * as React from "react";
 import { Toaster as Sonner, type ToasterProps } from "sonner";
 import { Spinner } from "#/spinner/components/spinner.tsx";
 
-export type { ToasterProps } from "sonner";
+export { toast } from "sonner";
+
+interface Props extends ToasterProps {}
 
 /* Theme is resolved from the `.dark` class on <html> — the same mechanism the
  * design tokens use — so the Toaster works without any theme provider. */
@@ -33,12 +35,13 @@ function useResolvedTheme(): "light" | "dark" {
 	);
 }
 
-export function Toaster(props: ToasterProps) {
+export function Toaster(props: Props) {
 	const theme = useResolvedTheme();
 
 	return (
 		<Sonner
 			theme={theme}
+			data-slot="toaster"
 			className="toaster group"
 			closeButton
 			icons={{
@@ -60,5 +63,3 @@ export function Toaster(props: ToasterProps) {
 		/>
 	);
 }
-
-export { toast } from "sonner";

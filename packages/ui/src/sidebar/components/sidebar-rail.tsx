@@ -1,6 +1,6 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
-import { useSidebar } from "#/sidebar/context/sidebar-context.tsx";
+import { useSidebar } from "#/sidebar/context/sidebar-context.ts";
 
 interface Props extends React.ComponentProps<"button"> {}
 

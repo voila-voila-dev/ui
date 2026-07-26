@@ -1,7 +1,7 @@
 import { SidebarSimpleIcon } from "@phosphor-icons/react";
 import type * as React from "react";
 import { Button } from "#/button/components/button.tsx";
-import { useSidebar } from "#/sidebar/context/sidebar-context.tsx";
+import { useSidebar } from "#/sidebar/context/sidebar-context.ts";
 
 interface Props extends React.ComponentProps<typeof Button> {}
 

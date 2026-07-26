@@ -1,5 +1,5 @@
 import { Input } from "@voila.dev/ui/input";
-import { NestedTableInput, Spreadsheet } from "@voila.dev/ui/spreadsheet";
+import { Spreadsheet } from "@voila.dev/ui/spreadsheet";
 import { useState } from "react";
 
 interface Variant {
@@ -86,7 +86,7 @@ export function Nested() {
 		);
 	return (
 		<div className="w-full max-w-3xs">
-			<NestedTableInput
+			<Spreadsheet.NestedInput
 				summary={`${tiers.length} tiers`}
 				ariaLabel="Quantity discounts"
 				title="Quantity discounts"
@@ -130,7 +130,7 @@ export function Nested() {
 						))}
 					</Spreadsheet.Body>
 				</Spreadsheet.Root>
-			</NestedTableInput>
+			</Spreadsheet.NestedInput>
 		</div>
 	);
 }

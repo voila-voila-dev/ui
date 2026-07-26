@@ -1,9 +1,11 @@
 export {
+	EMAIL_BLOCK_DEFINITIONS,
+	EMAIL_BLOCK_TYPES,
+	EMAIL_LEAF_BLOCK_TYPES,
 	type EmailBlockComponentProps,
 	type EmailBlockDefinition,
 	emailBlockDefinition,
 } from "#/email-block-editor/blocks/block-definitions.tsx";
-export { gridBlockDefinition } from "#/email-block-editor/blocks/grid-block.tsx";
 export type { SortableBlockHandle } from "#/email-block-editor/dnd/sortable-block-list.tsx";
 export type {
 	EmailEditorAction,

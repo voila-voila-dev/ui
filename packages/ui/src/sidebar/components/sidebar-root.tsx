@@ -1,7 +1,7 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 import { Sheet } from "#/sheet/components/sheet.tsx";
-import { useSidebar } from "#/sidebar/context/sidebar-context.tsx";
+import { useSidebar } from "#/sidebar/context/sidebar-context.ts";
 import { SIDEBAR_WIDTH_MOBILE } from "#/sidebar/lib/sidebar-constants.ts";
 
 interface Props extends React.ComponentProps<"div"> {

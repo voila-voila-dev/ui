@@ -2,7 +2,6 @@
 import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { DatePicker } from "#/date-picker/components/date-picker.tsx";
-import { DateRangePicker } from "#/date-picker/components/date-range-picker.tsx";
 
 beforeEach(() => {
 	// Base UI's Positioner measures the anchor with ResizeObserver, absent in jsdom.
@@ -153,7 +152,7 @@ describe("DatePicker", () => {
 
 describe("DateRangePicker", () => {
 	it("shows the placeholder when no range is selected", () => {
-		const screen = render(<DateRangePicker placeholder="Project window" />);
+		const screen = render(<DatePicker.Range placeholder="Project window" />);
 		const trigger = queryTrigger(screen);
 		expect(trigger?.textContent).toContain("Project window");
 		expect(trigger?.getAttribute("data-empty")).toBe("true");
@@ -161,7 +160,7 @@ describe("DateRangePicker", () => {
 
 	it("formats a complete range with an en dash", () => {
 		const screen = render(
-			<DateRangePicker
+			<DatePicker.Range
 				locale="fr-FR"
 				defaultValue={{
 					from: new Date(2026, 5, 9),
@@ -176,7 +175,7 @@ describe("DateRangePicker", () => {
 
 	it("renders two months by default", async () => {
 		const screen = render(
-			<DateRangePicker
+			<DatePicker.Range
 				calendarProps={{ defaultMonth: JUNE_2026 }}
 				defaultOpen
 			/>,
@@ -189,7 +188,7 @@ describe("DateRangePicker", () => {
 	it("stays open after the first click and closes once the range is complete", async () => {
 		const onValueChange = vi.fn();
 		const screen = render(
-			<DateRangePicker
+			<DatePicker.Range
 				locale="fr-FR"
 				onValueChange={onValueChange}
 				calendarProps={{ defaultMonth: JUNE_2026 }}
@@ -218,7 +217,7 @@ describe("DateRangePicker", () => {
 
 	it("collapses a same-day range to a single date on the trigger", () => {
 		const screen = render(
-			<DateRangePicker
+			<DatePicker.Range
 				locale="fr-FR"
 				defaultValue={{ from: JUNE_20, to: JUNE_20 }}
 			/>,
@@ -229,7 +228,7 @@ describe("DateRangePicker", () => {
 
 	it("serializes the range into -from/-to hidden inputs", () => {
 		const screen = render(
-			<DateRangePicker
+			<DatePicker.Range
 				name="projectWindow"
 				defaultValue={{
 					from: new Date(2026, 5, 9),

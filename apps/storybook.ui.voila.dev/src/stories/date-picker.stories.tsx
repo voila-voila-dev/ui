@@ -1,9 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/tanstack-react";
-import {
-	DatePicker,
-	type DateRange,
-	DateRangePicker,
-} from "@voila.dev/ui/date-picker";
+import { DatePicker, type DateRange } from "@voila.dev/ui/date-picker";
 import { useState } from "react";
 
 const meta = {
@@ -104,7 +100,7 @@ function RangeDatePicker() {
 	});
 
 	return (
-		<DateRangePicker
+		<DatePicker.Range
 			value={selectedRange}
 			onValueChange={setSelectedRange}
 			placeholder="Project window"
@@ -122,7 +118,7 @@ function CompactRangeDatePicker() {
 	// A short numeric date keeps both range ends compact (e.g. 6/9/2026); a single
 	// month fits narrow layouts like a filter bar.
 	return (
-		<DateRangePicker
+		<DatePicker.Range
 			formatOptions={{ dateStyle: "short" }}
 			value={selectedRange}
 			onValueChange={setSelectedRange}

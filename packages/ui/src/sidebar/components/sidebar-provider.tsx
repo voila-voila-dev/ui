@@ -4,7 +4,7 @@ import { cn } from "#/lib/utils.ts";
 import {
 	SidebarContext,
 	type SidebarContextValue,
-} from "#/sidebar/context/sidebar-context.tsx";
+} from "#/sidebar/context/sidebar-context.ts";
 import {
 	SIDEBAR_KEYBOARD_SHORTCUT,
 	SIDEBAR_WIDTH,

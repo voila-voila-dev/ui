@@ -4,7 +4,7 @@ import type * as React from "react";
 import type { VariantProps } from "#/lib/cva.ts";
 import { cn } from "#/lib/utils.ts";
 import { sidebarMenuButtonVariants } from "#/sidebar/components/sidebar-menu-button-variants.ts";
-import { useSidebar } from "#/sidebar/context/sidebar-context.tsx";
+import { useSidebar } from "#/sidebar/context/sidebar-context.ts";
 import { Tooltip } from "#/tooltip/components/tooltip.tsx";
 
 interface Props

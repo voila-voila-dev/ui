@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { Rating, ReviewItem } from "#/rating/components/rating.tsx";
+import { Rating } from "#/rating/components/rating.tsx";
 
 afterEach(cleanup);
 
@@ -95,12 +95,16 @@ describe("Rating.Input", () => {
 	});
 });
 
-describe("ReviewItem", () => {
+describe("Rating.ReviewItem", () => {
 	it("renders the author, rating and body", () => {
 		const screen = render(
-			<ReviewItem authorName="Nathan Guyot" rating={5} date="12 juin 2026">
+			<Rating.ReviewItem
+				authorName="Nathan Guyot"
+				rating={5}
+				date="12 juin 2026"
+			>
 				Service impeccable.
-			</ReviewItem>,
+			</Rating.ReviewItem>,
 		);
 		const item = queryBySlot(screen, "review-item");
 		expect(item?.textContent).toContain("Nathan Guyot");
@@ -115,7 +119,9 @@ describe("ReviewItem", () => {
 	});
 
 	it("omits the body when there is no children", () => {
-		const screen = render(<ReviewItem authorName="Nathan Guyot" rating={4} />);
+		const screen = render(
+			<Rating.ReviewItem authorName="Nathan Guyot" rating={4} />,
+		);
 		expect(queryBySlot(screen, "review-item-body")).toBeNull();
 	});
 });

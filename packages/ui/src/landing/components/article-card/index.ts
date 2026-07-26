@@ -11,8 +11,6 @@ import { ArticleCardRoot } from "#/landing/components/article-card/root.tsx";
 import { ArticleCardTags } from "#/landing/components/article-card/tags.tsx";
 import { ArticleCardTitle } from "#/landing/components/article-card/title.tsx";
 
-export { ArticleTags } from "#/landing/components/article-tags/index.ts";
-
 /**
  * Compose: `Root (anchor) > Frame > Image | ImageFallback + Content (Tags,
  * Title, Description, Meta > MetaItem…/Arrow)`.

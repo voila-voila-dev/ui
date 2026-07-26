@@ -22,7 +22,7 @@ import { SidebarRoot } from "#/sidebar/components/sidebar-root.tsx";
 import { SidebarSeparator } from "#/sidebar/components/sidebar-separator.tsx";
 import { SidebarTrigger } from "#/sidebar/components/sidebar-trigger.tsx";
 
-export { useSidebar } from "#/sidebar/context/sidebar-context.tsx";
+export { useSidebar } from "#/sidebar/context/sidebar-context.ts";
 
 /**
  * The Sidebar parts as one namespace.

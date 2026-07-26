@@ -1,7 +1,5 @@
-export {
-	ArticleCard,
-	ArticleTags,
-} from "#/landing/components/article-card/index.ts";
+export { ArticleCard } from "#/landing/components/article-card/index.ts";
+export { ArticleTags } from "#/landing/components/article-tags/index.ts";
 export { BentoGrid } from "#/landing/components/bento-grid/index.ts";
 export {
 	type ComparisonPanelVariant,

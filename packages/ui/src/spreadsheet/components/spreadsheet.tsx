@@ -1,3 +1,4 @@
+import { NestedTableInput } from "#/spreadsheet/components/nested-table-input.tsx";
 import { SpreadsheetAddRow } from "#/spreadsheet/components/spreadsheet-add-row.tsx";
 import { SpreadsheetBody } from "#/spreadsheet/components/spreadsheet-body.tsx";
 import { SpreadsheetCell } from "#/spreadsheet/components/spreadsheet-cell.tsx";
@@ -27,6 +28,7 @@ export type { SpreadsheetPasteData } from "#/spreadsheet/hooks/use-spreadsheet-g
  */
 export const Spreadsheet = {
 	Root: SpreadsheetRoot,
+	NestedInput: NestedTableInput,
 	Columns: SpreadsheetColumns,
 	Column: SpreadsheetColumn,
 	Header: SpreadsheetHeader,

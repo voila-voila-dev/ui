@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/tanstack-react";
-import { Rating, ReviewItem } from "@voila.dev/ui/rating";
+import { Rating } from "@voila.dev/ui/rating";
 import { useState } from "react";
 
 const meta = {
@@ -62,7 +62,7 @@ export const InputDisabled: Story = {
 export const Review: Story = {
 	render: () => (
 		<div className="flex max-w-md flex-col gap-6">
-			<ReviewItem
+			<Rating.ReviewItem
 				authorName="Camille Dubois"
 				authorAvatarSrc="https://github.com/shadcn.png"
 				rating={5}
@@ -70,10 +70,14 @@ export const Review: Story = {
 			>
 				Flawless work from kickoff to delivery — the whole redesign shipped
 				ahead of schedule.
-			</ReviewItem>
-			<ReviewItem authorName="Nathan Guyot" rating={4} date="May 3, 2026">
+			</Rating.ReviewItem>
+			<Rating.ReviewItem
+				authorName="Nathan Guyot"
+				rating={4}
+				date="May 3, 2026"
+			>
 				Very professional and responsive.
-			</ReviewItem>
+			</Rating.ReviewItem>
 		</div>
 	),
 };

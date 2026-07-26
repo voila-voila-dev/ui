@@ -41,6 +41,7 @@
 		"**/*.css"
 	],
 	"exports": {
+		"./package.json": "./package.json",
 		"./accordion": "./src/accordion/index.ts",
 		"./alert": "./src/alert/index.ts",
 		"./alert-dialog": "./src/alert-dialog/index.ts",
@@ -94,7 +95,6 @@
 		"./kbd": "./src/kbd/index.ts",
 		"./label": "./src/label/index.ts",
 		"./landing": "./src/landing/index.ts",
-		"./landing.css": "./src/landing/styles/landing.css",
 		"./list": "./src/list/index.ts",
 		"./map-view": "./src/map-view/index.ts",
 		"./menu": "./src/menu/index.ts",

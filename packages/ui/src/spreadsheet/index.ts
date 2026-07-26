@@ -1,4 +1,3 @@
-export { NestedTableInput } from "#/spreadsheet/components/nested-table-input.tsx";
 export {
 	Spreadsheet,
 	type SpreadsheetPasteData,

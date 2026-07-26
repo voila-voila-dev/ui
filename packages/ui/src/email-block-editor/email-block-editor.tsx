@@ -31,8 +31,8 @@ interface Props {
  * bottom sheet opened from the selected block's toolbar.
  *
  * The document is controlled (`document`/`onChange`); the block selection is
- * internal UI state. Every building part (blocks, sections, dnd list, reducer)
- * is also exported individually for custom compositions.
+ * internal UI state. The block registry (`EMAIL_BLOCK_DEFINITIONS`) is public
+ * so a host can render the same blocks outside the editor.
  */
 // fallow-ignore-next-line complexity -- composition, not logic: the compact/wide split picks a layout and the rest is prop wiring.
 export function EmailBlockEditor({
