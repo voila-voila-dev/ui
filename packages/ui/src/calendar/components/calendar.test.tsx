@@ -13,7 +13,9 @@ function queryRoot(screen: ReturnType<typeof render>) {
 
 function queryDayButtons(screen: ReturnType<typeof render>) {
 	return Array.from(
-		screen.baseElement.querySelectorAll("[data-slot=button][data-day]"),
+		screen.baseElement.querySelectorAll(
+			"[data-slot=calendar-day-button][data-day]",
+		),
 	);
 }
 
@@ -119,7 +121,7 @@ describe("Calendar", () => {
 			/>,
 		);
 		const disabledDays = screen.baseElement.querySelectorAll(
-			"[data-slot=button][data-day][disabled]",
+			"[data-slot=calendar-day-button][data-day][disabled]",
 		);
 		// June 2026: 4 Saturdays + 4 Sundays within the month.
 		expect(disabledDays.length).toBeGreaterThan(0);

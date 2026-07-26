@@ -45,6 +45,10 @@ export function FieldRoot({
 			props,
 		),
 		render,
-		state: { slot: "field", orientation, invalid: invalid ? "true" : undefined },
+		state: {
+			slot: "field",
+			orientation,
+			invalid: invalid ? "true" : undefined,
+		},
 	});
 }

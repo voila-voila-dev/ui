@@ -4,5 +4,12 @@ import { cn } from "#/lib/utils.ts";
 interface Props extends React.ComponentProps<typeof Heading> {}
 
 export function PageHeaderTitle({ className, ...props }: Props) {
-	return <Heading level="h1" className={cn("mb-4", className)} {...props} />;
+	return (
+		<Heading
+			data-slot="page-header-title"
+			level="h1"
+			className={cn("mb-4", className)}
+			{...props}
+		/>
+	);
 }

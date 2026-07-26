@@ -34,7 +34,7 @@ export function ShiftPickerBody({
 	const { activeDay, activeMinutes } = shiftActiveSelection(range, step);
 
 	return (
-		<div className="flex flex-col sm:flex-row">
+		<div data-slot="shift-picker-body" className="flex flex-col sm:flex-row">
 			<Calendar.Root
 				mode="single"
 				selected={activeDay ?? undefined}

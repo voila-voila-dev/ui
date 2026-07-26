@@ -19,6 +19,7 @@ export function PageHeaderRoot({
 }: Props) {
 	return (
 		<Section
+			data-slot="page-header"
 			spacing={spacing}
 			background={background}
 			className={className}

@@ -17,7 +17,10 @@ interface Props {
 /** The Start/End switch above the picker, each side showing its current summary. */
 export function ShiftStepTabs({ step, range, locale, onStepChange }: Props) {
 	return (
-		<div className="grid grid-cols-2 gap-1.5 border-b p-1.5">
+		<div
+			data-slot="shift-step-tabs"
+			className="grid grid-cols-2 gap-1.5 border-b p-1.5"
+		>
 			<ShiftStepTab
 				active={step === "start"}
 				heading={startLabelText(locale)}

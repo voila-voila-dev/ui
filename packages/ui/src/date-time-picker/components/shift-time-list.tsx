@@ -37,6 +37,7 @@ export function ShiftTimeList({
 	);
 	return (
 		<div
+			data-slot="shift-time-list"
 			role="listbox"
 			aria-label={ariaLabel}
 			// On desktop the list fills its stretched parent (which matches the

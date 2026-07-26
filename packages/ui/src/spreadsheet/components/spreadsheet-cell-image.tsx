@@ -56,7 +56,7 @@ export function SpreadsheetCellImage({
 	const hasImage = src !== null && src !== undefined && src.length > 0;
 	return (
 		<td
-			data-slot="spreadsheet-cell"
+			data-slot="spreadsheet-cell-image"
 			data-grid-value={value}
 			className={cn(
 				"group/image-cell relative border-r border-b border-input p-0 text-center align-middle last:border-r-0",

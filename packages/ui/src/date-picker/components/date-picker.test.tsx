@@ -32,7 +32,9 @@ const queryContent = (screen: ReturnType<typeof render>) =>
 // data-day is formatted with toLocaleDateString(locale.code); the fr locale
 // gives a deterministic dd/mm/yyyy regardless of the host's default locale.
 const queryDay = (screen: ReturnType<typeof render>, day: string) =>
-	screen.baseElement.querySelector(`[data-slot=button][data-day="${day}"]`);
+	screen.baseElement.querySelector(
+		`[data-slot=calendar-day-button][data-day="${day}"]`,
+	);
 
 describe("DatePicker", () => {
 	it("shows the placeholder and marks the trigger empty when nothing is selected", () => {

@@ -78,7 +78,12 @@ export function RatingInput({
 				);
 			})}
 			{name !== undefined ? (
-				<input type="hidden" name={name} value={value} />
+				<input
+					data-slot="rating-input-value"
+					type="hidden"
+					name={name}
+					value={value}
+				/>
 			) : null}
 		</div>
 	);

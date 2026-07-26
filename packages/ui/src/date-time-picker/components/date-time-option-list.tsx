@@ -30,6 +30,7 @@ export function DateTimeOptionList({
 
 	return (
 		<div
+			data-slot="date-time-option-list"
 			role="listbox"
 			aria-label={ariaLabel}
 			className="flex max-h-72 w-28 flex-col gap-0.5 overflow-y-auto overscroll-contain border-l p-1.5"

@@ -25,6 +25,7 @@ export function LandingHeroRoot({
 }: Props) {
 	return (
 		<Section
+			data-slot="landing-hero"
 			spacing={spacing}
 			background={background}
 			className={cn("overflow-hidden", className)}

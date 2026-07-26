@@ -35,7 +35,7 @@ export function UserAvatar({
 				<Avatar.Fallback>{getInitials(name)}</Avatar.Fallback>
 				{status ? <Avatar.Badge status={status} /> : null}
 			</Avatar.Root>
-			<div className="flex min-w-0 flex-col">
+			<div data-slot="user-avatar-body" className="flex min-w-0 flex-col">
 				<span
 					data-slot="user-avatar-name"
 					className="truncate text-sm leading-tight font-medium"

@@ -88,7 +88,10 @@ export function DateTimeRangeInput({
 	const endBounds = endFieldBounds(range.start);
 
 	return (
-		<div className={cn("grid grid-cols-1 gap-3 sm:grid-cols-2", className)}>
+		<div
+			data-slot="date-time-range-input"
+			className={cn("grid grid-cols-1 gap-3 sm:grid-cols-2", className)}
+		>
 			<div className="flex flex-col gap-1.5">
 				<Label htmlFor={startId}>{startLabel}</Label>
 				<ResponsiveDateTimeInput

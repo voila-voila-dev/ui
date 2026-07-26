@@ -4,5 +4,5 @@ import { Drawer as DrawerPrimitive } from "vaul";
 interface Props extends React.ComponentProps<typeof DrawerPrimitive.Portal> {}
 
 export function DrawerPortal({ ...props }: Props) {
-	return <DrawerPrimitive.Portal {...props} />;
+	return <DrawerPrimitive.Portal data-slot="drawer-portal" {...props} />;
 }

@@ -26,6 +26,7 @@ export function ComparisonSectionRoot({
 			{/* overflow-hidden: the Media illustrations carry decorative blur blobs
 			    that would otherwise create a few pixels of horizontal scroll. */}
 			<Section
+				data-slot="comparison-section"
 				spacing={spacing}
 				background={background}
 				className={cn("overflow-hidden", className)}
