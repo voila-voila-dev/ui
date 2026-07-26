@@ -1,0 +1,35 @@
+import { SidebarSimpleIcon } from "@phosphor-icons/react";
+import type * as React from "react";
+import { Button } from "#/button/components/button.tsx";
+import { useSidebar } from "#/sidebar/context/sidebar-context.tsx";
+
+export function SidebarTrigger({
+	className,
+	onClick,
+	children,
+	...props
+}: React.ComponentProps<typeof Button>) {
+	const { toggleSidebar } = useSidebar();
+
+	return (
+		<Button
+			data-sidebar="trigger"
+			data-slot="sidebar-trigger"
+			variant="ghost"
+			size="icon-sm"
+			className={className}
+			onClick={(event) => {
+				onClick?.(event);
+				toggleSidebar();
+			}}
+			{...props}
+		>
+			{children ?? (
+				<>
+					<SidebarSimpleIcon />
+					<span className="sr-only">Toggle Sidebar</span>
+				</>
+			)}
+		</Button>
+	);
+}

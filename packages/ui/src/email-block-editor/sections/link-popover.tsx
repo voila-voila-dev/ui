@@ -1,11 +1,7 @@
 import { type ReactElement, useState } from "react";
-import { Button } from "#/components/button.tsx";
-import { Input } from "#/components/input.tsx";
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from "#/components/popover.tsx";
+import { Button } from "#/button/components/button.tsx";
+import { Input } from "#/input/components/input.tsx";
+import { Popover } from "#/popover/components/popover.tsx";
 
 /**
  * The shared link editing surface: a small popover with a URL field,
@@ -32,7 +28,7 @@ export function LinkPopover({
 	const [href, setHref] = useState("");
 
 	return (
-		<Popover
+		<Popover.Root
 			open={open}
 			onOpenChange={(next) => {
 				if (next) {
@@ -42,8 +38,8 @@ export function LinkPopover({
 				setOpen(next);
 			}}
 		>
-			<PopoverTrigger render={trigger} />
-			<PopoverContent
+			<Popover.Trigger render={trigger} />
+			<Popover.Content
 				side="bottom"
 				align="start"
 				className="w-[min(18rem,calc(100vw-2rem))] p-3"
@@ -83,7 +79,7 @@ export function LinkPopover({
 						) : null}
 					</div>
 				</form>
-			</PopoverContent>
-		</Popover>
+			</Popover.Content>
+		</Popover.Root>
 	);
 }

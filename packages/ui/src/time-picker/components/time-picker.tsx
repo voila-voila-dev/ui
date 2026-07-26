@@ -1,0 +1,149 @@
+import { ClockIcon } from "@phosphor-icons/react";
+import * as React from "react";
+import type { ButtonProps } from "#/button/components/button.tsx";
+import { DatePicker } from "#/date-picker/components/date-picker.tsx";
+import { usePickerState } from "#/hooks/use-picker-state.ts";
+import { parseTimeToMinutes } from "#/lib/time-math.ts";
+import { cn } from "#/lib/utils.ts";
+import { Popover } from "#/popover/components/popover.tsx";
+import { HiddenTimeInput } from "#/time-picker/components/time-picker-hidden-input.tsx";
+import { TimePickerOption } from "#/time-picker/components/time-picker-option.tsx";
+import {
+	formatTimeLabel,
+	timeOptionValues,
+} from "#/time-picker/lib/time-picker-options.ts";
+
+export function TimePicker(props: {
+	/** Controlled "HH:mm" value; pass `null` for a controlled empty selection. */
+	value?: string | null;
+	defaultValue?: string;
+	onValueChange?: (time: string | null) => void;
+	placeholder?: string;
+	/**
+	 * `Intl.DateTimeFormat` options for the labels. Defaults to a short localized
+	 * time (`{ hour: "numeric", minute: "2-digit" }`, e.g. "2:30 PM" / "14:30").
+	 */
+	formatOptions?: Intl.DateTimeFormatOptions;
+	/** BCP-47 locale (e.g. "fr-FR"), applied to the trigger and option labels. */
+	locale?: string;
+	disabled?: boolean;
+	/** Minutes between two options. Defaults to 30. */
+	step?: number;
+	/** First selectable time, "HH:mm" inclusive. */
+	min?: string;
+	/** Last selectable time, "HH:mm" inclusive. */
+	max?: string;
+	/** Name for the hidden form input; the value is serialized as HH:mm. */
+	name?: string;
+	id?: string;
+	className?: string;
+	"aria-invalid"?: React.AriaAttributes["aria-invalid"];
+	"aria-label"?: string;
+	variant?: ButtonProps["variant"];
+	defaultOpen?: boolean;
+	open?: boolean;
+	onOpenChange?: (open: boolean) => void;
+}) {
+	const {
+		value: controlledValue,
+		defaultValue,
+		onValueChange,
+		placeholder = "Pick a time",
+		formatOptions,
+		locale,
+		disabled = false,
+		step = 30,
+		min = "00:00",
+		max = "23:59",
+		name,
+		id,
+		className,
+		"aria-invalid": ariaInvalid,
+		"aria-label": ariaLabel,
+		variant,
+		defaultOpen,
+		open: controlledOpen,
+		onOpenChange,
+	} = props;
+
+	const { isControlled, value, setUncontrolledValue, open, setOpen } =
+		usePickerState<string>({
+			value: controlledValue,
+			defaultValue,
+			open: controlledOpen,
+			defaultOpen,
+			onOpenChange,
+		});
+
+	const options = React.useMemo(
+		() => timeOptionValues(min, max, step),
+		[step, min, max],
+	);
+
+	const selectedMinutes = parseTimeToMinutes(value);
+
+	const handleSelect = (time: string) => {
+		if (!isControlled) setUncontrolledValue(time);
+		onValueChange?.(time);
+		setOpen(false);
+	};
+
+	// The selected option receives the popup's initial focus (otherwise Base UI
+	// focuses the first option, scrolling the list back to the top) and is then
+	// centered once the popup has been positioned — the ref fires too early, so
+	// defer by a frame. (Optional call: jsdom has no scrollIntoView.)
+	const selectedOptionRef = React.useRef<HTMLButtonElement | null>(null);
+	const setSelectedOption = React.useCallback(
+		(node: HTMLButtonElement | null) => {
+			selectedOptionRef.current = node;
+			if (!node) return;
+			requestAnimationFrame(() => node.scrollIntoView?.({ block: "center" }));
+		},
+		[],
+	);
+
+	return (
+		<Popover.Root open={open} onOpenChange={setOpen}>
+			<DatePicker.Trigger
+				slot="time-picker-trigger"
+				icon={<ClockIcon className="size-4 shrink-0 text-muted-foreground" />}
+				id={id}
+				className={cn("min-w-32", className)}
+				disabled={disabled}
+				empty={!value}
+				aria-invalid={ariaInvalid}
+				aria-label={ariaLabel}
+				variant={variant}
+			>
+				{value ? formatTimeLabel(value, locale, formatOptions) : placeholder}
+			</DatePicker.Trigger>
+			<HiddenTimeInput name={name} value={value} />
+			<Popover.Content
+				data-slot="time-picker-content"
+				className="w-auto min-w-(--anchor-width) p-1"
+				align="start"
+				initialFocus={selectedMinutes !== null ? selectedOptionRef : undefined}
+			>
+				<div
+					role="listbox"
+					aria-label={ariaLabel ?? placeholder}
+					className="flex max-h-64 flex-col gap-0.5 overflow-y-auto overscroll-contain"
+				>
+					{options.map((time) => (
+						<TimePickerOption
+							key={time}
+							time={time}
+							label={formatTimeLabel(time, locale, formatOptions)}
+							selected={
+								selectedMinutes !== null &&
+								parseTimeToMinutes(time) === selectedMinutes
+							}
+							selectedOptionRef={setSelectedOption}
+							onSelect={handleSelect}
+						/>
+					))}
+				</div>
+			</Popover.Content>
+		</Popover.Root>
+	);
+}

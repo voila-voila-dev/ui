@@ -1,4 +1,4 @@
-import { FilterFieldFrame } from "#/filter/components/fields/field-frame.tsx";
+import { FilterFieldFrame } from "#/filter/components/fields/filter-field-frame.tsx";
 import type {
 	BooleanFilterDefinition,
 	BooleanFilterValue,

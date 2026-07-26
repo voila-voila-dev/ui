@@ -1,14 +1,12 @@
 import { useId } from "react";
-import { MoneyInput } from "#/components/money-input.tsx";
-import {
-	FilterFieldFrame,
-	FilterRangeRow,
-} from "#/filter/components/fields/field-frame.tsx";
+import { FilterFieldFrame } from "#/filter/components/fields/filter-field-frame.tsx";
+import { FilterRangeRow } from "#/filter/components/fields/filter-range-row.tsx";
 import type {
 	FilterLabels,
 	MoneyRangeFilterDefinition,
 	MoneyRangeFilterValue,
 } from "#/filter/types.ts";
+import { MoneyInput } from "#/money-input/components/money-input.tsx";
 
 // Values travel as minor units (cents) — the platform's money representation —
 // while the field edits a major-unit string, so the rounding happens once, here.

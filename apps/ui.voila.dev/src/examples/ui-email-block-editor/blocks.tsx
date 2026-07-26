@@ -1,16 +1,14 @@
-import { EmailBlockEditor } from "@voila.dev/ui/email-block-editor";
 import {
+	EMAIL_COLOR,
 	type EmailBlockComponentProps,
+	EmailBlockEditor,
+	type EmailEditorBlock,
+	type EmailEditorDocument,
+	type EmailEditorGridBlock,
+	type EmailEditorLeafBlock,
 	emailBlockDefinition,
-} from "@voila.dev/ui/email-block-editor/blocks/block-definitions";
-import { gridBlockDefinition } from "@voila.dev/ui/email-block-editor/blocks/grid-block";
-import type {
-	EmailEditorBlock,
-	EmailEditorDocument,
-	EmailEditorGridBlock,
-	EmailEditorLeafBlock,
-} from "@voila.dev/ui/email-block-editor/document/types";
-import { EMAIL_COLOR } from "@voila.dev/ui/email-block-editor/theme";
+	gridBlockDefinition,
+} from "@voila.dev/ui/email-block-editor";
 import { type ReactNode, useState } from "react";
 
 /** Fake upload for the docs previews: no backend here, so the picked file is

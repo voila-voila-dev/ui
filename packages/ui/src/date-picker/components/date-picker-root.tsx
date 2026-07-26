@@ -1,0 +1,82 @@
+import { Calendar } from "#/calendar/components/calendar.tsx";
+import { DatePickerContent } from "#/date-picker/components/date-picker-content.tsx";
+import {
+	DEFAULT_DATE_FORMAT,
+	formatDateLabel,
+} from "#/date-picker/components/date-picker-format.ts";
+import { DatePickerHiddenInput } from "#/date-picker/components/date-picker-hidden-input.tsx";
+import type { DatePickerBaseProps } from "#/date-picker/components/date-picker-props.ts";
+import { DatePickerTrigger } from "#/date-picker/components/date-picker-trigger.tsx";
+import { usePickerState } from "#/hooks/use-picker-state.ts";
+import { Popover } from "#/popover/components/popover.tsx";
+
+export function DatePickerRoot({
+	value: controlledValue,
+	defaultValue,
+	onValueChange,
+	placeholder = "Pick a date",
+	formatOptions = DEFAULT_DATE_FORMAT,
+	locale,
+	disabled = false,
+	name,
+	id,
+	className,
+	"aria-invalid": ariaInvalid,
+	"aria-label": ariaLabel,
+	variant,
+	calendarProps,
+	defaultOpen,
+	open: controlledOpen,
+	onOpenChange,
+}: DatePickerBaseProps & {
+	/** Controlled value; pass `null` for a controlled empty selection. */
+	value?: Date | null;
+	defaultValue?: Date;
+	onValueChange?: (date: Date | null) => void;
+}) {
+	const { isControlled, value, setUncontrolledValue, open, setOpen } =
+		usePickerState<Date>({
+			value: controlledValue,
+			defaultValue,
+			open: controlledOpen,
+			defaultOpen,
+			onOpenChange,
+		});
+
+	const handleSelect = (date: Date | undefined) => {
+		if (!isControlled) setUncontrolledValue(date);
+		onValueChange?.(date ?? null);
+		// Single selection is complete the moment a day is picked.
+		if (date) setOpen(false);
+	};
+
+	const selectedDate = value ?? undefined;
+
+	return (
+		<Popover.Root open={open} onOpenChange={setOpen}>
+			<DatePickerTrigger
+				id={id}
+				className={className}
+				disabled={disabled}
+				empty={!value}
+				aria-invalid={ariaInvalid}
+				aria-label={ariaLabel}
+				variant={variant}
+			>
+				{formatDateLabel(value, locale, formatOptions, placeholder)}
+			</DatePickerTrigger>
+			<DatePickerHiddenInput name={name} date={value} />
+			<DatePickerContent>
+				<Calendar.Root
+					mode="single"
+					selected={selectedDate}
+					onSelect={handleSelect}
+					defaultMonth={selectedDate}
+					locale={locale}
+					autoFocus
+					{...calendarProps}
+				/>
+			</DatePickerContent>
+		</Popover.Root>
+	);
+}

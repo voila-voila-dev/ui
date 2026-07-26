@@ -1,14 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/tanstack-react";
-import {
-	Rating,
-	RatingInput,
-	ReviewItem,
-} from "@voila.dev/ui/components/rating";
+import { Rating, ReviewItem } from "@voila.dev/ui/rating";
 import { useState } from "react";
 
 const meta = {
 	title: "UI/Rating",
-	component: Rating,
+	component: Rating.Root,
 	tags: ["autodocs"],
 	argTypes: {
 		size: {
@@ -20,7 +16,7 @@ const meta = {
 		value: 4,
 		size: "default",
 	},
-} satisfies Meta<typeof Rating>;
+} satisfies Meta<typeof Rating.Root>;
 
 export default meta;
 
@@ -43,16 +39,16 @@ export const FractionalValue: Story = {
 export const Sizes: Story = {
 	render: (args) => (
 		<div className="flex flex-col items-start gap-4">
-			<Rating {...args} size="sm" count={12} />
-			<Rating {...args} size="default" count={12} />
-			<Rating {...args} size="lg" count={12} />
+			<Rating.Root {...args} size="sm" count={12} />
+			<Rating.Root {...args} size="default" count={12} />
+			<Rating.Root {...args} size="lg" count={12} />
 		</div>
 	),
 };
 
 function ControlledRatingInput() {
 	const [value, setValue] = useState(3);
-	return <RatingInput value={value} onChange={setValue} />;
+	return <Rating.Input value={value} onChange={setValue} />;
 }
 
 export const Input: Story = {
@@ -60,7 +56,7 @@ export const Input: Story = {
 };
 
 export const InputDisabled: Story = {
-	render: () => <RatingInput value={4} onChange={() => {}} disabled />,
+	render: () => <Rating.Input value={4} onChange={() => {}} disabled />,
 };
 
 export const Review: Story = {

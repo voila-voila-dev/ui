@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/tanstack-react";
-import { Gallery } from "@voila.dev/ui/components/gallery";
+import { Gallery } from "@voila.dev/ui/gallery";
 
 const images = [
 	{

@@ -1,0 +1,25 @@
+import { ListMagnifyingGlassIcon } from "@phosphor-icons/react";
+import { Empty } from "#/empty/components/empty.tsx";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+/** The generic "nothing matched" block shown in place of rows. */
+export function DataTableEmpty({
+	title = "No results",
+	description = "Try adjusting your search or filters.",
+}: Props) {
+	return (
+		<Empty.Root className="py-8">
+			<Empty.Header>
+				<Empty.Media variant="icon">
+					<ListMagnifyingGlassIcon />
+				</Empty.Media>
+				<Empty.Title>{title}</Empty.Title>
+				<Empty.Description>{description}</Empty.Description>
+			</Empty.Header>
+		</Empty.Root>
+	);
+}

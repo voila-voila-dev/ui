@@ -12,7 +12,7 @@ import { cn } from "#/lib/utils.ts";
  * time.
  */
 
-export interface ChartLineProps extends React.ComponentProps<"g"> {
+interface Props extends React.ComponentProps<"g"> {
 	readonly keys?: ReadonlyArray<string>;
 	readonly curve?: ChartCurve;
 	readonly strokeWidth?: number;
@@ -23,14 +23,14 @@ export interface ChartLineProps extends React.ComponentProps<"g"> {
 const ACTIVE_DOT_RADIUS = 4;
 const DOT_RADIUS = 2.5;
 
-function ChartLine({
+export function ChartLine({
 	className,
 	keys,
 	curve = "monotone",
 	strokeWidth = 2,
 	dots = false,
 	...props
-}: ChartLineProps) {
+}: Props) {
 	const {
 		data,
 		categories,
@@ -95,5 +95,3 @@ function ChartLine({
 		</g>
 	);
 }
-
-export { ChartLine };

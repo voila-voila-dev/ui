@@ -6,7 +6,10 @@ import { cn } from "#/lib/utils.ts";
  * aspect-video box — size it like the chart it stands in for. Pass localized
  * content as children (plain text, or an `Empty` block).
  */
-function ChartEmpty({ className, ...props }: React.ComponentProps<"div">) {
+export function ChartEmpty({
+	className,
+	...props
+}: React.ComponentProps<"div">) {
 	return (
 		<div
 			data-slot="chart-empty"
@@ -18,5 +21,3 @@ function ChartEmpty({ className, ...props }: React.ComponentProps<"div">) {
 		/>
 	);
 }
-
-export { ChartEmpty };

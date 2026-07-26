@@ -1,0 +1,82 @@
+/*
+ * Emerald - the developer-platform look (Supabase, Shopify): a green primary that
+ * reads as "go" without being the success colour, over neutrals with a cool cast.
+ *
+ * A theme overrides identity tokens only; everything else - charts, badges,
+ * status colours, radii - comes from the default theme it imports.
+ */
+@import "./default.css";
+
+:root {
+	--background: oklch(1 0 0);
+	--foreground: oklch(0.17 0.012 165);
+	--card: oklch(1 0 0);
+	--card-foreground: oklch(0.17 0.012 165);
+	--popover: oklch(1 0 0);
+	--popover-foreground: oklch(0.17 0.012 165);
+
+	--primary: oklch(0.52 0.115 160);
+	--primary-foreground: oklch(0.99 0 0);
+	--secondary: oklch(0.965 0.008 165);
+	--secondary-foreground: oklch(0.25 0.025 165);
+
+	--brand: oklch(0.6 0.135 158);
+	--brand-foreground: oklch(1 0 0);
+	--highlight: oklch(0.704 0.12 183);
+	--highlight-foreground: oklch(0.17 0.012 165);
+
+	--muted: oklch(0.965 0.008 165);
+	--muted-foreground: oklch(0.5 0.02 165);
+	--accent: oklch(0.95 0.02 160);
+	--accent-foreground: oklch(0.3 0.06 160);
+
+	--border: oklch(0.915 0.012 165);
+	--input: oklch(0.915 0.012 165);
+	--ring: oklch(0.6 0.135 158);
+
+	--sidebar: oklch(0.98 0.006 165);
+	--sidebar-foreground: oklch(0.17 0.012 165);
+	--sidebar-primary: oklch(0.52 0.115 160);
+	--sidebar-primary-foreground: oklch(0.99 0 0);
+	--sidebar-accent: oklch(0.95 0.02 160);
+	--sidebar-accent-foreground: oklch(0.3 0.06 160);
+	--sidebar-border: oklch(0.915 0.012 165);
+	--sidebar-ring: oklch(0.6 0.135 158);
+}
+
+.dark {
+	--background: oklch(0.16 0.012 165);
+	--foreground: oklch(0.96 0.008 165);
+	--card: oklch(0.212 0.016 165);
+	--card-foreground: oklch(0.96 0.008 165);
+	--popover: oklch(0.212 0.016 165);
+	--popover-foreground: oklch(0.96 0.008 165);
+
+	--primary: oklch(0.74 0.145 158);
+	--primary-foreground: oklch(0.16 0.012 165);
+	--secondary: oklch(0.272 0.02 165);
+	--secondary-foreground: oklch(0.96 0.008 165);
+
+	--brand: oklch(0.76 0.15 158);
+	--brand-foreground: oklch(0.16 0.012 165);
+	--highlight: oklch(0.75 0.12 183);
+	--highlight-foreground: oklch(0.16 0.012 165);
+
+	--muted: oklch(0.272 0.02 165);
+	--muted-foreground: oklch(0.72 0.022 165);
+	--accent: oklch(0.3 0.035 160);
+	--accent-foreground: oklch(0.96 0.008 165);
+
+	--border: oklch(0.96 0.02 165 / 12%);
+	--input: oklch(0.96 0.02 165 / 16%);
+	--ring: oklch(0.74 0.145 158);
+
+	--sidebar: oklch(0.188 0.014 165);
+	--sidebar-foreground: oklch(0.96 0.008 165);
+	--sidebar-primary: oklch(0.74 0.145 158);
+	--sidebar-primary-foreground: oklch(0.16 0.012 165);
+	--sidebar-accent: oklch(0.3 0.035 160);
+	--sidebar-accent-foreground: oklch(0.96 0.008 165);
+	--sidebar-border: oklch(0.96 0.02 165 / 12%);
+	--sidebar-ring: oklch(0.74 0.145 158);
+}

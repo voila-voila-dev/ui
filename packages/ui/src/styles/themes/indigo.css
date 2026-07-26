@@ -1,0 +1,83 @@
+/*
+ * Indigo - the issue-tracker look (Linear, Stripe): a saturated indigo primary
+ * over neutrals cooled by a trace of the same hue, so the chrome reads as part
+ * of the brand instead of grey stuck next to purple.
+ *
+ * A theme overrides identity tokens only; everything else - charts, badges,
+ * status colours, radii - comes from the default theme it imports.
+ */
+@import "./default.css";
+
+:root {
+	--background: oklch(1 0 0);
+	--foreground: oklch(0.16 0.015 277);
+	--card: oklch(1 0 0);
+	--card-foreground: oklch(0.16 0.015 277);
+	--popover: oklch(1 0 0);
+	--popover-foreground: oklch(0.16 0.015 277);
+
+	--primary: oklch(0.51 0.23 277);
+	--primary-foreground: oklch(0.99 0 0);
+	--secondary: oklch(0.968 0.008 277);
+	--secondary-foreground: oklch(0.24 0.03 277);
+
+	--brand: oklch(0.585 0.233 277);
+	--brand-foreground: oklch(1 0 0);
+	--highlight: oklch(0.685 0.149 237);
+	--highlight-foreground: oklch(1 0 0);
+
+	--muted: oklch(0.968 0.008 277);
+	--muted-foreground: oklch(0.5 0.03 277);
+	--accent: oklch(0.955 0.017 277);
+	--accent-foreground: oklch(0.32 0.11 277);
+
+	--border: oklch(0.918 0.011 277);
+	--input: oklch(0.918 0.011 277);
+	--ring: oklch(0.585 0.233 277);
+
+	--sidebar: oklch(0.982 0.006 277);
+	--sidebar-foreground: oklch(0.16 0.015 277);
+	--sidebar-primary: oklch(0.51 0.23 277);
+	--sidebar-primary-foreground: oklch(0.99 0 0);
+	--sidebar-accent: oklch(0.955 0.017 277);
+	--sidebar-accent-foreground: oklch(0.32 0.11 277);
+	--sidebar-border: oklch(0.918 0.011 277);
+	--sidebar-ring: oklch(0.585 0.233 277);
+}
+
+.dark {
+	--background: oklch(0.16 0.018 277);
+	--foreground: oklch(0.97 0.006 277);
+	--card: oklch(0.215 0.022 277);
+	--card-foreground: oklch(0.97 0.006 277);
+	--popover: oklch(0.215 0.022 277);
+	--popover-foreground: oklch(0.97 0.006 277);
+
+	--primary: oklch(0.7 0.19 277);
+	--primary-foreground: oklch(0.16 0.018 277);
+	--secondary: oklch(0.275 0.028 277);
+	--secondary-foreground: oklch(0.97 0.006 277);
+
+	--brand: oklch(0.72 0.18 277);
+	--brand-foreground: oklch(0.16 0.018 277);
+	--highlight: oklch(0.74 0.14 237);
+	--highlight-foreground: oklch(0.16 0.018 277);
+
+	--muted: oklch(0.275 0.028 277);
+	--muted-foreground: oklch(0.72 0.03 277);
+	--accent: oklch(0.3 0.04 277);
+	--accent-foreground: oklch(0.97 0.006 277);
+
+	--border: oklch(0.97 0.02 277 / 12%);
+	--input: oklch(0.97 0.02 277 / 16%);
+	--ring: oklch(0.7 0.19 277);
+
+	--sidebar: oklch(0.19 0.02 277);
+	--sidebar-foreground: oklch(0.97 0.006 277);
+	--sidebar-primary: oklch(0.7 0.19 277);
+	--sidebar-primary-foreground: oklch(0.16 0.018 277);
+	--sidebar-accent: oklch(0.3 0.04 277);
+	--sidebar-accent-foreground: oklch(0.97 0.006 277);
+	--sidebar-border: oklch(0.97 0.02 277 / 12%);
+	--sidebar-ring: oklch(0.7 0.19 277);
+}

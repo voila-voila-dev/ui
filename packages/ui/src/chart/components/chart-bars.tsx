@@ -11,8 +11,7 @@ import { cn } from "#/lib/utils.ts";
  * because the only thing that changes between them is where the geometry lands.
  */
 
-export interface ChartBarsProps
-	extends Omit<React.ComponentProps<"g">, "fill"> {
+interface Props extends Omit<React.ComponentProps<"g">, "fill"> {
 	/** Series to draw. Defaults to the root's value keys. */
 	readonly keys?: ReadonlyArray<string>;
 	readonly stacked?: boolean;
@@ -26,7 +25,7 @@ export interface ChartBarsProps
 /** Milliseconds each bar waits behind the one before it, on entry. */
 const STAGGER_MS = 24;
 
-function ChartBars({
+export function ChartBars({
 	className,
 	keys,
 	stacked,
@@ -34,7 +33,7 @@ function ChartBars({
 	gap,
 	fill,
 	...props
-}: ChartBarsProps) {
+}: Props) {
 	const {
 		data,
 		categories,
@@ -100,5 +99,3 @@ function ChartBars({
 		</g>
 	);
 }
-
-export { ChartBars };

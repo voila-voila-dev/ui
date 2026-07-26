@@ -10,13 +10,7 @@ import {
 } from "#/chart/core/polar.ts";
 import { cn } from "#/lib/utils.ts";
 
-/**
- * The pie mark, and its donut variant. Each row of data is one wedge, so the
- * colours come from the row (via `nameKey`) rather than from a series — which
- * is also how the tooltip and legend read a round chart.
- */
-
-export interface ChartPieProps extends React.ComponentProps<"g"> {
+interface Props extends React.ComponentProps<"g"> {
 	/** Field holding each wedge's size. Defaults to the first value key. */
 	readonly dataKey?: string;
 	/** Field naming each wedge's config entry. Defaults to the category field. */
@@ -33,7 +27,12 @@ export interface ChartPieProps extends React.ComponentProps<"g"> {
 /** Milliseconds each wedge waits behind the one before it, on entry. */
 const STAGGER_MS = 40;
 
-function ChartPie({
+/**
+ * The pie mark. Each row of data is one wedge, so the colours come from the row
+ * (via `nameKey`) rather than from a series — which is also how the tooltip and
+ * legend read a round chart. `ChartDonut` is the hollow variant.
+ */
+export function ChartPie({
 	className,
 	dataKey,
 	nameKey,
@@ -43,7 +42,7 @@ function ChartPie({
 	endAngle = 360,
 	inset = 8,
 	...props
-}: ChartPieProps) {
+}: Props) {
 	const {
 		data,
 		innerWidth,
@@ -124,10 +123,3 @@ function ChartPie({
 		</g>
 	);
 }
-
-/** A pie with its middle cut out — room for a total, and easier to compare. */
-function ChartDonut({ innerRadiusRatio = 0.6, ...props }: ChartPieProps) {
-	return <ChartPie innerRadiusRatio={innerRadiusRatio} {...props} />;
-}
-
-export { ChartDonut, ChartPie };

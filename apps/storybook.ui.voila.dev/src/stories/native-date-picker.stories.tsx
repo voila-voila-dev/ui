@@ -3,7 +3,7 @@ import {
 	NativeDatePicker,
 	NativeDateTimePicker,
 	NativeTimePicker,
-} from "@voila.dev/ui/components/native-date-picker";
+} from "@voila.dev/ui/native-date-picker";
 
 const meta = {
 	title: "UI/NativeDatePicker",

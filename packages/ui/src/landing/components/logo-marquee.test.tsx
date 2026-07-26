@@ -2,7 +2,7 @@
 import { cleanup, render } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 
-import { LogoMarquee } from "#/landing/components/logo-marquee.tsx";
+import { LogoMarquee } from "#/landing/components/logo-marquee/index.ts";
 
 afterEach(cleanup);
 

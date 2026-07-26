@@ -1,0 +1,83 @@
+/*
+ * Ocean - the business-software look (Intercom, Salesforce, Atlassian): a
+ * trustworthy mid blue with generous tinting, the safest default when the product
+ * has to look established on day one.
+ *
+ * A theme overrides identity tokens only; everything else - charts, badges,
+ * status colours, radii - comes from the default theme it imports.
+ */
+@import "./default.css";
+
+:root {
+	--background: oklch(1 0 0);
+	--foreground: oklch(0.17 0.018 250);
+	--card: oklch(1 0 0);
+	--card-foreground: oklch(0.17 0.018 250);
+	--popover: oklch(1 0 0);
+	--popover-foreground: oklch(0.17 0.018 250);
+
+	--primary: oklch(0.51 0.16 250);
+	--primary-foreground: oklch(0.99 0 0);
+	--secondary: oklch(0.966 0.01 250);
+	--secondary-foreground: oklch(0.25 0.035 250);
+
+	--brand: oklch(0.58 0.18 250);
+	--brand-foreground: oklch(1 0 0);
+	--highlight: oklch(0.715 0.123 215);
+	--highlight-foreground: oklch(0.17 0.018 250);
+
+	--muted: oklch(0.966 0.01 250);
+	--muted-foreground: oklch(0.5 0.03 250);
+	--accent: oklch(0.95 0.022 250);
+	--accent-foreground: oklch(0.31 0.09 250);
+
+	--border: oklch(0.914 0.014 250);
+	--input: oklch(0.914 0.014 250);
+	--ring: oklch(0.58 0.18 250);
+
+	--sidebar: oklch(0.98 0.008 250);
+	--sidebar-foreground: oklch(0.17 0.018 250);
+	--sidebar-primary: oklch(0.51 0.16 250);
+	--sidebar-primary-foreground: oklch(0.99 0 0);
+	--sidebar-accent: oklch(0.95 0.022 250);
+	--sidebar-accent-foreground: oklch(0.31 0.09 250);
+	--sidebar-border: oklch(0.914 0.014 250);
+	--sidebar-ring: oklch(0.58 0.18 250);
+}
+
+.dark {
+	--background: oklch(0.16 0.018 250);
+	--foreground: oklch(0.96 0.01 250);
+	--card: oklch(0.214 0.024 250);
+	--card-foreground: oklch(0.96 0.01 250);
+	--popover: oklch(0.214 0.024 250);
+	--popover-foreground: oklch(0.96 0.01 250);
+
+	--primary: oklch(0.7 0.16 250);
+	--primary-foreground: oklch(0.16 0.018 250);
+	--secondary: oklch(0.274 0.03 250);
+	--secondary-foreground: oklch(0.96 0.01 250);
+
+	--brand: oklch(0.72 0.165 250);
+	--brand-foreground: oklch(0.16 0.018 250);
+	--highlight: oklch(0.78 0.12 215);
+	--highlight-foreground: oklch(0.16 0.018 250);
+
+	--muted: oklch(0.274 0.03 250);
+	--muted-foreground: oklch(0.72 0.03 250);
+	--accent: oklch(0.3 0.045 250);
+	--accent-foreground: oklch(0.96 0.01 250);
+
+	--border: oklch(0.96 0.025 250 / 12%);
+	--input: oklch(0.96 0.025 250 / 16%);
+	--ring: oklch(0.7 0.16 250);
+
+	--sidebar: oklch(0.19 0.022 250);
+	--sidebar-foreground: oklch(0.96 0.01 250);
+	--sidebar-primary: oklch(0.7 0.16 250);
+	--sidebar-primary-foreground: oklch(0.16 0.018 250);
+	--sidebar-accent: oklch(0.3 0.045 250);
+	--sidebar-accent-foreground: oklch(0.96 0.01 250);
+	--sidebar-border: oklch(0.96 0.025 250 / 12%);
+	--sidebar-ring: oklch(0.7 0.16 250);
+}

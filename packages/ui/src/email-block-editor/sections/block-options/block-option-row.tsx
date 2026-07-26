@@ -1,11 +1,15 @@
 import type { ReactNode } from "react";
-import {
-	Field,
-	FieldContent,
-	FieldDescription,
-	FieldLabel,
-} from "#/components/field.tsx";
+import { Field } from "#/field/components/field.tsx";
 
+interface Props {
+	label: string;
+	/** The id of the control this row labels; omit for controls that label
+	 * themselves (a radio group carries its own `aria-label`). */
+	htmlFor?: string;
+	description?: string;
+	orientation?: "vertical" | "horizontal";
+	children: ReactNode;
+}
 /**
  * One labelled option in the block settings panel. Every block setting goes
  * through this row rather than hand-rolling `useId()` + `Label` + control, so
@@ -22,58 +26,28 @@ export function BlockOptionRow({
 	description,
 	orientation = "vertical",
 	children,
-}: {
-	label: string;
-	/** The id of the control this row labels; omit for controls that label
-	 * themselves (a radio group carries its own `aria-label`). */
-	htmlFor?: string;
-	description?: string;
-	orientation?: "vertical" | "horizontal";
-	children: ReactNode;
-}) {
+}: Props) {
 	if (orientation === "horizontal") {
 		return (
-			<Field orientation="horizontal">
-				<FieldContent>
-					<FieldLabel htmlFor={htmlFor}>{label}</FieldLabel>
+			<Field.Root orientation="horizontal">
+				<Field.Content>
+					<Field.Label htmlFor={htmlFor}>{label}</Field.Label>
 					{description === undefined ? null : (
-						<FieldDescription>{description}</FieldDescription>
+						<Field.Description>{description}</Field.Description>
 					)}
-				</FieldContent>
+				</Field.Content>
 				{children}
-			</Field>
+			</Field.Root>
 		);
 	}
 
 	return (
-		<Field>
-			<FieldLabel htmlFor={htmlFor}>{label}</FieldLabel>
+		<Field.Root>
+			<Field.Label htmlFor={htmlFor}>{label}</Field.Label>
 			{children}
 			{description === undefined ? null : (
-				<FieldDescription>{description}</FieldDescription>
+				<Field.Description>{description}</Field.Description>
 			)}
-		</Field>
-	);
-}
-
-/**
- * A titled group of rows. §1.4 of the editor plan: once a block carries more
- * than a handful of options they are split into "Content", "Appearance" and
- * "Link", always in that order.
- */
-export function BlockOptionSection({
-	title,
-	children,
-}: {
-	title: string;
-	children: ReactNode;
-}) {
-	return (
-		<section className="flex flex-col gap-3">
-			<h4 className="font-medium text-muted-foreground text-xs uppercase tracking-wide">
-				{title}
-			</h4>
-			{children}
-		</section>
+		</Field.Root>
 	);
 }

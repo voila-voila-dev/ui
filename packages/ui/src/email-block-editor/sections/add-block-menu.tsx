@@ -1,12 +1,7 @@
 import { PlusIcon } from "@phosphor-icons/react";
 import type { ReactElement } from "react";
-import { Button } from "#/components/button.tsx";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from "#/components/dropdown-menu.tsx";
+import { Button } from "#/button/components/button.tsx";
+import { DropdownMenu } from "#/dropdown-menu/components/dropdown-menu.tsx";
 import {
 	EMAIL_BLOCK_DEFINITIONS,
 	EMAIL_BLOCK_TYPES,
@@ -29,8 +24,8 @@ export function AddBlockMenu({
 	types?: ReadonlyArray<EmailEditorBlockType>;
 }) {
 	return (
-		<DropdownMenu>
-			<DropdownMenuTrigger
+		<DropdownMenu.Root>
+			<DropdownMenu.Trigger
 				render={
 					trigger ?? (
 						<Button variant="outline" size="sm">
@@ -40,17 +35,17 @@ export function AddBlockMenu({
 					)
 				}
 			/>
-			<DropdownMenuContent align="start">
+			<DropdownMenu.Content align="start">
 				{types.map((type) => {
 					const definition = EMAIL_BLOCK_DEFINITIONS[type];
 					return (
-						<DropdownMenuItem key={type} onClick={() => onAdd(type)}>
+						<DropdownMenu.Item key={type} onClick={() => onAdd(type)}>
 							<definition.icon aria-hidden />
 							{definition.label}
-						</DropdownMenuItem>
+						</DropdownMenu.Item>
 					);
 				})}
-			</DropdownMenuContent>
-		</DropdownMenu>
+			</DropdownMenu.Content>
+		</DropdownMenu.Root>
 	);
 }

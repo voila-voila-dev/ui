@@ -3,14 +3,14 @@ import {
 	DatePicker,
 	type DateRange,
 	DateRangePicker,
-} from "@voila.dev/ui/components/date-picker";
+} from "@voila.dev/ui/date-picker";
 import { useState } from "react";
 
 const meta = {
 	title: "UI/DatePicker",
-	component: DatePicker,
+	component: DatePicker.Root,
 	tags: ["autodocs"],
-} satisfies Meta<typeof DatePicker>;
+} satisfies Meta<typeof DatePicker.Root>;
 
 export default meta;
 
@@ -20,7 +20,7 @@ function SingleDatePicker() {
 	const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
 	return (
-		<DatePicker
+		<DatePicker.Root
 			value={selectedDate}
 			onValueChange={setSelectedDate}
 			placeholder="Project date"
@@ -38,7 +38,9 @@ function PreselectedDatePicker() {
 		new Date(2026, 5, 20),
 	);
 
-	return <DatePicker value={selectedDate} onValueChange={setSelectedDate} />;
+	return (
+		<DatePicker.Root value={selectedDate} onValueChange={setSelectedDate} />
+	);
 }
 
 export const WithValue: Story = {
@@ -51,7 +53,7 @@ function FrenchLocaleDatePicker() {
 	);
 
 	return (
-		<DatePicker
+		<DatePicker.Root
 			locale="fr-FR"
 			value={selectedDate}
 			onValueChange={setSelectedDate}
@@ -69,7 +71,7 @@ function DisabledDaysDatePicker() {
 
 	// Weekends are disabled — e.g. weekday-only project scheduling.
 	return (
-		<DatePicker
+		<DatePicker.Root
 			value={selectedDate}
 			onValueChange={setSelectedDate}
 			placeholder="Weekday project date"
@@ -86,12 +88,12 @@ export const DisabledDays: Story = {
 };
 
 export const Disabled: Story = {
-	render: () => <DatePicker disabled placeholder="Project date" />,
+	render: () => <DatePicker.Root disabled placeholder="Project date" />,
 };
 
 export const Invalid: Story = {
 	render: () => (
-		<DatePicker aria-invalid placeholder="Project date (required)" />
+		<DatePicker.Root aria-invalid placeholder="Project date (required)" />
 	),
 };
 

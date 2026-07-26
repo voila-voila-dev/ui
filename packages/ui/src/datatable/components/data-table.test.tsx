@@ -4,12 +4,6 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import {
 	type ColumnDef,
 	DataTable,
-	DataTableActions,
-	DataTableFilters,
-	DataTablePagination,
-	DataTableSearch,
-	DataTableToolbar,
-	DataTableViewOptions,
 	dataTableSelectionColumn,
 	dataTableToCsv,
 } from "#/datatable/components/data-table.tsx";
@@ -42,7 +36,7 @@ function bodyRows(screen: ReturnType<typeof render>) {
 
 describe("DataTable", () => {
 	it("renders headers and one row per data item", () => {
-		const screen = render(<DataTable columns={columns} data={projects} />);
+		const screen = render(<DataTable.Root columns={columns} data={projects} />);
 		expect(screen.getByText("Reference")).toBeDefined();
 		expect(screen.getByText("Client")).toBeDefined();
 		const rows = bodyRows(screen);
@@ -51,7 +45,7 @@ describe("DataTable", () => {
 	});
 
 	it("sorts when a sortable header is clicked and exposes aria-sort", () => {
-		const screen = render(<DataTable columns={columns} data={projects} />);
+		const screen = render(<DataTable.Root columns={columns} data={projects} />);
 		const clientHeader = screen.getByText("Client").closest("th");
 		if (!clientHeader) throw new Error("missing Client header");
 
@@ -66,7 +60,7 @@ describe("DataTable", () => {
 
 	it("applies initialSorting", () => {
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={columns}
 				data={projects}
 				initialSorting={[{ id: "amount", desc: true }]}
@@ -76,13 +70,13 @@ describe("DataTable", () => {
 	});
 
 	it("renders the default empty state when there are no rows", () => {
-		const screen = render(<DataTable columns={columns} data={[]} />);
+		const screen = render(<DataTable.Root columns={columns} data={[]} />);
 		expect(screen.getByText("No results")).toBeDefined();
 	});
 
 	it("renders a custom empty state", () => {
 		const screen = render(
-			<DataTable columns={columns} data={[]} emptyState="Nothing here" />,
+			<DataTable.Root columns={columns} data={[]} emptyState="Nothing here" />,
 		);
 		expect(screen.getByText("Nothing here")).toBeDefined();
 		expect(screen.queryByText("No results")).toBeNull();
@@ -91,7 +85,11 @@ describe("DataTable", () => {
 	it("invokes onRowClick with the row's data", () => {
 		const onRowClick = vi.fn();
 		const screen = render(
-			<DataTable columns={columns} data={projects} onRowClick={onRowClick} />,
+			<DataTable.Root
+				columns={columns}
+				data={projects}
+				onRowClick={onRowClick}
+			/>,
 		);
 		fireEvent.click(screen.getByText("Globex Media"));
 		expect(onRowClick).toHaveBeenCalledWith(projects[1]);
@@ -99,7 +97,7 @@ describe("DataTable", () => {
 
 	it("shows a loading overlay while keeping rows visible", () => {
 		const screen = render(
-			<DataTable columns={columns} data={projects} loading />,
+			<DataTable.Root columns={columns} data={projects} loading />,
 		);
 		expect(
 			screen.baseElement.querySelector("[data-slot=spinner]"),
@@ -109,7 +107,7 @@ describe("DataTable", () => {
 
 	it("makes the header sticky when stickyHeader is set", () => {
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={columns}
 				data={projects}
 				stickyHeader
@@ -128,7 +126,7 @@ describe("DataTable", () => {
 	it("renders sorted mobile cards and hides the table below md", () => {
 		const onRowClick = vi.fn();
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={columns}
 				data={projects}
 				initialSorting={[{ id: "client", desc: false }]}
@@ -155,15 +153,15 @@ describe("DataTable", () => {
 
 	it("renders the toolbar emplacement above the table", () => {
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={columns}
 				data={projects}
 				toolbar={
-					<DataTableToolbar>
-						<DataTableSearch placeholder="Search projects" />
-						<DataTableFilters>filters</DataTableFilters>
-						<DataTableActions>actions</DataTableActions>
-					</DataTableToolbar>
+					<DataTable.Toolbar>
+						<DataTable.Search placeholder="Search projects" />
+						<DataTable.Filters>filters</DataTable.Filters>
+						<DataTable.Actions>actions</DataTable.Actions>
+					</DataTable.Toolbar>
 				}
 			/>,
 		);
@@ -189,7 +187,7 @@ describe("DataTable selection", () => {
 	it("selects a row through its checkbox and stamps data-selected", () => {
 		const onRowSelectionChange = vi.fn();
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={selectableColumns}
 				data={projects}
 				enableRowSelection
@@ -207,7 +205,7 @@ describe("DataTable selection", () => {
 
 	it("selects every row through the header checkbox", () => {
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={selectableColumns}
 				data={projects}
 				enableRowSelection
@@ -222,7 +220,7 @@ describe("DataTable selection", () => {
 	it("does not trigger onRowClick from the selection checkbox", () => {
 		const onRowClick = vi.fn();
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={selectableColumns}
 				data={projects}
 				enableRowSelection
@@ -235,7 +233,7 @@ describe("DataTable selection", () => {
 
 	it("supports controlled selection state", () => {
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={selectableColumns}
 				data={projects}
 				enableRowSelection
@@ -250,10 +248,10 @@ describe("DataTable selection", () => {
 	});
 });
 
-describe("DataTablePagination", () => {
+describe("DataTable.Pagination", () => {
 	it("renders the row range and windowed page numbers", () => {
 		const screen = render(
-			<DataTablePagination
+			<DataTable.Pagination
 				page={0}
 				pageSize={10}
 				total={100}
@@ -272,7 +270,7 @@ describe("DataTablePagination", () => {
 	it("navigates with previous/next and direct page buttons", () => {
 		const onPageChange = vi.fn();
 		const screen = render(
-			<DataTablePagination
+			<DataTable.Pagination
 				page={3}
 				pageSize={10}
 				total={100}
@@ -289,7 +287,7 @@ describe("DataTablePagination", () => {
 
 	it("disables previous on the first page and next on the last", () => {
 		const first = render(
-			<DataTablePagination
+			<DataTable.Pagination
 				page={0}
 				pageSize={10}
 				total={20}
@@ -301,7 +299,7 @@ describe("DataTablePagination", () => {
 		);
 		cleanup();
 		const last = render(
-			<DataTablePagination
+			<DataTable.Pagination
 				page={1}
 				pageSize={10}
 				total={20}
@@ -313,7 +311,7 @@ describe("DataTablePagination", () => {
 
 	it("hides the controls on a single page but keeps the range", () => {
 		const screen = render(
-			<DataTablePagination
+			<DataTable.Pagination
 				page={0}
 				pageSize={10}
 				total={4}
@@ -326,7 +324,7 @@ describe("DataTablePagination", () => {
 
 	it("renders localized labels", () => {
 		const screen = render(
-			<DataTablePagination
+			<DataTable.Pagination
 				page={0}
 				pageSize={10}
 				total={30}
@@ -347,7 +345,7 @@ describe("DataTablePagination", () => {
 describe("DataTable with pagination", () => {
 	it("renders the pagination footer below the table", () => {
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={columns}
 				data={projects}
 				pagination={{
@@ -373,7 +371,7 @@ describe("DataTable row expansion", () => {
 	// did not, so every column rendered one place to the left of its heading.
 	it("gives the expander column a matching header cell", () => {
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={columns}
 				data={projects}
 				renderExpandedRow={renderExpanded}
@@ -388,7 +386,7 @@ describe("DataTable row expansion", () => {
 
 	it("opens and closes the detail panel", () => {
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={columns}
 				data={projects}
 				renderExpandedRow={renderExpanded}
@@ -403,7 +401,7 @@ describe("DataTable row expansion", () => {
 
 	it("spans the detail panel across every column, expander included", () => {
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={columns}
 				data={projects}
 				renderExpandedRow={renderExpanded}
@@ -417,14 +415,14 @@ describe("DataTable row expansion", () => {
 	});
 
 	it("leaves rows unexpandable when no panel is supplied", () => {
-		const screen = render(<DataTable columns={columns} data={projects} />);
+		const screen = render(<DataTable.Root columns={columns} data={projects} />);
 		expect(screen.queryByRole("button", { name: "Expand row" })).toBeNull();
 	});
 });
 
 describe("DataTable column resizing", () => {
 	it("offers a focusable handle per column, off by default", () => {
-		const plain = render(<DataTable columns={columns} data={projects} />);
+		const plain = render(<DataTable.Root columns={columns} data={projects} />);
 		expect(
 			plain.baseElement.querySelectorAll(
 				"[data-slot=data-table-resize-handle]",
@@ -432,7 +430,7 @@ describe("DataTable column resizing", () => {
 		).toHaveLength(0);
 		cleanup();
 		const resizable = render(
-			<DataTable columns={columns} data={projects} enableColumnResizing />,
+			<DataTable.Root columns={columns} data={projects} enableColumnResizing />,
 		);
 		const handles = resizable.baseElement.querySelectorAll(
 			"[data-slot=data-table-resize-handle]",
@@ -444,7 +442,7 @@ describe("DataTable column resizing", () => {
 	it("reports a width change from the keyboard", () => {
 		const onColumnSizingChange = vi.fn();
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={columns}
 				data={projects}
 				enableColumnResizing
@@ -465,7 +463,7 @@ describe("DataTable column resizing", () => {
 	// the handle must not also reorder the rows.
 	it("does not sort when the handle is clicked", () => {
 		const screen = render(
-			<DataTable columns={columns} data={projects} enableColumnResizing />,
+			<DataTable.Root columns={columns} data={projects} enableColumnResizing />,
 		);
 		const handle = screen.baseElement.querySelector(
 			"[data-slot=data-table-resize-handle]",
@@ -479,7 +477,7 @@ describe("DataTable column resizing", () => {
 describe("DataTable column pinning", () => {
 	it("freezes the named columns against each edge", () => {
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={columns}
 				data={projects}
 				columnPinning={{ left: ["reference"], right: ["amount"] }}
@@ -500,7 +498,7 @@ describe("DataTable column pinning", () => {
 	// hover, selection and expansion states.
 	it("lets pinned cells inherit the row background", () => {
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={columns}
 				data={projects}
 				columnPinning={{ left: ["reference"] }}
@@ -514,10 +512,10 @@ describe("DataTable column pinning", () => {
 describe("DataTable column visibility and export", () => {
 	it("hides a column through the view options menu", () => {
 		const screen = render(
-			<DataTable
+			<DataTable.Root
 				columns={columns}
 				data={projects}
-				toolbar={(table) => <DataTableViewOptions table={table} />}
+				toolbar={(table) => <DataTable.ViewOptions table={table} />}
 			/>,
 		);
 		expect(screen.getAllByRole("columnheader")).toHaveLength(columns.length);
@@ -531,7 +529,7 @@ describe("DataTable column visibility and export", () => {
 	it("serializes the visible, sorted rows to CSV", () => {
 		let csv = "";
 		render(
-			<DataTable
+			<DataTable.Root
 				columns={columns}
 				data={projects}
 				toolbar={(table) => {
@@ -549,7 +547,7 @@ describe("DataTable column visibility and export", () => {
 	it("quotes fields containing a comma or a quote", () => {
 		let csv = "";
 		render(
-			<DataTable
+			<DataTable.Root
 				columns={[{ accessorKey: "client", header: "Client" }]}
 				data={[{ reference: "x", client: 'Acme, "the client"', amount: 0 }]}
 				toolbar={(table) => {
@@ -565,7 +563,11 @@ describe("DataTable column visibility and export", () => {
 describe("DataTable global filter", () => {
 	it("narrows the rows to the matching ones", () => {
 		const screen = render(
-			<DataTable columns={columns} data={projects} globalFilter="Globex" />,
+			<DataTable.Root
+				columns={columns}
+				data={projects}
+				globalFilter="Globex"
+			/>,
 		);
 		const rows = screen.baseElement.querySelectorAll("tbody tr");
 		expect(rows).toHaveLength(1);

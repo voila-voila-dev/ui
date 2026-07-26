@@ -2,10 +2,8 @@ import { BooleanFilterField } from "#/filter/components/fields/boolean-filter-fi
 import { DateRangeFilterField } from "#/filter/components/fields/date-range-filter-field.tsx";
 import { GeoRadiusFilterField } from "#/filter/components/fields/geo-radius-filter-field.tsx";
 import { MoneyRangeFilterField } from "#/filter/components/fields/money-range-filter-field.tsx";
-import {
-	NumberFilterField,
-	NumberRangeFilterField,
-} from "#/filter/components/fields/number-filter-field.tsx";
+import { NumberFilterField } from "#/filter/components/fields/number-filter-field.tsx";
+import { NumberRangeFilterField } from "#/filter/components/fields/number-range-filter-field.tsx";
 import { SelectFilterField } from "#/filter/components/fields/select-filter-field.tsx";
 import { TextFilterField } from "#/filter/components/fields/text-filter-field.tsx";
 import type {

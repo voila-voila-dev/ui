@@ -1,0 +1,21 @@
+import { toLocalInputValue } from "#/date-time-picker/components/date-time-values.ts";
+
+/** Serialized `yyyy-MM-ddTHH:mm` form value, rendered only when named. */
+export function DateTimeHiddenInput({
+	name,
+	value,
+}: {
+	name: string | undefined;
+	value: Date | null | undefined;
+}) {
+	if (!name) {
+		return null;
+	}
+	return (
+		<input
+			type="hidden"
+			name={name}
+			value={value ? toLocalInputValue(value) : ""}
+		/>
+	);
+}

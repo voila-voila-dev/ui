@@ -1,8 +1,8 @@
 import { useId } from "react";
-import { MoneyInput } from "#/components/money-input.tsx";
 import type { EmailEditorMoney } from "#/email-block-editor/document/types.ts";
 import { BlockOptionRow } from "#/email-block-editor/sections/block-options/block-option-row.tsx";
 import { EMAIL_PREVIEW_LOCALE } from "#/email-block-editor/theme.ts";
+import { MoneyInput } from "#/money-input/components/money-input.tsx";
 
 /** EUR has two decimals, and it is the only currency the platform transacts
  * in; widening this means mirroring the domain's `currencyDecimals`. */

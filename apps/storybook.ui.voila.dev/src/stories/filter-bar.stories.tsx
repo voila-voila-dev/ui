@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/tanstack-react";
-import { FilterBar } from "@voila.dev/ui/filter/filter-bar";
-import { FilterForm } from "@voila.dev/ui/filter/filter-form";
-import type {
-	FilterDefinition,
-	FilterValues,
-	PlaceSuggestion,
-} from "@voila.dev/ui/filter/types";
-import { defaultFilterLabels } from "@voila.dev/ui/filter/types";
+import {
+	defaultFilterLabels,
+	FilterBar,
+	type FilterDefinition,
+	FilterForm,
+	type FilterValues,
+	type PlaceSuggestion,
+} from "@voila.dev/ui/filter";
 import { useState } from "react";
 
 // Stand-in for the app's geocoder: enough French towns to try the field.

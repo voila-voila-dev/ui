@@ -12,7 +12,7 @@ import { cn } from "#/lib/utils.ts";
  * top edge reads as the total rather than as the last series.
  */
 
-export interface ChartAreaProps extends React.ComponentProps<"g"> {
+interface Props extends React.ComponentProps<"g"> {
 	readonly keys?: ReadonlyArray<string>;
 	readonly curve?: ChartCurve;
 	readonly stacked?: boolean;
@@ -22,7 +22,7 @@ export interface ChartAreaProps extends React.ComponentProps<"g"> {
 	readonly gradient?: boolean;
 }
 
-function ChartArea({
+export function ChartArea({
 	className,
 	keys,
 	curve = "monotone",
@@ -31,7 +31,7 @@ function ChartArea({
 	strokeWidth = 2,
 	gradient = true,
 	...props
-}: ChartAreaProps) {
+}: Props) {
 	const {
 		chartId,
 		data,
@@ -119,5 +119,3 @@ function ChartArea({
 		</g>
 	);
 }
-
-export { ChartArea };

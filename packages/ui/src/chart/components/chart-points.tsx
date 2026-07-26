@@ -7,7 +7,7 @@ import { cn } from "#/lib/utils.ts";
 
 /** The scatter mark: one dot per datum per series, optionally sized by a field. */
 
-export interface ChartPointsProps extends React.ComponentProps<"g"> {
+interface Props extends React.ComponentProps<"g"> {
 	readonly keys?: ReadonlyArray<string>;
 	readonly radius?: number;
 	/** Field driving the dot area, for a bubble chart. */
@@ -18,14 +18,14 @@ export interface ChartPointsProps extends React.ComponentProps<"g"> {
 /** Milliseconds each dot waits behind the one before it, on entry. */
 const STAGGER_MS = 16;
 
-function ChartPoints({
+export function ChartPoints({
 	className,
 	keys,
 	radius = 4,
 	sizeKey,
 	maxRadius = 14,
 	...props
-}: ChartPointsProps) {
+}: Props) {
 	const {
 		data,
 		categories,
@@ -89,5 +89,3 @@ function ChartPoints({
 		</g>
 	);
 }
-
-export { ChartPoints };

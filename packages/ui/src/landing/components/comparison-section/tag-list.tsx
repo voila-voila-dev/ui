@@ -1,0 +1,13 @@
+import { cn } from "#/lib/utils.ts";
+
+type Props = React.ComponentProps<"div">;
+
+export function ComparisonTagList({ className, ...props }: Props) {
+	return (
+		<div
+			data-slot="comparison-tag-list"
+			className={cn("mb-8 flex flex-wrap gap-2", className)}
+			{...props}
+		/>
+	);
+}

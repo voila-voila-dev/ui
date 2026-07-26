@@ -1,14 +1,12 @@
 import { useId } from "react";
-import { Input } from "#/components/input.tsx";
-import {
-	FilterFieldFrame,
-	FilterOperatorToggle,
-} from "#/filter/components/fields/field-frame.tsx";
+import { FilterFieldFrame } from "#/filter/components/fields/filter-field-frame.tsx";
+import { FilterOperatorToggle } from "#/filter/components/fields/filter-operator-toggle.tsx";
 import type {
 	FilterLabels,
 	TextFilterDefinition,
 	TextFilterValue,
 } from "#/filter/types.ts";
+import { Input } from "#/input/components/input.tsx";
 
 /** Free-text contains/does-not-contain filter. */
 export function TextFilterField({

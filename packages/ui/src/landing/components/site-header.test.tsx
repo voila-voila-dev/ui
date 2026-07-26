@@ -2,7 +2,7 @@
 import { cleanup, fireEvent, render } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 
-import { SiteHeader } from "#/landing/components/site-header.tsx";
+import { SiteHeader } from "#/landing/components/site-header/index.ts";
 
 afterEach(cleanup);
 

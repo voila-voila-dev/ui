@@ -1,64 +1,28 @@
-import { type ReactNode, useCallback, useMemo, useState } from "react";
-import {
-	Drawer,
-	DrawerContent,
-	DrawerDescription,
-	DrawerHeader,
-	DrawerTitle,
-} from "#/components/drawer.tsx";
-import {
-	createEmailEditorReducer,
-	type EmailEditorAction,
-	type EmailEditorState,
-} from "#/email-block-editor/document/reducer.ts";
+import type { ReactNode } from "react";
+import { useCallback, useMemo, useState } from "react";
+import { BlockSettingsSheet } from "#/email-block-editor/block-settings-sheet.tsx";
+import type { EmailEditorAction } from "#/email-block-editor/document/reducer.ts";
+import { createEmailEditorReducer } from "#/email-block-editor/document/reducer.ts";
 import type {
 	EmailEditorDocument,
 	EmailEditorPreview,
 } from "#/email-block-editor/document/types.ts";
 import { useCompactEditorLayout } from "#/email-block-editor/lib/use-media-query.ts";
 import { EditorCanvas } from "#/email-block-editor/sections/editor-canvas.tsx";
-import {
-	BlockSettingsPanel,
-	EditorSidebar,
-} from "#/email-block-editor/sections/editor-sidebar.tsx";
+import { EditorSidebar } from "#/email-block-editor/sections/editor-sidebar.tsx";
 import { PreviewToggle } from "#/email-block-editor/sections/preview-toggle.tsx";
 
-/** The block settings panel as a bottom sheet, for the viewports where a 280px
- * column would put the options a screenful away from their block. */
-function BlockSettingsSheet({
-	open,
-	onOpenChange,
-	state,
-	dispatch,
-	onUploadImage,
-}: {
-	open: boolean;
-	onOpenChange: (open: boolean) => void;
-	state: EmailEditorState;
-	dispatch: (action: EmailEditorAction) => void;
+interface Props {
+	document: EmailEditorDocument;
+	onChange: (document: EmailEditorDocument) => void;
+	/** Delegated image upload: receives the picked file, resolves with its
+	 * public URL. Omit to disable image uploads. */
 	onUploadImage?: (file: File) => Promise<string>;
-}) {
-	return (
-		<Drawer open={open} onOpenChange={onOpenChange}>
-			<DrawerContent>
-				<DrawerHeader>
-					<DrawerTitle>Block settings</DrawerTitle>
-					<DrawerDescription className="sr-only">
-						Options for the selected block.
-					</DrawerDescription>
-				</DrawerHeader>
-				<div className="flex flex-col gap-4 overflow-y-auto px-4 pb-8">
-					<BlockSettingsPanel
-						state={state}
-						dispatch={dispatch}
-						onUploadImage={onUploadImage}
-					/>
-				</div>
-			</DrawerContent>
-		</Drawer>
-	);
+	/** Block-id factory, injectable for deterministic tests. */
+	generateBlockId?: () => string;
+	headerSlot?: ReactNode;
+	footerSlot?: ReactNode;
 }
-
 /**
  * The composed WYSIWYG email editor. On a wide viewport it is the canvas plus
  * a per-block settings column; below `lg` the column would push the options a
@@ -77,17 +41,7 @@ export function EmailBlockEditor({
 	generateBlockId = () => crypto.randomUUID(),
 	headerSlot,
 	footerSlot,
-}: {
-	document: EmailEditorDocument;
-	onChange: (document: EmailEditorDocument) => void;
-	/** Delegated image upload: receives the picked file, resolves with its
-	 * public URL. Omit to disable image uploads. */
-	onUploadImage?: (file: File) => Promise<string>;
-	/** Block-id factory, injectable for deterministic tests. */
-	generateBlockId?: () => string;
-	headerSlot?: ReactNode;
-	footerSlot?: ReactNode;
-}) {
+}: Props) {
 	const [selectedBlockId, setSelectedBlockId] = useState<string | null>(null);
 	const [settingsSheetOpen, setSettingsSheetOpen] = useState(false);
 	const compact = useCompactEditorLayout();

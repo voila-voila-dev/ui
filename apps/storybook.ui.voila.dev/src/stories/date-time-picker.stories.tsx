@@ -6,7 +6,7 @@ import {
 	NativeDateTimeInput,
 	ResponsiveDateTimeInput,
 	ShiftTimeRangeInput,
-} from "@voila.dev/ui/components/date-time-picker";
+} from "@voila.dev/ui/date-time-picker";
 import { useState } from "react";
 
 const meta = {

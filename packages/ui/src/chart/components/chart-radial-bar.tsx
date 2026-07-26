@@ -12,7 +12,7 @@ import { cn } from "#/lib/utils.ts";
  * rate, a share of a target.
  */
 
-export interface ChartRadialBarProps extends React.ComponentProps<"g"> {
+interface Props extends React.ComponentProps<"g"> {
 	readonly dataKey?: string;
 	readonly nameKey?: string;
 	/** Value that fills a whole track. Defaults to the value axis maximum. */
@@ -28,7 +28,7 @@ export interface ChartRadialBarProps extends React.ComponentProps<"g"> {
 	readonly gap?: number;
 }
 
-function ChartRadialBar({
+export function ChartRadialBar({
 	className,
 	dataKey,
 	nameKey,
@@ -40,7 +40,7 @@ function ChartRadialBar({
 	inset = 8,
 	gap = 4,
 	...props
-}: ChartRadialBarProps) {
+}: Props) {
 	const {
 		data,
 		innerWidth,
@@ -117,5 +117,3 @@ function ChartRadialBar({
 		</g>
 	);
 }
-
-export { ChartRadialBar };

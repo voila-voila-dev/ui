@@ -1,9 +1,6 @@
 import type { ReactNode } from "react";
-import {
-	SegmentedControl,
-	SegmentedControlItem,
-} from "#/components/segmented-control.tsx";
 import { BlockOptionRow } from "#/email-block-editor/sections/block-options/block-option-row.tsx";
+import { SegmentedControl } from "#/segmented-control/components/segmented-control.tsx";
 
 /**
  * A closed choice small enough to show every option at once: alignment, a
@@ -32,7 +29,7 @@ export function SegmentedOption<Value extends string | number>({
 }) {
 	return (
 		<BlockOptionRow label={label} description={description}>
-			<SegmentedControl
+			<SegmentedControl.Root
 				size="sm"
 				aria-label={label}
 				value={String(value)}
@@ -47,16 +44,16 @@ export function SegmentedOption<Value extends string | number>({
 				className="w-full"
 			>
 				{options.map((option) => (
-					<SegmentedControlItem
+					<SegmentedControl.Item
 						key={String(option.value)}
 						value={String(option.value)}
 						aria-label={option.icon === undefined ? undefined : option.label}
 						className="flex-1"
 					>
 						{option.icon ?? option.label}
-					</SegmentedControlItem>
+					</SegmentedControl.Item>
 				))}
-			</SegmentedControl>
+			</SegmentedControl.Root>
 		</BlockOptionRow>
 	);
 }

@@ -1,5 +1,5 @@
 import { XIcon } from "@phosphor-icons/react";
-import { Chip, ChipRemove } from "#/components/chip.tsx";
+import { Chip } from "#/chip/components/chip.tsx";
 import {
 	clearFilterValue,
 	describeFilterValue,
@@ -55,7 +55,7 @@ export function FilterChips({
 					return null;
 				}
 				return (
-					<Chip key={key} variant="outline" className="max-w-full">
+					<Chip.Root key={key} variant="outline" className="max-w-full">
 						<button
 							type="button"
 							className="cursor-pointer truncate text-left"
@@ -63,13 +63,13 @@ export function FilterChips({
 						>
 							{description}
 						</button>
-						<ChipRemove
+						<Chip.Remove
 							aria-label={`${labels.remove}: ${description}`}
 							onClick={() => onValuesChange(clearFilterValue(values, key))}
 						>
 							<XIcon />
-						</ChipRemove>
-					</Chip>
+						</Chip.Remove>
+					</Chip.Root>
 				);
 			})}
 		</div>

@@ -12,7 +12,7 @@ import { cn } from "#/lib/utils.ts";
  * directly comparable.
  */
 
-export interface ChartRadarProps extends React.ComponentProps<"g"> {
+interface Props extends React.ComponentProps<"g"> {
 	readonly keys?: ReadonlyArray<string>;
 	readonly fillOpacity?: number;
 	readonly strokeWidth?: number;
@@ -22,7 +22,7 @@ export interface ChartRadarProps extends React.ComponentProps<"g"> {
 
 const DOT_RADIUS = 3;
 
-function ChartRadar({
+export function ChartRadar({
 	className,
 	keys,
 	fillOpacity = 0.35,
@@ -30,7 +30,7 @@ function ChartRadar({
 	dots = false,
 	inset = 24,
 	...props
-}: ChartRadarProps) {
+}: Props) {
 	const {
 		data,
 		innerWidth,
@@ -98,5 +98,3 @@ function ChartRadar({
 		</g>
 	);
 }
-
-export { ChartRadar };

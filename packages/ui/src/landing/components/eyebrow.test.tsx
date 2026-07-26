@@ -2,7 +2,7 @@
 import { cleanup, render } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 
-import { Eyebrow } from "#/landing/components/eyebrow.tsx";
+import { Eyebrow } from "#/landing/components/eyebrow/index.ts";
 
 afterEach(cleanup);
 

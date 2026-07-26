@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import { Separator } from "#/components/separator.tsx";
 import { FilterField } from "#/filter/components/filter-field.tsx";
 import { setFilterValue } from "#/filter/lib/filter-values.ts";
 import type {
@@ -7,6 +6,7 @@ import type {
 	FilterLabels,
 	FilterValues,
 } from "#/filter/types.ts";
+import { Separator } from "#/separator/components/separator.tsx";
 
 /**
  * The editor: every declared filter, in declaration order, separated so a long

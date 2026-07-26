@@ -1,0 +1,17 @@
+import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion";
+import { cn } from "#/lib/utils.ts";
+
+export function AccordionRoot({
+	className,
+	multiple = false,
+	...props
+}: AccordionPrimitive.Root.Props) {
+	return (
+		<AccordionPrimitive.Root
+			data-slot="accordion"
+			className={cn("flex w-full flex-col", className)}
+			multiple={multiple}
+			{...props}
+		/>
+	);
+}

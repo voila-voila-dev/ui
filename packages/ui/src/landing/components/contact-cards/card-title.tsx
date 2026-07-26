@@ -1,0 +1,10 @@
+import { Heading } from "#/landing/components/heading.tsx";
+import { cn } from "#/lib/utils.ts";
+
+type Props = React.ComponentProps<typeof Heading>;
+
+export function ContactCardTitle({ className, ...props }: Props) {
+	return (
+		<Heading level="h2" className={cn("mb-2 text-xl", className)} {...props} />
+	);
+}

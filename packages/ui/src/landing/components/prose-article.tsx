@@ -6,7 +6,7 @@ import { cn } from "#/lib/utils.ts";
  * Long-form prose wrapper (blog articles, legal pages). Requires
  * `@plugin "@tailwindcss/typography"` in the consuming app's stylesheet.
  */
-function ProseArticle({
+export function ProseArticle({
 	className,
 	render,
 	...props
@@ -33,5 +33,3 @@ function ProseArticle({
 		},
 	});
 }
-
-export { ProseArticle };

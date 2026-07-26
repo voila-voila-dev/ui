@@ -41,7 +41,7 @@ interface SpreadsheetGridRect {
 	right: number;
 }
 
-interface SpreadsheetPasteData {
+export interface SpreadsheetPasteData {
 	/** 0-based grid position of the paste target's top-left cell. */
 	startRow: number;
 	startColumn: number;
@@ -404,7 +404,7 @@ interface SpreadsheetGridTableProps {
 	onPointerMove?: React.PointerEventHandler<HTMLTableElement>;
 }
 
-function useSpreadsheetGrid({
+export function useSpreadsheetGrid({
 	enabled,
 	onPasteData,
 	virtualRowCount,
@@ -739,5 +739,3 @@ function useSpreadsheetGrid({
 		},
 	};
 }
-
-export { type SpreadsheetPasteData, useSpreadsheetGrid };

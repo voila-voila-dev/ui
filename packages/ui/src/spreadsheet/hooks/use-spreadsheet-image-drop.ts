@@ -41,7 +41,7 @@ interface SpreadsheetImageDropProps {
  * depth counter rather than a boolean - a plain toggle flickers off the moment
  * the pointer enters a child.
  */
-function useSpreadsheetImageDrop({
+export function useSpreadsheetImageDrop({
 	onFileSelect,
 	disabled,
 }: {
@@ -110,5 +110,3 @@ function useSpreadsheetImageDrop({
 		},
 	};
 }
-
-export { useSpreadsheetImageDrop };

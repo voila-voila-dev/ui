@@ -1,9 +1,6 @@
 import { DesktopIcon, DeviceMobileIcon } from "@phosphor-icons/react";
-import {
-	SegmentedControl,
-	SegmentedControlItem,
-} from "#/components/segmented-control.tsx";
 import type { EmailEditorPreview } from "#/email-block-editor/document/types.ts";
+import { SegmentedControl } from "#/segmented-control/components/segmented-control.tsx";
 
 const PREVIEWS: ReadonlyArray<{
 	readonly value: EmailEditorPreview;
@@ -28,18 +25,18 @@ export function PreviewToggle({
 	onChange: (preview: EmailEditorPreview) => void;
 }) {
 	return (
-		<SegmentedControl
+		<SegmentedControl.Root
 			size="sm"
 			aria-label="Preview"
 			value={value}
 			onValueChange={(next) => onChange(next as EmailEditorPreview)}
 		>
 			{PREVIEWS.map((preview) => (
-				<SegmentedControlItem key={preview.value} value={preview.value}>
+				<SegmentedControl.Item key={preview.value} value={preview.value}>
 					<preview.Icon aria-hidden />
 					{preview.label}
-				</SegmentedControlItem>
+				</SegmentedControl.Item>
 			))}
-		</SegmentedControl>
+		</SegmentedControl.Root>
 	);
 }

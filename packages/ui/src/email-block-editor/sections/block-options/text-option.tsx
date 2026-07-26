@@ -1,8 +1,14 @@
 import { useId } from "react";
-import { Input } from "#/components/input.tsx";
-import { Textarea } from "#/components/textarea.tsx";
 import { BlockOptionRow } from "#/email-block-editor/sections/block-options/block-option-row.tsx";
+import { Input } from "#/input/components/input.tsx";
 
+interface Props {
+	label: string;
+	value: string;
+	onChange: (value: string) => void;
+	placeholder?: string;
+	description?: string;
+}
 /** A single-line text option (a label, a title, a price caption). */
 export function TextOption({
 	label,
@@ -10,13 +16,7 @@ export function TextOption({
 	onChange,
 	placeholder,
 	description,
-}: {
-	label: string;
-	value: string;
-	onChange: (value: string) => void;
-	placeholder?: string;
-	description?: string;
-}) {
+}: Props) {
 	const id = useId();
 	return (
 		<BlockOptionRow label={label} htmlFor={id} description={description}>
@@ -24,66 +24,6 @@ export function TextOption({
 				id={id}
 				value={value}
 				placeholder={placeholder}
-				onChange={(event) => onChange(event.target.value)}
-			/>
-		</BlockOptionRow>
-	);
-}
-
-/** A multi-line text option (a card description, a rating question). */
-export function TextAreaOption({
-	label,
-	value,
-	onChange,
-	placeholder,
-	description,
-	rows = 3,
-}: {
-	label: string;
-	value: string;
-	onChange: (value: string) => void;
-	placeholder?: string;
-	description?: string;
-	rows?: number;
-}) {
-	const id = useId();
-	return (
-		<BlockOptionRow label={label} htmlFor={id} description={description}>
-			<Textarea
-				id={id}
-				rows={rows}
-				value={value}
-				placeholder={placeholder}
-				onChange={(event) => onChange(event.target.value)}
-			/>
-		</BlockOptionRow>
-	);
-}
-
-/**
- * The one destination-URL control. Always "Link (URL)", always
- * `type="url"` with the `https://` placeholder, so a link field is
- * recognisable at a glance in any block (§1.2 of the editor plan).
- */
-export function LinkOption({
-	label = "Link (URL)",
-	value,
-	onChange,
-	description,
-}: {
-	label?: string;
-	value: string;
-	onChange: (href: string) => void;
-	description?: string;
-}) {
-	const id = useId();
-	return (
-		<BlockOptionRow label={label} htmlFor={id} description={description}>
-			<Input
-				id={id}
-				type="url"
-				placeholder="https://"
-				value={value}
 				onChange={(event) => onChange(event.target.value)}
 			/>
 		</BlockOptionRow>

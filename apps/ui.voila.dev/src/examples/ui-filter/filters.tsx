@@ -1,15 +1,15 @@
 import { type ColumnDef, DataTable } from "@voila.dev/ui/datatable";
-import { FilterBar } from "@voila.dev/ui/filter/filter-bar";
-import { FilterChips } from "@voila.dev/ui/filter/filter-chips";
-import { FilterForm } from "@voila.dev/ui/filter/filter-form";
-import { FilterTrigger } from "@voila.dev/ui/filter/filter-trigger";
-import type {
-	FilterDefinition,
-	FilterValues,
-	PlaceSuggestion,
-} from "@voila.dev/ui/filter/types";
-import { defaultFilterLabels } from "@voila.dev/ui/filter/types";
-import { RadiusMap } from "@voila.dev/ui/map/radius-map";
+import {
+	defaultFilterLabels,
+	FilterBar,
+	FilterChips,
+	type FilterDefinition,
+	FilterForm,
+	FilterTrigger,
+	type FilterValues,
+	type PlaceSuggestion,
+} from "@voila.dev/ui/filter";
+import { RadiusMap } from "@voila.dev/ui/radius-map";
 import { useMemo, useState } from "react";
 
 const STATUS = {
@@ -352,7 +352,7 @@ export function Listing() {
 				onSearchChange={setSearch}
 				resultCount={projects.length}
 			/>
-			<DataTable columns={PROJECT_COLUMNS} data={projects} />
+			<DataTable.Root columns={PROJECT_COLUMNS} data={projects} />
 			{area?.kind === "geoRadius" ? (
 				<RadiusMap
 					className="h-64 w-full overflow-hidden rounded-lg border"
