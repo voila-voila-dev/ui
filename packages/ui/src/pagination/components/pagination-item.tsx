@@ -1,7 +1,13 @@
-import type * as React from "react";
+import { mergeProps } from "@base-ui/react/merge-props";
+import { useRender } from "@base-ui/react/use-render";
 
-interface Props extends React.ComponentProps<"li"> {}
+interface Props extends useRender.ComponentProps<"li"> {}
 
-export function PaginationItem({ ...props }: Props) {
-	return <li data-slot="pagination-item" {...props} />;
+export function PaginationItem({ render, ...props }: Props) {
+	return useRender({
+		defaultTagName: "li",
+		props: mergeProps<"li">({}, props),
+		render,
+		state: { slot: "pagination-item" },
+	});
 }

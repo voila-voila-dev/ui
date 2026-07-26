@@ -9,7 +9,6 @@ export function SidebarRail({ className, ...props }: Props) {
 
 	return (
 		<button
-			data-sidebar="rail"
 			data-slot="sidebar-rail"
 			aria-label="Toggle Sidebar"
 			tabIndex={-1}

@@ -1,3 +1,5 @@
+import { mergeProps } from "@base-ui/react/merge-props";
+import { useRender } from "@base-ui/react/use-render";
 import { cva, type VariantProps } from "#/lib/cva.ts";
 import { cn } from "#/lib/utils.ts";
 
@@ -21,7 +23,7 @@ const fieldVariants = cva({
 });
 
 interface Props
-	extends React.ComponentProps<"div">,
+	extends useRender.ComponentProps<"div">,
 		VariantProps<typeof fieldVariants> {
 	invalid?: boolean;
 }
@@ -30,16 +32,19 @@ export function FieldRoot({
 	className,
 	orientation = "vertical",
 	invalid,
+	render,
 	...props
 }: Props) {
-	return (
-		<div
-			role="group"
-			data-slot="field"
-			data-orientation={orientation}
-			data-invalid={invalid || undefined}
-			className={cn(fieldVariants({ orientation }), className)}
-			{...props}
-		/>
-	);
+	return useRender({
+		defaultTagName: "div",
+		props: mergeProps<"div">(
+			{
+				role: "group",
+				className: cn(fieldVariants({ orientation }), className),
+			},
+			props,
+		),
+		render,
+		state: { slot: "field", orientation, invalid: invalid ? "true" : undefined },
+	});
 }

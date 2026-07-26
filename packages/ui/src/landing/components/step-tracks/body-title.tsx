@@ -1,13 +1,19 @@
+import { mergeProps } from "@base-ui/react/merge-props";
+import { useRender } from "@base-ui/react/use-render";
 import { cn } from "#/lib/utils.ts";
 
-interface Props extends React.ComponentProps<"h4"> {}
+interface Props extends useRender.ComponentProps<"h4"> {}
 
-export function StepTracksBodyTitle({ className, ...props }: Props) {
-	return (
-		<h4
-			data-slot="step-tracks-step-title"
-			className={cn("mb-2 text-lg font-semibold", className)}
-			{...props}
-		/>
-	);
+export function StepTracksBodyTitle({ className, render, ...props }: Props) {
+	return useRender({
+		defaultTagName: "h4",
+		props: mergeProps<"h4">(
+			{
+				className: cn("mb-2 text-lg font-semibold", className),
+			},
+			props,
+		),
+		render,
+		state: { slot: "step-tracks-step-title" },
+	});
 }

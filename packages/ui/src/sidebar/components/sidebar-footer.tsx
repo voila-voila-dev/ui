@@ -1,15 +1,19 @@
-import type * as React from "react";
+import { mergeProps } from "@base-ui/react/merge-props";
+import { useRender } from "@base-ui/react/use-render";
 import { cn } from "#/lib/utils.ts";
 
-interface Props extends React.ComponentProps<"div"> {}
+interface Props extends useRender.ComponentProps<"div"> {}
 
-export function SidebarFooter({ className, ...props }: Props) {
-	return (
-		<div
-			data-slot="sidebar-footer"
-			data-sidebar="footer"
-			className={cn("flex flex-col gap-2 p-2", className)}
-			{...props}
-		/>
-	);
+export function SidebarFooter({ className, render, ...props }: Props) {
+	return useRender({
+		defaultTagName: "div",
+		props: mergeProps<"div">(
+			{
+				className: cn("flex flex-col gap-2 p-2", className),
+			},
+			props,
+		),
+		render,
+		state: { slot: "sidebar-footer" },
+	});
 }

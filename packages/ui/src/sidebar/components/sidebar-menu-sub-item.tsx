@@ -1,15 +1,19 @@
-import type * as React from "react";
+import { mergeProps } from "@base-ui/react/merge-props";
+import { useRender } from "@base-ui/react/use-render";
 import { cn } from "#/lib/utils.ts";
 
-interface Props extends React.ComponentProps<"li"> {}
+interface Props extends useRender.ComponentProps<"li"> {}
 
-export function SidebarMenuSubItem({ className, ...props }: Props) {
-	return (
-		<li
-			data-slot="sidebar-menu-sub-item"
-			data-sidebar="menu-sub-item"
-			className={cn("group/menu-sub-item relative", className)}
-			{...props}
-		/>
-	);
+export function SidebarMenuSubItem({ className, render, ...props }: Props) {
+	return useRender({
+		defaultTagName: "li",
+		props: mergeProps<"li">(
+			{
+				className: cn("group/menu-sub-item relative", className),
+			},
+			props,
+		),
+		render,
+		state: { slot: "sidebar-menu-sub-item" },
+	});
 }

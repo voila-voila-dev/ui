@@ -1,3 +1,5 @@
+import { mergeProps } from "@base-ui/react/merge-props";
+import { useRender } from "@base-ui/react/use-render";
 import { cva, type VariantProps } from "#/lib/cva.ts";
 import { cn } from "#/lib/utils.ts";
 
@@ -38,22 +40,23 @@ const emptyMediaVariants = cva({
 });
 
 interface Props
-	extends React.ComponentProps<"div">,
+	extends useRender.ComponentProps<"div">,
 		VariantProps<typeof emptyMediaVariants> {}
 
 export function EmptyMedia({
 	className,
 	variant = "default",
 	size = "default",
+	render,
 	...props
 }: Props) {
-	return (
-		<div
-			data-slot="empty-media"
-			data-variant={variant}
-			data-size={size}
-			className={cn(emptyMediaVariants({ variant, size }), className)}
-			{...props}
-		/>
-	);
+	return useRender({
+		defaultTagName: "div",
+		props: mergeProps<"div">(
+			{ className: cn(emptyMediaVariants({ variant, size }), className) },
+			props,
+		),
+		render,
+		state: { slot: "empty-media", variant, size },
+	});
 }
