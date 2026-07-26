@@ -6,7 +6,8 @@ export {
 	type EmailBlockDefinition,
 	emailBlockDefinition,
 } from "#/email-block-editor/blocks/block-definitions.tsx";
-export type { SortableBlockHandle } from "#/email-block-editor/dnd/sortable-block-list.tsx";
+export { EmailBlockEditor } from "#/email-block-editor/components/email-block-editor.tsx";
+export type { SortableBlockHandle } from "#/email-block-editor/dnd/sortable-block-list.ts";
 export type {
 	EmailEditorAction,
 	EmailEditorContainerId,
@@ -50,5 +51,4 @@ export {
 	type EmailEditorTextSpan,
 	emptyEmailEditorDocument,
 } from "#/email-block-editor/document/types.ts";
-export { EmailBlockEditor } from "#/email-block-editor/email-block-editor.tsx";
 export { EMAIL_COLOR, EMAIL_FONT } from "#/email-block-editor/theme.ts";

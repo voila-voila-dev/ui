@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { Heading } from "#/landing/components/heading.tsx";
 import { cn } from "#/lib/utils.ts";
 

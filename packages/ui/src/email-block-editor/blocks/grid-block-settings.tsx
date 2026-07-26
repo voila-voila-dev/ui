@@ -1,11 +1,11 @@
 import type { EmailBlockComponentProps } from "#/email-block-editor/blocks/block-definitions.tsx";
+import { BlockOptionSection } from "#/email-block-editor/components/block-options/block-option-section.tsx";
+import { SegmentedOption } from "#/email-block-editor/components/block-options/segmented-option.tsx";
 import type {
 	EmailEditorGridBlock,
 	EmailEditorGridColumns,
 	EmailEditorGridMobileColumns,
 } from "#/email-block-editor/document/types.ts";
-import { BlockOptionSection } from "#/email-block-editor/sections/block-options/block-option-section.tsx";
-import { SegmentedOption } from "#/email-block-editor/sections/block-options/segmented-option.tsx";
 
 const DESKTOP_COLUMN_OPTIONS: ReadonlyArray<{
 	readonly value: EmailEditorGridColumns;

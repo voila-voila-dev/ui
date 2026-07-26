@@ -1,4 +1,5 @@
 import { StarIcon } from "@phosphor-icons/react";
+import type * as React from "react";
 import { accentHighlightStarClass } from "#/landing/lib/tones.ts";
 import { cn } from "#/lib/utils.ts";
 

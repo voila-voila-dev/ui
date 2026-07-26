@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 import { Separator } from "#/separator/components/separator.tsx";
 

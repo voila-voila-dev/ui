@@ -1,9 +1,9 @@
 import type { EmailBlockComponentProps } from "#/email-block-editor/blocks/block-definitions.tsx";
+import { AlignmentOption } from "#/email-block-editor/components/block-options/alignment-option.tsx";
+import { BlockOptionSection } from "#/email-block-editor/components/block-options/block-option-section.tsx";
+import { TextAreaOption } from "#/email-block-editor/components/block-options/text-area-option.tsx";
+import { TextOption } from "#/email-block-editor/components/block-options/text-option.tsx";
 import type { EmailEditorStatBlock } from "#/email-block-editor/document/types.ts";
-import { AlignmentOption } from "#/email-block-editor/sections/block-options/alignment-option.tsx";
-import { BlockOptionSection } from "#/email-block-editor/sections/block-options/block-option-section.tsx";
-import { TextAreaOption } from "#/email-block-editor/sections/block-options/text-area-option.tsx";
-import { TextOption } from "#/email-block-editor/sections/block-options/text-option.tsx";
 
 interface Props extends EmailBlockComponentProps<EmailEditorStatBlock> {}
 

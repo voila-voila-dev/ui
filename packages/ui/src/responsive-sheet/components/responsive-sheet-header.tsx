@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { Drawer } from "#/drawer/components/drawer.tsx";
 import { cn } from "#/lib/utils.ts";
 import { useResponsiveSheetIsMobile } from "#/responsive-sheet/context/responsive-sheet-context.ts";

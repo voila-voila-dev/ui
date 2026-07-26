@@ -8,6 +8,6 @@ interface Props extends PreviewCardPrimitive.Root.Props {}
  * Tooltip instead: a hover card is for content worth lingering on, so it opens
  * slower and stays open while the pointer is over the card itself.
  */
-export function HoverCardRoot({ ...props }: Props) {
+export function HoverCardRoot(props: Props) {
 	return <PreviewCardPrimitive.Root data-slot="hover-card" {...props} />;
 }

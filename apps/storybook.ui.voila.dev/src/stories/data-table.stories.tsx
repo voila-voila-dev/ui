@@ -6,7 +6,7 @@ import {
 	type ColumnDef,
 	DataTable,
 	dataTableSelectionColumn,
-} from "@voila.dev/ui/datatable";
+} from "@voila.dev/ui/data-table";
 import { Select } from "@voila.dev/ui/select";
 import { useMemo, useState } from "react";
 

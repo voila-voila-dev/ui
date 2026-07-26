@@ -1,5 +1,5 @@
+import type * as React from "react";
 import { Text } from "#/landing/components/text.tsx";
-import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<typeof Text> {}
 
@@ -9,7 +9,7 @@ export function SectionIntroDescription({ className, ...props }: Props) {
 			data-slot="section-intro-description"
 			variant="lead"
 			align="center"
-			className={cn(className)}
+			className={className}
 			{...props}
 		/>
 	);

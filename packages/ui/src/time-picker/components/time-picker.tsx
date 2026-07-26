@@ -103,7 +103,7 @@ export function TimePicker({
 	return (
 		<Popover.Root open={open} onOpenChange={setOpen}>
 			<DatePicker.Trigger
-				slot="time-picker-trigger"
+				slotName="time-picker-trigger"
 				icon={<ClockIcon className="size-4 shrink-0 text-muted-foreground" />}
 				className={cn("min-w-32", className)}
 				disabled={disabled}

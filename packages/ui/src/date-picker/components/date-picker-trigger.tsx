@@ -7,7 +7,8 @@ import { Popover } from "#/popover/components/popover.tsx";
 interface Props extends React.ComponentProps<typeof Button> {
 	empty: boolean;
 	icon?: React.ReactNode;
-	slot?: string;
+	/** Base for the part's `data-slot` attribute; not the DOM `slot`. */
+	slotName?: string;
 }
 
 /**
@@ -24,12 +25,12 @@ export function DatePickerTrigger({
 	icon = (
 		<CalendarBlankIcon className="size-4 shrink-0 text-muted-foreground" />
 	),
-	slot = "date-picker-trigger",
+	slotName = "date-picker-trigger",
 	...props
 }: Props) {
 	return (
 		<Popover.Trigger
-			data-slot={slot}
+			data-slot={slotName}
 			data-empty={empty || undefined}
 			render={
 				<Button

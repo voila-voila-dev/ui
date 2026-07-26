@@ -1,13 +1,13 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { FormattedInput } from "#/formatted-input/components/formatted-input.tsx";
 import {
 	applyMask,
 	businessIdMask,
-	FormattedInput,
 	idNumberMask,
 	phoneMask,
-} from "#/formatted-input/components/formatted-input.tsx";
+} from "#/formatted-input/lib/formatted-input-mask.ts";
 
 afterEach(cleanup);
 

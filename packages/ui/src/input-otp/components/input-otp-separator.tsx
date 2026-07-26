@@ -3,7 +3,7 @@ import type * as React from "react";
 
 interface Props extends React.ComponentProps<"div"> {}
 
-export function InputOTPSeparator({ ...props }: Props) {
+export function InputOTPSeparator(props: Props) {
 	return (
 		<div
 			data-slot="input-otp-separator"

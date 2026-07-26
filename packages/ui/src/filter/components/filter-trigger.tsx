@@ -2,6 +2,7 @@ import {
 	MagnifyingGlassIcon,
 	SlidersHorizontalIcon,
 } from "@phosphor-icons/react";
+import type * as React from "react";
 import { Badge } from "#/badge/components/badge.tsx";
 import type { FilterLabels } from "#/filter/types.ts";
 import { cn } from "#/lib/utils.ts";

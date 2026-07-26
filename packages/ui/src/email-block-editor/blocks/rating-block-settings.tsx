@@ -1,12 +1,12 @@
 import type { EmailBlockComponentProps } from "#/email-block-editor/blocks/block-definitions.tsx";
+import { BlockOptionSection } from "#/email-block-editor/components/block-options/block-option-section.tsx";
+import { LinkOption } from "#/email-block-editor/components/block-options/link-option.tsx";
+import { SelectOption } from "#/email-block-editor/components/block-options/select-option.tsx";
+import { TextOption } from "#/email-block-editor/components/block-options/text-option.tsx";
 import type {
 	EmailEditorRatingBlock,
 	EmailEditorRatingStyle,
 } from "#/email-block-editor/document/types.ts";
-import { BlockOptionSection } from "#/email-block-editor/sections/block-options/block-option-section.tsx";
-import { LinkOption } from "#/email-block-editor/sections/block-options/link-option.tsx";
-import { SelectOption } from "#/email-block-editor/sections/block-options/select-option.tsx";
-import { TextOption } from "#/email-block-editor/sections/block-options/text-option.tsx";
 
 const STYLE_OPTIONS: ReadonlyArray<{
 	readonly value: EmailEditorRatingStyle;

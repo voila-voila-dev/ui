@@ -6,6 +6,9 @@ import { BreadcrumbPage } from "#/breadcrumb/components/breadcrumb-page.tsx";
 import { BreadcrumbRoot } from "#/breadcrumb/components/breadcrumb-root.tsx";
 import { BreadcrumbSeparator } from "#/breadcrumb/components/breadcrumb-separator.tsx";
 
+/**
+ * The Breadcrumb parts as one namespace.
+ */
 export const Breadcrumb = {
 	Root: BreadcrumbRoot,
 	Ellipsis: BreadcrumbEllipsis,

@@ -12,6 +12,9 @@ import { AlertDialogRoot } from "#/alert-dialog/components/alert-dialog-root.tsx
 import { AlertDialogTitle } from "#/alert-dialog/components/alert-dialog-title.tsx";
 import { AlertDialogTrigger } from "#/alert-dialog/components/alert-dialog-trigger.tsx";
 
+/**
+ * The AlertDialog parts as one namespace.
+ */
 export const AlertDialog = {
 	Root: AlertDialogRoot,
 	Action: AlertDialogAction,

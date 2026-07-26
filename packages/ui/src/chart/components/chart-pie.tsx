@@ -8,7 +8,6 @@ import {
 	polarToCartesian,
 	sliceAngles,
 } from "#/chart/core/polar.ts";
-import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"g"> {
 	/** Field holding each wedge's size. Defaults to the first value key. */
@@ -71,7 +70,7 @@ export function ChartPie({
 		<g
 			data-slot="chart-pie"
 			data-variant={innerRadiusRatio > 0 ? "donut" : "pie"}
-			className={cn(className)}
+			className={className}
 			{...props}
 		>
 			{slices.map((slice) => {

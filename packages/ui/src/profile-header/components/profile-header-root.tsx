@@ -3,7 +3,7 @@ import { Avatar } from "#/avatar/components/avatar.tsx";
 import { cn } from "#/lib/utils.ts";
 import { ProfileHeaderCover } from "#/profile-header/components/profile-header-cover.tsx";
 import type { ProfileTheme } from "#/profile-header/components/profile-header-theme.ts";
-import { getInitials } from "#/user-avatar/libs/get-initials.ts";
+import { getInitials } from "#/user-avatar/lib/get-initials.ts";
 
 /** Ring color that frames the overlapping avatar, matched to the theme. */
 const avatarRingClasses =

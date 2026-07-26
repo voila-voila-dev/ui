@@ -2,9 +2,9 @@ import { PlusIcon, XIcon } from "@phosphor-icons/react";
 import { Button } from "#/button/components/button.tsx";
 import type { EmailBlockComponentProps } from "#/email-block-editor/blocks/block-definitions.tsx";
 import { TableColumnSettings } from "#/email-block-editor/blocks/table-column-settings.tsx";
+import { BlockOptionSection } from "#/email-block-editor/components/block-options/block-option-section.tsx";
+import { ToggleOption } from "#/email-block-editor/components/block-options/toggle-option.tsx";
 import type { EmailEditorTableBlock } from "#/email-block-editor/document/types.ts";
-import { BlockOptionSection } from "#/email-block-editor/sections/block-options/block-option-section.tsx";
-import { ToggleOption } from "#/email-block-editor/sections/block-options/toggle-option.tsx";
 
 interface Props extends EmailBlockComponentProps<EmailEditorTableBlock> {}
 

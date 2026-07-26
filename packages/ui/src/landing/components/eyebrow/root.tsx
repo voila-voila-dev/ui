@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { EyebrowToneContext } from "#/landing/components/eyebrow/context/eyebrow-context.ts";
 import { type Tone, toneTintBackgroundClass } from "#/landing/lib/tones.ts";
 import { cn } from "#/lib/utils.ts";

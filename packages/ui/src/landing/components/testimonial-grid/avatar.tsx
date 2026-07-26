@@ -1,7 +1,9 @@
+import type * as React from "react";
 import {
 	type TestimonialAvatarVariants,
 	testimonialAvatarVariants,
 } from "#/landing/components/testimonial-grid-variants.ts";
+
 import { cn } from "#/lib/utils.ts";
 
 interface Props

@@ -88,7 +88,7 @@ export function ShiftTimeRangeInput({
 			}}
 		>
 			<DatePicker.Trigger
-				slot="shift-time-range-trigger"
+				slotName="shift-time-range-trigger"
 				icon={
 					<CalendarDotsIcon className="size-4 shrink-0 text-muted-foreground" />
 				}

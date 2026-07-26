@@ -1,6 +1,6 @@
 import type * as React from "react";
 import { buttonGroupVariants } from "#/button-group/components/button-group-variants.ts";
-import { ButtonGroupContext } from "#/button-group/context/button-group-context.tsx";
+import { ButtonGroupContext } from "#/button-group/context/button-group-context.ts";
 import type { VariantProps } from "#/lib/cva.ts";
 import { cn } from "#/lib/utils.ts";
 

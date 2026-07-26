@@ -7,6 +7,9 @@ import { TableHeader } from "#/table/components/table-header.tsx";
 import { TableRoot } from "#/table/components/table-root.tsx";
 import { TableRow } from "#/table/components/table-row.tsx";
 
+/**
+ * The Table parts as one namespace.
+ */
 export const Table = {
 	Root: TableRoot,
 	Body: TableBody,

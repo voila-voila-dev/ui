@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { type Tone, toneTextClass } from "#/landing/lib/tones.ts";
 import { cn } from "#/lib/utils.ts";
 

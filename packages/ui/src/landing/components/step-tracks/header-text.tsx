@@ -5,3 +5,5 @@ export function StepTracksHeaderText({ className, ...props }: Props) {
 		<div data-slot="step-tracks-header-text" className={className} {...props} />
 	);
 }
+
+import type * as React from "react";

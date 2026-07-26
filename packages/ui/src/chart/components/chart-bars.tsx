@@ -3,7 +3,6 @@ import { useChartContext } from "#/chart/context/chart-context.tsx";
 import { barRects } from "#/chart/core/bars.ts";
 import { seriesColor } from "#/chart/core/config.ts";
 import { roundedBarPath } from "#/chart/core/geometry.ts";
-import { cn } from "#/lib/utils.ts";
 
 /**
  * The bar mark. Grouped by default, stacked on request, and upright or on its
@@ -60,7 +59,7 @@ export function ChartBars({
 	});
 
 	return (
-		<g data-slot="chart-bars" className={cn(className)} {...props}>
+		<g data-slot="chart-bars" className={className} {...props}>
 			{rects.map((rect) => {
 				const path = roundedBarPath(rect);
 				if (path === "") {

@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { Label } from "#/label/components/label.tsx";
 import { cn } from "#/lib/utils.ts";
 

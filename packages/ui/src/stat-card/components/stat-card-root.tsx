@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { Card } from "#/card/components/card.tsx";
 import { cn } from "#/lib/utils.ts";
 

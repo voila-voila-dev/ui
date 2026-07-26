@@ -1,4 +1,5 @@
 import { CalendarDotsIcon } from "@phosphor-icons/react";
+import type * as React from "react";
 import type { Button } from "#/button/components/button.tsx";
 import { Calendar } from "#/calendar/components/calendar.tsx";
 import { DatePicker } from "#/date-picker/components/date-picker.tsx";
@@ -76,7 +77,7 @@ export function DateTimePickerRoot({
 	return (
 		<Popover.Root open={open} onOpenChange={setOpen}>
 			<DatePicker.Trigger
-				slot="date-time-picker-trigger"
+				slotName="date-time-picker-trigger"
 				icon={
 					<CalendarDotsIcon className="size-4 shrink-0 text-muted-foreground" />
 				}

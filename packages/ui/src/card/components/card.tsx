@@ -6,6 +6,9 @@ import { CardHeader } from "#/card/components/card-header.tsx";
 import { CardRoot } from "#/card/components/card-root.tsx";
 import { CardTitle } from "#/card/components/card-title.tsx";
 
+/**
+ * The Card parts as one namespace.
+ */
 export const Card = {
 	Root: CardRoot,
 	Action: CardAction,

@@ -13,7 +13,7 @@ import type { ReactNode } from "react";
 import {
 	CONTAINER_PREFIX,
 	ROOT_CONTAINER,
-} from "#/email-block-editor/dnd/sortable-block-list.tsx";
+} from "#/email-block-editor/dnd/sortable-block-list.ts";
 import type { EmailEditorContainerId } from "#/email-block-editor/document/reducer.ts";
 import {
 	emailEditorContainerBlocks,

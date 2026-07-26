@@ -1,3 +1,4 @@
+import { mergeProps } from "@base-ui/react/merge-props";
 import * as React from "react";
 import { cn } from "#/lib/utils.ts";
 import { SpreadsheetResizeHandle } from "#/spreadsheet/components/spreadsheet-resize-handle.tsx";
@@ -71,8 +72,7 @@ export function SpreadsheetHead({
 					"cursor-grab touch-none outline-none select-none focus-visible:inset-ring-2 focus-visible:inset-ring-ring/70",
 				className,
 			)}
-			{...props}
-			{...reorder.headProps}
+			{...mergeProps<"th">(props, reorder.headProps)}
 		>
 			{canSort ? (
 				<button

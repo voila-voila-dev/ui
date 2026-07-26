@@ -5,3 +5,5 @@ export function SiteFooterColumn({ className, ...props }: Props) {
 		<div data-slot="site-footer-column" className={className} {...props} />
 	);
 }
+
+import type * as React from "react";

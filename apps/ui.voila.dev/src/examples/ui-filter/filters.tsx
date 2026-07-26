@@ -1,4 +1,4 @@
-import { type ColumnDef, DataTable } from "@voila.dev/ui/datatable";
+import { type ColumnDef, DataTable } from "@voila.dev/ui/data-table";
 import {
 	defaultFilterLabels,
 	Filter,

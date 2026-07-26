@@ -1,6 +1,7 @@
+export { FormattedInput } from "#/formatted-input/components/formatted-input.tsx";
 export {
+	applyMask,
 	businessIdMask,
-	FormattedInput,
 	idNumberMask,
 	phoneMask,
-} from "#/formatted-input/components/formatted-input.tsx";
+} from "#/formatted-input/lib/formatted-input-mask.ts";

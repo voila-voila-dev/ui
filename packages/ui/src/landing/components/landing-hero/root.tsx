@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { Container } from "#/landing/components/container.tsx";
 import {
 	type LandingHeroLayoutVariants,

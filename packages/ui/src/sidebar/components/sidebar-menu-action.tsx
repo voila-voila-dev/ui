@@ -1,11 +1,8 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-interface Props
-	extends useRender.ComponentProps<"button">,
-		React.ComponentProps<"button"> {
+interface Props extends useRender.ComponentProps<"button"> {
 	showOnHover?: boolean;
 }
 

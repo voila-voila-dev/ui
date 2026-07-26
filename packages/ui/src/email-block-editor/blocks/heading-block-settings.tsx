@@ -1,10 +1,10 @@
 import type { EmailBlockComponentProps } from "#/email-block-editor/blocks/block-definitions.tsx";
+import { SelectOption } from "#/email-block-editor/components/block-options/select-option.tsx";
+import { TextOption } from "#/email-block-editor/components/block-options/text-option.tsx";
 import type {
 	EmailEditorHeadingBlock,
 	EmailEditorHeadingLevel,
 } from "#/email-block-editor/document/types.ts";
-import { SelectOption } from "#/email-block-editor/sections/block-options/select-option.tsx";
-import { TextOption } from "#/email-block-editor/sections/block-options/text-option.tsx";
 import { EMAIL_HEADING_STYLE } from "#/email-block-editor/theme.ts";
 
 const HEADING_LEVEL_OPTIONS: ReadonlyArray<{

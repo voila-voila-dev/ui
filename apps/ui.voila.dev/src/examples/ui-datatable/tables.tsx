@@ -4,7 +4,7 @@ import {
 	DataTable,
 	type DataTableDensity,
 	dataTableSelectionColumn,
-} from "@voila.dev/ui/datatable";
+} from "@voila.dev/ui/data-table";
 import { useState } from "react";
 
 interface Project {

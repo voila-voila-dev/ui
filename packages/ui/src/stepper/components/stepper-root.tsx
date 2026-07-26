@@ -4,7 +4,7 @@ import { cn } from "#/lib/utils.ts";
 import {
 	StepperContext,
 	type StepperOrientation,
-} from "#/stepper/context/stepper-context.tsx";
+} from "#/stepper/context/stepper-context.ts";
 
 interface Props extends React.ComponentProps<"ol"> {
 	value: number;

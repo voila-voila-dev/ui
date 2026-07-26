@@ -1,13 +1,13 @@
 import type { DateRange } from "react-day-picker";
 import { Calendar } from "#/calendar/components/calendar.tsx";
 import { DatePickerContent } from "#/date-picker/components/date-picker-content.tsx";
+import { DatePickerTrigger } from "#/date-picker/components/date-picker-trigger.tsx";
+import { DateRangePickerHiddenInputs } from "#/date-picker/components/date-range-picker-hidden-inputs.tsx";
 import {
 	DEFAULT_DATE_FORMAT,
 	formatDateRangeLabel,
-} from "#/date-picker/components/date-picker-format.ts";
-import type { DatePickerBase } from "#/date-picker/components/date-picker-props.ts";
-import { DatePickerTrigger } from "#/date-picker/components/date-picker-trigger.tsx";
-import { DateRangePickerHiddenInputs } from "#/date-picker/components/date-range-picker-hidden-inputs.tsx";
+} from "#/date-picker/lib/date-picker-format.ts";
+import type { DatePickerBase } from "#/date-picker/lib/date-picker-props.ts";
 import { usePickerState } from "#/hooks/use-picker-state.ts";
 import { cn } from "#/lib/utils.ts";
 import { Popover } from "#/popover/components/popover.tsx";

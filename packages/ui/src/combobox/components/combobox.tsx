@@ -36,5 +36,3 @@ export const Combobox = {
 	Trigger: ComboboxTrigger,
 	Value: ComboboxValue,
 };
-
-export { useComboboxAnchor } from "#/combobox/hooks/use-combobox-anchor.ts";

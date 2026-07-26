@@ -25,11 +25,11 @@ export type CirclePolygonFeature = {
  * direct great-circle formula, so the drawn radius stays true at any latitude
  * (a naive degree offset would flatten the circle away from the equator).
  */
-export const circlePolygon = (
+export function circlePolygon(
 	center: GeoPoint,
 	radiusKm: number,
 	segments = 64,
-): CirclePolygonFeature => {
+): CirclePolygonFeature {
 	const angularDistance = radiusKm / EARTH_RADIUS_KM;
 	const centerLatitude = toRadians(center.latitude);
 	const centerLongitude = toRadians(center.longitude);
@@ -58,16 +58,16 @@ export const circlePolygon = (
 		geometry: { type: "Polygon", coordinates: [ring] },
 		properties: {},
 	};
-};
+}
 
 /**
  * The circle's bounding box (WGS84 degrees), for `fitBounds`. Derived from the
  * ring points so it shares the geodesic math above.
  */
-export const circleBounds = (
+export function circleBounds(
 	center: GeoPoint,
 	radiusKm: number,
-): { west: number; south: number; east: number; north: number } => {
+): { west: number; south: number; east: number; north: number } {
 	const ring = circlePolygon(center, radiusKm).geometry.coordinates[0];
 	let west = Number.POSITIVE_INFINITY;
 	let south = Number.POSITIVE_INFINITY;
@@ -80,4 +80,4 @@ export const circleBounds = (
 		north = Math.max(north, latitude);
 	}
 	return { west, south, east, north };
-};
+}

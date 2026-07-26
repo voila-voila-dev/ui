@@ -25,8 +25,6 @@ import { ChartXAxis } from "#/chart/components/chart-x-axis.tsx";
 import { ChartYAxis } from "#/chart/components/chart-y-axis.tsx";
 import { useChartContext } from "#/chart/context/chart-context.tsx";
 
-export { useChartContext } from "#/chart/context/chart-context.tsx";
-
 /**
  * The chart kit's public surface.
  *
@@ -73,18 +71,3 @@ export const Chart = {
 
 /** The chart the current part is drawing into. Throws outside a `Chart.Root`. */
 export const useChart = useChartContext;
-
-export type { ChartContextValue } from "#/chart/context/chart-context.tsx";
-export type {
-	ChartCategorySpec,
-	ChartValueSpec,
-} from "#/chart/core/chart-model.ts";
-export type { ChartConfig, ChartTheme } from "#/chart/core/config.ts";
-export type {
-	ChartCurve,
-	ChartDatum,
-	ChartMargin,
-	ChartOrientation,
-	ChartTooltipIndicator,
-} from "#/chart/core/types.ts";
-export type { ChartActive } from "#/chart/hooks/use-chart-pointer.ts";

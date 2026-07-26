@@ -11,6 +11,9 @@ import { SheetTrigger } from "#/sheet/components/sheet-trigger.tsx";
 
 export type { SheetContentSize } from "#/sheet/components/sheet-content.tsx";
 
+/**
+ * The Sheet parts as one namespace.
+ */
 export const Sheet = {
 	Root: SheetRoot,
 	Close: SheetClose,

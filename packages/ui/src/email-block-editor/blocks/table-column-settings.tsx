@@ -1,10 +1,10 @@
 import { PlusIcon, XIcon } from "@phosphor-icons/react";
 import { Button } from "#/button/components/button.tsx";
+import { SelectOption } from "#/email-block-editor/components/block-options/select-option.tsx";
 import type {
 	EmailEditorTableBlock,
 	EmailEditorTableColumn,
 } from "#/email-block-editor/document/types.ts";
-import { SelectOption } from "#/email-block-editor/sections/block-options/select-option.tsx";
 
 const ALIGN_OPTIONS: ReadonlyArray<{
 	readonly value: EmailEditorTableColumn["align"];

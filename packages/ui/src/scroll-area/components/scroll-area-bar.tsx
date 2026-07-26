@@ -4,7 +4,7 @@ import { cn } from "#/lib/utils.ts";
 
 interface Props extends ScrollAreaPrimitive.Scrollbar.Props {}
 
-export function ScrollBar({
+export function ScrollAreaBar({
 	className,
 	orientation = "vertical",
 	...props

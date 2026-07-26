@@ -1,12 +1,12 @@
 import type { EmailBlockComponentProps } from "#/email-block-editor/blocks/block-definitions.tsx";
 import { OfferFeatureSettings } from "#/email-block-editor/blocks/offer-feature-settings.tsx";
+import { BlockOptionSection } from "#/email-block-editor/components/block-options/block-option-section.tsx";
+import { LinkOption } from "#/email-block-editor/components/block-options/link-option.tsx";
+import { MoneyOption } from "#/email-block-editor/components/block-options/money-option.tsx";
+import { TextAreaOption } from "#/email-block-editor/components/block-options/text-area-option.tsx";
+import { TextOption } from "#/email-block-editor/components/block-options/text-option.tsx";
+import { ToggleOption } from "#/email-block-editor/components/block-options/toggle-option.tsx";
 import type { EmailEditorOfferBlock } from "#/email-block-editor/document/types.ts";
-import { BlockOptionSection } from "#/email-block-editor/sections/block-options/block-option-section.tsx";
-import { LinkOption } from "#/email-block-editor/sections/block-options/link-option.tsx";
-import { MoneyOption } from "#/email-block-editor/sections/block-options/money-option.tsx";
-import { TextAreaOption } from "#/email-block-editor/sections/block-options/text-area-option.tsx";
-import { TextOption } from "#/email-block-editor/sections/block-options/text-option.tsx";
-import { ToggleOption } from "#/email-block-editor/sections/block-options/toggle-option.tsx";
 
 interface Props extends EmailBlockComponentProps<EmailEditorOfferBlock> {}
 

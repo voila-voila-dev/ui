@@ -5,8 +5,6 @@ import { TranslationInputLocaleSelect } from "#/translation-input/components/tra
 import type { TranslationValue } from "#/translation-input/lib/translation-value.ts";
 import { writeLocale } from "#/translation-input/lib/write-locale.ts";
 
-export type { TranslationValue } from "#/translation-input/lib/translation-value.ts";
-
 interface Props
 	extends Omit<
 		React.ComponentProps<typeof InputGroup.Input>,

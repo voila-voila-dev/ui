@@ -1,7 +1,9 @@
+import type * as React from "react";
 import {
 	accentHighlightBlobClass,
 	brandGradientClass,
 } from "#/landing/lib/tones.ts";
+
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"article"> {}

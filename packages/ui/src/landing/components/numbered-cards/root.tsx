@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { NumberedCardsToneContext } from "#/landing/components/numbered-cards/context/numbered-cards-context.ts";
 import {
 	type NumberedCardsVariants,

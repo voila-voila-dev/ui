@@ -97,10 +97,3 @@ export function FormattedInput({
 		/>
 	);
 }
-
-export {
-	applyMask,
-	businessIdMask,
-	idNumberMask,
-	phoneMask,
-} from "#/formatted-input/lib/formatted-input-mask.ts";

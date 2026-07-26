@@ -1,10 +1,8 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import {
-	Combobox,
-	useComboboxAnchor,
-} from "#/combobox/components/combobox.tsx";
+import { Combobox } from "#/combobox/components/combobox.tsx";
+import { useComboboxAnchor } from "#/combobox/hooks/use-combobox-anchor.ts";
 
 const specialties = [
 	"Designer",

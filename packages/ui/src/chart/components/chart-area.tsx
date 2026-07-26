@@ -4,7 +4,6 @@ import { seriesColor } from "#/chart/core/config.ts";
 import { areaPath, linePath } from "#/chart/core/geometry.ts";
 import { seriesPoints, stackBases } from "#/chart/core/series.ts";
 import type { ChartCurve } from "#/chart/core/types.ts";
-import { cn } from "#/lib/utils.ts";
 
 /**
  * A filled band under each series, with the same outline the line mark would
@@ -50,7 +49,7 @@ export function ChartArea({
 	const baseline = valueScale.scale(valueScale.domain[0]);
 
 	return (
-		<g data-slot="chart-area" className={cn(className)} {...props}>
+		<g data-slot="chart-area" className={className} {...props}>
 			{drawnKeys.map((key, seriesIndex) => {
 				const base = bases?.get(key);
 				const points = seriesPoints({

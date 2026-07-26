@@ -5,7 +5,7 @@ import { StepperRoot } from "#/stepper/components/stepper-root.tsx";
 import { StepperSeparator } from "#/stepper/components/stepper-separator.tsx";
 import { StepperTitle } from "#/stepper/components/stepper-title.tsx";
 
-export type { StepperStepState } from "#/stepper/context/stepper-item-context.tsx";
+export type { StepperStepState } from "#/stepper/context/stepper-item-context.ts";
 
 /**
  * The Stepper parts as one namespace.

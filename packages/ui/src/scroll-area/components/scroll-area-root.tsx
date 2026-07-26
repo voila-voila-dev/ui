@@ -1,7 +1,7 @@
 import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area";
 
 import { cn } from "#/lib/utils.ts";
-import { ScrollBar } from "#/scroll-area/components/scroll-area-bar.tsx";
+import { ScrollAreaBar } from "#/scroll-area/components/scroll-area-bar.tsx";
 
 interface Props extends ScrollAreaPrimitive.Root.Props {}
 
@@ -18,7 +18,7 @@ export function ScrollAreaRoot({ className, children, ...props }: Props) {
 			>
 				{children}
 			</ScrollAreaPrimitive.Viewport>
-			<ScrollBar />
+			<ScrollAreaBar />
 			<ScrollAreaPrimitive.Corner />
 		</ScrollAreaPrimitive.Root>
 	);

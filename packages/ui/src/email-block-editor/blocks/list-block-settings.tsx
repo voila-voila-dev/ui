@@ -1,11 +1,11 @@
 import { PlusIcon, XIcon } from "@phosphor-icons/react";
 import { Button } from "#/button/components/button.tsx";
 import type { EmailBlockComponentProps } from "#/email-block-editor/blocks/block-definitions.tsx";
+import { SelectOption } from "#/email-block-editor/components/block-options/select-option.tsx";
 import type {
 	EmailEditorListBlock,
 	EmailEditorListMarker,
 } from "#/email-block-editor/document/types.ts";
-import { SelectOption } from "#/email-block-editor/sections/block-options/select-option.tsx";
 
 const MARKER_OPTIONS: ReadonlyArray<{
 	readonly value: EmailEditorListMarker;

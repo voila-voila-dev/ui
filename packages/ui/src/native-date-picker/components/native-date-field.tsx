@@ -3,7 +3,8 @@ import { cn } from "#/lib/utils.ts";
 
 interface Props extends Omit<React.ComponentProps<"input">, "type" | "size"> {
 	type: "date" | "time" | "datetime-local";
-	slot: string;
+	/** Base for the part's `data-slot` attributes; not the DOM `slot`. */
+	slotName: string;
 	icon: React.ReactNode;
 	size?: "sm" | "default";
 	/**
@@ -22,7 +23,7 @@ interface Props extends Omit<React.ComponentProps<"input">, "type" | "size"> {
  */
 export function NativeDateField({
 	type,
-	slot,
+	slotName,
 	icon,
 	className,
 	wrapperClassName,
@@ -36,19 +37,19 @@ export function NativeDateField({
 				"group/native-date-picker relative w-fit has-[input:disabled]:opacity-50",
 				wrapperClassName,
 			)}
-			data-slot={`${slot}-wrapper`}
+			data-slot={`${slotName}-wrapper`}
 			data-size={size}
 		>
 			<span
 				className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-muted-foreground select-none [&_svg]:size-4"
 				aria-hidden="true"
-				data-slot={`${slot}-icon`}
+				data-slot={`${slotName}-icon`}
 			>
 				{icon}
 			</span>
 			<input
 				type={type}
-				data-slot={slot}
+				data-slot={slotName}
 				data-size={size}
 				// `text-base` then `md:text-sm` is the same iOS zoom guard as Input.
 				className={cn(

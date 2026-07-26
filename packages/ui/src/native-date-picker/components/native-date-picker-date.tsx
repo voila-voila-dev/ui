@@ -5,7 +5,7 @@ import { NativeDateField } from "#/native-date-picker/components/native-date-fie
 interface Props
 	extends Omit<
 		React.ComponentProps<typeof NativeDateField>,
-		"type" | "slot" | "icon"
+		"type" | "slotName" | "icon"
 	> {}
 
 /** The browser's own date picker, dressed as an `Input`. */
@@ -13,7 +13,7 @@ export function NativeDatePickerDate(props: Props) {
 	return (
 		<NativeDateField
 			type="date"
-			slot="native-date-picker"
+			slotName="native-date-picker"
 			icon={<CalendarBlankIcon />}
 			{...props}
 		/>

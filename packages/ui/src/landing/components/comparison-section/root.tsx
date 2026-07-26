@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { ComparisonToneContext } from "#/landing/components/comparison-section/context/comparison-section-context.ts";
 import { Container } from "#/landing/components/container.tsx";
 import { Section } from "#/landing/components/section.tsx";

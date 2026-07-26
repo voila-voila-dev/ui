@@ -5,6 +5,6 @@ import { Drawer as DrawerPrimitive } from "vaul";
 // controlled/uncontrolled shapes, which an interface cannot extend.
 type Props = React.ComponentProps<typeof DrawerPrimitive.Root>;
 
-export function DrawerRoot({ ...props }: Props) {
+export function DrawerRoot(props: Props) {
 	return <DrawerPrimitive.Root data-slot="drawer" {...props} />;
 }

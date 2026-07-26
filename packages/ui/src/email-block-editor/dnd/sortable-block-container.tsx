@@ -8,7 +8,7 @@ import type * as React from "react";
 import {
 	CONTAINER_PREFIX,
 	ROOT_CONTAINER,
-} from "#/email-block-editor/dnd/sortable-block-list.tsx";
+} from "#/email-block-editor/dnd/sortable-block-list.ts";
 import type { EmailEditorContainerId } from "#/email-block-editor/document/reducer.ts";
 
 const containerDroppableId = (containerId: EmailEditorContainerId): string =>

@@ -1,7 +1,7 @@
 import type * as React from "react";
 
 import { cn } from "#/lib/utils.ts";
-import { useStepperContext } from "#/stepper/context/stepper-context.tsx";
+import { useStepperContext } from "#/stepper/context/stepper-context.ts";
 
 interface Props extends React.ComponentProps<"div"> {}
 

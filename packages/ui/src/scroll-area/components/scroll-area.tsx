@@ -1,4 +1,4 @@
-import { ScrollBar } from "#/scroll-area/components/scroll-area-bar.tsx";
+import { ScrollAreaBar } from "#/scroll-area/components/scroll-area-bar.tsx";
 import { ScrollAreaRoot } from "#/scroll-area/components/scroll-area-root.tsx";
 
 /**
@@ -6,5 +6,5 @@ import { ScrollAreaRoot } from "#/scroll-area/components/scroll-area-root.tsx";
  */
 export const ScrollArea = {
 	Root: ScrollAreaRoot,
-	Bar: ScrollBar,
+	Bar: ScrollAreaBar,
 };

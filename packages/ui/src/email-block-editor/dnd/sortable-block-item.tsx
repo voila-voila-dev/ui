@@ -2,7 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type * as React from "react";
 import type { ReactNode } from "react";
-import type { SortableBlockHandle } from "#/email-block-editor/dnd/sortable-block-list.tsx";
+import type { SortableBlockHandle } from "#/email-block-editor/dnd/sortable-block-list.ts";
 
 // `children` is a render prop here, so it is replaced rather than inherited.
 interface Props extends Omit<React.ComponentProps<"div">, "children"> {

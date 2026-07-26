@@ -4,7 +4,6 @@ import { readNumber } from "#/chart/core/chart-model.ts";
 import { configKeyFor, seriesColor } from "#/chart/core/config.ts";
 import { arcPath } from "#/chart/core/geometry.ts";
 import { polarFrame } from "#/chart/core/polar.ts";
-import { cn } from "#/lib/utils.ts";
 
 /**
  * Bars bent around the centre — one concentric track per row. Reads as a set of
@@ -66,7 +65,7 @@ export function ChartRadialBar({
 	const span = endAngle - startAngle;
 
 	return (
-		<g data-slot="chart-radial-bar" className={cn(className)} {...props}>
+		<g data-slot="chart-radial-bar" className={className} {...props}>
 			{data.map((datum, index) => {
 				// Track zero is the outermost, so the first row of data reads first.
 				const trackOuter = radius - index * trackDepth;

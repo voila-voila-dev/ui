@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { cva, type VariantProps } from "#/lib/cva.ts";
 import { cn } from "#/lib/utils.ts";
 

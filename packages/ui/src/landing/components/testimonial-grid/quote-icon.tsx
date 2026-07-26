@@ -1,4 +1,5 @@
 import { QuotesIcon } from "@phosphor-icons/react";
+import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<typeof QuotesIcon> {}

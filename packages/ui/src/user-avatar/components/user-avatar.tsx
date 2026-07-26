@@ -1,7 +1,7 @@
 import type * as React from "react";
 import { Avatar } from "#/avatar/components/avatar.tsx";
 import { cn } from "#/lib/utils.ts";
-import { getInitials } from "#/user-avatar/libs/get-initials.ts";
+import { getInitials } from "#/user-avatar/lib/get-initials.ts";
 
 interface Props extends React.ComponentProps<"div"> {
 	name: string;

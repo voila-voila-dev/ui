@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { FeatureGridToneContext } from "#/landing/components/feature-grid/context/feature-grid-context.ts";
 import {
 	type FeatureGridVariants,

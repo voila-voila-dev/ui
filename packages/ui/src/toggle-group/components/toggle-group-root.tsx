@@ -1,5 +1,5 @@
 import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group";
-import type * as React from "react";
+import * as React from "react";
 import type { VariantProps } from "#/lib/cva.ts";
 import { cn } from "#/lib/utils.ts";
 import type { toggleVariants } from "#/toggle/components/toggle-variants.ts";
@@ -21,6 +21,11 @@ export function ToggleGroupRoot({
 	children,
 	...props
 }: Props) {
+	const context = React.useMemo(
+		() => ({ variant, size, spacing, orientation }),
+		[variant, size, spacing, orientation],
+	);
+
 	return (
 		<ToggleGroupPrimitive
 			data-slot="toggle-group"
@@ -35,9 +40,7 @@ export function ToggleGroupRoot({
 			)}
 			{...props}
 		>
-			<ToggleGroupContext.Provider
-				value={{ variant, size, spacing, orientation }}
-			>
+			<ToggleGroupContext.Provider value={context}>
 				{children}
 			</ToggleGroupContext.Provider>
 		</ToggleGroupPrimitive>

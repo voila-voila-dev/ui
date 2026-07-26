@@ -3,7 +3,6 @@ import { useChartContext } from "#/chart/context/chart-context.tsx";
 import { readNumber } from "#/chart/core/chart-model.ts";
 import { seriesColor } from "#/chart/core/config.ts";
 import { seriesPoints } from "#/chart/core/series.ts";
-import { cn } from "#/lib/utils.ts";
 
 /** The scatter mark: one dot per datum per series, optionally sized by a field. */
 
@@ -53,7 +52,7 @@ export function ChartPoints({
 	};
 
 	return (
-		<g data-slot="chart-points" className={cn(className)} {...props}>
+		<g data-slot="chart-points" className={className} {...props}>
 			{drawnKeys.map((key, seriesIndex) => {
 				const color = seriesColor(config, key, seriesIndex);
 				return seriesPoints({

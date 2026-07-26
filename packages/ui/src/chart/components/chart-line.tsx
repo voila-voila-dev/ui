@@ -4,7 +4,6 @@ import { seriesColor } from "#/chart/core/config.ts";
 import { linePath } from "#/chart/core/geometry.ts";
 import { seriesPoints } from "#/chart/core/series.ts";
 import type { ChartCurve } from "#/chart/core/types.ts";
-import { cn } from "#/lib/utils.ts";
 
 /**
  * One line per series. The active datum grows a dot, so scrubbing with a finger
@@ -45,7 +44,7 @@ export function ChartLine({
 	const drawnKeys = keys ?? valueKeys;
 
 	return (
-		<g data-slot="chart-line" className={cn(className)} {...props}>
+		<g data-slot="chart-line" className={className} {...props}>
 			{drawnKeys.map((key, seriesIndex) => {
 				const points = seriesPoints({
 					data,

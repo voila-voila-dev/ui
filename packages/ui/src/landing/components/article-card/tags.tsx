@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { ArticleTags } from "#/landing/components/article-tags/index.ts";
 import { cn } from "#/lib/utils.ts";
 

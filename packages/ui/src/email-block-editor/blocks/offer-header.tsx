@@ -1,7 +1,7 @@
 import { BlockTextInput } from "#/email-block-editor/blocks/block-text-input.tsx";
 import { EmailCardMeta } from "#/email-block-editor/blocks/email-card-meta.tsx";
 import type { EmailEditorOfferBlock } from "#/email-block-editor/document/types.ts";
-import { formatPreviewPrice } from "#/email-block-editor/sections/block-options/money-option.tsx";
+import { formatPreviewPrice } from "#/email-block-editor/lib/money.ts";
 import { EMAIL_COLOR } from "#/email-block-editor/theme.ts";
 
 interface Props {

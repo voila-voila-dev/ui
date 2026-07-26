@@ -2,7 +2,7 @@ import { CheckIcon } from "@phosphor-icons/react";
 import type * as React from "react";
 
 import { cn } from "#/lib/utils.ts";
-import { useStepperItemContext } from "#/stepper/context/stepper-item-context.tsx";
+import { useStepperItemContext } from "#/stepper/context/stepper-item-context.ts";
 
 interface Props extends React.ComponentProps<"span"> {}
 

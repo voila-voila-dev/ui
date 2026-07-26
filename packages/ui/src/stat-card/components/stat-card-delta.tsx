@@ -1,4 +1,5 @@
 import { TrendDownIcon, TrendUpIcon } from "@phosphor-icons/react";
+import type * as React from "react";
 import type { VariantProps } from "#/lib/cva.ts";
 import { cn } from "#/lib/utils.ts";
 import { statCardDeltaVariants } from "#/stat-card/components/stat-card-delta-variants.ts";

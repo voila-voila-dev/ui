@@ -3,7 +3,7 @@ import { BlockTextInput } from "#/email-block-editor/blocks/block-text-input.tsx
 import { EmailCardButton } from "#/email-block-editor/blocks/email-card-button.tsx";
 import { EmailCardShell } from "#/email-block-editor/blocks/email-card-shell.tsx";
 import type { EmailEditorProductBlock } from "#/email-block-editor/document/types.ts";
-import { formatPreviewPrice } from "#/email-block-editor/sections/block-options/money-option.tsx";
+import { formatPreviewPrice } from "#/email-block-editor/lib/money.ts";
 import { EMAIL_COLOR } from "#/email-block-editor/theme.ts";
 
 interface Props extends EmailBlockComponentProps<EmailEditorProductBlock> {}

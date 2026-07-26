@@ -1,11 +1,11 @@
 import * as React from "react";
 
 import { cn } from "#/lib/utils.ts";
-import { useStepperContext } from "#/stepper/context/stepper-context.tsx";
+import { useStepperContext } from "#/stepper/context/stepper-context.ts";
 import {
 	StepperItemContext,
 	type StepperStepState,
-} from "#/stepper/context/stepper-item-context.tsx";
+} from "#/stepper/context/stepper-item-context.ts";
 
 interface Props extends React.ComponentProps<"li"> {
 	step: number;

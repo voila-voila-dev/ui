@@ -1,24 +1,19 @@
-export {
-	Chart,
-	type ChartActive,
-	type ChartCategorySpec,
-	type ChartConfig,
-	type ChartContextValue,
-	type ChartCurve,
-	type ChartDatum,
-	type ChartMargin,
-	type ChartOrientation,
-	type ChartTheme,
-	type ChartTooltipIndicator,
-	type ChartValueSpec,
-} from "#/chart/components/chart.tsx";
+export { Chart, useChart } from "#/chart/components/chart.tsx";
+export type { ChartContextValue } from "#/chart/context/chart-context.tsx";
+export { useChartContext } from "#/chart/context/chart-context.tsx";
 export type { AxisTick, AxisTickOptions } from "#/chart/core/axis.ts";
 export type { BarLayoutOptions, BarRect } from "#/chart/core/bars.ts";
 export type {
+	ChartCategorySpec,
 	ChartModel,
 	ChartModelOptions,
+	ChartValueSpec,
 } from "#/chart/core/chart-model.ts";
-export type { ChartConfigItem } from "#/chart/core/config.ts";
+export type {
+	ChartConfig,
+	ChartConfigItem,
+	ChartTheme,
+} from "#/chart/core/config.ts";
 export type { FormatNumberOptions } from "#/chart/core/format.ts";
 export type { ArcOptions, RoundedBarOptions } from "#/chart/core/geometry.ts";
 export type {
@@ -34,17 +29,23 @@ export type {
 export type { SeriesPointsOptions } from "#/chart/core/series.ts";
 export type {
 	ChartCornerRadius,
+	ChartCurve,
+	ChartDatum,
 	ChartDiscreteScale,
 	ChartInterval,
 	ChartLinearScale,
+	ChartMargin,
+	ChartOrientation,
 	ChartPoint,
 	ChartScale,
+	ChartTooltipIndicator,
 } from "#/chart/core/types.ts";
 export type {
 	ChartDimension,
 	ChartDimensionsResult,
 } from "#/chart/hooks/use-chart-dimensions.ts";
 export type {
+	ChartActive,
 	ChartPointerHandlers,
 	ChartPointerOptions,
 	ChartPointerResult,

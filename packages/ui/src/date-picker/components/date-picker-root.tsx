@@ -1,12 +1,12 @@
 import { Calendar } from "#/calendar/components/calendar.tsx";
 import { DatePickerContent } from "#/date-picker/components/date-picker-content.tsx";
+import { DatePickerHiddenInput } from "#/date-picker/components/date-picker-hidden-input.tsx";
+import { DatePickerTrigger } from "#/date-picker/components/date-picker-trigger.tsx";
 import {
 	DEFAULT_DATE_FORMAT,
 	formatDateLabel,
-} from "#/date-picker/components/date-picker-format.ts";
-import { DatePickerHiddenInput } from "#/date-picker/components/date-picker-hidden-input.tsx";
-import type { DatePickerBase } from "#/date-picker/components/date-picker-props.ts";
-import { DatePickerTrigger } from "#/date-picker/components/date-picker-trigger.tsx";
+} from "#/date-picker/lib/date-picker-format.ts";
+import type { DatePickerBase } from "#/date-picker/lib/date-picker-props.ts";
 import { usePickerState } from "#/hooks/use-picker-state.ts";
 import { Popover } from "#/popover/components/popover.tsx";
 

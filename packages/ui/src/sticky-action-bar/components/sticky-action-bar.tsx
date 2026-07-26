@@ -8,7 +8,6 @@ interface Props extends React.ComponentProps<"div"> {
 
 export function StickyActionBar({
 	className,
-	children,
 	hideOnDesktop = true,
 	...props
 }: Props) {
@@ -24,8 +23,6 @@ export function StickyActionBar({
 				className,
 			)}
 			{...props}
-		>
-			{children}
-		</div>
+		/>
 	);
 }

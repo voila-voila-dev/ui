@@ -1,7 +1,5 @@
 import * as ResizablePrimitive from "react-resizable-panels";
 
-import { cn } from "#/lib/utils.ts";
-
 interface Props extends ResizablePrimitive.GroupProps {}
 
 /**
@@ -17,7 +15,7 @@ export function ResizablePanelGroup({ className, ...props }: Props) {
 	return (
 		<ResizablePrimitive.Group
 			data-slot="resizable-panel-group"
-			className={cn(className)}
+			className={className}
 			{...props}
 		/>
 	);
