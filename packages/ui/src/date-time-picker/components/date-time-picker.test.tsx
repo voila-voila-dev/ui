@@ -2,9 +2,6 @@
 import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { DateTimePicker } from "#/date-time-picker/components/date-time-picker.tsx";
-import { DateTimeRangeInput } from "#/date-time-picker/components/date-time-range-input.tsx";
-import { NativeDateTimeInput } from "#/date-time-picker/components/native-date-time-input.tsx";
-import { ResponsiveDateTimeInput } from "#/date-time-picker/components/responsive-date-time-input.tsx";
 
 beforeEach(() => {
 	// Base UI's Positioner measures the anchor with ResizeObserver, absent in jsdom.
@@ -50,7 +47,7 @@ const queryNativeInput = (screen: ReturnType<typeof render>) =>
 
 describe("DateTimePicker", () => {
 	it("shows the placeholder and marks the trigger empty when nothing is selected", () => {
-		const screen = render(<DateTimePicker placeholder="Project start" />);
+		const screen = render(<DateTimePicker.Root placeholder="Project start" />);
 		const trigger = queryTrigger(screen);
 		expect(trigger?.textContent).toContain("Project start");
 		expect(trigger?.getAttribute("data-empty")).toBe("true");
@@ -58,7 +55,7 @@ describe("DateTimePicker", () => {
 
 	it("formats the selected datetime on the trigger (Intl medium+short, en default)", () => {
 		const screen = render(
-			<DateTimePicker value={new Date(2026, 5, 20, 14, 30)} />,
+			<DateTimePicker.Root value={new Date(2026, 5, 20, 14, 30)} />,
 		);
 		const trigger = queryTrigger(screen);
 		expect(trigger?.textContent).toContain("2026");
@@ -68,14 +65,17 @@ describe("DateTimePicker", () => {
 
 	it("formats the trigger label with the provided locale", () => {
 		const screen = render(
-			<DateTimePicker locale="fr-FR" value={new Date(2026, 5, 20, 14, 30)} />,
+			<DateTimePicker.Root
+				locale="fr-FR"
+				value={new Date(2026, 5, 20, 14, 30)}
+			/>,
 		);
 		expect(queryTrigger(screen)?.textContent).toContain("14:30");
 		expect(queryTrigger(screen)?.textContent).not.toContain("PM");
 	});
 
 	it("lists a full day of time options at the given step", async () => {
-		const screen = render(<DateTimePicker minuteStep={30} defaultOpen />);
+		const screen = render(<DateTimePicker.Root minuteStep={30} defaultOpen />);
 		await waitFor(() => {
 			const options = queryOptions(screen);
 			expect(options.length).toBe(48);
@@ -86,7 +86,7 @@ describe("DateTimePicker", () => {
 	it("selecting a time combines it with the date, fires onValueChange, and closes", async () => {
 		const onValueChange = vi.fn();
 		const screen = render(
-			<DateTimePicker
+			<DateTimePicker.Root
 				value={new Date(2026, 5, 20, 0, 0)}
 				onValueChange={onValueChange}
 				defaultOpen
@@ -114,7 +114,7 @@ describe("DateTimePicker", () => {
 	it("selecting a day defaults the time to 09:00 and keeps the popover open", async () => {
 		const onValueChange = vi.fn();
 		const screen = render(
-			<DateTimePicker
+			<DateTimePicker.Root
 				onValueChange={onValueChange}
 				calendarProps={{ defaultMonth: new Date(2026, 5, 1) }}
 				defaultOpen
@@ -141,7 +141,7 @@ describe("DateTimePicker", () => {
 
 	it("serializes the value into a hidden form input as yyyy-MM-ddTHH:mm", () => {
 		const screen = render(
-			<DateTimePicker
+			<DateTimePicker.Root
 				name="projectStart"
 				value={new Date(2026, 5, 20, 9, 30)}
 			/>,
@@ -154,7 +154,7 @@ describe("DateTimePicker", () => {
 	});
 
 	it("does not open when disabled", () => {
-		const screen = render(<DateTimePicker disabled />);
+		const screen = render(<DateTimePicker.Root disabled />);
 		const trigger = queryTrigger(screen) as HTMLButtonElement;
 		expect(trigger.disabled).toBe(true);
 		fireEvent.click(trigger);
@@ -162,15 +162,15 @@ describe("DateTimePicker", () => {
 	});
 });
 
-describe("NativeDateTimeInput", () => {
+describe("DateTimePicker.Native", () => {
 	it("renders a native datetime-local input", () => {
-		const screen = render(<NativeDateTimeInput />);
+		const screen = render(<DateTimePicker.Native />);
 		expect(queryNativeInput(screen)?.type).toBe("datetime-local");
 	});
 
 	it("renders a Date value as the local datetime-local string", () => {
 		const screen = render(
-			<NativeDateTimeInput value={new Date(2026, 5, 20, 14, 30)} />,
+			<DateTimePicker.Native value={new Date(2026, 5, 20, 14, 30)} />,
 		);
 		expect(queryNativeInput(screen)?.value).toBe("2026-06-20T14:30");
 	});
@@ -178,7 +178,7 @@ describe("NativeDateTimeInput", () => {
 	it("fires onValueChange with a parsed Date", () => {
 		const onValueChange = vi.fn();
 		const screen = render(
-			<NativeDateTimeInput onValueChange={onValueChange} />,
+			<DateTimePicker.Native onValueChange={onValueChange} />,
 		);
 		const input = queryNativeInput(screen) as HTMLInputElement;
 		fireEvent.change(input, { target: { value: "2026-06-20T14:30" } });
@@ -191,7 +191,7 @@ describe("NativeDateTimeInput", () => {
 	it("fires onValueChange with null when cleared", () => {
 		const onValueChange = vi.fn();
 		const screen = render(
-			<NativeDateTimeInput
+			<DateTimePicker.Native
 				value={new Date(2026, 5, 20, 14, 30)}
 				onValueChange={onValueChange}
 			/>,
@@ -202,13 +202,13 @@ describe("NativeDateTimeInput", () => {
 	});
 });
 
-describe("ResponsiveDateTimeInput", () => {
+describe("DateTimePicker.Responsive", () => {
 	it("renders the Base UI picker trigger on desktop", async () => {
 		Object.defineProperty(window, "innerWidth", {
 			value: 1024,
 			configurable: true,
 		});
-		const screen = render(<ResponsiveDateTimeInput placeholder="When" />);
+		const screen = render(<DateTimePicker.Responsive placeholder="When" />);
 		await waitFor(() => {
 			expect(queryTrigger(screen)).not.toBeNull();
 			expect(queryNativeInput(screen)).toBeNull();
@@ -220,7 +220,7 @@ describe("ResponsiveDateTimeInput", () => {
 			value: 500,
 			configurable: true,
 		});
-		const screen = render(<ResponsiveDateTimeInput />);
+		const screen = render(<DateTimePicker.Responsive />);
 		await waitFor(() => {
 			expect(queryNativeInput(screen)).not.toBeNull();
 			expect(queryTrigger(screen)).toBeNull();
@@ -228,7 +228,7 @@ describe("ResponsiveDateTimeInput", () => {
 	});
 });
 
-describe("DateTimeRangeInput", () => {
+describe("DateTimePicker.Range", () => {
 	beforeEach(() => {
 		// Drive the desktop surface so the two triggers are the Base UI pickers.
 		Object.defineProperty(window, "innerWidth", {
@@ -239,7 +239,7 @@ describe("DateTimeRangeInput", () => {
 
 	it("renders the start and end labels", () => {
 		const screen = render(
-			<DateTimeRangeInput startLabel="From" endLabel="To" />,
+			<DateTimePicker.Range startLabel="From" endLabel="To" />,
 		);
 		expect(screen.getByText("From")).not.toBeNull();
 		expect(screen.getByText("To")).not.toBeNull();
@@ -248,7 +248,7 @@ describe("DateTimeRangeInput", () => {
 	it("seeds the end an hour after the start when the end is empty", async () => {
 		const onValueChange = vi.fn();
 		const screen = render(
-			<DateTimeRangeInput
+			<DateTimePicker.Range
 				defaultValue={{ start: new Date(2026, 5, 20, 9, 0), end: null }}
 				onValueChange={onValueChange}
 			/>,
@@ -278,7 +278,7 @@ describe("DateTimeRangeInput", () => {
 	it("leaves an existing later end untouched when the start moves", async () => {
 		const onValueChange = vi.fn();
 		const screen = render(
-			<DateTimeRangeInput
+			<DateTimePicker.Range
 				defaultValue={{
 					start: new Date(2026, 5, 20, 9, 0),
 					end: new Date(2026, 5, 20, 18, 0),

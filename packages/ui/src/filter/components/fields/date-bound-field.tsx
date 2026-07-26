@@ -1,6 +1,6 @@
 import { DatePicker } from "#/date-picker/components/date-picker.tsx";
 import { useIsMobile } from "#/hooks/use-mobile.ts";
-import { NativeDatePicker } from "#/native-date-picker/components/native-date-picker.tsx";
+import { NativeDatePickerDate } from "#/native-date-picker/components/native-date-picker-date.tsx";
 
 // Bounds are `YYYY-MM-DD` strings: that is what a native date input reads and
 // writes, what a query string carries, and what survives a time zone unchanged.
@@ -42,7 +42,7 @@ export function DateBoundField({
 
 	if (isMobile) {
 		return (
-			<NativeDatePicker
+			<NativeDatePickerDate
 				id={id}
 				wrapperClassName="w-full"
 				aria-label={placeholder}

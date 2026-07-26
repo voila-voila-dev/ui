@@ -16,8 +16,6 @@ import {
 import { cn } from "#/lib/utils.ts";
 import { Popover } from "#/popover/components/popover.tsx";
 
-export type { DateTimeRange } from "#/date-time-picker/components/date-time-range.ts";
-
 interface Props {
 	/** Controlled range; both sides may be `null` independently. */
 	value?: DateTimeRange;

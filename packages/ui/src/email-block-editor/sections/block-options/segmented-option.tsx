@@ -2,6 +2,18 @@ import type { ReactNode } from "react";
 import { BlockOptionRow } from "#/email-block-editor/sections/block-options/block-option-row.tsx";
 import { SegmentedControl } from "#/segmented-control/components/segmented-control.tsx";
 
+interface Props<Value extends string | number> {
+	label: string;
+	value: Value;
+	options: ReadonlyArray<{
+		readonly value: Value;
+		readonly label: string;
+		readonly icon?: ReactNode;
+	}>;
+	onChange: (value: Value) => void;
+	description?: string;
+}
+
 /**
  * A closed choice small enough to show every option at once: alignment, a
  * column count. Values may be numbers; they are matched back by their string
@@ -16,17 +28,7 @@ export function SegmentedOption<Value extends string | number>({
 	options,
 	onChange,
 	description,
-}: {
-	label: string;
-	value: Value;
-	options: ReadonlyArray<{
-		readonly value: Value;
-		readonly label: string;
-		readonly icon?: ReactNode;
-	}>;
-	onChange: (value: Value) => void;
-	description?: string;
-}) {
+}: Props<Value>) {
 	return (
 		<BlockOptionRow label={label} description={description}>
 			<SegmentedControl.Root

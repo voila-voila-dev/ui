@@ -1,6 +1,6 @@
 import type * as React from "react";
-import { DateTimePicker } from "#/date-time-picker/components/date-time-picker.tsx";
 import type { DateTimeShared } from "#/date-time-picker/components/date-time-picker-props.ts";
+import { DateTimePickerRoot } from "#/date-time-picker/components/date-time-picker-root.tsx";
 import { NativeDateTimeInput } from "#/date-time-picker/components/native-date-time-input.tsx";
 import { useIsMobile } from "#/hooks/use-mobile.ts";
 import { cn } from "#/lib/utils.ts";
@@ -8,7 +8,9 @@ import { cn } from "#/lib/utils.ts";
 interface Props extends DateTimeShared {
 	/** `Intl.DateTimeFormat` options for the desktop trigger label. */
 	formatOptions?: Intl.DateTimeFormatOptions;
-	calendarProps?: React.ComponentProps<typeof DateTimePicker>["calendarProps"];
+	calendarProps?: React.ComponentProps<
+		typeof DateTimePickerRoot
+	>["calendarProps"];
 	/** Min selectable time on the native input, `HH:mm`. */
 	min?: string;
 	/** Max selectable time on the native input, `HH:mm`. */
@@ -16,7 +18,7 @@ interface Props extends DateTimeShared {
 }
 
 /**
- * The datetime equivalent of `ResponsiveSelect`: the Base UI {@link DateTimePicker}
+ * The datetime equivalent of `ResponsiveSelect`: the Base UI {@link DateTimePickerRoot}
  * on desktop and the native {@link NativeDateTimeInput} under the `useIsMobile`
  * breakpoint, behind one `Date | null` value API. Both surfaces fill their
  * container width by default (override via `className`).
@@ -61,7 +63,7 @@ export function ResponsiveDateTimeInput({
 	}
 
 	return (
-		<DateTimePicker
+		<DateTimePickerRoot
 			id={id}
 			name={name}
 			value={value}

@@ -33,22 +33,19 @@ export const formatPreviewPrice = (money: EmailEditorMoney): string =>
 		currency: money.currency,
 	}).format(money.amountInMinorUnits / MINOR_UNITS_PER_UNIT);
 
+interface Props {
+	label: string;
+	value: EmailEditorMoney;
+	onChange: (money: EmailEditorMoney) => void;
+	description?: string;
+}
+
 /**
  * The one price control. The document stores integer minor units and a
  * currency (never a formatted string), so one campaign can be sent in several
  * locales and formatted per recipient at render time.
  */
-export function MoneyOption({
-	label,
-	value,
-	onChange,
-	description,
-}: {
-	label: string;
-	value: EmailEditorMoney;
-	onChange: (money: EmailEditorMoney) => void;
-	description?: string;
-}) {
+export function MoneyOption({ label, value, onChange, description }: Props) {
 	const id = useId();
 	return (
 		<BlockOptionRow label={label} htmlFor={id} description={description}>

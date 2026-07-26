@@ -1,9 +1,4 @@
-export { FilterBar } from "#/filter/components/filter-bar.tsx";
-export { FilterChips } from "#/filter/components/filter-chips.tsx";
-export { FilterField } from "#/filter/components/filter-field.tsx";
-export { FilterForm } from "#/filter/components/filter-form.tsx";
-export { FilterPanel } from "#/filter/components/filter-panel.tsx";
-export { FilterTrigger } from "#/filter/components/filter-trigger.tsx";
+export { Filter } from "#/filter/components/filter.tsx";
 export {
 	clearFilterValue,
 	countActiveFilters,

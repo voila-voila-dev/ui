@@ -3,6 +3,17 @@ import { Button } from "#/button/components/button.tsx";
 import { Input } from "#/input/components/input.tsx";
 import { Popover } from "#/popover/components/popover.tsx";
 
+interface Props {
+	trigger: ReactElement;
+	/** Resolved each time the popover opens (e.g. the link under the caret). */
+	initialHref: () => string;
+	/** Runs as the popover opens (the toolbar saves the text selection here). */
+	onOpen?: () => void;
+	onApply: (href: string) => void;
+	/** "Remove link" — omitted when removing makes no sense (a button). */
+	onRemove?: () => void;
+}
+
 /**
  * The shared link editing surface: a small popover with a URL field,
  * apply, and an optional remove action. The paragraph toolbar drives it with
@@ -14,16 +25,7 @@ export function LinkPopover({
 	onOpen,
 	onApply,
 	onRemove,
-}: {
-	trigger: ReactElement;
-	/** Resolved each time the popover opens (e.g. the link under the caret). */
-	initialHref: () => string;
-	/** Runs as the popover opens (the toolbar saves the text selection here). */
-	onOpen?: () => void;
-	onApply: (href: string) => void;
-	/** "Remove link" — omitted when removing makes no sense (a button). */
-	onRemove?: () => void;
-}) {
+}: Props) {
 	const [open, setOpen] = useState(false);
 	const [href, setHref] = useState("");
 

@@ -23,11 +23,7 @@ import { InputGroup } from "@voila.dev/ui/input-group";
 import { InputOTP } from "@voila.dev/ui/input-otp";
 import { Label } from "@voila.dev/ui/label";
 import { MoneyInput } from "@voila.dev/ui/money-input";
-import {
-	NativeDatePicker,
-	NativeDateTimePicker,
-	NativeTimePicker,
-} from "@voila.dev/ui/native-date-picker";
+import { NativeDatePicker } from "@voila.dev/ui/native-date-picker";
 import { NativeSelect } from "@voila.dev/ui/native-select";
 import { RadioGroup } from "@voila.dev/ui/radio-group";
 import { Rating } from "@voila.dev/ui/rating";
@@ -578,7 +574,7 @@ export function DatePickerExample() {
 export function DateTimePickerExample() {
 	const [value, setValue] = useState<Date | null>(new Date(2026, 5, 20, 9, 30));
 	return (
-		<DateTimePicker
+		<DateTimePicker.Root
 			value={value}
 			onValueChange={setValue}
 			placeholder="Project start"
@@ -597,9 +593,9 @@ export function TimePickerExample() {
 export function NativeDatePickerExample() {
 	return (
 		<div className="flex flex-col gap-3">
-			<NativeDatePicker defaultValue="2026-06-20" />
-			<NativeTimePicker defaultValue="14:30" />
-			<NativeDateTimePicker defaultValue="2026-06-20T14:30" />
+			<NativeDatePicker.Date defaultValue="2026-06-20" />
+			<NativeDatePicker.Time defaultValue="14:30" />
+			<NativeDatePicker.DateTime defaultValue="2026-06-20T14:30" />
 		</div>
 	);
 }

@@ -63,7 +63,7 @@ export function Messages() {
 	const [values, setValues] = useState<FilterValues>({});
 	const [search, setSearch] = useState("");
 	return (
-		<FilterBar
+		<Filter.Root
 			definitions={definitions}
 			values={values}
 			onValuesChange={setValues}

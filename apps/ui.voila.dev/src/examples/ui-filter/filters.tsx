@@ -1,11 +1,8 @@
 import { type ColumnDef, DataTable } from "@voila.dev/ui/datatable";
 import {
 	defaultFilterLabels,
-	FilterBar,
-	FilterChips,
+	Filter,
 	type FilterDefinition,
-	FilterForm,
-	FilterTrigger,
 	type FilterValues,
 	type PlaceSuggestion,
 } from "@voila.dev/ui/filter";
@@ -82,7 +79,7 @@ function Field({ definition }: { readonly definition: FilterDefinition }) {
 	const [values, setValues] = useState<FilterValues>({});
 	return (
 		<div className="w-full max-w-md">
-			<FilterForm
+			<Filter.Form
 				definitions={[definition]}
 				values={values}
 				onValuesChange={setValues}
@@ -108,7 +105,7 @@ export function Bar() {
 	const [search, setSearch] = useState("");
 	return (
 		<div className="w-full">
-			<FilterBar
+			<Filter.Root
 				definitions={ALL}
 				values={values}
 				onValuesChange={setValues}
@@ -124,7 +121,7 @@ export function Form() {
 	const [values, setValues] = useState<FilterValues>({});
 	return (
 		<div className="w-full max-w-md">
-			<FilterForm
+			<Filter.Form
 				definitions={ALL}
 				values={values}
 				onValuesChange={setValues}
@@ -142,7 +139,7 @@ export function Chips() {
 	});
 	return (
 		<div className="w-full">
-			<FilterChips
+			<Filter.Chips
 				definitions={ALL}
 				values={values}
 				onValuesChange={setValues}
@@ -156,7 +153,7 @@ export function Chips() {
 export function Trigger() {
 	return (
 		<div className="w-full max-w-md">
-			<FilterTrigger
+			<Filter.Trigger
 				summary="name@example.com"
 				activeCount={2}
 				labels={defaultFilterLabels}
@@ -344,7 +341,7 @@ export function Listing() {
 	const area = values.area;
 	return (
 		<div className="flex w-full flex-col gap-4">
-			<FilterBar
+			<Filter.Root
 				definitions={LISTING_DEFINITIONS}
 				values={values}
 				onValuesChange={setValues}

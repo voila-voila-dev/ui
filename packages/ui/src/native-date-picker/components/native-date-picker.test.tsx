@@ -2,8 +2,6 @@
 import { cleanup, fireEvent, render } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { NativeDatePicker } from "#/native-date-picker/components/native-date-picker.tsx";
-import { NativeDateTimePicker } from "#/native-date-picker/components/native-date-time-picker.tsx";
-import { NativeTimePicker } from "#/native-date-picker/components/native-time-picker.tsx";
 
 afterEach(() => {
 	cleanup();
@@ -18,7 +16,7 @@ function queryInput(screen: ReturnType<typeof render>, slot: string) {
 
 describe("NativeDatePicker", () => {
 	it("renders a native date input with a leading calendar icon", () => {
-		const screen = render(<NativeDatePicker />);
+		const screen = render(<NativeDatePicker.Date />);
 		const input = queryInput(screen, "native-date-picker");
 		expect(input?.type).toBe("date");
 		expect(
@@ -30,7 +28,10 @@ describe("NativeDatePicker", () => {
 
 	it("merges className onto the input and wrapperClassName onto the wrapper", () => {
 		const screen = render(
-			<NativeDatePicker className="custom-input" wrapperClassName="w-full" />,
+			<NativeDatePicker.Date
+				className="custom-input"
+				wrapperClassName="w-full"
+			/>,
 		);
 		const input = queryInput(screen, "native-date-picker");
 		expect(input?.classList.contains("custom-input")).toBe(true);
@@ -42,7 +43,7 @@ describe("NativeDatePicker", () => {
 
 	it("forwards native input props (name, min, max, required, aria-invalid)", () => {
 		const screen = render(
-			<NativeDatePicker
+			<NativeDatePicker.Date
 				name="missionDate"
 				min="2026-06-01"
 				max="2026-06-30"
@@ -60,7 +61,7 @@ describe("NativeDatePicker", () => {
 
 	it("fires onChange with the picked value", () => {
 		const onChange = vi.fn();
-		const screen = render(<NativeDatePicker onChange={onChange} />);
+		const screen = render(<NativeDatePicker.Date onChange={onChange} />);
 		const input = queryInput(screen, "native-date-picker") as HTMLInputElement;
 		fireEvent.change(input, { target: { value: "2026-06-20" } });
 		expect(onChange).toHaveBeenCalledTimes(1);
@@ -70,7 +71,7 @@ describe("NativeDatePicker", () => {
 	it("opens the native picker on click via showPicker", () => {
 		const showPicker = vi.fn();
 		HTMLInputElement.prototype.showPicker = showPicker;
-		const screen = render(<NativeDatePicker />);
+		const screen = render(<NativeDatePicker.Date />);
 		fireEvent.click(
 			queryInput(screen, "native-date-picker") as HTMLInputElement,
 		);
@@ -81,7 +82,7 @@ describe("NativeDatePicker", () => {
 		const showPicker = vi.fn();
 		HTMLInputElement.prototype.showPicker = showPicker;
 		const screen = render(
-			<NativeDatePicker onClick={(event) => event.preventDefault()} />,
+			<NativeDatePicker.Date onClick={(event) => event.preventDefault()} />,
 		);
 		fireEvent.click(
 			queryInput(screen, "native-date-picker") as HTMLInputElement,
@@ -90,7 +91,7 @@ describe("NativeDatePicker", () => {
 	});
 
 	it("exposes the size on both the wrapper and the input", () => {
-		const screen = render(<NativeDatePicker size="sm" />);
+		const screen = render(<NativeDatePicker.Date size="sm" />);
 		const input = queryInput(screen, "native-date-picker");
 		expect(input?.getAttribute("data-size")).toBe("sm");
 		const wrapper = screen.baseElement.querySelector(
@@ -100,7 +101,7 @@ describe("NativeDatePicker", () => {
 	});
 
 	it("hides the WebKit indicator (the whole field is the affordance)", () => {
-		const screen = render(<NativeDatePicker />);
+		const screen = render(<NativeDatePicker.Date />);
 		const input = queryInput(screen, "native-date-picker");
 		expect(
 			input?.classList.contains(
@@ -110,9 +111,9 @@ describe("NativeDatePicker", () => {
 	});
 });
 
-describe("NativeTimePicker", () => {
+describe("NativeDatePicker.Time", () => {
 	it("renders a native time input with a clock icon", () => {
-		const screen = render(<NativeTimePicker />);
+		const screen = render(<NativeDatePicker.Time />);
 		const input = queryInput(screen, "native-time-picker");
 		expect(input?.type).toBe("time");
 		expect(
@@ -124,7 +125,9 @@ describe("NativeTimePicker", () => {
 
 	it("forwards step and fires onChange with the picked value", () => {
 		const onChange = vi.fn();
-		const screen = render(<NativeTimePicker step={900} onChange={onChange} />);
+		const screen = render(
+			<NativeDatePicker.Time step={900} onChange={onChange} />,
+		);
 		const input = queryInput(screen, "native-time-picker") as HTMLInputElement;
 		expect(input.step).toBe("900");
 		fireEvent.change(input, { target: { value: "14:30" } });
@@ -133,9 +136,9 @@ describe("NativeTimePicker", () => {
 	});
 });
 
-describe("NativeDateTimePicker", () => {
+describe("NativeDatePicker.DateTime", () => {
 	it("renders a native datetime-local input", () => {
-		const screen = render(<NativeDateTimePicker />);
+		const screen = render(<NativeDatePicker.DateTime />);
 		const input = queryInput(screen, "native-date-time-picker");
 		expect(input?.type).toBe("datetime-local");
 		expect(
@@ -147,7 +150,7 @@ describe("NativeDateTimePicker", () => {
 
 	it("fires onChange with the picked value", () => {
 		const onChange = vi.fn();
-		const screen = render(<NativeDateTimePicker onChange={onChange} />);
+		const screen = render(<NativeDatePicker.DateTime onChange={onChange} />);
 		const input = queryInput(
 			screen,
 			"native-date-time-picker",

@@ -9,8 +9,6 @@ import { ResponsiveDateTimeInput } from "#/date-time-picker/components/responsiv
 import { Label } from "#/label/components/label.tsx";
 import { cn } from "#/lib/utils.ts";
 
-export type { DateTimeRange } from "#/date-time-picker/components/date-time-range.ts";
-
 interface Props {
 	/** Controlled range; both sides may be `null` independently. */
 	value?: DateTimeRange;

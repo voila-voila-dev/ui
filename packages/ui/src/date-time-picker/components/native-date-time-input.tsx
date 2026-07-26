@@ -3,11 +3,11 @@ import {
 	parseLocalInputValue,
 	toLocalInputValue,
 } from "#/date-time-picker/components/date-time-values.ts";
-import { NativeDateTimePicker } from "#/native-date-picker/components/native-date-time-picker.tsx";
+import { NativeDatePickerDateTime } from "#/native-date-picker/components/native-date-picker-date-time.tsx";
 
 interface Props
 	extends Omit<
-		React.ComponentProps<typeof NativeDateTimePicker>,
+		React.ComponentProps<typeof NativeDatePickerDateTime>,
 		"value" | "defaultValue" | "onChange"
 	> {
 	value?: Date | null;
@@ -21,7 +21,7 @@ interface Props
  */
 export function NativeDateTimeInput({ value, onValueChange, ...props }: Props) {
 	return (
-		<NativeDateTimePicker
+		<NativeDatePickerDateTime
 			value={value ? toLocalInputValue(value) : ""}
 			onChange={(event) =>
 				onValueChange?.(parseLocalInputValue(event.target.value))

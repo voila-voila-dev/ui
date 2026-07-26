@@ -8,6 +8,13 @@ import {
 } from "#/email-block-editor/blocks/block-definitions.tsx";
 import type { EmailEditorBlockType } from "#/email-block-editor/document/types.ts";
 
+interface Props {
+	onAdd: (type: EmailEditorBlockType) => void;
+	trigger?: ReactElement;
+	/** The offerable types; a grid cell passes the leaf types only. */
+	types?: ReadonlyArray<EmailEditorBlockType>;
+}
+
 /**
  * The "Add a block" menu, fed by the block registry. The default trigger
  * is the outlined empty-state button; the block toolbar passes its own icon
@@ -17,12 +24,7 @@ export function AddBlockMenu({
 	onAdd,
 	trigger,
 	types = EMAIL_BLOCK_TYPES,
-}: {
-	onAdd: (type: EmailEditorBlockType) => void;
-	trigger?: ReactElement;
-	/** The offerable types; a grid cell passes the leaf types only. */
-	types?: ReadonlyArray<EmailEditorBlockType>;
-}) {
+}: Props) {
 	return (
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger

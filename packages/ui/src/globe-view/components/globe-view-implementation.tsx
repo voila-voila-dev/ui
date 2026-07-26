@@ -6,7 +6,7 @@ import { cn } from "#/lib/utils.ts";
 import {
 	DEFAULT_DARK_STYLE_URL,
 	DEFAULT_STYLE_URL,
-} from "#/map-view/components/map-view-implementation.tsx";
+} from "#/map-view/lib/style-urls.ts";
 
 /** A whole hemisphere in frame — the sensible default for a globe. */
 const DEFAULT_CENTER: readonly [number, number] = [2.3522, 30];

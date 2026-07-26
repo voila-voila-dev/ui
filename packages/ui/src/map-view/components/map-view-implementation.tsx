@@ -3,14 +3,16 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "#/lib/utils.ts";
 import type { MapView } from "#/map-view/components/map-view.tsx";
-
-export const DEFAULT_STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
-export const DEFAULT_DARK_STYLE_URL =
-	"https://tiles.openfreemap.org/styles/dark";
+import {
+	DEFAULT_DARK_STYLE_URL,
+	DEFAULT_STYLE_URL,
+} from "#/map-view/lib/style-urls.ts";
 
 /** Western Europe — a sensible default frame for the whole dataset. */
 const DEFAULT_CENTER: readonly [number, number] = [2.3522, 48.8566];
 const DEFAULT_ZOOM = 5;
+
+interface Props extends React.ComponentProps<typeof MapView> {}
 
 /**
  * The MapLibre-backed body of `MapView`. This module owns the only runtime
@@ -29,7 +31,7 @@ export function MapViewImplementation({
 	onMoveEnd,
 	unavailableFallback,
 	...props
-}: React.ComponentProps<typeof MapView>) {
+}: Props) {
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const onReadyRef = useRef(onReady);
 	onReadyRef.current = onReady;

@@ -5,11 +5,11 @@ import { MapView as LazyMapView } from "#/map-view/components/map-view.tsx";
 // The public `MapView` defers this module through `React.lazy`, so the
 // behavioral suite drives the implementation directly (synchronous mount);
 // the lazy shell gets its own suite at the bottom.
+import { MapViewImplementation as MapView } from "#/map-view/components/map-view-implementation.tsx";
 import {
 	DEFAULT_DARK_STYLE_URL,
 	DEFAULT_STYLE_URL,
-	MapViewImplementation as MapView,
-} from "#/map-view/components/map-view-implementation.tsx";
+} from "#/map-view/lib/style-urls.ts";
 
 /**
  * Controllable MapLibre stand-in: jsdom has no WebGL, so the real constructor

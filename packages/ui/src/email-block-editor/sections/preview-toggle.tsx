@@ -11,19 +11,18 @@ const PREVIEWS: ReadonlyArray<{
 	{ value: "mobile", label: "Mobile", Icon: DeviceMobileIcon },
 ];
 
+interface Props {
+	value: EmailEditorPreview;
+	onChange: (preview: EmailEditorPreview) => void;
+}
+
 /**
  * Switches the canvas between the two renderings an email actually gets: the
  * full 600px card, and a phone-width one where grids collapse to their mobile
  * column count. Editor chrome, so it uses app styling and sits above the
  * canvas rather than inside the card.
  */
-export function PreviewToggle({
-	value,
-	onChange,
-}: {
-	value: EmailEditorPreview;
-	onChange: (preview: EmailEditorPreview) => void;
-}) {
+export function PreviewToggle({ value, onChange }: Props) {
 	return (
 		<SegmentedControl.Root
 			size="sm"

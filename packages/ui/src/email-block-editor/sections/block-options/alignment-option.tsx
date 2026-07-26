@@ -28,6 +28,12 @@ const ALIGNMENTS: ReadonlyArray<{
 	},
 ];
 
+interface Props {
+	label?: string;
+	value: EmailEditorAlignment;
+	onChange: (alignment: EmailEditorAlignment) => void;
+}
+
 /**
  * The one alignment control. Every block that can be aligned uses this exact
  * segmented control, so "Alignment" means the same thing and looks the same
@@ -37,11 +43,7 @@ export function AlignmentOption({
 	label = "Alignment",
 	value,
 	onChange,
-}: {
-	label?: string;
-	value: EmailEditorAlignment;
-	onChange: (alignment: EmailEditorAlignment) => void;
-}) {
+}: Props) {
 	return (
 		<SegmentedOption
 			label={label}
