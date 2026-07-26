@@ -6,6 +6,13 @@ import type {
 } from "#/filter/types.ts";
 import { cn } from "#/lib/utils.ts";
 
+interface Props {
+	readonly definition: BooleanFilterDefinition;
+	readonly value: BooleanFilterValue | undefined;
+	readonly onValueChange: (value: BooleanFilterValue | undefined) => void;
+	readonly labels: FilterLabels;
+}
+
 /**
  * Three states, not two: yes, no, and "any" (the filter unset). A switch can
  * only say yes/no, which silently turns "I don't care" into "must be false" —
@@ -16,12 +23,7 @@ export function BooleanFilterField({
 	value,
 	onValueChange,
 	labels,
-}: {
-	readonly definition: BooleanFilterDefinition;
-	readonly value: BooleanFilterValue | undefined;
-	readonly onValueChange: (value: BooleanFilterValue | undefined) => void;
-	readonly labels: FilterLabels;
-}) {
+}: Props) {
 	const states: ReadonlyArray<{ key: string; label: string; set?: boolean }> = [
 		{ key: "any", label: labels.any },
 		{ key: "true", label: definition.trueLabel, set: true },

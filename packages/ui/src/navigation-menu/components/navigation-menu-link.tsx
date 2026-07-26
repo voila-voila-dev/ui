@@ -1,10 +1,8 @@
 import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu";
 import { cn } from "#/lib/utils.ts";
 
-export function NavigationMenuLink({
-	className,
-	...props
-}: NavigationMenuPrimitive.Link.Props) {
+interface Props extends NavigationMenuPrimitive.Link.Props {}
+export function NavigationMenuLink({ className, ...props }: Props) {
 	return (
 		<NavigationMenuPrimitive.Link
 			data-slot="navigation-menu-link"

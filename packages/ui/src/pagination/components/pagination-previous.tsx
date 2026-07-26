@@ -3,11 +3,15 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 import { PaginationLink } from "#/pagination/components/pagination-link.tsx";
 
+interface Props extends React.ComponentProps<typeof PaginationLink> {
+	text?: string;
+}
+
 export function PaginationPrevious({
 	className,
 	text = "Previous",
 	...props
-}: React.ComponentProps<typeof PaginationLink> & { text?: string }) {
+}: Props) {
 	return (
 		<PaginationLink
 			aria-label="Go to previous page"

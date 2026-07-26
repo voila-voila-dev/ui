@@ -5,6 +5,17 @@ import type { ImageUploadShape } from "#/image-upload-field/lib/image-upload-fie
 import { cn } from "#/lib/utils.ts";
 import { Progress } from "#/progress/components/progress.tsx";
 
+interface Props extends React.ComponentProps<"div"> {
+	value: string;
+	shape: ImageUploadShape;
+	aspectRatio: number;
+	isUploading: boolean;
+	replaceLabel: React.ReactNode;
+	removeLabel: React.ReactNode;
+	onReplace: () => void;
+	onRemove?: () => void;
+}
+
 /**
  * The "view" state: the current image with Replace / Remove, or a Progress bar
  * while the parent's upload is in flight.
@@ -20,16 +31,7 @@ export function ImageUploadFieldView({
 	onRemove,
 	className,
 	...props
-}: React.ComponentProps<"div"> & {
-	value: string;
-	shape: ImageUploadShape;
-	aspectRatio: number;
-	isUploading: boolean;
-	replaceLabel: React.ReactNode;
-	removeLabel: React.ReactNode;
-	onReplace: () => void;
-	onRemove?: () => void;
-}) {
+}: Props) {
 	const isCircle = shape === "circle";
 	return (
 		<div

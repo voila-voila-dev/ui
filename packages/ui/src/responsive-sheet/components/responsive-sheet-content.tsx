@@ -3,20 +3,22 @@ import { Drawer } from "#/drawer/components/drawer.tsx";
 import { useResponsiveSheetIsMobile } from "#/responsive-sheet/context/responsive-sheet-context.ts";
 import { Sheet, type SheetContentSize } from "#/sheet/components/sheet.tsx";
 
-export function ResponsiveSheetContent({
-	className,
-	children,
-	size = "default",
-	showCloseButton = true,
-	closeButtonLabel = "Close",
-}: {
+interface Props {
 	className?: string;
 	children?: React.ReactNode;
 	/** Desktop panel width — the mobile drawer is always full-width. */
 	size?: SheetContentSize;
 	showCloseButton?: boolean;
 	closeButtonLabel?: string;
-}) {
+}
+
+export function ResponsiveSheetContent({
+	className,
+	children,
+	size = "default",
+	showCloseButton = true,
+	closeButtonLabel = "Close",
+}: Props) {
 	const isMobile = useResponsiveSheetIsMobile("ResponsiveSheet.Content");
 	if (isMobile) {
 		return (

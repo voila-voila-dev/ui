@@ -2,10 +2,8 @@ import { Command as CommandPrimitive } from "cmdk";
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function CommandEmpty({
-	className,
-	...props
-}: React.ComponentProps<typeof CommandPrimitive.Empty>) {
+interface Props extends React.ComponentProps<typeof CommandPrimitive.Empty> {}
+export function CommandEmpty({ className, ...props }: Props) {
 	return (
 		<CommandPrimitive.Empty
 			data-slot="command-empty"

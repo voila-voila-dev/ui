@@ -1,10 +1,8 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function SidebarMenuSub({
-	className,
-	...props
-}: React.ComponentProps<"ul">) {
+interface Props extends React.ComponentProps<"ul"> {}
+export function SidebarMenuSub({ className, ...props }: Props) {
 	return (
 		<ul
 			data-slot="sidebar-menu-sub"

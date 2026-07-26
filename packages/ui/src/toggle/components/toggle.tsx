@@ -3,15 +3,16 @@ import type { VariantProps } from "#/lib/cva.ts";
 import { cn } from "#/lib/utils.ts";
 import { toggleVariants } from "#/toggle/components/toggle-variants.ts";
 
-export type ToggleProps = TogglePrimitive.Props &
-	VariantProps<typeof toggleVariants>;
+interface Props
+	extends TogglePrimitive.Props,
+		VariantProps<typeof toggleVariants> {}
 
 export function Toggle({
 	className,
 	variant = "default",
 	size = "default",
 	...props
-}: ToggleProps) {
+}: Props) {
 	return (
 		<TogglePrimitive
 			data-slot="toggle"

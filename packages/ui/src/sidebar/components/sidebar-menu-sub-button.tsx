@@ -3,17 +3,20 @@ import { useRender } from "@base-ui/react/use-render";
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
+interface Props
+	extends useRender.ComponentProps<"a">,
+		React.ComponentProps<"a"> {
+	size?: "sm" | "default";
+	isActive?: boolean;
+}
+
 export function SidebarMenuSubButton({
 	render,
 	size = "default",
 	isActive = false,
 	className,
 	...props
-}: useRender.ComponentProps<"a"> &
-	React.ComponentProps<"a"> & {
-		size?: "sm" | "default";
-		isActive?: boolean;
-	}) {
+}: Props) {
 	return useRender({
 		defaultTagName: "a",
 		props: mergeProps<"a">(

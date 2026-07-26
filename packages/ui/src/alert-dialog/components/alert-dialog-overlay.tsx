@@ -1,10 +1,9 @@
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog";
 import { cn } from "#/lib/utils.ts";
 
-export function AlertDialogOverlay({
-	className,
-	...props
-}: AlertDialogPrimitive.Backdrop.Props) {
+interface Props extends AlertDialogPrimitive.Backdrop.Props {}
+
+export function AlertDialogOverlay({ className, ...props }: Props) {
 	return (
 		<AlertDialogPrimitive.Backdrop
 			data-slot="alert-dialog-overlay"

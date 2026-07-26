@@ -1,10 +1,13 @@
 import { CalendarDotsIcon } from "@phosphor-icons/react";
-import {
-	NativeDateField,
-	type NativeDateFieldProps,
-} from "#/native-date-picker/components/native-date-field.tsx";
+import type * as React from "react";
+import { NativeDateField } from "#/native-date-picker/components/native-date-field.tsx";
 
-export function NativeDateTimePicker(props: NativeDateFieldProps) {
+export function NativeDateTimePicker(
+	props: Omit<
+		React.ComponentProps<typeof NativeDateField>,
+		"type" | "slot" | "icon"
+	>,
+) {
 	return (
 		<NativeDateField
 			type="datetime-local"

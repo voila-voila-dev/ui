@@ -4,15 +4,12 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 import { useStepperItemContext } from "#/stepper/context/stepper-item-context.tsx";
 
+interface Props extends React.ComponentProps<"span"> {}
 /**
  * Step circle: renders the step number (or custom children) and swaps to a
  * check mark once the step is completed.
  */
-export function StepperIndicator({
-	className,
-	children,
-	...props
-}: React.ComponentProps<"span">) {
+export function StepperIndicator({ className, children, ...props }: Props) {
 	const { step, state } = useStepperItemContext("Stepper.Indicator");
 	return (
 		<span

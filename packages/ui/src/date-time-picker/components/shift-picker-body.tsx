@@ -12,6 +12,15 @@ import {
 	startLabelText,
 } from "#/date-time-picker/components/shift-time-range.ts";
 
+interface Props {
+	range: DateTimeRange;
+	step: ShiftStep;
+	locale: string | undefined;
+	minuteStep: number;
+	onDaySelect: (day: Date | undefined) => void;
+	onTimeSelect: (minutes: number) => void;
+}
+
 /** The active step's calendar beside its time column. */
 export function ShiftPickerBody({
 	range,
@@ -20,14 +29,7 @@ export function ShiftPickerBody({
 	minuteStep,
 	onDaySelect,
 	onTimeSelect,
-}: {
-	range: DateTimeRange;
-	step: ShiftStep;
-	locale: string | undefined;
-	minuteStep: number;
-	onDaySelect: (day: Date | undefined) => void;
-	onTimeSelect: (minutes: number) => void;
-}) {
+}: Props) {
 	const timeOptions = useTimeOptions(minuteStep);
 	const { activeDay, activeMinutes } = shiftActiveSelection(range, step);
 

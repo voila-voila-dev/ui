@@ -1,7 +1,15 @@
 import * as React from "react";
-import { Carousel, type CarouselApi } from "#/carousel/components/carousel.tsx";
+import { Carousel } from "#/carousel/components/carousel.tsx";
+import type { CarouselApi } from "#/carousel/context/carousel-context.tsx";
 import { Dialog } from "#/dialog/components/dialog.tsx";
 import type { GalleryImage } from "#/gallery/lib/gallery-types.ts";
+
+interface Props {
+	images: ReadonlyArray<GalleryImage>;
+	open: boolean;
+	onOpenChange: (open: boolean) => void;
+	startIndex?: number;
+}
 
 /**
  * Full-screen image viewer built on Dialog + Carousel. Controlled via `open`
@@ -13,12 +21,7 @@ export function Lightbox({
 	open,
 	onOpenChange,
 	startIndex = 0,
-}: {
-	images: ReadonlyArray<GalleryImage>;
-	open: boolean;
-	onOpenChange: (open: boolean) => void;
-	startIndex?: number;
-}) {
+}: Props) {
 	const [api, setApi] = React.useState<CarouselApi>();
 
 	// Jump to the requested slide whenever the lightbox (re)opens.

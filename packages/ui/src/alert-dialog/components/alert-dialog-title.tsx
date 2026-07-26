@@ -1,11 +1,9 @@
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog";
-import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function AlertDialogTitle({
-	className,
-	...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Title>) {
+interface Props extends AlertDialogPrimitive.Title.Props {}
+
+export function AlertDialogTitle({ className, ...props }: Props) {
 	return (
 		<AlertDialogPrimitive.Title
 			data-slot="alert-dialog-title"

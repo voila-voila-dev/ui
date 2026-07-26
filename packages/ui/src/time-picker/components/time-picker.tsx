@@ -1,6 +1,6 @@
 import { ClockIcon } from "@phosphor-icons/react";
 import * as React from "react";
-import type { ButtonProps } from "#/button/components/button.tsx";
+import type { Button } from "#/button/components/button.tsx";
 import { DatePicker } from "#/date-picker/components/date-picker.tsx";
 import { usePickerState } from "#/hooks/use-picker-state.ts";
 import { parseTimeToMinutes } from "#/lib/time-math.ts";
@@ -13,7 +13,7 @@ import {
 	timeOptionValues,
 } from "#/time-picker/lib/time-picker-options.ts";
 
-export function TimePicker(props: {
+interface Props {
 	/** Controlled "HH:mm" value; pass `null` for a controlled empty selection. */
 	value?: string | null;
 	defaultValue?: string;
@@ -39,11 +39,13 @@ export function TimePicker(props: {
 	className?: string;
 	"aria-invalid"?: React.AriaAttributes["aria-invalid"];
 	"aria-label"?: string;
-	variant?: ButtonProps["variant"];
+	variant?: React.ComponentProps<typeof Button>["variant"];
 	defaultOpen?: boolean;
 	open?: boolean;
 	onOpenChange?: (open: boolean) => void;
-}) {
+}
+
+export function TimePicker(props: Props) {
 	const {
 		value: controlledValue,
 		defaultValue,

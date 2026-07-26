@@ -3,15 +3,18 @@ import { useRender } from "@base-ui/react/use-render";
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
+interface Props
+	extends useRender.ComponentProps<"button">,
+		React.ComponentProps<"button"> {
+	showOnHover?: boolean;
+}
+
 export function SidebarMenuAction({
 	className,
 	render,
 	showOnHover = false,
 	...props
-}: useRender.ComponentProps<"button"> &
-	React.ComponentProps<"button"> & {
-		showOnHover?: boolean;
-	}) {
+}: Props) {
 	return useRender({
 		defaultTagName: "button",
 		props: mergeProps<"button">(

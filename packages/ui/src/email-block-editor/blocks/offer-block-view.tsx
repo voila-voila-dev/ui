@@ -6,7 +6,7 @@ import { OfferHeader } from "#/email-block-editor/blocks/offer-header.tsx";
 import type { EmailEditorOfferBlock } from "#/email-block-editor/document/types.ts";
 import { EMAIL_COLOR } from "#/email-block-editor/theme.ts";
 
-type Props = EmailBlockComponentProps<EmailEditorOfferBlock>;
+interface Props extends EmailBlockComponentProps<EmailEditorOfferBlock> {}
 /**
  * A pricing plan on the shared card shell: an eyebrow, a name, a price with an
  * optional period, a feature list and a call to action. `highlighted` draws

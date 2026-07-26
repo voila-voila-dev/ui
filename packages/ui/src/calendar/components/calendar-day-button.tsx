@@ -3,13 +3,17 @@ import { type DayButton, getDefaultClassNames } from "react-day-picker";
 import { Button } from "#/button/components/button.tsx";
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends React.ComponentProps<typeof DayButton> {
+	locale?: string;
+}
+
 export function CalendarDayButton({
 	className,
 	day,
 	modifiers,
 	locale,
 	...props
-}: React.ComponentProps<typeof DayButton> & { locale?: string }) {
+}: Props) {
 	const defaultClassNames = getDefaultClassNames();
 
 	const ref = React.useRef<HTMLButtonElement>(null);

@@ -33,20 +33,7 @@ const chunkIntoRows = (
 	return rows;
 };
 
-export function IconPicker({
-	value: controlledValue,
-	defaultValue = null,
-	onValueChange,
-	placeholder = "Select an icon",
-	searchPlaceholder = "Search icons…",
-	emptyLabel = "No icons found",
-	clearLabel = "Clear selection",
-	moreLabel,
-	name,
-	disabled = false,
-	closeOnSelect = true,
-	className,
-}: {
+interface Props {
 	/** Controlled selection; omit to let the picker manage its own state. */
 	value?: PhosphorIconName | (string & {}) | null;
 	/** Initial selection for uncontrolled usage. */
@@ -63,7 +50,22 @@ export function IconPicker({
 	/** Keep the popover open after a pick, for rapid-compare flows. */
 	closeOnSelect?: boolean;
 	className?: string;
-}) {
+}
+
+export function IconPicker({
+	value: controlledValue,
+	defaultValue = null,
+	onValueChange,
+	placeholder = "Select an icon",
+	searchPlaceholder = "Search icons…",
+	emptyLabel = "No icons found",
+	clearLabel = "Clear selection",
+	moreLabel,
+	name,
+	disabled = false,
+	closeOnSelect = true,
+	className,
+}: Props) {
 	const [query, setQuery] = useState("");
 
 	const matches = useMemo(() => {

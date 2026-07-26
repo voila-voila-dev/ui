@@ -2,6 +2,14 @@ import * as React from "react";
 import { Button } from "#/button/components/button.tsx";
 import { timeLabel } from "#/date-time-picker/components/date-time-values.ts";
 
+interface Props {
+	options: ReadonlyArray<number>;
+	selectedMinutes: number | null;
+	locale: string | undefined;
+	ariaLabel: string;
+	onSelect: (totalMinutes: number) => void;
+}
+
 /** The scrollable time-of-day column beside {@link DateTimePicker}'s calendar. */
 export function DateTimeOptionList({
 	options,
@@ -9,13 +17,7 @@ export function DateTimeOptionList({
 	locale,
 	ariaLabel,
 	onSelect,
-}: {
-	options: ReadonlyArray<number>;
-	selectedMinutes: number | null;
-	locale: string | undefined;
-	ariaLabel: string;
-	onSelect: (totalMinutes: number) => void;
-}) {
+}: Props) {
 	// Center the selected time option once the popup is positioned (the ref fires
 	// too early, so defer by a frame). Optional call: jsdom has no scrollIntoView.
 	const setSelectedOption = React.useCallback(

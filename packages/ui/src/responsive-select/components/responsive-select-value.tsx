@@ -1,8 +1,7 @@
 import type * as React from "react";
 import { Select } from "#/select/components/select.tsx";
 
-export function ResponsiveSelectValue(
-	props: React.ComponentProps<typeof Select.Value>,
-) {
+interface Props extends React.ComponentProps<typeof Select.Value> {}
+export function ResponsiveSelectValue(props: Props) {
 	return <Select.Value {...props} />;
 }

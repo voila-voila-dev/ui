@@ -1,5 +1,6 @@
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 
-export function ComboboxValue({ ...props }: ComboboxPrimitive.Value.Props) {
+interface Props extends ComboboxPrimitive.Value.Props {}
+export function ComboboxValue({ ...props }: Props) {
 	return <ComboboxPrimitive.Value data-slot="combobox-value" {...props} />;
 }

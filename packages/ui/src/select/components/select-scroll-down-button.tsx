@@ -1,8 +1,8 @@
-import { SelectPrimitive } from "@base-ui/react/select";
+import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { CaretDownIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
-type Props = SelectPrimitive.ScrollDownArrow.Props;
+interface Props extends SelectPrimitive.ScrollDownArrow.Props {}
 export function SelectScrollDownButton({ className, ...props }: Props) {
 	return (
 		<SelectPrimitive.ScrollDownArrow

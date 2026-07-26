@@ -11,6 +11,17 @@ import type {
 } from "#/filter/types.ts";
 import { cn } from "#/lib/utils.ts";
 
+interface Props {
+	readonly definitions: ReadonlyArray<FilterDefinition>;
+	readonly values: FilterValues;
+	readonly onValuesChange: (values: FilterValues) => void;
+	readonly labels: FilterLabels;
+	readonly locale: string;
+	/** Opens the editor, usually scrolled to the clicked filter. */
+	readonly onChipClick?: (key: string) => void;
+	readonly className?: string;
+}
+
 /**
  * What is currently filtered, stated in full: one removable chip per active
  * filter. This is the "view" half of the pair — the editor is behind a trigger,
@@ -24,16 +35,7 @@ export function FilterChips({
 	locale,
 	onChipClick,
 	className,
-}: {
-	readonly definitions: ReadonlyArray<FilterDefinition>;
-	readonly values: FilterValues;
-	readonly onValuesChange: (values: FilterValues) => void;
-	readonly labels: FilterLabels;
-	readonly locale: string;
-	/** Opens the editor, usually scrolled to the clicked filter. */
-	readonly onChipClick?: (key: string) => void;
-	readonly className?: string;
-}) {
+}: Props) {
 	const entries = Object.entries(values);
 	if (entries.length === 0) {
 		return null;

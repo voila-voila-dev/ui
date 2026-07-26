@@ -2,14 +2,16 @@ import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { CaretDownIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends SelectPrimitive.Trigger.Props {
+	size?: "sm" | "default";
+}
+
 export function SelectTrigger({
 	className,
 	size = "default",
 	children,
 	...props
-}: SelectPrimitive.Trigger.Props & {
-	size?: "sm" | "default";
-}) {
+}: Props) {
 	return (
 		<SelectPrimitive.Trigger
 			data-slot="select-trigger"

@@ -1,13 +1,11 @@
 import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar";
 import { cn } from "#/lib/utils.ts";
 
-export function AvatarRoot({
-	className,
-	size = "default",
-	...props
-}: AvatarPrimitive.Root.Props & {
+interface Props extends AvatarPrimitive.Root.Props {
 	size?: "default" | "sm" | "lg";
-}) {
+}
+
+export function AvatarRoot({ className, size = "default", ...props }: Props) {
 	return (
 		<AvatarPrimitive.Root
 			data-slot="avatar"

@@ -3,11 +3,8 @@ import { useRender } from "@base-ui/react/use-render";
 import { DotsThreeIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
-export function BreadcrumbEllipsis({
-	className,
-	render,
-	...props
-}: useRender.ComponentProps<"span">) {
+interface Props extends useRender.ComponentProps<"span"> {}
+export function BreadcrumbEllipsis({ className, render, ...props }: Props) {
 	return useRender({
 		defaultTagName: "span",
 		props: mergeProps<"span">(

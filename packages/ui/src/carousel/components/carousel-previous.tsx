@@ -1,8 +1,12 @@
 import { CaretLeftIcon } from "@phosphor-icons/react";
 import type * as React from "react";
 import { Button } from "#/button/components/button.tsx";
-import { useCarousel } from "#/carousel/context/carousel-context.tsx";
+import { useCarousel } from "#/carousel/hooks/use-carousel.ts";
 import { cn } from "#/lib/utils.ts";
+
+interface Props extends React.ComponentProps<typeof Button> {
+	inset?: boolean;
+}
 
 export function CarouselPrevious({
 	className,
@@ -10,7 +14,7 @@ export function CarouselPrevious({
 	size = "icon-sm",
 	inset = false,
 	...props
-}: React.ComponentProps<typeof Button> & { inset?: boolean }) {
+}: Props) {
 	const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
 	return (

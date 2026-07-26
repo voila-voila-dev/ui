@@ -1,10 +1,8 @@
 import { Dialog as SheetPrimitive } from "@base-ui/react/dialog";
 import { cn } from "#/lib/utils.ts";
 
-export function SheetTitle({
-	className,
-	...props
-}: SheetPrimitive.Title.Props) {
+interface Props extends SheetPrimitive.Title.Props {}
+export function SheetTitle({ className, ...props }: Props) {
 	return (
 		<SheetPrimitive.Title
 			data-slot="sheet-title"

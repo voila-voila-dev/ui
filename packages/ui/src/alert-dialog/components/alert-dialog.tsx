@@ -27,5 +27,3 @@ export const AlertDialog = {
 	Title: AlertDialogTitle,
 	Trigger: AlertDialogTrigger,
 };
-
-export type { AlertDialogContentSize } from "#/alert-dialog/components/alert-dialog-content.tsx";

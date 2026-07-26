@@ -1,10 +1,9 @@
 import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar";
 import { cn } from "#/lib/utils.ts";
 
-export function AvatarImage({
-	className,
-	...props
-}: AvatarPrimitive.Image.Props) {
+interface Props extends AvatarPrimitive.Image.Props {}
+
+export function AvatarImage({ className, ...props }: Props) {
 	return (
 		<AvatarPrimitive.Image
 			data-slot="avatar-image"

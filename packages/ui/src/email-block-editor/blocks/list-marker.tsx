@@ -10,7 +10,7 @@ export function ListMarker({ marker, index }: Props) {
 	if (marker === "badge") {
 		return (
 			<span
-				className="flex size-6 shrink-0 items-center justify-center rounded-full font-semibold text-[12px] text-white"
+				className="flex size-6 shrink-0 items-center justify-center rounded-full font-semibold text-[12px] text-primary-foreground"
 				style={{ backgroundColor: EMAIL_COLOR.brand }}
 				aria-hidden
 			>

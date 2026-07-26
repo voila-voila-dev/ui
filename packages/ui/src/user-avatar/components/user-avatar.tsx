@@ -3,6 +3,14 @@ import { Avatar } from "#/avatar/components/avatar.tsx";
 import { cn } from "#/lib/utils.ts";
 import { getInitials } from "#/user-avatar/libs/get-initials.ts";
 
+interface Props extends React.ComponentProps<"div"> {
+	name: string;
+	description?: React.ReactNode;
+	src?: string;
+	status?: React.ComponentProps<typeof Avatar.Badge>["status"];
+	size?: React.ComponentProps<typeof Avatar.Root>["size"];
+}
+
 export function UserAvatar({
 	className,
 	name,
@@ -11,13 +19,7 @@ export function UserAvatar({
 	status,
 	size = "default",
 	...props
-}: React.ComponentProps<"div"> & {
-	name: string;
-	description?: React.ReactNode;
-	src?: string;
-	status?: React.ComponentProps<typeof Avatar.Badge>["status"];
-	size?: React.ComponentProps<typeof Avatar.Root>["size"];
-}) {
+}: Props) {
 	return (
 		<div
 			data-slot="user-avatar"

@@ -10,6 +10,20 @@ import type {
 import { Input } from "#/input/components/input.tsx";
 import { ResponsiveDialog } from "#/responsive-dialog/components/responsive-dialog.tsx";
 
+interface Props {
+	readonly open: boolean;
+	readonly onOpenChange: (open: boolean) => void;
+	readonly definitions: ReadonlyArray<FilterDefinition>;
+	readonly values: FilterValues;
+	/** Called once, on apply, with the committed record. */
+	readonly onValuesChange: (values: FilterValues) => void;
+	readonly labels: FilterLabels;
+	readonly locale: string;
+	/** Free-text search, kept beside the filters when the list has one. */
+	readonly searchValue?: string;
+	readonly onSearchChange?: (value: string) => void;
+}
+
 /**
  * The editor as an overlay: a centered dialog on desktop, a bottom drawer on
  * mobile. Edits are a draft committed on "Apply" — a filtered list refetches,
@@ -26,19 +40,7 @@ export function FilterPanel({
 	locale,
 	searchValue,
 	onSearchChange,
-}: {
-	readonly open: boolean;
-	readonly onOpenChange: (open: boolean) => void;
-	readonly definitions: ReadonlyArray<FilterDefinition>;
-	readonly values: FilterValues;
-	/** Called once, on apply, with the committed record. */
-	readonly onValuesChange: (values: FilterValues) => void;
-	readonly labels: FilterLabels;
-	readonly locale: string;
-	/** Free-text search, kept beside the filters when the list has one. */
-	readonly searchValue?: string;
-	readonly onSearchChange?: (value: string) => void;
-}) {
+}: Props) {
 	const [draft, setDraft] = useState<FilterValues>(values);
 	const [draftSearch, setDraftSearch] = useState(searchValue ?? "");
 

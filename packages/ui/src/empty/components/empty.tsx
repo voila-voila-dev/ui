@@ -5,8 +5,6 @@ import { EmptyMedia } from "#/empty/components/empty-media.tsx";
 import { EmptyRoot } from "#/empty/components/empty-root.tsx";
 import { EmptyTitle } from "#/empty/components/empty-title.tsx";
 
-export type { EmptyProps } from "#/empty/components/empty-root.tsx";
-
 /**
  * The Empty parts as one namespace.
  */

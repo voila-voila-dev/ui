@@ -7,6 +7,11 @@ import type { ProfileTheme } from "#/profile-header/components/profile-header-th
 const coverGradientClasses =
 	"bg-gradient-to-br group-data-[theme=highlight]/profile-header-cover:from-highlight group-data-[theme=highlight]/profile-header-cover:via-highlight/80 group-data-[theme=highlight]/profile-header-cover:to-highlight/40 group-data-[theme=brand]/profile-header-cover:from-brand group-data-[theme=brand]/profile-header-cover:via-brand/80 group-data-[theme=brand]/profile-header-cover:to-brand/40";
 
+interface Props extends React.ComponentProps<"div"> {
+	coverImage?: React.ReactNode | string;
+	theme?: ProfileTheme;
+}
+
 /** Cover band — renders a `coverImage` (node or src) or a themed gradient. */
 export function ProfileHeaderCover({
 	coverImage,
@@ -14,10 +19,7 @@ export function ProfileHeaderCover({
 	className,
 	children,
 	...props
-}: React.ComponentProps<"div"> & {
-	coverImage?: React.ReactNode | string;
-	theme?: ProfileTheme;
-}) {
+}: Props) {
 	return (
 		<div
 			data-slot="profile-header-cover"

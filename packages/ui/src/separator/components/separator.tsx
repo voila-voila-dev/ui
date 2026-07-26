@@ -1,8 +1,8 @@
-import { SeparatorPrimitive } from "@base-ui/react/separator";
+import { Separator as SeparatorPrimitive } from "@base-ui/react/separator";
 import { cn } from "#/lib/utils.ts";
 import { SeparatorLine } from "#/separator/components/separator-line.tsx";
 
-type Props = SeparatorPrimitive.Props;
+interface Props extends SeparatorPrimitive.Props {}
 export function Separator({
 	className,
 	orientation = "horizontal",

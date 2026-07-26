@@ -1,7 +1,7 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"div">;
+interface Props extends React.ComponentProps<"div"> {}
 export function ChatDateSeparator({ className, children, ...props }: Props) {
 	return (
 		<div

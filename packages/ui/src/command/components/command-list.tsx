@@ -2,10 +2,8 @@ import { Command as CommandPrimitive } from "cmdk";
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function CommandList({
-	className,
-	...props
-}: React.ComponentProps<typeof CommandPrimitive.List>) {
+interface Props extends React.ComponentProps<typeof CommandPrimitive.List> {}
+export function CommandList({ className, ...props }: Props) {
 	return (
 		<CommandPrimitive.List
 			data-slot="command-list"

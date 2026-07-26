@@ -1,9 +1,22 @@
+import type * as React from "react";
 import { ImageCropper } from "#/image-cropper/components/image-cropper.tsx";
 import { CropControls } from "#/image-upload-field/components/crop-controls.tsx";
-import type { ImageUploadCropperProps } from "#/image-upload-field/components/image-upload-field-cropper.tsx";
+import type { ImageUploadShape } from "#/image-upload-field/lib/image-upload-field-types.ts";
 import { Progress } from "#/progress/components/progress.tsx";
 
-type Props = ImageUploadCropperProps;
+interface Props {
+	shape: ImageUploadShape;
+	aspectRatio: number;
+	isUploading: boolean;
+	label: React.ReactNode;
+	description: React.ReactNode;
+	cancelLabel: string;
+	confirmLabel: string;
+	outputSize?: { readonly width: number; readonly height: number };
+	hasPicked: boolean;
+	onPickedChange: (hasPicked: boolean) => void;
+	onFileCropped: (blob: Blob) => void;
+}
 /** The dropzone → crop → confirm flow itself, minus the surrounding chrome. */
 export function ImageUploadCropper({
 	shape,

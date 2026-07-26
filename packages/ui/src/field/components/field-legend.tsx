@@ -14,11 +14,15 @@ const fieldLegendVariants = cva({
 	},
 });
 
+interface Props
+	extends React.ComponentProps<"legend">,
+		VariantProps<typeof fieldLegendVariants> {}
+
 export function FieldLegend({
 	className,
 	variant = "legend",
 	...props
-}: React.ComponentProps<"legend"> & VariantProps<typeof fieldLegendVariants>) {
+}: Props) {
 	return (
 		<legend
 			data-slot="field-legend"

@@ -2,7 +2,7 @@ import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "#/lib/utils.ts";
-import type { MapViewProps } from "#/map-view/components/map-view.tsx";
+import type { MapView } from "#/map-view/components/map-view.tsx";
 
 export const DEFAULT_STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
 export const DEFAULT_DARK_STYLE_URL =
@@ -29,7 +29,7 @@ export function MapViewImplementation({
 	onMoveEnd,
 	unavailableFallback,
 	...props
-}: MapViewProps) {
+}: React.ComponentProps<typeof MapView>) {
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const onReadyRef = useRef(onReady);
 	onReadyRef.current = onReady;

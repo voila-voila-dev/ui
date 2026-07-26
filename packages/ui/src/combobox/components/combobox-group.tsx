@@ -1,5 +1,6 @@
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 
-export function ComboboxGroup({ ...props }: ComboboxPrimitive.Group.Props) {
+interface Props extends ComboboxPrimitive.Group.Props {}
+export function ComboboxGroup({ ...props }: Props) {
 	return <ComboboxPrimitive.Group data-slot="combobox-group" {...props} />;
 }

@@ -3,6 +3,30 @@ import { ImageUploadFieldEditor } from "#/image-upload-field/components/image-up
 import { ImageUploadFieldView } from "#/image-upload-field/components/image-upload-field-view.tsx";
 import type { ImageUploadShape } from "#/image-upload-field/lib/image-upload-field-types.ts";
 
+interface Props extends Omit<React.ComponentProps<"div">, "onChange"> {
+	/** Current image URL, or null/undefined when nothing is set yet. */
+	value?: string | null;
+	/** Crop aspect ratio: 1 for avatars, 3 for covers. */
+	aspectRatio?: number;
+	shape?: ImageUploadShape;
+	/** While `true`, the confirm button spins and a Progress bar shows. */
+	isUploading?: boolean;
+	/**
+	 * Fixed output dimensions for the cropped image (e.g. a 512×512 avatar).
+	 * Defaults to the cropped region's natural size.
+	 */
+	outputSize?: { readonly width: number; readonly height: number };
+	/** Fired with the cropped Blob once the user confirms — parent uploads it. */
+	onFileCropped: (blob: Blob) => void;
+	onRemove?: () => void;
+	label?: React.ReactNode;
+	description?: React.ReactNode;
+	replaceLabel?: React.ReactNode;
+	removeLabel?: React.ReactNode;
+	cancelLabel?: string;
+	confirmLabel?: string;
+}
+
 /**
  * Controlled presentational bridge over <ImageCropper.Root> for avatar / cover
  * uploads. It is deliberately network-free: it surfaces the cropped `Blob`
@@ -30,29 +54,7 @@ export function ImageUploadField({
 	confirmLabel = "Save",
 	className,
 	...props
-}: Omit<React.ComponentProps<"div">, "onChange"> & {
-	/** Current image URL, or null/undefined when nothing is set yet. */
-	value?: string | null;
-	/** Crop aspect ratio: 1 for avatars, 3 for covers. */
-	aspectRatio?: number;
-	shape?: ImageUploadShape;
-	/** While `true`, the confirm button spins and a Progress bar shows. */
-	isUploading?: boolean;
-	/**
-	 * Fixed output dimensions for the cropped image (e.g. a 512×512 avatar).
-	 * Defaults to the cropped region's natural size.
-	 */
-	outputSize?: { readonly width: number; readonly height: number };
-	/** Fired with the cropped Blob once the user confirms — parent uploads it. */
-	onFileCropped: (blob: Blob) => void;
-	onRemove?: () => void;
-	label?: React.ReactNode;
-	description?: React.ReactNode;
-	replaceLabel?: React.ReactNode;
-	removeLabel?: React.ReactNode;
-	cancelLabel?: string;
-	confirmLabel?: string;
-}) {
+}: Props) {
 	const hasValue = value !== null && value !== undefined && value !== "";
 	// Start in "view" when there's already an image; otherwise show the cropper.
 	const [mode, setMode] = React.useState<"view" | "edit">(

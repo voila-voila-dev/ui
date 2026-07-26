@@ -2,11 +2,11 @@ import type * as React from "react";
 
 import { cn } from "#/lib/utils.ts";
 
-export function TableRoot({
-	className,
-	containerClassName,
-	...props
-}: React.ComponentProps<"table"> & { containerClassName?: string }) {
+interface Props extends React.ComponentProps<"table"> {
+	containerClassName?: string;
+}
+
+export function TableRoot({ className, containerClassName, ...props }: Props) {
 	return (
 		<div
 			data-slot="table-container"

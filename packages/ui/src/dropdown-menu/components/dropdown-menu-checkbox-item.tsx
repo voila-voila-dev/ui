@@ -6,15 +6,17 @@ import {
 	menuItemVariants,
 } from "#/menu/components/menu-variants.ts";
 
+interface Props extends MenuPrimitive.CheckboxItem.Props {
+	inset?: boolean;
+}
+
 export function DropdownMenuCheckboxItem({
 	className,
 	children,
 	checked,
 	inset,
 	...props
-}: MenuPrimitive.CheckboxItem.Props & {
-	inset?: boolean;
-}) {
+}: Props) {
 	return (
 		<MenuPrimitive.CheckboxItem
 			data-slot="dropdown-menu-checkbox-item"

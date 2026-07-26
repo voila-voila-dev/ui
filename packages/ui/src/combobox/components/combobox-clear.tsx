@@ -2,10 +2,11 @@ import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { XIcon } from "@phosphor-icons/react";
 import { InputGroup } from "#/input-group/components/input-group.tsx";
 
+interface Props extends ComboboxPrimitive.Clear.Props {}
 export function ComboboxClear({
 	"aria-label": ariaLabel = "Clear selection",
 	...props
-}: ComboboxPrimitive.Clear.Props) {
+}: Props) {
 	return (
 		<ComboboxPrimitive.Clear
 			data-slot="combobox-clear"

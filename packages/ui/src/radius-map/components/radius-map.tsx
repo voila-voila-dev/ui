@@ -13,6 +13,16 @@ const FILL_LAYER = `${SOURCE_ID}-fill`;
 const LINE_LAYER = `${SOURCE_ID}-line`;
 const CENTER_LAYER = `${SOURCE_ID}-center`;
 
+interface Props {
+	readonly center: GeoPoint;
+	readonly radiusKm: number;
+	/** Circle fill/stroke colour. Defaults to the kit's deep blue. */
+	readonly color?: string;
+	readonly className?: string;
+	/** Shown when the environment has no WebGL; this package ships no copy. */
+	readonly unavailableFallback?: ReactNode;
+}
+
 /**
  * The searched area, drawn: a geodesic circle of `radiusKm` around the chosen
  * place, with a dot on the place itself. The viewport follows the circle so the
@@ -24,15 +34,7 @@ export function RadiusMap({
 	color = "#1e3a8a",
 	className,
 	unavailableFallback,
-}: {
-	readonly center: GeoPoint;
-	readonly radiusKm: number;
-	/** Circle fill/stroke colour. Defaults to the kit's deep blue. */
-	readonly color?: string;
-	readonly className?: string;
-	/** Shown when the environment has no WebGL; this package ships no copy. */
-	readonly unavailableFallback?: ReactNode;
-}) {
+}: Props) {
 	const [map, setMap] = useState<maplibregl.Map | null>(null);
 
 	// `onReady` replays after a theme-driven basemap swap, which drops custom

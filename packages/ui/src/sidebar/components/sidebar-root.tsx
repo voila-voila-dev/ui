@@ -4,6 +4,14 @@ import { Sheet } from "#/sheet/components/sheet.tsx";
 import { useSidebar } from "#/sidebar/context/sidebar-context.tsx";
 import { SIDEBAR_WIDTH_MOBILE } from "#/sidebar/lib/sidebar-constants.ts";
 
+interface Props extends React.ComponentProps<"div"> {
+	side?: "left" | "right";
+	variant?: "sidebar" | "floating" | "inset";
+	collapsible?: "offcanvas" | "icon" | "none";
+	sheetTitle?: string;
+	sheetDescription?: string;
+}
+
 export function SidebarRoot({
 	side = "left",
 	variant = "sidebar",
@@ -14,13 +22,7 @@ export function SidebarRoot({
 	style,
 	children,
 	...props
-}: React.ComponentProps<"div"> & {
-	side?: "left" | "right";
-	variant?: "sidebar" | "floating" | "inset";
-	collapsible?: "offcanvas" | "icon" | "none";
-	sheetTitle?: string;
-	sheetDescription?: string;
-}) {
+}: Props) {
 	const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
 
 	if (collapsible === "none") {

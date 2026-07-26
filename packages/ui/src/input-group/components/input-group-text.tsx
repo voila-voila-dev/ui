@@ -1,10 +1,8 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function InputGroupText({
-	className,
-	...props
-}: React.ComponentProps<"span">) {
+interface Props extends React.ComponentProps<"span"> {}
+export function InputGroupText({ className, ...props }: Props) {
 	return (
 		<span
 			data-slot="input-group-text"

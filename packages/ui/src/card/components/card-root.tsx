@@ -3,14 +3,16 @@ import { useRender } from "@base-ui/react/use-render";
 
 import { cn } from "#/lib/utils.ts";
 
-export type CardSize = "default" | "sm";
+interface Props extends useRender.ComponentProps<"div"> {
+	size?: "default" | "sm";
+}
 
 export function CardRoot({
 	className,
 	size = "default",
 	render,
 	...props
-}: useRender.ComponentProps<"div"> & { size?: CardSize }) {
+}: Props) {
 	return useRender({
 		defaultTagName: "div",
 		props: mergeProps<"div">(

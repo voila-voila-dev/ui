@@ -18,18 +18,20 @@ const toMinorUnits = (raw: string): number | undefined =>
 		? undefined
 		: Math.round(Number(raw) * 100);
 
+interface Props {
+	readonly definition: MoneyRangeFilterDefinition;
+	readonly value: MoneyRangeFilterValue | undefined;
+	readonly onValueChange: (value: MoneyRangeFilterValue) => void;
+	readonly labels: FilterLabels;
+}
+
 /** A price floor and ceiling, either of which may be left open. */
 export function MoneyRangeFilterField({
 	definition,
 	value,
 	onValueChange,
 	labels,
-}: {
-	readonly definition: MoneyRangeFilterDefinition;
-	readonly value: MoneyRangeFilterValue | undefined;
-	readonly onValueChange: (value: MoneyRangeFilterValue) => void;
-	readonly labels: FilterLabels;
-}) {
+}: Props) {
 	const controlId = useId();
 	const isEmpty = value?.min === undefined && value?.max === undefined;
 

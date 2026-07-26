@@ -1,11 +1,9 @@
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog";
-import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function AlertDialogDescription({
-	className,
-	...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Description>) {
+interface Props extends AlertDialogPrimitive.Description.Props {}
+
+export function AlertDialogDescription({ className, ...props }: Props) {
 	return (
 		<AlertDialogPrimitive.Description
 			data-slot="alert-dialog-description"

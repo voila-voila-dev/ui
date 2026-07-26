@@ -1,9 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
-export function EmptyDescription({
-	className,
-	...props
-}: React.ComponentProps<"p">) {
+interface Props extends React.ComponentProps<"p"> {}
+export function EmptyDescription({ className, ...props }: Props) {
 	return (
 		<p
 			data-slot="empty-description"

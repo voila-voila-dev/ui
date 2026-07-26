@@ -2,13 +2,15 @@ import * as React from "react";
 import { cn } from "#/lib/utils.ts";
 import { Skeleton } from "#/skeleton/components/skeleton.tsx";
 
+interface Props extends React.ComponentProps<"div"> {
+	showIcon?: boolean;
+}
+
 export function SidebarMenuSkeleton({
 	className,
 	showIcon = false,
 	...props
-}: React.ComponentProps<"div"> & {
-	showIcon?: boolean;
-}) {
+}: Props) {
 	// Deterministic width between 50 and 90% derived from useId so server and
 	// client render the same markup (Math.random() caused hydration mismatches).
 	const id = React.useId();

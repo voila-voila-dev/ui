@@ -1,10 +1,8 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function SidebarInset({
-	className,
-	...props
-}: React.ComponentProps<"main">) {
+interface Props extends React.ComponentProps<"main"> {}
+export function SidebarInset({ className, ...props }: Props) {
 	return (
 		<main
 			data-slot="sidebar-inset"

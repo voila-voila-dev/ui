@@ -1,10 +1,8 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function BreadcrumbList({
-	className,
-	...props
-}: React.ComponentProps<"ol">) {
+interface Props extends React.ComponentProps<"ol"> {}
+export function BreadcrumbList({ className, ...props }: Props) {
 	return (
 		<ol
 			data-slot="breadcrumb-list"

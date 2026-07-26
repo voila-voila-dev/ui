@@ -1,8 +1,7 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"tbody">;
-
+interface Props extends React.ComponentProps<"tbody"> {}
 export function SpreadsheetBody({ className, ...props }: Props) {
 	return (
 		<tbody

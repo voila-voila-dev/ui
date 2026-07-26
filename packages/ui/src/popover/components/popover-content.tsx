@@ -2,6 +2,20 @@ import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
 
 import { cn } from "#/lib/utils.ts";
 
+interface Props
+	extends PopoverPrimitive.Popup.Props,
+		Pick<
+			PopoverPrimitive.Positioner.Props,
+			"align" | "alignOffset" | "side" | "sideOffset"
+		> {
+	// Escape hatch for the Positioner props not surfaced as dedicated props
+	// (collisionPadding, sticky, anchor, positionMethod, arrowPadding…).
+	positionerProps?: Omit<
+		PopoverPrimitive.Positioner.Props,
+		"align" | "alignOffset" | "side" | "sideOffset" | "children"
+	>;
+}
+
 export function PopoverContent({
 	className,
 	align = "center",
@@ -10,18 +24,7 @@ export function PopoverContent({
 	sideOffset = 4,
 	positionerProps,
 	...props
-}: PopoverPrimitive.Popup.Props &
-	Pick<
-		PopoverPrimitive.Positioner.Props,
-		"align" | "alignOffset" | "side" | "sideOffset"
-	> & {
-		// Escape hatch for the Positioner props not surfaced as dedicated props
-		// (collisionPadding, sticky, anchor, positionMethod, arrowPadding…).
-		positionerProps?: Omit<
-			PopoverPrimitive.Positioner.Props,
-			"align" | "alignOffset" | "side" | "sideOffset" | "children"
-		>;
-	}) {
+}: Props) {
 	const { className: positionerClassName, ...restPositionerProps } =
 		positionerProps ?? {};
 	return (

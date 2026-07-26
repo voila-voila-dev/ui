@@ -13,11 +13,11 @@ const kbdVariants = cva({
 	},
 });
 
-export function KbdRoot({
-	className,
-	size = "default",
-	...props
-}: React.ComponentProps<"kbd"> & VariantProps<typeof kbdVariants>) {
+interface Props
+	extends React.ComponentProps<"kbd">,
+		VariantProps<typeof kbdVariants> {}
+
+export function KbdRoot({ className, size = "default", ...props }: Props) {
 	return (
 		<kbd
 			data-slot="kbd"

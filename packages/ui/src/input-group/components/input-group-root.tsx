@@ -1,10 +1,8 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function InputGroupRoot({
-	className,
-	...props
-}: React.ComponentProps<"fieldset">) {
+interface Props extends React.ComponentProps<"fieldset"> {}
+export function InputGroupRoot({ className, ...props }: Props) {
 	return (
 		<fieldset
 			data-slot="input-group"

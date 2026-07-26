@@ -21,16 +21,19 @@ const inputGroupButtonVariants = cva({
 	},
 });
 
+interface Props
+	extends Omit<React.ComponentProps<typeof Button>, "size" | "type">,
+		VariantProps<typeof inputGroupButtonVariants> {
+	type?: "button" | "submit" | "reset";
+}
+
 export function InputGroupButton({
 	className,
 	type = "button",
 	variant = "ghost",
 	size = "xs",
 	...props
-}: Omit<React.ComponentProps<typeof Button>, "size" | "type"> &
-	VariantProps<typeof inputGroupButtonVariants> & {
-		type?: "button" | "submit" | "reset";
-	}) {
+}: Props) {
 	return (
 		<Button
 			type={type}

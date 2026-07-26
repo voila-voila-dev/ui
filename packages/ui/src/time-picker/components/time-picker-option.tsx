@@ -1,19 +1,21 @@
 import type * as React from "react";
 import { Button } from "#/button/components/button.tsx";
 
+interface Props {
+	time: string;
+	label: string;
+	selected: boolean;
+	selectedOptionRef: React.Ref<HTMLButtonElement>;
+	onSelect: (time: string) => void;
+}
+
 export function TimePickerOption({
 	time,
 	label,
 	selected,
 	selectedOptionRef,
 	onSelect,
-}: {
-	time: string;
-	label: string;
-	selected: boolean;
-	selectedOptionRef: React.Ref<HTMLButtonElement>;
-	onSelect: (time: string) => void;
-}) {
+}: Props) {
 	return (
 		<Button
 			role="option"

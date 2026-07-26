@@ -3,11 +3,8 @@ import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area";
 import { cn } from "#/lib/utils.ts";
 import { ScrollBar } from "#/scroll-area/components/scroll-area-bar.tsx";
 
-export function ScrollAreaRoot({
-	className,
-	children,
-	...props
-}: ScrollAreaPrimitive.Root.Props) {
+interface Props extends ScrollAreaPrimitive.Root.Props {}
+export function ScrollAreaRoot({ className, children, ...props }: Props) {
 	return (
 		<ScrollAreaPrimitive.Root
 			data-slot="scroll-area"

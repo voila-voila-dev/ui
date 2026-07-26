@@ -1,8 +1,7 @@
 import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu";
 
-export function ContextMenuGroup({
-	...props
-}: ContextMenuPrimitive.Group.Props) {
+interface Props extends ContextMenuPrimitive.Group.Props {}
+export function ContextMenuGroup({ ...props }: Props) {
 	return (
 		<ContextMenuPrimitive.Group data-slot="context-menu-group" {...props} />
 	);

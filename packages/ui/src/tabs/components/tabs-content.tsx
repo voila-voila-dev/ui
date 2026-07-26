@@ -2,10 +2,8 @@ import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
 
 import { cn } from "#/lib/utils.ts";
 
-export function TabsContent({
-	className,
-	...props
-}: TabsPrimitive.Panel.Props) {
+interface Props extends TabsPrimitive.Panel.Props {}
+export function TabsContent({ className, ...props }: Props) {
 	return (
 		<TabsPrimitive.Panel
 			data-slot="tabs-content"

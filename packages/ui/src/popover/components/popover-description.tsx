@@ -2,10 +2,8 @@ import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
 
 import { cn } from "#/lib/utils.ts";
 
-export function PopoverDescription({
-	className,
-	...props
-}: PopoverPrimitive.Description.Props) {
+interface Props extends PopoverPrimitive.Description.Props {}
+export function PopoverDescription({ className, ...props }: Props) {
 	return (
 		<PopoverPrimitive.Description
 			data-slot="popover-description"

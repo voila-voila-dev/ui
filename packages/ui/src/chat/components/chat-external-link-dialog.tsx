@@ -1,14 +1,7 @@
 import type * as React from "react";
 import { ConfirmDialog } from "#/confirm-dialog/components/confirm-dialog.tsx";
 
-export function ChatExternalLinkDialog({
-	url,
-	onClose,
-	title,
-	description,
-	confirmLabel,
-	cancelLabel,
-}: {
+interface Props {
 	/** The pending external URL; `null` keeps the dialog closed. */
 	url: string | null;
 	onClose: () => void;
@@ -17,7 +10,16 @@ export function ChatExternalLinkDialog({
 	description?: React.ReactNode;
 	confirmLabel: React.ReactNode;
 	cancelLabel: React.ReactNode;
-}) {
+}
+
+export function ChatExternalLinkDialog({
+	url,
+	onClose,
+	title,
+	description,
+	confirmLabel,
+	cancelLabel,
+}: Props) {
 	return (
 		<ConfirmDialog
 			open={url !== null}

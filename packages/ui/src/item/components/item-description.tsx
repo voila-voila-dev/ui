@@ -1,10 +1,8 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function ItemDescription({
-	className,
-	...props
-}: React.ComponentProps<"p">) {
+interface Props extends React.ComponentProps<"p"> {}
+export function ItemDescription({ className, ...props }: Props) {
 	return (
 		<p
 			data-slot="item-description"

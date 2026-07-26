@@ -23,13 +23,17 @@ const itemVariants = cva({
 	},
 });
 
+interface Props
+	extends useRender.ComponentProps<"div">,
+		VariantProps<typeof itemVariants> {}
+
 export function ItemRoot({
 	className,
 	variant = "default",
 	size = "default",
 	render,
 	...props
-}: useRender.ComponentProps<"div"> & VariantProps<typeof itemVariants>) {
+}: Props) {
 	return useRender({
 		defaultTagName: "div",
 		props: mergeProps<"div">(

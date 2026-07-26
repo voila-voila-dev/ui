@@ -2,11 +2,9 @@ import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion";
 import { CaretDownIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
-export function AccordionTrigger({
-	className,
-	children,
-	...props
-}: AccordionPrimitive.Trigger.Props) {
+interface Props extends AccordionPrimitive.Trigger.Props {}
+
+export function AccordionTrigger({ className, children, ...props }: Props) {
 	return (
 		<AccordionPrimitive.Header className="flex">
 			<AccordionPrimitive.Trigger

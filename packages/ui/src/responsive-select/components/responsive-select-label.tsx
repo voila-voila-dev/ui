@@ -1,8 +1,7 @@
 import type * as React from "react";
 import { Select } from "#/select/components/select.tsx";
 
-export function ResponsiveSelectLabel(
-	props: React.ComponentProps<typeof Select.Label>,
-) {
+interface Props extends React.ComponentProps<typeof Select.Label> {}
+export function ResponsiveSelectLabel(props: Props) {
 	return <Select.Label {...props} />;
 }

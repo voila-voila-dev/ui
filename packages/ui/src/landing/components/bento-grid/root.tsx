@@ -1,7 +1,6 @@
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"div">;
-
+interface Props extends React.ComponentProps<"div"> {}
 /**
  * Bento grid with a featured gradient tile. Compose: Root > FeaturedItem
  * (FeaturedContent > FeaturedIcon/FeaturedLabel/FeaturedTitle +

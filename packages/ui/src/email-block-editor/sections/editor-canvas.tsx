@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { EMAIL_GRID_GAP_PX } from "#/email-block-editor/blocks/grid-block.tsx";
 import { EmailEditorDndContext } from "#/email-block-editor/dnd/email-editor-dnd-context.tsx";
 import { SortableBlockContainer } from "#/email-block-editor/dnd/sortable-block-container.tsx";
 import type {
@@ -13,7 +12,11 @@ import { AddBlockMenu } from "#/email-block-editor/sections/add-block-menu.tsx";
 import { CanvasBlockRow } from "#/email-block-editor/sections/canvas-block-row.tsx";
 import { CardFooterPlaceholder } from "#/email-block-editor/sections/card-footer-placeholder.tsx";
 import { CardHeaderPlaceholder } from "#/email-block-editor/sections/card-header-placeholder.tsx";
-import { EMAIL_COLOR, EMAIL_FONT } from "#/email-block-editor/theme.ts";
+import {
+	EMAIL_COLOR,
+	EMAIL_FONT,
+	EMAIL_GRID_GAP_PX,
+} from "#/email-block-editor/theme.ts";
 
 interface Props {
 	state: EmailEditorState;

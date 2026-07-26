@@ -2,13 +2,11 @@ import * as ResizablePrimitive from "react-resizable-panels";
 
 import { cn } from "#/lib/utils.ts";
 
-export function ResizableHandle({
-	withHandle,
-	className,
-	...props
-}: ResizablePrimitive.SeparatorProps & {
+interface Props extends ResizablePrimitive.SeparatorProps {
 	withHandle?: boolean;
-}) {
+}
+
+export function ResizableHandle({ withHandle, className, ...props }: Props) {
 	return (
 		<ResizablePrimitive.Separator
 			data-slot="resizable-handle"

@@ -2,7 +2,8 @@ import type * as React from "react";
 
 import { cn } from "#/lib/utils.ts";
 
-export function Label({ className, ...props }: React.ComponentProps<"label">) {
+interface Props extends React.ComponentProps<"label"> {}
+export function Label({ className, ...props }: Props) {
 	return (
 		// biome-ignore lint/a11y/noLabelWithoutControl: This component is meant to be used as a wrapper for form controls, so it may not always have a control associated with it.
 		<label

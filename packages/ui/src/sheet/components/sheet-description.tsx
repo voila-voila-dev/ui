@@ -1,10 +1,8 @@
 import { Dialog as SheetPrimitive } from "@base-ui/react/dialog";
 import { cn } from "#/lib/utils.ts";
 
-export function SheetDescription({
-	className,
-	...props
-}: SheetPrimitive.Description.Props) {
+interface Props extends SheetPrimitive.Description.Props {}
+export function SheetDescription({ className, ...props }: Props) {
 	return (
 		<SheetPrimitive.Description
 			data-slot="sheet-description"

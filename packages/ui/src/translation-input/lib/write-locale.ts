@@ -1,8 +1,5 @@
-/** A value carrying one string per locale, keyed by locale tag. */
-export type TranslationValue = Record<string, string>;
-
-export const isBlank = (text: string | undefined): boolean =>
-	(text ?? "").trim().length === 0;
+import { isBlank } from "#/translation-input/lib/is-blank.ts";
+import type { TranslationValue } from "#/translation-input/lib/translation-value.ts";
 
 /**
  * Writes `text` to `locale`, carrying it into every locale that is still blank

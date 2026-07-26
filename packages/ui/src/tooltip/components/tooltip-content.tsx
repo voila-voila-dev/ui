@@ -2,6 +2,13 @@ import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 
 import { cn } from "#/lib/utils.ts";
 
+interface Props
+	extends TooltipPrimitive.Popup.Props,
+		Pick<
+			TooltipPrimitive.Positioner.Props,
+			"align" | "alignOffset" | "collisionPadding" | "side" | "sideOffset"
+		> {}
+
 export function TooltipContent({
 	className,
 	side = "top",
@@ -11,11 +18,7 @@ export function TooltipContent({
 	collisionPadding,
 	children,
 	...props
-}: TooltipPrimitive.Popup.Props &
-	Pick<
-		TooltipPrimitive.Positioner.Props,
-		"align" | "alignOffset" | "collisionPadding" | "side" | "sideOffset"
-	>) {
+}: Props) {
 	return (
 		<TooltipPrimitive.Portal>
 			<TooltipPrimitive.Positioner

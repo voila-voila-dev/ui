@@ -6,11 +6,8 @@ import {
 	menuItemVariants,
 } from "#/menu/components/menu-variants.ts";
 
-export function ComboboxItem({
-	className,
-	children,
-	...props
-}: ComboboxPrimitive.Item.Props) {
+interface Props extends ComboboxPrimitive.Item.Props {}
+export function ComboboxItem({ className, children, ...props }: Props) {
 	return (
 		<ComboboxPrimitive.Item
 			data-slot="combobox-item"

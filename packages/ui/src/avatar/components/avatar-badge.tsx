@@ -3,11 +3,11 @@ import { avatarBadgeVariants } from "#/avatar/components/avatar-badge-variants.t
 import type { VariantProps } from "#/lib/cva.ts";
 import { cn } from "#/lib/utils.ts";
 
-export function AvatarBadge({
-	className,
-	status,
-	...props
-}: React.ComponentProps<"span"> & VariantProps<typeof avatarBadgeVariants>) {
+interface Props
+	extends React.ComponentProps<"span">,
+		VariantProps<typeof avatarBadgeVariants> {}
+
+export function AvatarBadge({ className, status, ...props }: Props) {
 	return (
 		<span
 			data-slot="avatar-badge"

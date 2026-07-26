@@ -1,13 +1,12 @@
 import { toLocalInputValue } from "#/date-time-picker/components/date-time-values.ts";
 
-/** Serialized `yyyy-MM-ddTHH:mm` form value, rendered only when named. */
-export function DateTimeHiddenInput({
-	name,
-	value,
-}: {
+interface Props {
 	name: string | undefined;
 	value: Date | null | undefined;
-}) {
+}
+
+/** Serialized `yyyy-MM-ddTHH:mm` form value, rendered only when named. */
+export function DateTimeHiddenInput({ name, value }: Props) {
 	if (!name) {
 		return null;
 	}

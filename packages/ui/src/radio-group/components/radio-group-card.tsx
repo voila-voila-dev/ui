@@ -3,10 +3,10 @@ import { CheckCircleIcon } from "@phosphor-icons/react";
 
 import { cn } from "#/lib/utils.ts";
 
-export type RadioGroupCardProps = RadioPrimitive.Root.Props & {
+interface Props extends RadioPrimitive.Root.Props {
 	/** Hide the checked-corner icon when the card's own content marks selection. */
 	showIndicator?: boolean;
-};
+}
 
 /**
  * "Choice card" alternative to `RadioGroup.Item` - a bordered selectable card
@@ -19,7 +19,7 @@ export function RadioGroupCard({
 	children,
 	showIndicator = true,
 	...props
-}: RadioGroupCardProps) {
+}: Props) {
 	return (
 		<RadioPrimitive.Root
 			data-slot="radio-group-card"

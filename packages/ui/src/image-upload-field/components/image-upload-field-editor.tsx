@@ -1,8 +1,14 @@
 import type * as React from "react";
 import { Button } from "#/button/components/button.tsx";
 import { ImageUploadCropper } from "#/image-upload-field/components/image-upload-cropper.tsx";
-import type { ImageUploadCropperProps } from "#/image-upload-field/components/image-upload-field-cropper.tsx";
 import { cn } from "#/lib/utils.ts";
+
+interface Props extends React.ComponentProps<"div"> {
+	cropper: React.ComponentProps<typeof ImageUploadCropper>;
+	/** Show the escape hatch back to the existing image (only when one exists). */
+	canCancel: boolean;
+	onCancel: () => void;
+}
 
 /** The "edit" state: the crop flow, plus the way back to an existing image. */
 export function ImageUploadFieldEditor({
@@ -11,12 +17,7 @@ export function ImageUploadFieldEditor({
 	onCancel,
 	className,
 	...props
-}: React.ComponentProps<"div"> & {
-	cropper: ImageUploadCropperProps;
-	/** Show the escape hatch back to the existing image (only when one exists). */
-	canCancel: boolean;
-	onCancel: () => void;
-}) {
+}: Props) {
 	return (
 		<div
 			data-slot="image-upload-field"

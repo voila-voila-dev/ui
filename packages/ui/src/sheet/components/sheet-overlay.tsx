@@ -1,10 +1,8 @@
 import { Dialog as SheetPrimitive } from "@base-ui/react/dialog";
 import { cn } from "#/lib/utils.ts";
 
-export function SheetOverlay({
-	className,
-	...props
-}: SheetPrimitive.Backdrop.Props) {
+interface Props extends SheetPrimitive.Backdrop.Props {}
+export function SheetOverlay({ className, ...props }: Props) {
 	return (
 		<SheetPrimitive.Backdrop
 			data-slot="sheet-overlay"

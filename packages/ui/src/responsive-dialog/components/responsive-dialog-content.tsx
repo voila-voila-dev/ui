@@ -4,15 +4,7 @@ import { Dialog } from "#/dialog/components/dialog.tsx";
 import { Drawer } from "#/drawer/components/drawer.tsx";
 import { useResponsiveDialogIsMobile } from "#/responsive-dialog/context/responsive-dialog-context.ts";
 
-export function ResponsiveDialogContent({
-	className,
-	children,
-	size = "sm",
-	showCloseButton = true,
-	closeButtonLabel = "Close",
-	overlayClassName,
-	autoFocus = true,
-}: {
+interface Props {
 	className?: string;
 	children?: React.ReactNode;
 	/** Desktop dialog width — the mobile drawer is always full-width. */
@@ -27,7 +19,17 @@ export function ResponsiveDialogContent({
 	 * see. The content stays reachable by tab either way.
 	 */
 	autoFocus?: boolean;
-}) {
+}
+
+export function ResponsiveDialogContent({
+	className,
+	children,
+	size = "sm",
+	showCloseButton = true,
+	closeButtonLabel = "Close",
+	overlayClassName,
+	autoFocus = true,
+}: Props) {
 	const isMobile = useResponsiveDialogIsMobile("ResponsiveDialog.Content");
 	if (isMobile) {
 		return (

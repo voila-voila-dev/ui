@@ -23,16 +23,18 @@ const KEYBOARD_PAN_OFFSETS: Record<string, ImageCropperPoint> = {
 	ArrowDown: { x: 0, y: KEYBOARD_PAN_STEP },
 };
 
-export function ImageCropperArea({
-	shape = "rectangle",
-	"aria-label": ariaLabel = "Drag to move the image, pinch or scroll to zoom",
-	className,
-}: {
+interface Props {
 	/** Visual mask drawn over the viewport; "circle" pairs with aspectRatio 1. */
 	shape?: "rectangle" | "circle";
 	"aria-label"?: string;
 	className?: string;
-}) {
+}
+
+export function ImageCropperArea({
+	shape = "rectangle",
+	"aria-label": ariaLabel = "Drag to move the image, pinch or scroll to zoom",
+	className,
+}: Props) {
 	const context = useImageCropperContext("ImageCropper.Area");
 	const {
 		aspectRatio,

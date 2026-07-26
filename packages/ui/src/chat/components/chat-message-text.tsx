@@ -2,15 +2,17 @@ import type * as React from "react";
 
 const CHAT_LINK_PATTERN = /https?:\/\/[^\s<>"']+/g;
 
+interface Props extends Omit<React.ComponentProps<"span">, "children"> {
+	children: string;
+	onLinkClick?: (url: string) => void;
+}
+
 export function ChatMessageText({
 	children,
 	onLinkClick,
 	className,
 	...props
-}: Omit<React.ComponentProps<"span">, "children"> & {
-	children: string;
-	onLinkClick?: (url: string) => void;
-}) {
+}: Props) {
 	const nodes: React.ReactNode[] = [];
 	let lastIndex = 0;
 	for (const match of children.matchAll(CHAT_LINK_PATTERN)) {

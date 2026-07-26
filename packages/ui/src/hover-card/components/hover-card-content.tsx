@@ -2,6 +2,25 @@ import { PreviewCard as PreviewCardPrimitive } from "@base-ui/react/preview-card
 
 import { cn } from "#/lib/utils.ts";
 
+interface Props
+	extends PreviewCardPrimitive.Popup.Props,
+		Pick<
+			PreviewCardPrimitive.Positioner.Props,
+			"align" | "alignOffset" | "collisionPadding" | "side" | "sideOffset"
+		> {
+	// Escape hatch for the Positioner props not surfaced as dedicated props
+	// (sticky, anchor, positionMethod, arrowPadding…).
+	positionerProps?: Omit<
+		PreviewCardPrimitive.Positioner.Props,
+		| "align"
+		| "alignOffset"
+		| "collisionPadding"
+		| "side"
+		| "sideOffset"
+		| "children"
+	>;
+}
+
 export function HoverCardContent({
 	className,
 	align = "center",
@@ -11,23 +30,7 @@ export function HoverCardContent({
 	collisionPadding = 8,
 	positionerProps,
 	...props
-}: PreviewCardPrimitive.Popup.Props &
-	Pick<
-		PreviewCardPrimitive.Positioner.Props,
-		"align" | "alignOffset" | "collisionPadding" | "side" | "sideOffset"
-	> & {
-		// Escape hatch for the Positioner props not surfaced as dedicated props
-		// (sticky, anchor, positionMethod, arrowPadding…).
-		positionerProps?: Omit<
-			PreviewCardPrimitive.Positioner.Props,
-			| "align"
-			| "alignOffset"
-			| "collisionPadding"
-			| "side"
-			| "sideOffset"
-			| "children"
-		>;
-	}) {
+}: Props) {
 	const { className: positionerClassName, ...restPositionerProps } =
 		positionerProps ?? {};
 	return (

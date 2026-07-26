@@ -1,8 +1,7 @@
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<typeof ArrowUpRightIcon>;
-
+interface Props extends React.ComponentProps<typeof ArrowUpRightIcon> {}
 export function ArticleCardArrow({ className, ...props }: Props) {
 	return (
 		<ArrowUpRightIcon

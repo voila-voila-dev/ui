@@ -3,6 +3,18 @@ import { cn } from "#/lib/utils.ts";
 import { SelectScrollDownButton } from "#/select/components/select-scroll-down-button.tsx";
 import { SelectScrollUpButton } from "#/select/components/select-scroll-up-button.tsx";
 
+interface Props
+	extends SelectPrimitive.Popup.Props,
+		Pick<
+			SelectPrimitive.Positioner.Props,
+			| "align"
+			| "alignOffset"
+			| "side"
+			| "sideOffset"
+			| "alignItemWithTrigger"
+			| "collisionPadding"
+		> {}
+
 /* With the default `alignItemWithTrigger` the popup overlaps the trigger
  * macOS-style and intentionally suppresses the open/close animation; pass
  * `alignItemWithTrigger={false}` to get the popover-style zoom/fade. */
@@ -16,16 +28,7 @@ export function SelectContent({
 	alignItemWithTrigger = true,
 	collisionPadding,
 	...props
-}: SelectPrimitive.Popup.Props &
-	Pick<
-		SelectPrimitive.Positioner.Props,
-		| "align"
-		| "alignOffset"
-		| "side"
-		| "sideOffset"
-		| "alignItemWithTrigger"
-		| "collisionPadding"
-	>) {
+}: Props) {
 	return (
 		<SelectPrimitive.Portal>
 			<SelectPrimitive.Positioner

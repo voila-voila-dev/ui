@@ -2,7 +2,8 @@ import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
 
 import { cn } from "#/lib/utils.ts";
 
-export function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
+interface Props extends TabsPrimitive.Tab.Props {}
+export function TabsTrigger({ className, ...props }: Props) {
 	return (
 		<TabsPrimitive.Tab
 			data-slot="tabs-trigger"

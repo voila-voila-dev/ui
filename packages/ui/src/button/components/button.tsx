@@ -1,5 +1,4 @@
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
-
 import {
 	type ButtonVariants,
 	buttonVariants,
@@ -7,14 +6,13 @@ import {
 import { cn } from "#/lib/utils.ts";
 import { Spinner } from "#/spinner/components/spinner.tsx";
 
-export type ButtonProps = ButtonPrimitive.Props &
-	ButtonVariants & {
-		/**
-		 * Show a leading spinner and mark the button `aria-busy`, disabling
-		 * interaction while an async action is in flight (e.g. a form submit).
-		 */
-		loading?: boolean;
-	};
+interface Props extends ButtonPrimitive.Props, ButtonVariants {
+	/**
+	 * Show a leading spinner and mark the button `aria-busy`, disabling
+	 * interaction while an async action is in flight (e.g. a form submit).
+	 */
+	loading?: boolean;
+}
 
 export function Button({
 	className,
@@ -25,7 +23,7 @@ export function Button({
 	disabled,
 	children,
 	...props
-}: ButtonProps) {
+}: Props) {
 	return (
 		<ButtonPrimitive
 			data-slot="button"
@@ -42,12 +40,3 @@ export function Button({
 		</ButtonPrimitive>
 	);
 }
-
-export {
-	type ButtonSize,
-	type ButtonVariant,
-	type ButtonVariants,
-	buttonSizeOptions,
-	buttonVariantOptions,
-	buttonVariants,
-} from "#/button/components/button-variants.ts";

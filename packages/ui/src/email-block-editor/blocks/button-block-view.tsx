@@ -11,7 +11,7 @@ const JUSTIFY: { readonly [A in EmailEditorAlignment]: string } = {
 	center: "center",
 	right: "flex-end",
 };
-type Props = EmailBlockComponentProps<EmailEditorButtonBlock>;
+interface Props extends EmailBlockComponentProps<EmailEditorButtonBlock> {}
 /**
  * The call-to-action button. The label is edited in place; the target URL, the
  * alignment and the variant live in the settings sidebar (no inline chip — the
@@ -39,7 +39,9 @@ export function ButtonBlockView({ block, onChange }: Props) {
 					className="min-w-16 max-w-full border-none bg-transparent p-0 text-center font-semibold text-[15px] leading-none outline-none [field-sizing:content] placeholder:opacity-50"
 					style={{
 						fontFamily: EMAIL_FONT,
-						color: filled ? "#ffffff" : EMAIL_COLOR.brand,
+						color: filled
+							? "var(--color-primary-foreground)"
+							: EMAIL_COLOR.brand,
 					}}
 				/>
 			</span>

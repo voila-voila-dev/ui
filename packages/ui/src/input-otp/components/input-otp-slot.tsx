@@ -2,13 +2,11 @@ import { OTPInputContext } from "input-otp";
 import * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function InputOTPSlot({
-	index,
-	className,
-	...props
-}: React.ComponentProps<"div"> & {
+interface Props extends React.ComponentProps<"div"> {
 	index: number;
-}) {
+}
+
+export function InputOTPSlot({ index, className, ...props }: Props) {
 	const inputOTPContext = React.useContext(OTPInputContext);
 	const { char, hasFakeCaret, isActive } = inputOTPContext?.slots[index] ?? {};
 

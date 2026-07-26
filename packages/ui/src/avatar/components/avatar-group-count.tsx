@@ -1,13 +1,15 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends React.ComponentProps<"div"> {
+	size?: "default" | "sm" | "lg";
+}
+
 export function AvatarGroupCount({
 	className,
 	size = "default",
 	...props
-}: React.ComponentProps<"div"> & {
-	size?: "default" | "sm" | "lg";
-}) {
+}: Props) {
 	return (
 		<div
 			data-slot="avatar-group-count"

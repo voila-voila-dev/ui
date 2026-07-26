@@ -1,9 +1,8 @@
 import type * as React from "react";
 
-export function BreadcrumbRoot({
-	className,
-	...props
-}: React.ComponentProps<"nav">) {
+interface Props extends React.ComponentProps<"nav"> {}
+
+export function BreadcrumbRoot({ className, ...props }: Props) {
 	return (
 		<nav
 			aria-label="breadcrumb"

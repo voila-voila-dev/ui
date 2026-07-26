@@ -3,18 +3,20 @@ import * as React from "react";
 import { useImageCropperContext } from "#/image-cropper/context/image-cropper-context.tsx";
 import { cn } from "#/lib/utils.ts";
 
-export function ImageCropperDropzone({
-	label = "Choose an image",
-	description = "Click to browse or drag and drop",
-	className,
-	children,
-}: {
+interface Props {
 	label?: string;
 	description?: string;
 	className?: string;
 	/** Replaces the default icon + label content entirely. */
 	children?: React.ReactNode;
-}) {
+}
+
+export function ImageCropperDropzone({
+	label = "Choose an image",
+	description = "Click to browse or drag and drop",
+	className,
+	children,
+}: Props) {
 	const { aspectRatio, disabled, imageSource, openFilePicker, selectFile } =
 		useImageCropperContext("ImageCropper.Dropzone");
 	const [isDraggingOver, setIsDraggingOver] = React.useState(false);

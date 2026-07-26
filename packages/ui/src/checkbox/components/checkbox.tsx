@@ -2,15 +2,11 @@ import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
 import { CheckIcon, MinusIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
-export type CheckboxProps = CheckboxPrimitive.Root.Props & {
+interface Props extends CheckboxPrimitive.Root.Props {
 	size?: "sm" | "default";
-};
+}
 
-export function Checkbox({
-	className,
-	size = "default",
-	...props
-}: CheckboxProps) {
+export function Checkbox({ className, size = "default", ...props }: Props) {
 	return (
 		<CheckboxPrimitive.Root
 			data-slot="checkbox"

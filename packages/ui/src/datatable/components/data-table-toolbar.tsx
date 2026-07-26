@@ -1,8 +1,7 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"div">;
-
+interface Props extends React.ComponentProps<"div"> {}
 /**
  * Emplacement row above a `DataTable`: search at the start, filter controls
  * next to it, end-aligned actions via `DataTable.Actions`. Wraps on narrow

@@ -1,10 +1,8 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function PaginationContent({
-	className,
-	...props
-}: React.ComponentProps<"ul">) {
+interface Props extends React.ComponentProps<"ul"> {}
+export function PaginationContent({ className, ...props }: Props) {
 	return (
 		<ul
 			data-slot="pagination-content"

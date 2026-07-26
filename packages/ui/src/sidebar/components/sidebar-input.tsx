@@ -2,10 +2,8 @@ import type * as React from "react";
 import { Input } from "#/input/components/input.tsx";
 import { cn } from "#/lib/utils.ts";
 
-export function SidebarInput({
-	className,
-	...props
-}: React.ComponentProps<typeof Input>) {
+interface Props extends React.ComponentProps<typeof Input> {}
+export function SidebarInput({ className, ...props }: Props) {
 	return (
 		<Input
 			data-slot="sidebar-input"

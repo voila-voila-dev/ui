@@ -7,6 +7,14 @@ import { sidebarMenuButtonVariants } from "#/sidebar/components/sidebar-menu-but
 import { useSidebar } from "#/sidebar/context/sidebar-context.tsx";
 import { Tooltip } from "#/tooltip/components/tooltip.tsx";
 
+interface Props
+	extends useRender.ComponentProps<"button">,
+		React.ComponentProps<"button">,
+		VariantProps<typeof sidebarMenuButtonVariants> {
+	isActive?: boolean;
+	tooltip?: string | React.ComponentProps<typeof Tooltip.Content>;
+}
+
 export function SidebarMenuButton({
 	render,
 	isActive = false,
@@ -15,11 +23,7 @@ export function SidebarMenuButton({
 	tooltip,
 	className,
 	...props
-}: useRender.ComponentProps<"button"> &
-	React.ComponentProps<"button"> & {
-		isActive?: boolean;
-		tooltip?: string | React.ComponentProps<typeof Tooltip.Content>;
-	} & VariantProps<typeof sidebarMenuButtonVariants>) {
+}: Props) {
 	const { isMobile, state } = useSidebar();
 	const comp = useRender({
 		defaultTagName: "button",

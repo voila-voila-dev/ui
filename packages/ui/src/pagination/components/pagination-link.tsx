@@ -2,7 +2,9 @@ import type * as React from "react";
 import { Button } from "#/button/components/button.tsx";
 import { cn } from "#/lib/utils.ts";
 
-export type PaginationLinkProps = {
+interface Props
+	extends Pick<React.ComponentProps<typeof Button>, "size" | "variant">,
+		React.ComponentProps<"a"> {
 	isActive?: boolean;
 	/**
 	 * Render the link as non-interactive (e.g. Previous on the first page):
@@ -10,8 +12,7 @@ export type PaginationLinkProps = {
 	 * `aria-disabled:` styling idiom rather than a dead `href`.
 	 */
 	isDisabled?: boolean;
-} & Pick<React.ComponentProps<typeof Button>, "size" | "variant"> &
-	React.ComponentProps<"a">;
+}
 
 export function PaginationLink({
 	className,
@@ -20,7 +21,7 @@ export function PaginationLink({
 	size = "icon",
 	variant,
 	...props
-}: PaginationLinkProps) {
+}: Props) {
 	return (
 		<Button
 			// `variant` overrides the active/inactive default so consumers can opt

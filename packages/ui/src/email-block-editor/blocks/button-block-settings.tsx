@@ -16,7 +16,7 @@ const VARIANT_OPTIONS: ReadonlyArray<{
 	{ value: "primary", label: "Filled (brand color)" },
 	{ value: "secondary", label: "Outline" },
 ];
-type Props = EmailBlockComponentProps<EmailEditorButtonBlock>;
+interface Props extends EmailBlockComponentProps<EmailEditorButtonBlock> {}
 export function ButtonBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

@@ -196,4 +196,39 @@ describe("AlertDialog", () => {
 		expect(action?.classList.contains("custom-action-class")).toBe(true);
 		expect(cancel?.classList.contains("custom-cancel-class")).toBe(true);
 	});
+
+	it("lets the header, footer and media pick their element via render", async () => {
+		const screen = render(
+			<AlertDialog.Root defaultOpen>
+				<AlertDialog.Content>
+					<AlertDialog.Header render={<header />}>
+						<AlertDialog.Media render={<span />}>
+							<svg role="img" aria-label="Warning" />
+						</AlertDialog.Media>
+						<AlertDialog.Title>Custom elements</AlertDialog.Title>
+						<AlertDialog.Description>
+							Render prop coverage.
+						</AlertDialog.Description>
+					</AlertDialog.Header>
+					<AlertDialog.Footer render={<footer />}>
+						<AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
+					</AlertDialog.Footer>
+				</AlertDialog.Content>
+			</AlertDialog.Root>,
+		);
+		await waitFor(() => {
+			expect(screen.getByRole("alertdialog")).toBeTruthy();
+		});
+		const bySlot = (slot: string) =>
+			screen.baseElement.querySelector(`[data-slot=${slot}]`);
+		expect(bySlot("alert-dialog-header")?.tagName).toBe("HEADER");
+		expect(bySlot("alert-dialog-footer")?.tagName).toBe("FOOTER");
+		expect(bySlot("alert-dialog-media")?.tagName).toBe("SPAN");
+		// The media slot still drives the header's grid contract.
+		expect(
+			bySlot("alert-dialog-header")?.className.includes(
+				"has-data-[slot=alert-dialog-media]:grid-rows-[auto_auto_1fr]",
+			),
+		).toBe(true);
+	});
 });

@@ -6,14 +6,16 @@ import {
 	menuItemVariants,
 } from "#/menu/components/menu-variants.ts";
 
+interface Props extends ContextMenuPrimitive.RadioItem.Props {
+	inset?: boolean;
+}
+
 export function ContextMenuRadioItem({
 	className,
 	children,
 	inset,
 	...props
-}: ContextMenuPrimitive.RadioItem.Props & {
-	inset?: boolean;
-}) {
+}: Props) {
 	return (
 		<ContextMenuPrimitive.RadioItem
 			data-slot="context-menu-radio-item"

@@ -14,6 +14,10 @@ const trendIcons: Record<
 	neutral: null,
 };
 
+interface Props
+	extends React.ComponentProps<"div">,
+		VariantProps<typeof statCardDeltaVariants> {}
+
 /**
  * Trend indicator next to the label or value. `up` renders in the success
  * color and `down` in the destructive color - for metrics where down is the
@@ -25,7 +29,7 @@ export function StatCardDelta({
 	trend = "neutral",
 	children,
 	...props
-}: React.ComponentProps<"div"> & VariantProps<typeof statCardDeltaVariants>) {
+}: Props) {
 	const TrendIcon = trendIcons[trend];
 	return (
 		<div

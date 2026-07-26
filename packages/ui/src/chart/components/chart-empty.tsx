@@ -1,15 +1,13 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends React.ComponentProps<"div"> {}
 /**
  * Rendered in place of a chart when there is no data. Defaults to the root's
  * aspect-video box — size it like the chart it stands in for. Pass localized
  * content as children (plain text, or an `Empty` block).
  */
-export function ChartEmpty({
-	className,
-	...props
-}: React.ComponentProps<"div">) {
+export function ChartEmpty({ className, ...props }: Props) {
 	return (
 		<div
 			data-slot="chart-empty"

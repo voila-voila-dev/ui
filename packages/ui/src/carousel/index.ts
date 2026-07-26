@@ -1,6 +1,7 @@
-export {
-	Carousel,
-	type CarouselApi,
-	type CarouselOptions,
-	type CarouselPlugin,
-} from "#/carousel/components/carousel.tsx";
+export { Carousel } from "#/carousel/components/carousel.tsx";
+export type {
+	CarouselApi,
+	CarouselOptions,
+	CarouselPlugin,
+} from "#/carousel/context/carousel-context.tsx";
+export { useCarousel } from "#/carousel/hooks/use-carousel.ts";

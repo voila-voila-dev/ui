@@ -2,8 +2,7 @@ import { PlusIcon } from "@phosphor-icons/react";
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"button">;
-
+interface Props extends React.ComponentProps<"button"> {}
 /**
  * Full-width "add a row" button for the mobile card mode - pass it through
  * the table's `mobileAddRow` prop, wired like the desktop

@@ -1,5 +1,7 @@
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog";
 
-export function AlertDialogRoot({ ...props }: AlertDialogPrimitive.Root.Props) {
+interface Props extends AlertDialogPrimitive.Root.Props {}
+
+export function AlertDialogRoot({ ...props }: Props) {
 	return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />;
 }

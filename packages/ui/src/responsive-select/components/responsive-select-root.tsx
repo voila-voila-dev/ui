@@ -2,7 +2,7 @@ import * as React from "react";
 import { useIsMobile } from "#/hooks/use-mobile.ts";
 import { NativeSelect } from "#/native-select/components/native-select.tsx";
 import { NativeOptionsFromContent } from "#/responsive-select/components/native-options-from-content.tsx";
-import type { ItemProps } from "#/responsive-select/components/responsive-select-children.ts";
+import type { SelectItemShape } from "#/responsive-select/components/responsive-select-children.ts";
 import {
 	getElementOfType,
 	textOf,
@@ -10,7 +10,6 @@ import {
 import { ResponsiveSelectContent } from "#/responsive-select/components/responsive-select-content.tsx";
 import { ResponsiveSelectGroup } from "#/responsive-select/components/responsive-select-group.tsx";
 import { ResponsiveSelectItem } from "#/responsive-select/components/responsive-select-item.tsx";
-import type { ResponsiveSelectTriggerProps } from "#/responsive-select/components/responsive-select-trigger.tsx";
 import { ResponsiveSelectTrigger } from "#/responsive-select/components/responsive-select-trigger.tsx";
 import { ResponsiveSelectValue } from "#/responsive-select/components/responsive-select-value.tsx";
 import { Select } from "#/select/components/select.tsx";
@@ -26,7 +25,7 @@ function buildItemsRecord(children: React.ReactNode): Record<string, string> {
 		for (const child of React.Children.toArray(nodes)) {
 			if (!React.isValidElement(child)) continue;
 			if (child.type === ResponsiveSelectItem) {
-				const props = child.props as ItemProps;
+				const props = child.props as SelectItemShape;
 				record[props.value] = textOf(props.children);
 			} else if (child.type === ResponsiveSelectGroup) {
 				visit((child.props as { children?: React.ReactNode }).children);
@@ -36,7 +35,7 @@ function buildItemsRecord(children: React.ReactNode): Record<string, string> {
 	if (content) visit(content.props.children);
 	return record;
 }
-type Props = ResponsiveSelectRootProps;
+
 export function ResponsiveSelectRoot({
 	value,
 	defaultValue,
@@ -79,10 +78,9 @@ export function ResponsiveSelectRoot({
 
 	// Project the part elements onto one native control. The Select parts below
 	// are never instantiated on this surface — we only read their props.
-	const trigger = getElementOfType<ResponsiveSelectTriggerProps>(
-		children,
-		ResponsiveSelectTrigger,
-	);
+	const trigger = getElementOfType<
+		React.ComponentProps<typeof ResponsiveSelectTrigger>
+	>(children, ResponsiveSelectTrigger);
 	const content = getElementOfType<{ children?: React.ReactNode }>(
 		children,
 		ResponsiveSelectContent,
@@ -136,7 +134,7 @@ export function ResponsiveSelectRoot({
 }
 
 // Item/Label content must be plain text so a native `<option>` can render it.
-export type ResponsiveSelectRootProps = {
+interface Props {
 	value?: string;
 	defaultValue?: string;
 	onValueChange?: (value: string) => void;
@@ -145,4 +143,4 @@ export type ResponsiveSelectRootProps = {
 	disabled?: boolean;
 	required?: boolean;
 	children?: React.ReactNode;
-};
+}

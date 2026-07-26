@@ -2,12 +2,13 @@ import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { CaretDownIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends ComboboxPrimitive.Trigger.Props {}
 export function ComboboxTrigger({
 	className,
 	children,
 	"aria-label": ariaLabel = "Open list",
 	...props
-}: ComboboxPrimitive.Trigger.Props) {
+}: Props) {
 	return (
 		<ComboboxPrimitive.Trigger
 			data-slot="combobox-trigger"

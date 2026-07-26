@@ -1,10 +1,8 @@
 import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu";
 import { cn } from "#/lib/utils.ts";
 
-export function NavigationMenuIndicator({
-	className,
-	...props
-}: NavigationMenuPrimitive.Icon.Props) {
+interface Props extends NavigationMenuPrimitive.Icon.Props {}
+export function NavigationMenuIndicator({ className, ...props }: Props) {
 	return (
 		<NavigationMenuPrimitive.Icon
 			data-slot="navigation-menu-indicator"

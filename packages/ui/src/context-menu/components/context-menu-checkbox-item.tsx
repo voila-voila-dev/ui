@@ -6,15 +6,17 @@ import {
 	menuItemVariants,
 } from "#/menu/components/menu-variants.ts";
 
+interface Props extends ContextMenuPrimitive.CheckboxItem.Props {
+	inset?: boolean;
+}
+
 export function ContextMenuCheckboxItem({
 	className,
 	children,
 	checked,
 	inset,
 	...props
-}: ContextMenuPrimitive.CheckboxItem.Props & {
-	inset?: boolean;
-}) {
+}: Props) {
 	return (
 		<ContextMenuPrimitive.CheckboxItem
 			data-slot="context-menu-checkbox-item"

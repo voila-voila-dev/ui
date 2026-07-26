@@ -3,13 +3,20 @@ import { useIsMobile } from "#/hooks/use-mobile.ts";
 import { cn } from "#/lib/utils.ts";
 import {
 	SidebarContext,
-	type SidebarContextProps,
+	type SidebarContextValue,
 } from "#/sidebar/context/sidebar-context.tsx";
 import {
 	SIDEBAR_KEYBOARD_SHORTCUT,
 	SIDEBAR_WIDTH,
 	SIDEBAR_WIDTH_ICON,
 } from "#/sidebar/lib/sidebar-constants.ts";
+
+interface Props extends React.ComponentProps<"div"> {
+	defaultOpen?: boolean;
+	open?: boolean;
+	onOpenChange?: (open: boolean) => void;
+	keyboardShortcut?: string | false;
+}
 
 export function SidebarProvider({
 	defaultOpen = true,
@@ -20,12 +27,7 @@ export function SidebarProvider({
 	style,
 	children,
 	...props
-}: React.ComponentProps<"div"> & {
-	defaultOpen?: boolean;
-	open?: boolean;
-	onOpenChange?: (open: boolean) => void;
-	keyboardShortcut?: string | false;
-}) {
+}: Props) {
 	const isMobile = useIsMobile();
 	const [openMobile, setOpenMobile] = React.useState(false);
 
@@ -71,7 +73,7 @@ export function SidebarProvider({
 	// This makes it easier to style the sidebar with Tailwind classes.
 	const state = open ? "expanded" : "collapsed";
 
-	const contextValue = React.useMemo<SidebarContextProps>(
+	const contextValue = React.useMemo<SidebarContextValue>(
 		() => ({
 			state,
 			open,

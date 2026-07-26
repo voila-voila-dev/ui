@@ -1,7 +1,7 @@
 import maplibregl from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef, useState } from "react";
-import type { GlobeViewProps } from "#/globe-view/components/globe-view.tsx";
+import type { GlobeView } from "#/globe-view/components/globe-view.tsx";
+import { StaticGlobeOutline } from "#/globe-view/components/static-globe-outline.tsx";
 import { cn } from "#/lib/utils.ts";
 import {
 	DEFAULT_DARK_STYLE_URL,
@@ -11,7 +11,6 @@ import {
 /** A whole hemisphere in frame — the sensible default for a globe. */
 const DEFAULT_CENTER: readonly [number, number] = [2.3522, 30];
 const DEFAULT_ZOOM = 1.4;
-
 /**
  * Resolves a CSS colour expression (`var(--primary)`, `color-mix(…)`) to the
  * `rgba()` string MapLibre's style parser accepts. The probe element gives the
@@ -42,48 +41,7 @@ function resolveCssColor(
 	const [r, g, b, a] = context.getImageData(0, 0, 1, 1).data;
 	return `rgba(${r}, ${g}, ${b}, ${((a ?? 0) / 255).toFixed(3)})`;
 }
-
-/** The default WebGL-less fallback: a static globe outline in `--muted`. */
-function StaticGlobeOutline() {
-	return (
-		<svg
-			aria-hidden
-			viewBox="0 0 100 100"
-			className="mx-auto aspect-square h-full max-w-full text-muted"
-		>
-			<title>Globe unavailable</title>
-			<circle
-				cx="50"
-				cy="50"
-				r="48"
-				fill="none"
-				stroke="currentColor"
-				strokeWidth="1.5"
-			/>
-			<ellipse
-				cx="50"
-				cy="50"
-				rx="24"
-				ry="48"
-				fill="none"
-				stroke="currentColor"
-			/>
-			<ellipse
-				cx="50"
-				cy="50"
-				rx="44"
-				ry="48"
-				fill="none"
-				stroke="currentColor"
-				strokeWidth="0.5"
-			/>
-			<line x1="2" y1="50" x2="98" y2="50" stroke="currentColor" />
-			<path d="M 7 26 A 60 60 0 0 1 93 26" fill="none" stroke="currentColor" />
-			<path d="M 7 74 A 60 60 0 0 0 93 74" fill="none" stroke="currentColor" />
-		</svg>
-	);
-}
-
+interface Props extends React.ComponentProps<typeof GlobeView> {}
 /**
  * The MapLibre-backed body of `GlobeView`, loaded through `React.lazy` from
  * `globe-view.tsx` so the ~270 kB runtime never rides along with a page that
@@ -100,7 +58,7 @@ export function GlobeViewImplementation({
 	onReady,
 	unavailableFallback,
 	...props
-}: GlobeViewProps) {
+}: Props) {
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const onReadyRef = useRef(onReady);
 	onReadyRef.current = onReady;

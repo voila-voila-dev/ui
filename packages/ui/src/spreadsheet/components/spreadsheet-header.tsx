@@ -2,8 +2,7 @@ import * as React from "react";
 import { cn } from "#/lib/utils.ts";
 import { SpreadsheetContext } from "#/spreadsheet/context/spreadsheet-context.ts";
 
-type Props = React.ComponentProps<"thead">;
-
+interface Props extends React.ComponentProps<"thead"> {}
 /** The header row band — sticky when the table asks for it. */
 export function SpreadsheetHeader({ className, ...props }: Props) {
 	const { stickyHeader } = React.useContext(SpreadsheetContext);

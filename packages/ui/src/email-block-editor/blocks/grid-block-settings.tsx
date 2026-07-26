@@ -23,7 +23,7 @@ const MOBILE_COLUMN_OPTIONS: ReadonlyArray<{
 	{ value: 1, label: "1" },
 	{ value: 2, label: "2" },
 ];
-type Props = EmailBlockComponentProps<EmailEditorGridBlock>;
+interface Props extends EmailBlockComponentProps<EmailEditorGridBlock> {}
 export function GridBlockSettings({ block, onChange }: Props) {
 	return (
 		<BlockOptionSection title="Appearance">

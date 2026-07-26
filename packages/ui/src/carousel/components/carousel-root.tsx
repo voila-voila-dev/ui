@@ -3,7 +3,7 @@ import * as React from "react";
 import {
 	type CarouselApi,
 	CarouselContext,
-	type CarouselProps,
+	type CarouselSettings,
 } from "#/carousel/context/carousel-context.tsx";
 import { cn } from "#/lib/utils.ts";
 
@@ -14,6 +14,8 @@ function prefersReducedMotion() {
 	);
 }
 
+interface Props extends React.ComponentProps<"div">, CarouselSettings {}
+
 export function CarouselRoot({
 	orientation = "horizontal",
 	opts,
@@ -22,7 +24,7 @@ export function CarouselRoot({
 	className,
 	children,
 	...props
-}: React.ComponentProps<"div"> & CarouselProps) {
+}: Props) {
 	const [carouselRef, api] = useEmblaCarousel(
 		{
 			...opts,

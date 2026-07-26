@@ -3,6 +3,14 @@ import { cn } from "#/lib/utils.ts";
 import { RatingRoot } from "#/rating/components/rating-root.tsx";
 import { UserAvatar } from "#/user-avatar/components/user-avatar.tsx";
 
+interface Props extends React.ComponentProps<"div"> {
+	authorName: string;
+	authorAvatarSrc?: string;
+	rating: number;
+	/** Pre-formatted date string (the kit stays locale-agnostic). */
+	date?: React.ReactNode;
+}
+
 /**
  * One review entry: the reviewer's avatar + name, their star rating, the date
  * and the review body. Composes `UserAvatar` and `Rating`.
@@ -15,13 +23,7 @@ export function ReviewItem({
 	children,
 	className,
 	...props
-}: React.ComponentProps<"div"> & {
-	authorName: string;
-	authorAvatarSrc?: string;
-	rating: number;
-	/** Pre-formatted date string (the kit stays locale-agnostic). */
-	date?: React.ReactNode;
-}) {
+}: Props) {
 	return (
 		<div
 			data-slot="review-item"

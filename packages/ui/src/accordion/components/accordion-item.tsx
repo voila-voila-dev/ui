@@ -1,10 +1,9 @@
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion";
 import { cn } from "#/lib/utils.ts";
 
-export function AccordionItem({
-	className,
-	...props
-}: AccordionPrimitive.Item.Props) {
+interface Props extends AccordionPrimitive.Item.Props {}
+
+export function AccordionItem({ className, ...props }: Props) {
 	return (
 		<AccordionPrimitive.Item
 			data-slot="accordion-item"

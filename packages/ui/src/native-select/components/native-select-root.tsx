@@ -2,7 +2,7 @@ import { CaretDownIcon } from "@phosphor-icons/react";
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export type NativeSelectProps = Omit<React.ComponentProps<"select">, "size"> & {
+interface Props extends Omit<React.ComponentProps<"select">, "size"> {
 	size?: "sm" | "default";
 	/**
 	 * Classes for the wrapper `<div>` that hosts the caret overlay. Use this for
@@ -10,14 +10,14 @@ export type NativeSelectProps = Omit<React.ComponentProps<"select">, "size"> & {
 	 * `<select>` itself, matching the rest of the kit's form controls.
 	 */
 	wrapperClassName?: string;
-};
+}
 
 export function NativeSelectRoot({
 	className,
 	wrapperClassName,
 	size = "default",
 	...props
-}: NativeSelectProps) {
+}: Props) {
 	return (
 		<div
 			className={cn(

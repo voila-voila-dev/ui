@@ -2,11 +2,11 @@ import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
 
 import { cn } from "#/lib/utils.ts";
 
-export type SwitchProps = SwitchPrimitive.Root.Props & {
+interface Props extends SwitchPrimitive.Root.Props {
 	size?: "sm" | "default";
-};
+}
 
-export function Switch({ className, size = "default", ...props }: SwitchProps) {
+export function Switch({ className, size = "default", ...props }: Props) {
 	return (
 		<SwitchPrimitive.Root
 			data-slot="switch"

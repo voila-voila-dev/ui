@@ -1,11 +1,9 @@
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion";
 import { cn, proseLinkClassName } from "#/lib/utils.ts";
 
-export function AccordionContent({
-	className,
-	children,
-	...props
-}: AccordionPrimitive.Panel.Props) {
+interface Props extends AccordionPrimitive.Panel.Props {}
+
+export function AccordionContent({ className, children, ...props }: Props) {
 	return (
 		<AccordionPrimitive.Panel
 			data-slot="accordion-content"

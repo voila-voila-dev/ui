@@ -1,11 +1,9 @@
 import * as React from "react";
-import {
-	AlertDialog,
-	type AlertDialogContentSize,
-} from "#/alert-dialog/components/alert-dialog.tsx";
-import { Button, type ButtonVariant } from "#/button/components/button.tsx";
+import { AlertDialog } from "#/alert-dialog/components/alert-dialog.tsx";
+import { Button } from "#/button/components/button.tsx";
+import type { ButtonVariant } from "#/button/components/button-variants.ts";
 
-export type ConfirmDialogProps = {
+interface Props {
 	/**
 	 * Element rendered as the dialog trigger, carrying its own label, e.g.
 	 * `<Button variant="destructive">Delete</Button>`. Omit it to drive the
@@ -18,7 +16,7 @@ export type ConfirmDialogProps = {
 	description?: React.ReactNode;
 	/** Icon slot rendered in `AlertDialog.Media` beside the title. */
 	media?: React.ReactNode;
-	size?: AlertDialogContentSize;
+	size?: "default" | "sm";
 	// English defaults to match the kit's other built-in labels; pass localized
 	// strings from the app (e.g. paraglide messages).
 	confirmLabel?: React.ReactNode;
@@ -35,7 +33,7 @@ export type ConfirmDialogProps = {
 	onConfirm?: () => undefined | Promise<unknown>;
 	/** Called when the cancel button is clicked (not on Escape/backdrop). */
 	onCancel?: () => void;
-};
+}
 
 export function ConfirmDialog({
 	trigger,
@@ -50,7 +48,7 @@ export function ConfirmDialog({
 	variant = "default",
 	onConfirm,
 	onCancel,
-}: ConfirmDialogProps) {
+}: Props) {
 	const [uncontrolledOpen, setUncontrolledOpen] = React.useState(false);
 	const [pending, setPending] = React.useState(false);
 	const open = controlledOpen ?? uncontrolledOpen;

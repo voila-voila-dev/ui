@@ -1,10 +1,8 @@
 import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { cn } from "#/lib/utils.ts";
 
-export function SelectLabel({
-	className,
-	...props
-}: SelectPrimitive.GroupLabel.Props) {
+interface Props extends SelectPrimitive.GroupLabel.Props {}
+export function SelectLabel({ className, ...props }: Props) {
 	return (
 		<SelectPrimitive.GroupLabel
 			data-slot="select-label"

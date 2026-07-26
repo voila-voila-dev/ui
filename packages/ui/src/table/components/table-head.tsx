@@ -2,7 +2,8 @@ import type * as React from "react";
 
 import { cn } from "#/lib/utils.ts";
 
-export function TableHead({ className, ...props }: React.ComponentProps<"th">) {
+interface Props extends React.ComponentProps<"th"> {}
+export function TableHead({ className, ...props }: Props) {
 	return (
 		<th
 			data-slot="table-head"

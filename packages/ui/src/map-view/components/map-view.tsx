@@ -19,7 +19,7 @@ export type MapBounds = {
  * cartography). The URL constants live in `map-view-implementation.tsx` with
  * the rest of the runtime map code.
  */
-export type MapViewProps = Omit<ComponentProps<"div">, "children"> & {
+interface Props extends Omit<ComponentProps<"div">, "children"> {
 	/**
 	 * Vector style URL. Read once, on mount; defaults to the OpenFreeMap
 	 * "liberty" basemap — or its "dark" variant while inside a `.dark` subtree,
@@ -57,7 +57,7 @@ export type MapViewProps = Omit<ComponentProps<"div">, "children"> & {
 	 * package is translation-agnostic, so consumers pass their own localized node.
 	 */
 	readonly unavailableFallback?: ReactNode;
-};
+}
 
 // `maplibre-gl` weighs ~270 kB gzipped, so the rendering body lives in its own
 // module and only downloads once a map actually mounts. Type-only imports of
@@ -81,7 +81,7 @@ const MapViewImplementation = lazy(() =>
  * with the same frame pulses in place, matching the tile-streaming placeholder
  * the loaded map shows next.
  */
-export function MapView({ className, ...props }: MapViewProps) {
+export function MapView({ className, ...props }: Props) {
 	return (
 		<Suspense
 			fallback={

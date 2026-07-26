@@ -71,6 +71,17 @@
 					"tsdk": "node_modules/typescript-editor-lsp/lib"
 				}
 			}
+		},
+		"vscode-css-language-server": {
+			"settings": {
+				"css": {
+					"lint": {
+						// Tailwind v4 at-rules (@theme, @utility, @source, @custom-variant,
+						// @plugin) are unknown to the plain CSS server.
+						"unknownAtRules": "ignore"
+					}
+				}
+			}
 		}
 	}
 }

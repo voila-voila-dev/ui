@@ -4,6 +4,11 @@ import { ComboboxTrigger } from "#/combobox/components/combobox-trigger.tsx";
 import { InputGroup } from "#/input-group/components/input-group.tsx";
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends ComboboxPrimitive.Input.Props {
+	showTrigger?: boolean;
+	showClear?: boolean;
+}
+
 export function ComboboxInput({
 	className,
 	children,
@@ -11,10 +16,7 @@ export function ComboboxInput({
 	showTrigger = true,
 	showClear = false,
 	...props
-}: ComboboxPrimitive.Input.Props & {
-	showTrigger?: boolean;
-	showClear?: boolean;
-}) {
+}: Props) {
 	return (
 		<InputGroup.Root className={cn("w-auto", className)}>
 			<ComboboxPrimitive.Input

@@ -3,8 +3,7 @@ import { StepTracksToneContext } from "#/landing/components/step-tracks/context/
 import { toneConnectorLineClass } from "#/landing/lib/tones.ts";
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"div">;
-
+interface Props extends React.ComponentProps<"div"> {}
 /** Stepper wrapper — owns the vertical connector line behind the icon tiles. */
 export function StepTracksSteps({ className, children, ...props }: Props) {
 	const tone = useContext(StepTracksToneContext);

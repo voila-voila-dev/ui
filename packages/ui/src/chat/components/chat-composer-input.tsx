@@ -1,20 +1,9 @@
 import { PaperPlaneRightIcon } from "@phosphor-icons/react";
-import type * as React from "react";
 import { Button } from "#/button/components/button.tsx";
+import { isSubmitKey } from "#/chat/lib/is-submit-key.ts";
 import { Spinner } from "#/spinner/components/spinner.tsx";
 import { Textarea } from "#/textarea/components/textarea.tsx";
 
-function isSubmitKey(
-	keyEvent: React.KeyboardEvent<HTMLTextAreaElement>,
-	submitOnEnter: boolean,
-): boolean {
-	if (keyEvent.key !== "Enter" || keyEvent.nativeEvent.isComposing) {
-		return false;
-	}
-	const withModifier = keyEvent.metaKey || keyEvent.ctrlKey;
-	const plainEnterSends = submitOnEnter && !keyEvent.shiftKey;
-	return withModifier || plainEnterSends;
-}
 interface Props {
 	value: string;
 	onValueChange: (value: string) => void;

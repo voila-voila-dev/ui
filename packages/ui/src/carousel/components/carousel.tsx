@@ -5,9 +5,6 @@ import { CarouselNext } from "#/carousel/components/carousel-next.tsx";
 import { CarouselPrevious } from "#/carousel/components/carousel-previous.tsx";
 import { CarouselRoot } from "#/carousel/components/carousel-root.tsx";
 
-/**
- * The Carousel parts as one namespace.
- */
 export const Carousel = {
 	Root: CarouselRoot,
 	Content: CarouselContent,
@@ -16,10 +13,3 @@ export const Carousel = {
 	Next: CarouselNext,
 	Previous: CarouselPrevious,
 };
-
-export {
-	type CarouselApi,
-	type CarouselOptions,
-	type CarouselPlugin,
-	useCarousel,
-} from "#/carousel/context/carousel-context.tsx";

@@ -2,10 +2,8 @@ import type * as React from "react";
 import { DropdownMenu } from "#/dropdown-menu/components/dropdown-menu.tsx";
 import { cn } from "#/lib/utils.ts";
 
-export function MenubarTrigger({
-	className,
-	...props
-}: React.ComponentProps<typeof DropdownMenu.Trigger>) {
+interface Props extends React.ComponentProps<typeof DropdownMenu.Trigger> {}
+export function MenubarTrigger({ className, ...props }: Props) {
 	return (
 		<DropdownMenu.Trigger
 			data-slot="menubar-trigger"

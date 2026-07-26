@@ -1,9 +1,8 @@
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 
-export function TooltipProvider({
-	delay = 0,
-	...props
-}: TooltipPrimitive.Provider.Props) {
+interface Props extends TooltipPrimitive.Provider.Props {}
+
+export function TooltipProvider({ delay = 0, ...props }: Props) {
 	return (
 		<TooltipPrimitive.Provider
 			data-slot="tooltip-provider"

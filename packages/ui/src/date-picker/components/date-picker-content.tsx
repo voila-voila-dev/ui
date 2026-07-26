@@ -1,7 +1,11 @@
 import type * as React from "react";
 import { Popover } from "#/popover/components/popover.tsx";
 
-export function DatePickerContent({ children }: { children: React.ReactNode }) {
+interface Props {
+	children: React.ReactNode;
+}
+
+export function DatePickerContent({ children }: Props) {
 	return (
 		<Popover.Content
 			data-slot="date-picker-content"

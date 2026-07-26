@@ -3,15 +3,13 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 import { useStepperContext } from "#/stepper/context/stepper-context.tsx";
 
+interface Props extends React.ComponentProps<"div"> {}
 /**
  * Connecting line to the next step. Horizontal: a flexible rule filling the
  * gap between items. Vertical: an absolute line dropping from the indicator,
  * sized by the item's bottom padding.
  */
-export function StepperSeparator({
-	className,
-	...props
-}: React.ComponentProps<"div">) {
+export function StepperSeparator({ className, ...props }: Props) {
 	const { orientation } = useStepperContext("Stepper.Separator");
 	return (
 		<div

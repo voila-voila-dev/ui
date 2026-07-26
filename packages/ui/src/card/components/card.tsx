@@ -6,8 +6,6 @@ import { CardHeader } from "#/card/components/card-header.tsx";
 import { CardRoot } from "#/card/components/card-root.tsx";
 import { CardTitle } from "#/card/components/card-title.tsx";
 
-export type { CardSize } from "#/card/components/card-root.tsx";
-
 export const Card = {
 	Root: CardRoot,
 	Action: CardAction,

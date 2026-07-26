@@ -3,12 +3,6 @@ import { cva, type VariantProps } from "#/lib/cva.ts";
 export const buttonVariants = cva({
 	base: "group/button inline-flex shrink-0 cursor-pointer items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
 	variants: {
-		// Solid variants (default/primary/brand/highlight) only hover when
-		// rendered as an anchor ([a]:hover) - a plain <button> is usually the
-		// page's primary action and gets its feedback from active:translate-y-px
-		// instead, so it stays inert under the cursor. The neutral/utility roles
-		// (secondary/outline/ghost/destructive/link) hover unconditionally.
-		// Mirrors the same split in `badgeVariants`.
 		variant: {
 			default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
 			primary: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
@@ -38,9 +32,6 @@ export const buttonVariants = cva({
 				"size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
 			"icon-lg": "size-9",
 		},
-		// Corner shape. `default` keeps the size-driven radius; `pill` forces a
-		// fully-rounded button (used by the storefront CTAs). Listed last so its
-		// rounded-full wins tailwind-merge over the size radii above.
 		shape: {
 			default: "",
 			pill: "rounded-full",

@@ -6,6 +6,13 @@ import { Badge } from "#/badge/components/badge.tsx";
 import type { FilterLabels } from "#/filter/types.ts";
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends React.ComponentProps<"button"> {
+	/** Current search text, or the placeholder when nothing is searched yet. */
+	readonly summary?: string;
+	readonly activeCount: number;
+	readonly labels: FilterLabels;
+}
+
 /**
  * The one control a filtered list shows at rest: a search-field-shaped button.
  * It reads as a search box because searching is what people come to a list to
@@ -18,12 +25,7 @@ export function FilterTrigger({
 	labels,
 	className,
 	...props
-}: React.ComponentProps<"button"> & {
-	/** Current search text, or the placeholder when nothing is searched yet. */
-	readonly summary?: string;
-	readonly activeCount: number;
-	readonly labels: FilterLabels;
-}) {
+}: Props) {
 	return (
 		<button
 			type="button"

@@ -1,8 +1,7 @@
 import type * as React from "react";
 import { Shortcut } from "#/shortcut/components/shortcut.tsx";
 
-export function ContextMenuShortcut({
-	...props
-}: React.ComponentProps<typeof Shortcut>) {
+interface Props extends React.ComponentProps<typeof Shortcut> {}
+export function ContextMenuShortcut({ ...props }: Props) {
 	return <Shortcut data-slot="context-menu-shortcut" {...props} />;
 }

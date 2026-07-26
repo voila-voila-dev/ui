@@ -2,7 +2,8 @@ import type * as React from "react";
 
 import { cn } from "#/lib/utils.ts";
 
-export function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
+interface Props extends React.ComponentProps<"tr"> {}
+export function TableRow({ className, ...props }: Props) {
 	return (
 		<tr
 			data-slot="table-row"

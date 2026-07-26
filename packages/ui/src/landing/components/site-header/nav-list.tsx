@@ -1,7 +1,6 @@
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"ul">;
-
+interface Props extends React.ComponentProps<"ul"> {}
 export function SiteHeaderNavList({ className, ...props }: Props) {
 	return (
 		<ul

@@ -7,6 +7,15 @@ import {
 	starSizeClasses,
 } from "#/rating/components/rating-stars.ts";
 
+interface Props extends Omit<React.ComponentProps<"div">, "onChange"> {
+	value: number;
+	onChange: (value: number) => void;
+	size?: RatingSize;
+	max?: number;
+	disabled?: boolean;
+	name?: string;
+}
+
 /**
  * Interactive star picker. Controlled via `value` / `onChange`; hovering
  * previews the would-be selection. Keyboard accessible through a radiogroup of
@@ -21,14 +30,7 @@ export function RatingInput({
 	name,
 	className,
 	...props
-}: Omit<React.ComponentProps<"div">, "onChange"> & {
-	value: number;
-	onChange: (value: number) => void;
-	size?: RatingSize;
-	max?: number;
-	disabled?: boolean;
-	name?: string;
-}) {
+}: Props) {
 	const [hovered, setHovered] = React.useState<number | null>(null);
 	const active = hovered ?? value;
 

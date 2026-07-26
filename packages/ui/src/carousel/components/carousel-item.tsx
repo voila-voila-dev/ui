@@ -1,11 +1,9 @@
 import type * as React from "react";
-import { useCarousel } from "#/carousel/context/carousel-context.tsx";
+import { useCarousel } from "#/carousel/hooks/use-carousel.ts";
 import { cn } from "#/lib/utils.ts";
 
-export function CarouselItem({
-	className,
-	...props
-}: React.ComponentProps<"div">) {
+interface Props extends React.ComponentProps<"div"> {}
+export function CarouselItem({ className, ...props }: Props) {
 	const { orientation } = useCarousel();
 
 	return (

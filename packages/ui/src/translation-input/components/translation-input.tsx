@@ -2,17 +2,16 @@ import type * as React from "react";
 import { InputGroup } from "#/input-group/components/input-group.tsx";
 import { cn } from "#/lib/utils.ts";
 import { TranslationInputLocaleSelect } from "#/translation-input/components/translation-input-locale-select.tsx";
-import {
-	type TranslationValue,
-	writeLocale,
-} from "#/translation-input/components/translation-input-value.ts";
+import type { TranslationValue } from "#/translation-input/lib/translation-value.ts";
+import { writeLocale } from "#/translation-input/lib/write-locale.ts";
 
-export type { TranslationValue } from "#/translation-input/components/translation-input-value.ts";
+export type { TranslationValue } from "#/translation-input/lib/translation-value.ts";
 
-export type TranslationInputProps = Omit<
-	React.ComponentProps<typeof InputGroup.Input>,
-	"type" | "value" | "onChange" | "onValueChange"
-> & {
+interface Props
+	extends Omit<
+		React.ComponentProps<typeof InputGroup.Input>,
+		"type" | "value" | "onChange" | "onValueChange"
+	> {
 	/** The whole per-locale record; only the active locale's string is shown. */
 	value: TranslationValue;
 	/** Receives the whole record with the active locale's string replaced. */
@@ -29,7 +28,7 @@ export type TranslationInputProps = Omit<
 	localeCodes?: Record<string, string>;
 	/** Wrapper class (width/layout), forwarded to the `InputGroup`. */
 	className?: string;
-};
+}
 
 /**
  * A translated text input: one field editing the active locale's string, with a
@@ -55,7 +54,7 @@ export function TranslationInput({
 	localeCodes,
 	className,
 	...props
-}: TranslationInputProps) {
+}: Props) {
 	return (
 		<InputGroup.Root
 			// The input has no intrinsic width, so under `table-layout: auto` a

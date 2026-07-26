@@ -1,11 +1,13 @@
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion";
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends AccordionPrimitive.Root.Props {}
+
 export function AccordionRoot({
 	className,
 	multiple = false,
 	...props
-}: AccordionPrimitive.Root.Props) {
+}: Props) {
 	return (
 		<AccordionPrimitive.Root
 			data-slot="accordion"

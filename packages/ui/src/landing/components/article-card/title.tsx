@@ -1,7 +1,6 @@
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"h3">;
-
+interface Props extends React.ComponentProps<"h3"> {}
 export function ArticleCardTitle({ className, ...props }: Props) {
 	return (
 		<h3

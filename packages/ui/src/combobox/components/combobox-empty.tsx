@@ -1,10 +1,8 @@
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { cn } from "#/lib/utils.ts";
 
-export function ComboboxEmpty({
-	className,
-	...props
-}: ComboboxPrimitive.Empty.Props) {
+interface Props extends ComboboxPrimitive.Empty.Props {}
+export function ComboboxEmpty({ className, ...props }: Props) {
 	return (
 		<ComboboxPrimitive.Empty
 			data-slot="combobox-empty"

@@ -1,10 +1,8 @@
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { cn } from "#/lib/utils.ts";
 
-export function ComboboxChipsInput({
-	className,
-	...props
-}: ComboboxPrimitive.Input.Props) {
+interface Props extends ComboboxPrimitive.Input.Props {}
+export function ComboboxChipsInput({ className, ...props }: Props) {
 	return (
 		<ComboboxPrimitive.Input
 			data-slot="combobox-chip-input"

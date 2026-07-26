@@ -2,8 +2,7 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { cn } from "#/lib/utils.ts";
 
-type Props = useRender.ComponentProps<"a">;
-
+interface Props extends useRender.ComponentProps<"a"> {}
 /** A column entry — the anchor comes wrapped in its own `li`. */
 export function SiteFooterColumnLink({ className, render, ...props }: Props) {
 	const anchor = useRender({

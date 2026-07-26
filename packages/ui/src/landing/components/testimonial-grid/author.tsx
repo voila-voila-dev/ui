@@ -1,7 +1,6 @@
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"figcaption">;
-
+interface Props extends React.ComponentProps<"figcaption"> {}
 export function TestimonialAuthor({ className, ...props }: Props) {
 	return (
 		<figcaption

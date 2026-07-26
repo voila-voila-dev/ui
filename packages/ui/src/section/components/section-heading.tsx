@@ -1,9 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
-export function SectionHeading({
-	className,
-	...props
-}: React.ComponentProps<"div">) {
+interface Props extends React.ComponentProps<"div"> {}
+export function SectionHeading({ className, ...props }: Props) {
 	return (
 		<div
 			data-slot="section-heading"

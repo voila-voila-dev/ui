@@ -1,5 +1,6 @@
 import * as ResizablePrimitive from "react-resizable-panels";
 
-export function ResizablePanel({ ...props }: ResizablePrimitive.PanelProps) {
+interface Props extends ResizablePrimitive.PanelProps {}
+export function ResizablePanel({ ...props }: Props) {
 	return <ResizablePrimitive.Panel data-slot="resizable-panel" {...props} />;
 }

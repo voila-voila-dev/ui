@@ -1,10 +1,8 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function BreadcrumbItem({
-	className,
-	...props
-}: React.ComponentProps<"li">) {
+interface Props extends React.ComponentProps<"li"> {}
+export function BreadcrumbItem({ className, ...props }: Props) {
 	return (
 		<li
 			data-slot="breadcrumb-item"

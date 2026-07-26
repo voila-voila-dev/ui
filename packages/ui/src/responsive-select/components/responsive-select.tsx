@@ -26,5 +26,3 @@ export const ResponsiveSelect = {
 	Label: ResponsiveSelectLabel,
 	Item: ResponsiveSelectItem,
 };
-
-export type { ResponsiveSelectRootProps } from "#/responsive-select/components/responsive-select-root.tsx";

@@ -73,7 +73,7 @@ export function RichTextEditable({
 				// `min-h-[1lh]` keeps one line of height while the box is empty: a
 				// collapsed contentEditable would let the absolutely-positioned
 				// placeholder spill over whatever follows the block.
-				`relative min-h-[1lh] w-full whitespace-pre-wrap break-words outline-none [&_a]:text-[#151b77] [&_a]:underline ${className ?? ""} ` +
+				`relative min-h-[1lh] w-full whitespace-pre-wrap break-words outline-none [&_a]:text-primary [&_a]:underline ${className ?? ""} ` +
 				(empty
 					? // `inset-x-0` matters: without horizontal offsets the pseudo-element
 						// takes its static position, which under a centred block starts at

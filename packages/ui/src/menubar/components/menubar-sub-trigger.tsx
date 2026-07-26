@@ -1,10 +1,8 @@
 import type * as React from "react";
 import { DropdownMenu } from "#/dropdown-menu/components/dropdown-menu.tsx";
 
-export function MenubarSubTrigger({
-	className,
-	...props
-}: React.ComponentProps<typeof DropdownMenu.SubTrigger>) {
+interface Props extends React.ComponentProps<typeof DropdownMenu.SubTrigger> {}
+export function MenubarSubTrigger({ className, ...props }: Props) {
 	return (
 		<DropdownMenu.SubTrigger
 			data-slot="menubar-sub-trigger"

@@ -11,7 +11,7 @@ export function EmailCardButton({ label }: Props) {
 	}
 	return (
 		<span
-			className="mt-1 inline-block self-start rounded-lg px-[18px] py-[10px] font-semibold text-[14px] text-white"
+			className="mt-1 inline-block self-start rounded-lg px-[18px] py-[10px] font-semibold text-[14px] text-primary-foreground"
 			style={{ backgroundColor: EMAIL_COLOR.brand }}
 		>
 			{label}

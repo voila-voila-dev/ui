@@ -6,8 +6,7 @@ import {
 import { toneTextClass } from "#/landing/lib/tones.ts";
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"p">;
-
+interface Props extends React.ComponentProps<"p"> {}
 export function ComparisonPanelTitle({ className, ...props }: Props) {
 	const tone = useContext(ComparisonToneContext);
 	const variant = useContext(ComparisonPanelContext);

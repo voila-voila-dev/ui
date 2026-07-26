@@ -1,8 +1,7 @@
 import { Container } from "#/landing/components/container.tsx";
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"footer">;
-
+interface Props extends React.ComponentProps<"footer"> {}
 /**
  * Marketing site footer. Compose: Root > Columns (Brand > BrandDescription +
  * SocialLinks > SocialLink…, Column > ColumnTitle + ColumnList > ColumnLink…) +

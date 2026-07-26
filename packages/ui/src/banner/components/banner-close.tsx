@@ -2,10 +2,9 @@ import { XIcon } from "@phosphor-icons/react";
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function BannerClose({
-	className,
-	...props
-}: React.ComponentProps<"button">) {
+interface Props extends React.ComponentProps<"button"> {}
+
+export function BannerClose({ className, ...props }: Props) {
 	return (
 		<button
 			type="button"

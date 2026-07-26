@@ -1,8 +1,8 @@
-import aubergineCss from "@voila.dev/ui/styles/themes/aubergine.css?url";
 import emeraldCss from "@voila.dev/ui/styles/themes/emerald.css?url";
 import indigoCss from "@voila.dev/ui/styles/themes/indigo.css?url";
-import oceanCss from "@voila.dev/ui/styles/themes/ocean.css?url";
+import irisCss from "@voila.dev/ui/styles/themes/iris.css?url";
 import oliveCss from "@voila.dev/ui/styles/themes/olive.css?url";
+import sandCss from "@voila.dev/ui/styles/themes/sand.css?url";
 
 /**
  * The themes shipped by @voila.dev/ui, offered as a toolbar switch so every story
@@ -15,11 +15,11 @@ import oliveCss from "@voila.dev/ui/styles/themes/olive.css?url";
  */
 export const PALETTES = [
 	{ id: "default", title: "Default (black & white)" },
-	{ id: "indigo", title: "Indigo (Linear, Stripe)", href: indigoCss },
-	{ id: "ocean", title: "Ocean (Intercom, Atlassian)", href: oceanCss },
-	{ id: "emerald", title: "Emerald (Supabase, Shopify)", href: emeraldCss },
-	{ id: "olive", title: "Olive (Notion, Craft)", href: oliveCss },
-	{ id: "aubergine", title: "Aubergine (Slack)", href: aubergineCss },
+	{ id: "indigo", title: "Indigo (Linear)", href: indigoCss },
+	{ id: "iris", title: "Iris (Stripe)", href: irisCss },
+	{ id: "sand", title: "Sand (Notion)", href: sandCss },
+	{ id: "emerald", title: "Emerald (Supabase)", href: emeraldCss },
+	{ id: "olive", title: "Olive (fintech)", href: oliveCss },
 ] as const;
 
 const PALETTE_LINK_ID = "ui-palette-stylesheet";

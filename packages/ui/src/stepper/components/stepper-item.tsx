@@ -7,13 +7,11 @@ import {
 	type StepperStepState,
 } from "#/stepper/context/stepper-item-context.tsx";
 
-export function StepperItem({
-	className,
-	step,
-	...props
-}: React.ComponentProps<"li"> & {
+interface Props extends React.ComponentProps<"li"> {
 	step: number;
-}) {
+}
+
+export function StepperItem({ className, step, ...props }: Props) {
 	const { value, orientation } = useStepperContext("Stepper.Item");
 	const state: StepperStepState =
 		step < value ? "completed" : step === value ? "active" : "inactive";

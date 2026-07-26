@@ -3,14 +3,16 @@ import { CaretRightIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 import { menuSubTriggerVariants } from "#/menu/components/menu-variants.ts";
 
+interface Props extends ContextMenuPrimitive.SubmenuTrigger.Props {
+	inset?: boolean;
+}
+
 export function ContextMenuSubTrigger({
 	className,
 	inset,
 	children,
 	...props
-}: ContextMenuPrimitive.SubmenuTrigger.Props & {
-	inset?: boolean;
-}) {
+}: Props) {
 	return (
 		<ContextMenuPrimitive.SubmenuTrigger
 			data-slot="context-menu-sub-trigger"

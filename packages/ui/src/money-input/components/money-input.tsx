@@ -2,10 +2,11 @@ import type * as React from "react";
 import { InputGroup } from "#/input-group/components/input-group.tsx";
 import { cn } from "#/lib/utils.ts";
 
-export type MoneyInputProps = Omit<
-	React.ComponentProps<typeof InputGroup.Input>,
-	"type" | "value" | "onChange"
-> & {
+interface Props
+	extends Omit<
+		React.ComponentProps<typeof InputGroup.Input>,
+		"type" | "value" | "onChange"
+	> {
 	/** Raw amount as typed (e.g. `"120"` or `"120.50"`). */
 	value: string;
 	/** Receives the raw amount string on every change. */
@@ -26,7 +27,7 @@ export type MoneyInputProps = Omit<
 	currencyLabel: string;
 	/** Wrapper class (width/layout), forwarded to the `InputGroup`. */
 	className?: string;
-};
+}
 
 /**
  * A money amount input: a numeric field with a trailing currency select. The
@@ -46,7 +47,7 @@ export function MoneyInput({
 	currencyLabel,
 	className,
 	...props
-}: MoneyInputProps) {
+}: Props) {
 	return (
 		<InputGroup.Root
 			className={cn(

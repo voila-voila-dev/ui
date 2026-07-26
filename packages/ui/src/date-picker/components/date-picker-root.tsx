@@ -5,10 +5,17 @@ import {
 	formatDateLabel,
 } from "#/date-picker/components/date-picker-format.ts";
 import { DatePickerHiddenInput } from "#/date-picker/components/date-picker-hidden-input.tsx";
-import type { DatePickerBaseProps } from "#/date-picker/components/date-picker-props.ts";
+import type { DatePickerBase } from "#/date-picker/components/date-picker-props.ts";
 import { DatePickerTrigger } from "#/date-picker/components/date-picker-trigger.tsx";
 import { usePickerState } from "#/hooks/use-picker-state.ts";
 import { Popover } from "#/popover/components/popover.tsx";
+
+interface Props extends DatePickerBase {
+	/** Controlled value; pass `null` for a controlled empty selection. */
+	value?: Date | null;
+	defaultValue?: Date;
+	onValueChange?: (date: Date | null) => void;
+}
 
 export function DatePickerRoot({
 	value: controlledValue,
@@ -28,12 +35,7 @@ export function DatePickerRoot({
 	defaultOpen,
 	open: controlledOpen,
 	onOpenChange,
-}: DatePickerBaseProps & {
-	/** Controlled value; pass `null` for a controlled empty selection. */
-	value?: Date | null;
-	defaultValue?: Date;
-	onValueChange?: (date: Date | null) => void;
-}) {
+}: Props) {
 	const { isControlled, value, setUncontrolledValue, open, setOpen } =
 		usePickerState<Date>({
 			value: controlledValue,

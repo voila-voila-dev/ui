@@ -1,10 +1,8 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function PaginationRoot({
-	className,
-	...props
-}: React.ComponentProps<"nav">) {
+interface Props extends React.ComponentProps<"nav"> {}
+export function PaginationRoot({ className, ...props }: Props) {
 	return (
 		<nav
 			// Sentence case to match the kit's other nav labels; spread-overridable

@@ -3,7 +3,8 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 import { Popover } from "#/popover/components/popover.tsx";
 
-export type NestedTableInputProps = {
+interface Props
+	extends Omit<React.ComponentProps<"button">, "children" | "title"> {
 	/**
 	 * What the closed cell reads, e.g. "2 paliers" or an em-dash when empty.
 	 * The cell is a summary; the detail lives in the popover.
@@ -22,7 +23,7 @@ export type NestedTableInputProps = {
 	/** Width of the popover; the nested table sets its own column widths. */
 	contentClassName?: string;
 	className?: string;
-} & Omit<React.ComponentProps<"button">, "children" | "title">;
+}
 
 /**
  * A cell whose value is a whole sub-table rather than a scalar: it renders a
@@ -44,7 +45,7 @@ export function NestedTableInput({
 	contentClassName,
 	className,
 	...props
-}: NestedTableInputProps) {
+}: Props) {
 	return (
 		<Popover.Root>
 			<Popover.Trigger

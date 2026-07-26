@@ -1,14 +1,10 @@
 import { cn } from "#/lib/utils.ts";
 
-export type EmptyProps = React.ComponentProps<"div"> & {
+interface Props extends React.ComponentProps<"div"> {
 	bordered?: boolean;
-};
+}
 
-export function EmptyRoot({
-	className,
-	bordered = false,
-	...props
-}: EmptyProps) {
+export function EmptyRoot({ className, bordered = false, ...props }: Props) {
 	return (
 		<div
 			data-slot="empty"

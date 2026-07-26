@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { badgeColors } from "#/badge/components/badge.tsx";
+import { badgeColors } from "#/badge/components/badge-variants.ts";
 import { ColorPicker } from "#/color-picker/components/color-picker.tsx";
 
 beforeEach(() => {

@@ -1,11 +1,11 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function ChatMessageGroup({
-	align,
-	className,
-	...props
-}: React.ComponentProps<"div"> & { align: "start" | "end" }) {
+interface Props extends React.ComponentProps<"div"> {
+	align: "start" | "end";
+}
+
+export function ChatMessageGroup({ align, className, ...props }: Props) {
 	return (
 		<div
 			data-slot="chat-message-group"

@@ -1,12 +1,11 @@
 import * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function KbdGroup({
-	className,
-	separator,
-	children,
-	...props
-}: React.ComponentProps<"kbd"> & { separator?: React.ReactNode }) {
+interface Props extends React.ComponentProps<"kbd"> {
+	separator?: React.ReactNode;
+}
+
+export function KbdGroup({ className, separator, children, ...props }: Props) {
 	return (
 		<kbd
 			data-slot="kbd-group"

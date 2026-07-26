@@ -18,10 +18,12 @@ import appCss from "@/styles/docs.css?url";
  * class the whole token system keys off, and the stored theme by injecting its
  * stylesheet, so a hard reload flashes neither light mode nor the default
  * palette. The hrefs are build-time constants, and the palette id is only ever
- * used as an object key, so nothing here interpolates untrusted input.
+ * used as an object key, so nothing here interpolates untrusted input. An id
+ * that no longer ships — a theme retired since the visitor last chose one —
+ * falls back to the default instead of leaving the menu on a dead entry.
  */
 const themeScript = `(()=>{try{var t=localStorage.getItem("theme");document.documentElement.classList.toggle("dark",t!=="light")}catch(e){document.documentElement.classList.add("dark")}
-try{var h=${JSON.stringify(PALETTE_HREFS)},p=localStorage.getItem(${JSON.stringify(PALETTE_STORAGE_KEY)});if(p){document.documentElement.dataset.palette=p;if(h[p]){var l=document.createElement("link");l.id=${JSON.stringify(PALETTE_LINK_ID)};l.rel="stylesheet";l.href=h[p];document.head.appendChild(l)}}}catch(e){}})()`;
+try{var h=${JSON.stringify(PALETTE_HREFS)},p=localStorage.getItem(${JSON.stringify(PALETTE_STORAGE_KEY)});if(p&&(p==="default"||h[p])){document.documentElement.dataset.palette=p;if(h[p]){var l=document.createElement("link");l.id=${JSON.stringify(PALETTE_LINK_ID)};l.rel="stylesheet";l.href=h[p];document.head.appendChild(l)}}}catch(e){}})()`;
 
 export const Route = createRootRoute({
 	head: () => ({

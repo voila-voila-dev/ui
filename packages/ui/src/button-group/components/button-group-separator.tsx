@@ -3,17 +3,16 @@ import { ButtonGroupContext } from "#/button-group/context/button-group-context.
 import { cn } from "#/lib/utils.ts";
 import { Separator } from "#/separator/components/separator.tsx";
 
+interface Props extends React.ComponentProps<typeof Separator> {}
 export function ButtonGroupSeparator({
 	className,
 	orientation,
 	...props
-}: React.ComponentProps<typeof Separator>) {
+}: Props) {
 	const groupOrientation = React.useContext(ButtonGroupContext);
 	return (
 		<Separator
 			data-slot="button-group-separator"
-			// A horizontal group needs a vertical rule between members, and
-			// vice versa - derived from the group so consumers never pass it.
 			orientation={
 				orientation ??
 				(groupOrientation === "horizontal" ? "vertical" : "horizontal")

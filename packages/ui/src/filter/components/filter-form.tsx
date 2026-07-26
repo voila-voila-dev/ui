@@ -8,6 +8,14 @@ import type {
 } from "#/filter/types.ts";
 import { Separator } from "#/separator/components/separator.tsx";
 
+interface Props {
+	readonly definitions: ReadonlyArray<FilterDefinition>;
+	readonly values: FilterValues;
+	readonly onValuesChange: (values: FilterValues) => void;
+	readonly labels: FilterLabels;
+	readonly locale: string;
+}
+
 /**
  * The editor: every declared filter, in declaration order, separated so a long
  * panel stays scannable. It edits a whole `FilterValues` record — clearing a
@@ -19,13 +27,7 @@ export function FilterForm({
 	onValuesChange,
 	labels,
 	locale,
-}: {
-	readonly definitions: ReadonlyArray<FilterDefinition>;
-	readonly values: FilterValues;
-	readonly onValuesChange: (values: FilterValues) => void;
-	readonly labels: FilterLabels;
-	readonly locale: string;
-}) {
+}: Props) {
 	return (
 		<div className="flex flex-col gap-5" data-slot="filter-form">
 			{definitions.map((definition, index) => (

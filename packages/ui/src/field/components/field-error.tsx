@@ -1,14 +1,11 @@
 import { useMemo } from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function FieldError({
-	className,
-	children,
-	errors,
-	...props
-}: React.ComponentProps<"div"> & {
+interface Props extends React.ComponentProps<"div"> {
 	errors?: Array<{ message?: string } | undefined>;
-}) {
+}
+
+export function FieldError({ className, children, errors, ...props }: Props) {
 	const content = useMemo(() => {
 		if (children) {
 			return children;

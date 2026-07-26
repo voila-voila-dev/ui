@@ -17,7 +17,7 @@ export type GlobeMarker = {
  * overridable via `styleUrl`. The differences are the projection — MapLibre's
  * native globe — plus an optional auto-rotation and declarative markers.
  */
-export type GlobeViewProps = Omit<ComponentProps<"div">, "children"> & {
+interface Props extends Omit<ComponentProps<"div">, "children"> {
 	/**
 	 * Vector style URL. Read once, on mount; defaults to the OpenFreeMap
 	 * "liberty" basemap — or its "dark" variant while inside a `.dark` subtree,
@@ -57,7 +57,7 @@ export type GlobeViewProps = Omit<ComponentProps<"div">, "children"> & {
 	 * outline drawn in `--muted`.
 	 */
 	readonly unavailableFallback?: ReactNode;
-};
+}
 
 // Same discipline as `MapView`: `maplibre-gl` weighs ~270 kB gzipped, so the
 // rendering body lives in its own module and only downloads once a globe
@@ -77,7 +77,7 @@ const GlobeViewImplementation = lazy(() =>
  * the globe stays transparent so the surrounding section's background shows
  * through, and the MapLibre runtime is code-split behind a pulsing skeleton.
  */
-export function GlobeView({ className, ...props }: GlobeViewProps) {
+export function GlobeView({ className, ...props }: Props) {
 	return (
 		<Suspense
 			fallback={

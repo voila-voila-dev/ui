@@ -1,15 +1,17 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends React.ComponentProps<"div"> {
+	/** Hide the bar from the `md` breakpoint up (default `true`). */
+	hideOnDesktop?: boolean;
+}
+
 export function StickyActionBar({
 	className,
 	children,
 	hideOnDesktop = true,
 	...props
-}: React.ComponentProps<"div"> & {
-	/** Hide the bar from the `md` breakpoint up (default `true`). */
-	hideOnDesktop?: boolean;
-}) {
+}: Props) {
 	return (
 		<div
 			data-slot="sticky-action-bar"

@@ -12,10 +12,11 @@ type InputChangeEvent = Parameters<
 	NonNullable<React.ComponentProps<typeof Input>["onChange"]>
 >[0];
 
-export type FormattedInputProps = Omit<
-	React.ComponentProps<typeof Input>,
-	"value" | "defaultValue" | "onValueChange" | "type"
-> & {
+interface Props
+	extends Omit<
+		React.ComponentProps<typeof Input>,
+		"value" | "defaultValue" | "onValueChange" | "type"
+	> {
 	/** Digit mask, e.g. `"### ### ### #####"` for a business id. `#` marks a digit slot. */
 	mask: string;
 	/** Raw digits (unformatted). */
@@ -24,7 +25,7 @@ export type FormattedInputProps = Omit<
 	defaultValue?: string;
 	/** Receives the raw digits whenever they change. */
 	onValueChange?: (value: string) => void;
-};
+}
 
 export function FormattedInput({
 	mask,
@@ -34,7 +35,7 @@ export function FormattedInput({
 	onChange,
 	ref,
 	...props
-}: FormattedInputProps) {
+}: Props) {
 	const maximumDigits = countDigitSlots(mask);
 	const [internalDigits, setInternalDigits] = React.useState(() =>
 		extractDigits(defaultValue ?? "", maximumDigits),

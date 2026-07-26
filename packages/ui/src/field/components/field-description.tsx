@@ -1,9 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
-export function FieldDescription({
-	className,
-	...props
-}: React.ComponentProps<"p">) {
+interface Props extends React.ComponentProps<"p"> {}
+export function FieldDescription({ className, ...props }: Props) {
 	return (
 		<p
 			data-slot="field-description"

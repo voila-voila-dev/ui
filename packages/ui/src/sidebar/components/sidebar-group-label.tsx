@@ -3,11 +3,11 @@ import { useRender } from "@base-ui/react/use-render";
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function SidebarGroupLabel({
-	className,
-	render,
-	...props
-}: useRender.ComponentProps<"div"> & React.ComponentProps<"div">) {
+interface Props
+	extends useRender.ComponentProps<"div">,
+		React.ComponentProps<"div"> {}
+
+export function SidebarGroupLabel({ className, render, ...props }: Props) {
 	return useRender({
 		defaultTagName: "div",
 		props: mergeProps<"div">(

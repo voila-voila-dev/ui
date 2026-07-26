@@ -6,14 +6,16 @@ import {
 	menuItemVariants,
 } from "#/menu/components/menu-variants.ts";
 
+interface Props extends MenuPrimitive.RadioItem.Props {
+	inset?: boolean;
+}
+
 export function DropdownMenuRadioItem({
 	className,
 	children,
 	inset,
 	...props
-}: MenuPrimitive.RadioItem.Props & {
-	inset?: boolean;
-}) {
+}: Props) {
 	return (
 		<MenuPrimitive.RadioItem
 			data-slot="dropdown-menu-radio-item"

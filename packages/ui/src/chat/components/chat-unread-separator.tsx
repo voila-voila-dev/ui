@@ -1,11 +1,7 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"div">;
-/**
- * "New messages" rule shown when opening a thread with unread messages.
- * Same anatomy as ChatDateSeparator, in the destructive accent.
- */
+interface Props extends React.ComponentProps<"div"> {}
 export function ChatUnreadSeparator({ className, children, ...props }: Props) {
 	return (
 		<div

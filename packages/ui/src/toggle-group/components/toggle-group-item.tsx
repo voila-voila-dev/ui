@@ -5,13 +5,17 @@ import { cn } from "#/lib/utils.ts";
 import { toggleVariants } from "#/toggle/components/toggle-variants.ts";
 import { ToggleGroupContext } from "#/toggle-group/context/toggle-group-context.ts";
 
+interface Props
+	extends TogglePrimitive.Props,
+		VariantProps<typeof toggleVariants> {}
+
 export function ToggleGroupItem({
 	className,
 	children,
 	variant = "default",
 	size = "default",
 	...props
-}: TogglePrimitive.Props & VariantProps<typeof toggleVariants>) {
+}: Props) {
 	const context = React.useContext(ToggleGroupContext);
 
 	return (

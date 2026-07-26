@@ -3,8 +3,7 @@ import { NumberedCardsToneContext } from "#/landing/components/numbered-cards/co
 import { toneTextClass, toneTintBackgroundClass } from "#/landing/lib/tones.ts";
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"span">;
-
+interface Props extends React.ComponentProps<"span"> {}
 export function NumberedCardIcon({ className, ...props }: Props) {
 	const tone = useContext(NumberedCardsToneContext);
 

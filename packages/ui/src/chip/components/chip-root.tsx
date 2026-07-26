@@ -5,6 +5,11 @@ import {
 } from "#/badge/components/badge-variants.ts";
 import { cn } from "#/lib/utils.ts";
 
+// `color` is declared on both `React.ComponentProps<"span">` (as `string`) and
+// `BadgeVariants` (as a palette union), so this has to stay an intersection —
+// an interface `extends` would reject the conflicting member.
+type Props = React.ComponentProps<"span"> & BadgeVariants;
+
 /**
  * Dismissible tag built on the Badge recipe: same `variant`/`color`/`size`
  * axes, plus a `ChipRemove` button for removable selections (skills catalog,
@@ -16,7 +21,7 @@ export function ChipRoot({
 	color,
 	size = "default",
 	...props
-}: React.ComponentProps<"span"> & BadgeVariants) {
+}: Props) {
 	return (
 		<span
 			data-slot="chip"

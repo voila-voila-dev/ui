@@ -1,11 +1,10 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render } from "@testing-library/react";
+import type * as React from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import {
-	Carousel,
-	type CarouselApi,
-	useCarousel,
-} from "#/carousel/components/carousel.tsx";
+import { Carousel } from "#/carousel/components/carousel.tsx";
+import type { CarouselApi } from "#/carousel/context/carousel-context.tsx";
+import { useCarousel } from "#/carousel/hooks/use-carousel.ts";
 
 const matchMediaMatches = { reducedMotion: false };
 

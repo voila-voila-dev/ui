@@ -14,19 +14,7 @@ import {
 } from "#/image-cropper/lib/image-cropper-geometry.ts";
 import { cn } from "#/lib/utils.ts";
 
-export function ImageCropperRoot({
-	aspectRatio = 1,
-	minZoom = 1,
-	maxZoom = 4,
-	accept = "image/*",
-	defaultImage,
-	crossOrigin = "anonymous",
-	disabled = false,
-	onImageChange,
-	onCropChange,
-	className,
-	children,
-}: {
+interface Props {
 	/** Width / height ratio of the crop viewport, e.g. 1 for avatars or 16 / 9 for covers. */
 	aspectRatio?: number;
 	/** Lowest zoom level; 1 means the image exactly covers the viewport. */
@@ -49,7 +37,21 @@ export function ImageCropperRoot({
 	onCropChange?: (cropArea: ImageCropperCropArea) => void;
 	className?: string;
 	children?: React.ReactNode;
-}) {
+}
+
+export function ImageCropperRoot({
+	aspectRatio = 1,
+	minZoom = 1,
+	maxZoom = 4,
+	accept = "image/*",
+	defaultImage,
+	crossOrigin = "anonymous",
+	disabled = false,
+	onImageChange,
+	onCropChange,
+	className,
+	children,
+}: Props) {
 	const fileInputRef = React.useRef<HTMLInputElement>(null);
 	const imageElementRef = React.useRef<HTMLImageElement | null>(null);
 	const ownedObjectUrlRef = React.useRef<string | null>(null);

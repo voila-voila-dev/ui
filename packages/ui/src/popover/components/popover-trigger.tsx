@@ -1,5 +1,6 @@
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
 
-export function PopoverTrigger({ ...props }: PopoverPrimitive.Trigger.Props) {
+interface Props extends PopoverPrimitive.Trigger.Props {}
+export function PopoverTrigger({ ...props }: Props) {
 	return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />;
 }

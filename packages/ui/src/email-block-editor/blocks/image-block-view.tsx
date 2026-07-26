@@ -1,10 +1,10 @@
 import type { EmailBlockComponentProps } from "#/email-block-editor/blocks/block-definitions.tsx";
-import { EMAIL_IMAGE_WIDTH_RATIO } from "#/email-block-editor/blocks/image-block.tsx";
 import { ImageDropZone } from "#/email-block-editor/blocks/image-drop-zone.tsx";
 import { PlayOverlay } from "#/email-block-editor/blocks/play-overlay.tsx";
 import type { EmailEditorImageBlock } from "#/email-block-editor/document/types.ts";
+import { EMAIL_IMAGE_WIDTH_RATIO } from "#/email-block-editor/theme.ts";
 
-type Props = EmailBlockComponentProps<EmailEditorImageBlock>;
+interface Props extends EmailBlockComponentProps<EmailEditorImageBlock> {}
 /**
  * A content image. Without a source it renders a dashed drop zone that opens a
  * file picker; the actual upload is delegated to the host through

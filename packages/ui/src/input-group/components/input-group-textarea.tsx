@@ -2,10 +2,8 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 import { Textarea } from "#/textarea/components/textarea.tsx";
 
-export function InputGroupTextarea({
-	className,
-	...props
-}: React.ComponentProps<typeof Textarea>) {
+interface Props extends React.ComponentProps<typeof Textarea> {}
+export function InputGroupTextarea({ className, ...props }: Props) {
 	return (
 		<Textarea
 			data-slot="input-group-control"

@@ -5,7 +5,7 @@ import {
 	DEFAULT_DATE_FORMAT,
 	formatDateRangeLabel,
 } from "#/date-picker/components/date-picker-format.ts";
-import type { DatePickerBaseProps } from "#/date-picker/components/date-picker-props.ts";
+import type { DatePickerBase } from "#/date-picker/components/date-picker-props.ts";
 import { DatePickerTrigger } from "#/date-picker/components/date-picker-trigger.tsx";
 import { DateRangePickerHiddenInputs } from "#/date-picker/components/date-range-picker-hidden-inputs.tsx";
 import { usePickerState } from "#/hooks/use-picker-state.ts";
@@ -19,6 +19,13 @@ function isRangeSelectionComplete(range: DateRange | undefined): boolean {
 		return false;
 	}
 	return range.from.getTime() !== range.to.getTime();
+}
+
+interface Props extends DatePickerBase {
+	/** Controlled value; pass `null` for a controlled empty selection. */
+	value?: DateRange | null;
+	defaultValue?: DateRange;
+	onValueChange?: (range: DateRange | null) => void;
 }
 
 export function DateRangePicker({
@@ -39,12 +46,7 @@ export function DateRangePicker({
 	defaultOpen,
 	open: controlledOpen,
 	onOpenChange,
-}: DatePickerBaseProps & {
-	/** Controlled value; pass `null` for a controlled empty selection. */
-	value?: DateRange | null;
-	defaultValue?: DateRange;
-	onValueChange?: (range: DateRange | null) => void;
-}) {
+}: Props) {
 	const { isControlled, value, setUncontrolledValue, open, setOpen } =
 		usePickerState<DateRange>({
 			value: controlledValue,

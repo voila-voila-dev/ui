@@ -1,5 +1,14 @@
 import { cn } from "#/lib/utils.ts";
-import type { TranslationValue } from "#/translation-input/components/translation-input-value.ts";
+import type { TranslationValue } from "#/translation-input/lib/translation-value.ts";
+
+interface Props {
+	value: TranslationValue;
+	locale: string;
+	locales: ReadonlyArray<string>;
+	onLocaleChange: (locale: string) => void;
+	localeLabel: string;
+	localeCodes?: Record<string, string>;
+}
 
 /**
  * The trailing locale switcher. Locales that hold nothing yet are marked with
@@ -13,14 +22,7 @@ export function TranslationInputLocaleSelect({
 	onLocaleChange,
 	localeLabel,
 	localeCodes,
-}: {
-	value: TranslationValue;
-	locale: string;
-	locales: ReadonlyArray<string>;
-	onLocaleChange: (locale: string) => void;
-	localeLabel: string;
-	localeCodes?: Record<string, string>;
-}) {
+}: Props) {
 	return (
 		<select
 			data-slot="translation-input-locale"

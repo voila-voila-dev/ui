@@ -8,7 +8,7 @@ import { EMAIL_COLOR } from "#/email-block-editor/theme.ts";
 /** The author/date line, with a separator only when both are present. */
 const metaLine = (block: EmailEditorArticleBlock): string =>
 	[block.author, block.publishDate].filter((part) => part !== "").join(" · ");
-type Props = EmailBlockComponentProps<EmailEditorArticleBlock>;
+interface Props extends EmailBlockComponentProps<EmailEditorArticleBlock> {}
 /**
  * A blog post or an external resource, on the shared card shell. Field names
  * follow the real blog model, so a digest built from published posts maps

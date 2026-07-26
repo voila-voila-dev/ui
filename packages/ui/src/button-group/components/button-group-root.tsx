@@ -4,11 +4,15 @@ import { ButtonGroupContext } from "#/button-group/context/button-group-context.
 import type { VariantProps } from "#/lib/cva.ts";
 import { cn } from "#/lib/utils.ts";
 
+interface Props
+	extends React.ComponentProps<"div">,
+		VariantProps<typeof buttonGroupVariants> {}
+
 export function ButtonGroupRoot({
 	className,
 	orientation = "horizontal",
 	...props
-}: React.ComponentProps<"div"> & VariantProps<typeof buttonGroupVariants>) {
+}: Props) {
 	return (
 		<ButtonGroupContext.Provider value={orientation}>
 			<div

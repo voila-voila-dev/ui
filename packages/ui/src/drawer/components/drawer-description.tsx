@@ -2,10 +2,9 @@ import type * as React from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
 import { cn } from "#/lib/utils.ts";
 
-export function DrawerDescription({
-	className,
-	...props
-}: React.ComponentProps<typeof DrawerPrimitive.Description>) {
+interface Props
+	extends React.ComponentProps<typeof DrawerPrimitive.Description> {}
+export function DrawerDescription({ className, ...props }: Props) {
 	return (
 		<DrawerPrimitive.Description
 			data-slot="drawer-description"

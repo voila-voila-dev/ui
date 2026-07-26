@@ -2,6 +2,13 @@ import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { cn } from "#/lib/utils.ts";
 import { menuContentVariants } from "#/menu/components/menu-variants.ts";
 
+interface Props
+	extends ComboboxPrimitive.Popup.Props,
+		Pick<
+			ComboboxPrimitive.Positioner.Props,
+			"side" | "align" | "sideOffset" | "alignOffset" | "anchor"
+		> {}
+
 export function ComboboxContent({
 	className,
 	side = "bottom",
@@ -10,11 +17,7 @@ export function ComboboxContent({
 	alignOffset = 0,
 	anchor,
 	...props
-}: ComboboxPrimitive.Popup.Props &
-	Pick<
-		ComboboxPrimitive.Positioner.Props,
-		"side" | "align" | "sideOffset" | "alignOffset" | "anchor"
-	>) {
+}: Props) {
 	return (
 		<ComboboxPrimitive.Portal>
 			<ComboboxPrimitive.Positioner

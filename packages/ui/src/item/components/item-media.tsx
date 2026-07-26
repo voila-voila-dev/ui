@@ -18,12 +18,16 @@ const itemMediaVariants = cva({
 	},
 });
 
+interface Props
+	extends useRender.ComponentProps<"div">,
+		VariantProps<typeof itemMediaVariants> {}
+
 export function ItemMedia({
 	className,
 	variant = "default",
 	render,
 	...props
-}: useRender.ComponentProps<"div"> & VariantProps<typeof itemMediaVariants>) {
+}: Props) {
 	return useRender({
 		defaultTagName: "div",
 		props: mergeProps<"div">(

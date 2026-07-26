@@ -2,11 +2,8 @@ import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { CheckIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
-export function SelectItem({
-	className,
-	children,
-	...props
-}: SelectPrimitive.Item.Props) {
+interface Props extends SelectPrimitive.Item.Props {}
+export function SelectItem({ className, children, ...props }: Props) {
 	return (
 		<SelectPrimitive.Item
 			data-slot="select-item"

@@ -4,6 +4,13 @@ import { useIsMobile } from "#/hooks/use-mobile.ts";
 import { ResponsiveSheetContext } from "#/responsive-sheet/context/responsive-sheet-context.ts";
 import { Sheet } from "#/sheet/components/sheet.tsx";
 
+interface Props {
+	open?: boolean;
+	defaultOpen?: boolean;
+	onOpenChange?: (open: boolean) => void;
+	children?: React.ReactNode;
+}
+
 // The root owns the open state so it survives crossing the breakpoint while
 // open: the two halves are different component trees, so uncontrolled state
 // would reset.
@@ -12,12 +19,7 @@ export function ResponsiveSheetRoot({
 	defaultOpen = false,
 	onOpenChange,
 	children,
-}: {
-	open?: boolean;
-	defaultOpen?: boolean;
-	onOpenChange?: (open: boolean) => void;
-	children?: React.ReactNode;
-}) {
+}: Props) {
 	const isMobile = useIsMobile();
 	const [uncontrolledOpen, setUncontrolledOpen] = React.useState(defaultOpen);
 	const isOpen = open ?? uncontrolledOpen;

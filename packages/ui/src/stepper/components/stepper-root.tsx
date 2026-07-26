@@ -6,6 +6,11 @@ import {
 	type StepperOrientation,
 } from "#/stepper/context/stepper-context.tsx";
 
+interface Props extends React.ComponentProps<"ol"> {
+	value: number;
+	orientation?: StepperOrientation;
+}
+
 /**
  * Presentational progress indicator for multi-step flows (onboarding,
  * booking). `value` is the 1-based active step: steps below it render as
@@ -17,10 +22,7 @@ export function StepperRoot({
 	value,
 	orientation = "horizontal",
 	...props
-}: React.ComponentProps<"ol"> & {
-	value: number;
-	orientation?: StepperOrientation;
-}) {
+}: Props) {
 	const contextValue = React.useMemo(
 		() => ({ value, orientation }),
 		[value, orientation],

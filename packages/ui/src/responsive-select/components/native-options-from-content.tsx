@@ -1,6 +1,6 @@
 import * as React from "react";
 import { NativeSelect } from "#/native-select/components/native-select.tsx";
-import type { ItemProps } from "#/responsive-select/components/responsive-select-children.ts";
+import type { SelectItemShape } from "#/responsive-select/components/responsive-select-children.ts";
 import {
 	getElementOfType,
 	getElementsOfType,
@@ -19,7 +19,7 @@ export function NativeOptionsFromContent({ children }: Props) {
 			{React.Children.map(children, (child) => {
 				if (!React.isValidElement(child)) return null;
 				if (child.type === ResponsiveSelectItem) {
-					const props = child.props as ItemProps;
+					const props = child.props as SelectItemShape;
 					return (
 						<NativeSelect.Option value={props.value} disabled={props.disabled}>
 							{props.children}
@@ -33,7 +33,7 @@ export function NativeOptionsFromContent({ children }: Props) {
 						groupChildren,
 						ResponsiveSelectLabel,
 					);
-					const items = getElementsOfType<ItemProps>(
+					const items = getElementsOfType<SelectItemShape>(
 						groupChildren,
 						ResponsiveSelectItem,
 					);

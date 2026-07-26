@@ -20,13 +20,18 @@ const fieldVariants = cva({
 	},
 });
 
+interface Props
+	extends React.ComponentProps<"div">,
+		VariantProps<typeof fieldVariants> {
+	invalid?: boolean;
+}
+
 export function FieldRoot({
 	className,
 	orientation = "vertical",
 	invalid,
 	...props
-}: React.ComponentProps<"div"> &
-	VariantProps<typeof fieldVariants> & { invalid?: boolean }) {
+}: Props) {
 	return (
 		<div
 			role="group"

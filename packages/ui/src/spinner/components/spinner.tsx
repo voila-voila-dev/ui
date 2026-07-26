@@ -1,7 +1,8 @@
 import { SpinnerGapIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
-export function Spinner({ className, ...props }: React.ComponentProps<"svg">) {
+interface Props extends React.ComponentProps<"svg"> {}
+export function Spinner({ className, ...props }: Props) {
 	return (
 		<SpinnerGapIcon
 			data-slot="spinner"

@@ -33,12 +33,16 @@ const inputGroupAddonVariants = cva({
  * mousedown-then-click closed the native dropdown the moment it opened - the
  * locale/currency simply could not be changed with the pointer.
  */
+interface Props
+	extends React.ComponentProps<"div">,
+		VariantProps<typeof inputGroupAddonVariants> {}
+
 export function InputGroupAddon({
 	className,
 	align = "inline-start",
 	onClick,
 	...props
-}: React.ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>) {
+}: Props) {
 	return (
 		<div
 			role="group"

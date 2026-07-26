@@ -1,7 +1,8 @@
 import { Menubar as MenubarPrimitive } from "@base-ui/react/menubar";
 import { cn } from "#/lib/utils.ts";
 
-export function MenubarRoot({ className, ...props }: MenubarPrimitive.Props) {
+interface Props extends MenubarPrimitive.Props {}
+export function MenubarRoot({ className, ...props }: Props) {
 	return (
 		<MenubarPrimitive
 			data-slot="menubar"

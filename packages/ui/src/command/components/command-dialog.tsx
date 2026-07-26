@@ -2,6 +2,15 @@ import type * as React from "react";
 import { Dialog } from "#/dialog/components/dialog.tsx";
 import { cn } from "#/lib/utils.ts";
 
+interface Props
+	extends Omit<React.ComponentProps<typeof Dialog.Root>, "children"> {
+	title?: string;
+	description?: string;
+	className?: string;
+	showCloseButton?: boolean;
+	children: React.ReactNode;
+}
+
 export function CommandDialog({
 	title = "Command Palette",
 	description = "Search for a command to run...",
@@ -9,13 +18,7 @@ export function CommandDialog({
 	className,
 	showCloseButton = false,
 	...props
-}: Omit<React.ComponentProps<typeof Dialog.Root>, "children"> & {
-	title?: string;
-	description?: string;
-	className?: string;
-	showCloseButton?: boolean;
-	children: React.ReactNode;
-}) {
+}: Props) {
 	return (
 		<Dialog.Root {...props}>
 			<Dialog.Content

@@ -9,7 +9,11 @@ export function PlayOverlay() {
 			style={{ backgroundColor: EMAIL_COLOR.brand }}
 			aria-hidden
 		>
-			<PlayIcon size={24} weight="fill" color="#ffffff" />
+			<PlayIcon
+				size={24}
+				weight="fill"
+				color="var(--color-primary-foreground)"
+			/>
 		</span>
 	);
 }

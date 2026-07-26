@@ -3,14 +3,16 @@ import { XIcon } from "@phosphor-icons/react";
 import { Button } from "#/button/components/button.tsx";
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends ComboboxPrimitive.Chip.Props {
+	showRemove?: boolean;
+}
+
 export function ComboboxChip({
 	className,
 	children,
 	showRemove = true,
 	...props
-}: ComboboxPrimitive.Chip.Props & {
-	showRemove?: boolean;
-}) {
+}: Props) {
 	return (
 		<ComboboxPrimitive.Chip
 			data-slot="combobox-chip"

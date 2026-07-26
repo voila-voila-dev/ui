@@ -1,21 +1,19 @@
+import type * as React from "react";
 import { DateTimePicker } from "#/date-time-picker/components/date-time-picker.tsx";
-import type {
-	DateTimePickerProps,
-	DateTimeSharedProps,
-} from "#/date-time-picker/components/date-time-picker-props.ts";
+import type { DateTimeShared } from "#/date-time-picker/components/date-time-picker-props.ts";
 import { NativeDateTimeInput } from "#/date-time-picker/components/native-date-time-input.tsx";
 import { useIsMobile } from "#/hooks/use-mobile.ts";
 import { cn } from "#/lib/utils.ts";
 
-export type ResponsiveDateTimeInputProps = DateTimeSharedProps & {
+interface Props extends DateTimeShared {
 	/** `Intl.DateTimeFormat` options for the desktop trigger label. */
 	formatOptions?: Intl.DateTimeFormatOptions;
-	calendarProps?: DateTimePickerProps["calendarProps"];
+	calendarProps?: React.ComponentProps<typeof DateTimePicker>["calendarProps"];
 	/** Min selectable time on the native input, `HH:mm`. */
 	min?: string;
 	/** Max selectable time on the native input, `HH:mm`. */
 	max?: string;
-};
+}
 
 /**
  * The datetime equivalent of `ResponsiveSelect`: the Base UI {@link DateTimePicker}
@@ -40,7 +38,7 @@ export function ResponsiveDateTimeInput({
 	calendarProps,
 	min,
 	max,
-}: ResponsiveDateTimeInputProps) {
+}: Props) {
 	const isMobile = useIsMobile();
 
 	if (isMobile) {

@@ -1,7 +1,7 @@
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { cn } from "#/lib/utils.ts";
 
-type Props = DialogPrimitive.Backdrop.Props;
+interface Props extends DialogPrimitive.Backdrop.Props {}
 export function DialogOverlay({ className, ...props }: Props) {
 	return (
 		<DialogPrimitive.Backdrop

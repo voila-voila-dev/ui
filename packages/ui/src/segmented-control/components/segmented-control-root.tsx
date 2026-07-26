@@ -5,8 +5,9 @@ import { cn } from "#/lib/utils.ts";
 import { segmentedControlVariants } from "#/segmented-control/components/segmented-control-variants.ts";
 import { SegmentedControlContext } from "#/segmented-control/context/segmented-control-context.ts";
 
-export type SegmentedControlProps = RadioGroupPrimitive.Props &
-	VariantProps<typeof segmentedControlVariants>;
+interface Props
+	extends RadioGroupPrimitive.Props,
+		VariantProps<typeof segmentedControlVariants> {}
 
 export function SegmentedControlRoot({
 	className,
@@ -14,7 +15,7 @@ export function SegmentedControlRoot({
 	children,
 	onValueChange,
 	...props
-}: SegmentedControlProps) {
+}: Props) {
 	const rootRef = React.useRef<HTMLDivElement | null>(null);
 	const thumbRef = React.useRef<HTMLSpanElement | null>(null);
 	const hasMeasuredRef = React.useRef(false);

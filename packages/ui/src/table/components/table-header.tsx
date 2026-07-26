@@ -2,10 +2,8 @@ import type * as React from "react";
 
 import { cn } from "#/lib/utils.ts";
 
-export function TableHeader({
-	className,
-	...props
-}: React.ComponentProps<"thead">) {
+interface Props extends React.ComponentProps<"thead"> {}
+export function TableHeader({ className, ...props }: Props) {
 	return (
 		<thead
 			data-slot="table-header"

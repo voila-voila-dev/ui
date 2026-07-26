@@ -2,10 +2,8 @@ import { Command as CommandPrimitive } from "cmdk";
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function CommandGroup({
-	className,
-	...props
-}: React.ComponentProps<typeof CommandPrimitive.Group>) {
+interface Props extends React.ComponentProps<typeof CommandPrimitive.Group> {}
+export function CommandGroup({ className, ...props }: Props) {
 	return (
 		<CommandPrimitive.Group
 			data-slot="command-group"

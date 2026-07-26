@@ -10,6 +10,3 @@ export const RadioGroup = {
 	Card: RadioGroupCard,
 	Item: RadioGroupItem,
 };
-
-export type { RadioGroupCardProps } from "#/radio-group/components/radio-group-card.tsx";
-export type { RadioGroupProps } from "#/radio-group/components/radio-group-root.tsx";

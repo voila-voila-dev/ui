@@ -1,7 +1,6 @@
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"div">;
-
+interface Props extends React.ComponentProps<"div"> {}
 /** Gradient placeholder shown when the article has no cover image. */
 export function ArticleCardImageFallback({
 	className,

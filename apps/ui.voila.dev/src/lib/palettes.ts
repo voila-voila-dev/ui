@@ -1,8 +1,8 @@
-import aubergineCss from "@voila.dev/ui/styles/themes/aubergine.css?url";
 import emeraldCss from "@voila.dev/ui/styles/themes/emerald.css?url";
 import indigoCss from "@voila.dev/ui/styles/themes/indigo.css?url";
-import oceanCss from "@voila.dev/ui/styles/themes/ocean.css?url";
+import irisCss from "@voila.dev/ui/styles/themes/iris.css?url";
 import oliveCss from "@voila.dev/ui/styles/themes/olive.css?url";
+import sandCss from "@voila.dev/ui/styles/themes/sand.css?url";
 
 /**
  * The themes shipped by @voila.dev/ui, offered as a live switch.
@@ -33,37 +33,37 @@ export const PALETTES: readonly Palette[] = [
 	{
 		id: "indigo",
 		label: "Indigo",
-		hint: "Linear, Stripe",
+		hint: "Linear",
 		href: indigoCss,
-		swatch: "oklch(0.51 0.23 277)",
+		swatch: "oklch(0.567 0.159 275)",
 	},
 	{
-		id: "ocean",
-		label: "Ocean",
-		hint: "Intercom, Atlassian",
-		href: oceanCss,
-		swatch: "oklch(0.51 0.16 250)",
+		id: "iris",
+		label: "Iris",
+		hint: "Stripe",
+		href: irisCss,
+		swatch: "oklch(0.578 0.235 278)",
+	},
+	{
+		id: "sand",
+		label: "Sand",
+		hint: "Notion",
+		href: sandCss,
+		swatch: "oklch(0.555 0.16 253)",
 	},
 	{
 		id: "emerald",
 		label: "Emerald",
-		hint: "Supabase, Shopify",
+		hint: "Supabase",
 		href: emeraldCss,
-		swatch: "oklch(0.52 0.115 160)",
+		swatch: "oklch(0.55 0.115 160)",
 	},
 	{
 		id: "olive",
 		label: "Olive",
-		hint: "Notion, Craft",
+		hint: "Fintech",
 		href: oliveCss,
-		swatch: "oklch(0.47 0.075 122)",
-	},
-	{
-		id: "aubergine",
-		label: "Aubergine",
-		hint: "Slack",
-		href: aubergineCss,
-		swatch: "oklch(0.38 0.105 320)",
+		swatch: "oklch(0.53 0.05 110)",
 	},
 ];
 

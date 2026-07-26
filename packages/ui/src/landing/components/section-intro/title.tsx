@@ -1,8 +1,7 @@
 import { Heading } from "#/landing/components/heading.tsx";
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<typeof Heading>;
-
+interface Props extends React.ComponentProps<typeof Heading> {}
 export function SectionIntroTitle({ className, ...props }: Props) {
 	return (
 		<Heading

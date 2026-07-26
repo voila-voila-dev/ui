@@ -2,10 +2,8 @@ import { Command as CommandPrimitive } from "cmdk";
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function CommandRoot({
-	className,
-	...props
-}: React.ComponentProps<typeof CommandPrimitive>) {
+interface Props extends React.ComponentProps<typeof CommandPrimitive> {}
+export function CommandRoot({ className, ...props }: Props) {
 	return (
 		<CommandPrimitive
 			data-slot="command"

@@ -1,9 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
-export function EmptyTitle({
-	className,
-	...props
-}: React.ComponentProps<"h3">) {
+interface Props extends React.ComponentProps<"h3"> {}
+export function EmptyTitle({ className, ...props }: Props) {
 	return (
 		<h3
 			data-slot="empty-title"

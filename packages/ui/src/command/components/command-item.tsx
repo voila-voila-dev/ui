@@ -4,11 +4,8 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 import { menuItemVariants } from "#/menu/components/menu-variants.ts";
 
-export function CommandItem({
-	className,
-	children,
-	...props
-}: React.ComponentProps<typeof CommandPrimitive.Item>) {
+interface Props extends React.ComponentProps<typeof CommandPrimitive.Item> {}
+export function CommandItem({ className, children, ...props }: Props) {
 	return (
 		<CommandPrimitive.Item
 			data-slot="command-item"

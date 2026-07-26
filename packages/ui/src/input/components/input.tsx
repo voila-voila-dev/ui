@@ -2,7 +2,8 @@ import { Input as InputPrimitive } from "@base-ui/react/input";
 
 import { cn } from "#/lib/utils.ts";
 
-export function Input({ className, ...props }: InputPrimitive.Props) {
+interface Props extends InputPrimitive.Props {}
+export function Input({ className, ...props }: Props) {
 	return (
 		<InputPrimitive
 			data-slot="input"

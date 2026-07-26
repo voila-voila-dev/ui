@@ -17,15 +17,7 @@ const supportsScrollAnchoring = (() => {
 	}
 })();
 
-export function ChatMessageList({
-	header,
-	onFollowChange,
-	followThreshold = FOLLOW_THRESHOLD,
-	jumpToLatestLabel,
-	className,
-	children,
-	...props
-}: React.ComponentProps<"div"> & {
+interface Props extends React.ComponentProps<"div"> {
 	/** Pinned above the messages inside the scroll area (e.g. "load older"). */
 	header?: React.ReactNode;
 	/**
@@ -42,7 +34,17 @@ export function ChatMessageList({
 	 * affordance.
 	 */
 	jumpToLatestLabel?: React.ReactNode;
-}) {
+}
+
+export function ChatMessageList({
+	header,
+	onFollowChange,
+	followThreshold = FOLLOW_THRESHOLD,
+	jumpToLatestLabel,
+	className,
+	children,
+	...props
+}: Props) {
 	const scrollRef = React.useRef<HTMLDivElement>(null);
 	// Follow the bottom while the reader is there; never yank them up while they
 	// are reading history.

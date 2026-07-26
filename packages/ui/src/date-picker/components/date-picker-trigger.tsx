@@ -1,8 +1,14 @@
 import { CalendarBlankIcon } from "@phosphor-icons/react";
 import type * as React from "react";
-import { Button, type ButtonProps } from "#/button/components/button.tsx";
+import { Button } from "#/button/components/button.tsx";
 import { cn } from "#/lib/utils.ts";
 import { Popover } from "#/popover/components/popover.tsx";
+
+interface Props extends React.ComponentProps<typeof Button> {
+	empty: boolean;
+	icon?: React.ReactNode;
+	slot?: string;
+}
 
 /**
  * The shared input-look trigger for the popover pickers (DatePicker,
@@ -20,7 +26,7 @@ export function DatePickerTrigger({
 	),
 	slot = "date-picker-trigger",
 	...props
-}: ButtonProps & { empty: boolean; icon?: React.ReactNode; slot?: string }) {
+}: Props) {
 	return (
 		<Popover.Trigger
 			data-slot={slot}

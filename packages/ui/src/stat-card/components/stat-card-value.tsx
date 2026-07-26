@@ -1,9 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
-export function StatCardValue({
-	className,
-	...props
-}: React.ComponentProps<"div">) {
+interface Props extends React.ComponentProps<"div"> {}
+export function StatCardValue({ className, ...props }: Props) {
 	return (
 		<div
 			data-slot="stat-card-value"

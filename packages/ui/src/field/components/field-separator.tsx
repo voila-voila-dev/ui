@@ -1,13 +1,11 @@
 import { cn } from "#/lib/utils.ts";
 import { Separator } from "#/separator/components/separator.tsx";
 
-export function FieldSeparator({
-	children,
-	className,
-	...props
-}: React.ComponentProps<"div"> & {
+interface Props extends React.ComponentProps<"div"> {
 	children?: React.ReactNode;
-}) {
+}
+
+export function FieldSeparator({ children, className, ...props }: Props) {
 	return (
 		<div
 			data-slot="field-separator"

@@ -2,10 +2,8 @@ import { Radio as RadioPrimitive } from "@base-ui/react/radio";
 
 import { cn } from "#/lib/utils.ts";
 
-export function RadioGroupItem({
-	className,
-	...props
-}: RadioPrimitive.Root.Props) {
+interface Props extends RadioPrimitive.Root.Props {}
+export function RadioGroupItem({ className, ...props }: Props) {
 	return (
 		<RadioPrimitive.Root
 			data-slot="radio-group-item"

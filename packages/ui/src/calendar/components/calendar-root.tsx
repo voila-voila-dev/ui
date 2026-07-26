@@ -8,6 +8,7 @@ import { DayPicker, getDefaultClassNames } from "react-day-picker";
 import type { Button } from "#/button/components/button.tsx";
 import { buttonVariants } from "#/button/components/button-variants.ts";
 import { CalendarDayButton } from "#/calendar/components/calendar-day-button.tsx";
+import { weekStartFromLocale } from "#/calendar/lib/calendar-week-start.ts";
 import { cn } from "#/lib/utils.ts";
 
 // DayPicker's props are a union over `mode` (single | range | multiple); omitting a
@@ -16,29 +17,16 @@ type DistributiveOmit<T, K extends PropertyKey> = T extends unknown
 	? Omit<T, K>
 	: never;
 
-/**
- * First day of the week for a BCP-47 locale (react-day-picker's `weekStartsOn`,
- * 0 = Sunday), read from the native `Intl.Locale` week info: `en-US` → Sunday,
- * `fr-FR` → Monday. Returns undefined (react-day-picker's default) when the
- * runtime lacks the API or the locale is omitted.
- */
-function weekStartFromLocale(
-	locale: string | undefined,
-): 0 | 1 | 2 | 3 | 4 | 5 | 6 | undefined {
-	if (!locale) return undefined;
-	try {
-		const intlLocale = new Intl.Locale(locale) as Intl.Locale & {
-			getWeekInfo?: () => { firstDay: number };
-			weekInfo?: { firstDay: number };
-		};
-		const info = intlLocale.getWeekInfo?.() ?? intlLocale.weekInfo;
-		// Intl reports 1 = Monday … 7 = Sunday; map Sunday (7) to 0 for the picker.
-		if (info) return (info.firstDay % 7) as 0 | 1 | 2 | 3 | 4 | 5 | 6;
-	} catch {
-		// Older runtimes lack Intl week info; fall back to the picker default.
-	}
-	return undefined;
-}
+// Alias, not `interface … extends`: `DistributiveOmit` maps over react-day-picker's
+// union of mode props, and an interface cannot extend a mapped type.
+type Props = DistributiveOmit<
+	React.ComponentProps<typeof DayPicker>,
+	"locale"
+> & {
+	navButtonVariant?: React.ComponentProps<typeof Button>["variant"];
+	/** BCP-47 locale (e.g. "fr-FR") applied to the month, weekday, and day labels. */
+	locale?: string;
+};
 
 export function CalendarRoot({
 	className,
@@ -51,11 +39,7 @@ export function CalendarRoot({
 	formatters,
 	components,
 	...props
-}: DistributiveOmit<React.ComponentProps<typeof DayPicker>, "locale"> & {
-	navButtonVariant?: React.ComponentProps<typeof Button>["variant"];
-	/** BCP-47 locale (e.g. "fr-FR") applied to the month, weekday, and day labels. */
-	locale?: string;
-}) {
+}: Props) {
 	const defaultClassNames = getDefaultClassNames();
 
 	return (

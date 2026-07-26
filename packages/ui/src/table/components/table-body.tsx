@@ -2,10 +2,8 @@ import type * as React from "react";
 
 import { cn } from "#/lib/utils.ts";
 
-export function TableBody({
-	className,
-	...props
-}: React.ComponentProps<"tbody">) {
+interface Props extends React.ComponentProps<"tbody"> {}
+export function TableBody({ className, ...props }: Props) {
 	return (
 		<tbody
 			data-slot="table-body"

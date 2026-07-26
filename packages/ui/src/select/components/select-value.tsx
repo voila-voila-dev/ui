@@ -1,10 +1,8 @@
 import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { cn } from "#/lib/utils.ts";
 
-export function SelectValue({
-	className,
-	...props
-}: SelectPrimitive.Value.Props) {
+interface Props extends SelectPrimitive.Value.Props {}
+export function SelectValue({ className, ...props }: Props) {
 	return (
 		<SelectPrimitive.Value
 			data-slot="select-value"

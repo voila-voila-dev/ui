@@ -2,11 +2,12 @@ import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area";
 
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends ScrollAreaPrimitive.Scrollbar.Props {}
 export function ScrollBar({
 	className,
 	orientation = "vertical",
 	...props
-}: ScrollAreaPrimitive.Scrollbar.Props) {
+}: Props) {
 	return (
 		<ScrollAreaPrimitive.Scrollbar
 			data-slot="scroll-area-scrollbar"

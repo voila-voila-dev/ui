@@ -1,7 +1,6 @@
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"h4">;
-
+interface Props extends React.ComponentProps<"h4"> {}
 export function StepTracksBodyTitle({ className, ...props }: Props) {
 	return (
 		<h4

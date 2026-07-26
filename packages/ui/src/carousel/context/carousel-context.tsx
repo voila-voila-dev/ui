@@ -7,14 +7,14 @@ type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
 export type CarouselOptions = UseCarouselParameters[0];
 export type CarouselPlugin = UseCarouselParameters[1];
 
-export type CarouselProps = {
+export type CarouselSettings = {
 	opts?: CarouselOptions;
 	plugins?: CarouselPlugin;
 	orientation?: "horizontal" | "vertical";
 	setApi?: (api: CarouselApi) => void;
 };
 
-export type CarouselContextProps = {
+export type CarouselContextValue = {
 	carouselRef: ReturnType<typeof useEmblaCarousel>[0];
 	api: ReturnType<typeof useEmblaCarousel>[1];
 	scrollPrev: () => void;
@@ -24,18 +24,8 @@ export type CarouselContextProps = {
 	canScrollNext: boolean;
 	selectedIndex: number;
 	scrollSnaps: number[];
-} & CarouselProps;
+} & CarouselSettings;
 
-export const CarouselContext = React.createContext<CarouselContextProps | null>(
+export const CarouselContext = React.createContext<CarouselContextValue | null>(
 	null,
 );
-
-export function useCarousel() {
-	const context = React.useContext(CarouselContext);
-
-	if (!context) {
-		throw new Error("useCarousel must be used within a <Carousel.Root />");
-	}
-
-	return context;
-}

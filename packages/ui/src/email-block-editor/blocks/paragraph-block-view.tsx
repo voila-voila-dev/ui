@@ -3,7 +3,7 @@ import { RichTextEditable } from "#/email-block-editor/blocks/rich-text-editable
 import type { EmailEditorParagraphBlock } from "#/email-block-editor/document/types.ts";
 import { EMAIL_COLOR, EMAIL_FONT } from "#/email-block-editor/theme.ts";
 
-type Props = EmailBlockComponentProps<EmailEditorParagraphBlock>;
+interface Props extends EmailBlockComponentProps<EmailEditorParagraphBlock> {}
 /**
  * A rich body paragraph, edited in place (bold, italic, underline and links
  * via the block toolbar). Mirrors the domain `emailParagraph` component

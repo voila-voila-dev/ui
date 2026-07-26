@@ -13,6 +13,7 @@ function resolveThumbValues(
 	return [min];
 }
 
+interface Props extends SliderPrimitive.Root.Props {}
 export function SliderRoot({
 	className,
 	children,
@@ -21,7 +22,7 @@ export function SliderRoot({
 	min = 0,
 	max = 100,
 	...props
-}: SliderPrimitive.Root.Props) {
+}: Props) {
 	const thumbValues = resolveThumbValues(value, defaultValue, min);
 
 	return (

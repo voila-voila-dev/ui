@@ -2,10 +2,8 @@ import type * as React from "react";
 
 import { cn } from "#/lib/utils.ts";
 
-export function TableFooter({
-	className,
-	...props
-}: React.ComponentProps<"tfoot">) {
+interface Props extends React.ComponentProps<"tfoot"> {}
+export function TableFooter({ className, ...props }: Props) {
 	return (
 		<tfoot
 			data-slot="table-footer"

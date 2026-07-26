@@ -1,14 +1,14 @@
 import type * as React from "react";
-import type { ButtonProps } from "#/button/components/button.tsx";
+import type { Button } from "#/button/components/button.tsx";
 import type { Calendar } from "#/calendar/components/calendar.tsx";
 
-export type CalendarPassthroughProps = Omit<
+export type CalendarPassthrough = Omit<
 	React.ComponentProps<typeof Calendar.Root>,
 	"mode" | "selected" | "onSelect" | "locale"
 >;
 
 /** The props both {@link DatePicker.Root} and `DateRangePicker` take. */
-export type DatePickerBaseProps = {
+export type DatePickerBase = {
 	placeholder?: string;
 	/**
 	 * `Intl.DateTimeFormat` options for the trigger label. Defaults to a long
@@ -24,9 +24,9 @@ export type DatePickerBaseProps = {
 	className?: string;
 	"aria-invalid"?: React.AriaAttributes["aria-invalid"];
 	"aria-label"?: string;
-	variant?: ButtonProps["variant"];
+	variant?: React.ComponentProps<typeof Button>["variant"];
 	/** Escape hatch for the underlying Calendar (disabled days, week numbers…). */
-	calendarProps?: CalendarPassthroughProps;
+	calendarProps?: CalendarPassthrough;
 	defaultOpen?: boolean;
 	open?: boolean;
 	onOpenChange?: (open: boolean) => void;

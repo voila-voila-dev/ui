@@ -2,6 +2,13 @@ import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu
 import { cn } from "#/lib/utils.ts";
 import { menuContentVariants } from "#/menu/components/menu-variants.ts";
 
+interface Props
+	extends ContextMenuPrimitive.Popup.Props,
+		Pick<
+			ContextMenuPrimitive.Positioner.Props,
+			"align" | "alignOffset" | "side" | "sideOffset"
+		> {}
+
 export function ContextMenuContent({
 	className,
 	align = "start",
@@ -9,11 +16,7 @@ export function ContextMenuContent({
 	side = "right",
 	sideOffset = 0,
 	...props
-}: ContextMenuPrimitive.Popup.Props &
-	Pick<
-		ContextMenuPrimitive.Positioner.Props,
-		"align" | "alignOffset" | "side" | "sideOffset"
-	>) {
+}: Props) {
 	return (
 		<ContextMenuPrimitive.Portal>
 			<ContextMenuPrimitive.Positioner

@@ -25,6 +25,7 @@ type Props = useRender.ComponentProps<"div"> & {
 	/** Leading visual (typically an avatar), rendered before the text column. */
 	leading?: React.ReactNode;
 };
+
 export function ChatConversationItem({
 	title,
 	description,

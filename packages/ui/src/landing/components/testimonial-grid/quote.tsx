@@ -1,7 +1,6 @@
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"blockquote">;
-
+interface Props extends React.ComponentProps<"blockquote"> {}
 export function TestimonialQuote({ className, children, ...props }: Props) {
 	return (
 		<blockquote

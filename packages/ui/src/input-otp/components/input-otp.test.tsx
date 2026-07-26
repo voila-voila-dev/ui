@@ -28,11 +28,11 @@ class ResizeObserverStub {
 globalThis.ResizeObserver ??=
 	ResizeObserverStub as unknown as typeof ResizeObserver;
 
-type OtpProps = Partial<
+type Props = Partial<
 	Omit<React.ComponentProps<typeof InputOTP.Root>, "children" | "render">
 >;
 
-function renderOtp(props?: OtpProps) {
+function renderOtp(props?: Props) {
 	return render(
 		<InputOTP.Root maxLength={6} {...props}>
 			<InputOTP.Group>

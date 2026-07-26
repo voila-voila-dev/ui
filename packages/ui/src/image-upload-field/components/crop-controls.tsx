@@ -1,5 +1,4 @@
 import { Button } from "#/button/components/button.tsx";
-import { ImageCropper } from "#/image-cropper/components/image-cropper.tsx";
 import { useImageCropper } from "#/image-cropper/context/image-cropper-context.tsx";
 
 interface Props {

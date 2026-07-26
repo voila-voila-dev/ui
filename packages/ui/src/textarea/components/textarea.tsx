@@ -1,10 +1,8 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function Textarea({
-	className,
-	...props
-}: React.ComponentProps<"textarea">) {
+interface Props extends React.ComponentProps<"textarea"> {}
+export function Textarea({ className, ...props }: Props) {
 	return (
 		<textarea
 			data-slot="textarea"

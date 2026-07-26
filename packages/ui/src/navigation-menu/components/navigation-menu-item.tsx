@@ -1,10 +1,8 @@
 import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu";
 import { cn } from "#/lib/utils.ts";
 
-export function NavigationMenuItem({
-	className,
-	...props
-}: NavigationMenuPrimitive.Item.Props) {
+interface Props extends NavigationMenuPrimitive.Item.Props {}
+export function NavigationMenuItem({ className, ...props }: Props) {
 	return (
 		<NavigationMenuPrimitive.Item
 			data-slot="navigation-menu-item"

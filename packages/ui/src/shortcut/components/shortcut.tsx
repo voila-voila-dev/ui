@@ -3,20 +3,17 @@ import { Kbd } from "#/kbd/components/kbd.tsx";
 import { cn } from "#/lib/utils.ts";
 import { menuShortcutVariants } from "#/menu/components/menu-variants.ts";
 
+interface Props extends React.ComponentProps<"span"> {
+	keys?: ReadonlyArray<string>;
+}
+
 /**
  * Right-aligned keyboard hint for menu rows, shared by
  * `DropdownMenu.Shortcut`, `ContextMenu.Shortcut`, `Menubar.Shortcut` and
  * `Command.Shortcut`. Pass plain children ("⌘K") for the classic text hint, or
  * `keys` to render each key as a small `Kbd` chip instead.
  */
-export function Shortcut({
-	className,
-	keys,
-	children,
-	...props
-}: React.ComponentProps<"span"> & {
-	keys?: ReadonlyArray<string>;
-}) {
+export function Shortcut({ className, keys, children, ...props }: Props) {
 	return (
 		<span
 			data-slot="shortcut"

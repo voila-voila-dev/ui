@@ -2,10 +2,10 @@ import { Progress as ProgressPrimitive } from "@base-ui/react/progress";
 
 import { cn } from "#/lib/utils.ts";
 
-type ProgressProps = ProgressPrimitive.Root.Props & {
+interface Props extends ProgressPrimitive.Root.Props {
 	trackClassName?: string;
 	indicatorClassName?: string;
-};
+}
 
 /**
  * Children render before the track in a wrapping flex row, so a
@@ -18,7 +18,7 @@ export function ProgressRoot({
 	trackClassName,
 	indicatorClassName,
 	...props
-}: ProgressProps) {
+}: Props) {
 	return (
 		<ProgressPrimitive.Root
 			data-slot="progress"

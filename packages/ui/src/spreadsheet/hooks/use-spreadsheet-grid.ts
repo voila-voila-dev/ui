@@ -394,7 +394,7 @@ function stampGridAttributes(
 	}
 }
 
-interface SpreadsheetGridTableProps {
+interface GridTableOptions {
 	role?: "grid";
 	"aria-multiselectable"?: boolean;
 	onFocus?: React.FocusEventHandler<HTMLTableElement>;
@@ -415,7 +415,7 @@ export function useSpreadsheetGrid({
 	virtualRowCount: number | null;
 }): {
 	tableRef: React.RefObject<HTMLTableElement | null>;
-	tableProps: SpreadsheetGridTableProps;
+	tableProps: GridTableOptions;
 } {
 	const tableRef = React.useRef<HTMLTableElement | null>(null);
 	const [activePosition, setActivePosition] =

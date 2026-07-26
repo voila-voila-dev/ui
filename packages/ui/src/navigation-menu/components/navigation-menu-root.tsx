@@ -2,6 +2,13 @@ import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/naviga
 import { cn } from "#/lib/utils.ts";
 import { NavigationMenuPositioner } from "#/navigation-menu/components/navigation-menu-positioner.tsx";
 
+interface Props
+	extends NavigationMenuPrimitive.Root.Props,
+		Pick<
+			NavigationMenuPrimitive.Positioner.Props,
+			"align" | "alignOffset" | "side" | "sideOffset" | "collisionPadding"
+		> {}
+
 export function NavigationMenuRoot({
 	align = "start",
 	alignOffset = 0,
@@ -11,11 +18,7 @@ export function NavigationMenuRoot({
 	className,
 	children,
 	...props
-}: NavigationMenuPrimitive.Root.Props &
-	Pick<
-		NavigationMenuPrimitive.Positioner.Props,
-		"align" | "alignOffset" | "side" | "sideOffset" | "collisionPadding"
-	>) {
+}: Props) {
 	return (
 		<NavigationMenuPrimitive.Root
 			data-slot="navigation-menu"

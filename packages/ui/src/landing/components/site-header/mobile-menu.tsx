@@ -3,8 +3,7 @@ import { Container } from "#/landing/components/container.tsx";
 import { SiteHeaderContext } from "#/landing/components/site-header/context/site-header-context.ts";
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"div">;
-
+interface Props extends React.ComponentProps<"div"> {}
 export function SiteHeaderMobileMenu({ className, children, ...props }: Props) {
 	const { open } = useContext(SiteHeaderContext);
 

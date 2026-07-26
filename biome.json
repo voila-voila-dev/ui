@@ -47,6 +47,9 @@
 				"packages/ui/src/color-picker/components/**",
 				"packages/ui/src/copyable-text/components/**",
 				"packages/ui/src/field/components/**",
+				"packages/ui/src/image-cropper/components/**",
+				"packages/ui/src/input-group/components/**",
+				"packages/ui/src/input-otp/components/**",
 				"packages/ui/src/rating/components/**",
 				"packages/ui/src/components/**",
 				"packages/ui/src/chart/components/**",
@@ -72,6 +75,7 @@
 			"includes": [
 				"packages/ui/src/carousel/components/**",
 				"packages/ui/src/chat/components/**",
+				"packages/ui/src/kbd/components/**",
 				"packages/ui/src/rating/components/**",
 				"packages/ui/src/components/**",
 				"packages/ui/src/chart/components/**",

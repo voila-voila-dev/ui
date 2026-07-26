@@ -11,7 +11,7 @@ import { cn } from "#/lib/utils.ts";
 
 export type { DateTimeRange } from "#/date-time-picker/components/date-time-range.ts";
 
-export type DateTimeRangeInputProps = {
+interface Props {
 	/** Controlled range; both sides may be `null` independently. */
 	value?: DateTimeRange;
 	defaultValue?: DateTimeRange;
@@ -41,7 +41,7 @@ export type DateTimeRangeInputProps = {
 	/** Styles the wrapping grid (e.g. `md:col-span-2`). */
 	className?: string;
 	"aria-invalid"?: React.AriaAttributes["aria-invalid"];
-};
+}
 
 /**
  * Two labeled {@link ResponsiveDateTimeInput}s bound into a single start/end range.
@@ -67,7 +67,7 @@ export function DateTimeRangeInput({
 	formatOptions,
 	className,
 	"aria-invalid": ariaInvalid,
-}: DateTimeRangeInputProps) {
+}: Props) {
 	const { range, commit } = useDateTimeRangeState({
 		value: controlledValue,
 		defaultValue,

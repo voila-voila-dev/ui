@@ -1,7 +1,6 @@
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"span">;
-
+interface Props extends React.ComponentProps<"span"> {}
 export function ArticleTag({ className, ...props }: Props) {
 	return (
 		<span

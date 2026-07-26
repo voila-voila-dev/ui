@@ -5,6 +5,12 @@ import { Lightbox } from "#/gallery/components/gallery-lightbox.tsx";
 import type { GalleryImage } from "#/gallery/lib/gallery-types.ts";
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends Omit<React.ComponentProps<"div">, "children"> {
+	images: ReadonlyArray<GalleryImage>;
+	emptyLabel?: React.ReactNode;
+	emptyDescription?: React.ReactNode;
+}
+
 /**
  * Responsive thumbnail grid that opens a full-screen `Lightbox` on click.
  * Renders an `Empty` state when there are no images. Thumbnails are buttons so
@@ -16,11 +22,7 @@ export function Gallery({
 	emptyDescription,
 	className,
 	...props
-}: Omit<React.ComponentProps<"div">, "children"> & {
-	images: ReadonlyArray<GalleryImage>;
-	emptyLabel?: React.ReactNode;
-	emptyDescription?: React.ReactNode;
-}) {
+}: Props) {
 	const [openIndex, setOpenIndex] = React.useState<number | null>(null);
 
 	if (images.length === 0) {

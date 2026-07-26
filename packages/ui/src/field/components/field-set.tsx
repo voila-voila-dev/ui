@@ -1,9 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
-export function FieldSet({
-	className,
-	...props
-}: React.ComponentProps<"fieldset">) {
+interface Props extends React.ComponentProps<"fieldset"> {}
+export function FieldSet({ className, ...props }: Props) {
 	return (
 		<fieldset
 			data-slot="field-set"

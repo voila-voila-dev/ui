@@ -6,6 +6,8 @@ import {
 } from "#/badge/components/badge-variants.ts";
 import { cn } from "#/lib/utils.ts";
 
+type Props = useRender.ComponentProps<"span"> & BadgeVariants;
+
 export function Badge({
 	className,
 	variant = "default",
@@ -13,7 +15,7 @@ export function Badge({
 	size = "default",
 	render,
 	...props
-}: useRender.ComponentProps<"span"> & BadgeVariants) {
+}: Props) {
 	return useRender({
 		defaultTagName: "span",
 		props: mergeProps<"span">(
@@ -31,14 +33,3 @@ export function Badge({
 		},
 	});
 }
-
-export {
-	type BadgeColor,
-	type BadgeVariant,
-	type BadgeVariants,
-	badgeColorBackgroundClass,
-	badgeColorForegroundClass,
-	badgeColors,
-	badgeVariantOptions,
-	badgeVariants,
-} from "#/badge/components/badge-variants.ts";

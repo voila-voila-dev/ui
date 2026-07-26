@@ -4,14 +4,16 @@ import { Dialog } from "#/dialog/components/dialog.tsx";
 import { Drawer } from "#/drawer/components/drawer.tsx";
 import { useResponsiveDialogIsMobile } from "#/responsive-dialog/context/responsive-dialog-context.ts";
 
+interface Props extends React.ComponentProps<"div"> {
+	closeLabel?: string;
+}
+
 export function ResponsiveDialogFooter({
 	className,
 	closeLabel,
 	children,
 	...props
-}: React.ComponentProps<"div"> & {
-	closeLabel?: string;
-}) {
+}: Props) {
 	const isMobile = useResponsiveDialogIsMobile("ResponsiveDialog.Footer");
 	if (isMobile) {
 		return (

@@ -1,7 +1,6 @@
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"div">;
-
+interface Props extends React.ComponentProps<"div"> {}
 /** Brand column — logo + description + social links; spans two columns. */
 export function SiteFooterBrand({ className, ...props }: Props) {
 	return (

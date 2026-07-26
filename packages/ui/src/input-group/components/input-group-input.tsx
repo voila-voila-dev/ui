@@ -2,10 +2,8 @@ import type * as React from "react";
 import { Input } from "#/input/components/input.tsx";
 import { cn } from "#/lib/utils.ts";
 
-export function InputGroupInput({
-	className,
-	...props
-}: React.ComponentProps<typeof Input>) {
+interface Props extends React.ComponentProps<typeof Input> {}
+export function InputGroupInput({ className, ...props }: Props) {
 	return (
 		<Input
 			data-slot="input-group-control"

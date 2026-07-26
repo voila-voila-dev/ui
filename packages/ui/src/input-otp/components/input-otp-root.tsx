@@ -2,13 +2,17 @@ import { OTPInput } from "input-otp";
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
+// Alias, not `interface … extends`: `input-otp`'s props are a union of the
+// render-prop and children shapes, which an interface cannot extend.
+type Props = React.ComponentProps<typeof OTPInput> & {
+	containerClassName?: string;
+};
+
 export function InputOTPRoot({
 	className,
 	containerClassName,
 	...props
-}: React.ComponentProps<typeof OTPInput> & {
-	containerClassName?: string;
-}) {
+}: Props) {
 	return (
 		<OTPInput
 			data-slot="input-otp"

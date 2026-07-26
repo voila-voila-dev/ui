@@ -18,7 +18,7 @@ import { Popover } from "#/popover/components/popover.tsx";
 
 export type { DateTimeRange } from "#/date-time-picker/components/date-time-range.ts";
 
-export type ShiftTimeRangeInputProps = {
+interface Props {
 	/** Controlled range; both sides may be `null` independently. */
 	value?: DateTimeRange;
 	defaultValue?: DateTimeRange;
@@ -35,7 +35,7 @@ export type ShiftTimeRangeInputProps = {
 	className?: string;
 	"aria-invalid"?: React.AriaAttributes["aria-invalid"];
 	"aria-label"?: string;
-};
+}
 
 /**
  * A single trigger for a shift's start and end. One field, but you pick a full
@@ -57,7 +57,7 @@ export function ShiftTimeRangeInput({
 	className,
 	"aria-invalid": ariaInvalid,
 	"aria-label": ariaLabel,
-}: ShiftTimeRangeInputProps) {
+}: Props) {
 	const { range, commit } = useDateTimeRangeState({
 		value: controlledValue,
 		defaultValue,

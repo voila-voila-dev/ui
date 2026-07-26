@@ -1,10 +1,8 @@
 import { Label } from "#/label/components/label.tsx";
 import { cn } from "#/lib/utils.ts";
 
-export function FieldLabel({
-	className,
-	...props
-}: React.ComponentProps<typeof Label>) {
+interface Props extends React.ComponentProps<typeof Label> {}
+export function FieldLabel({ className, ...props }: Props) {
 	return (
 		<Label
 			data-slot="field-label"

@@ -2,10 +2,8 @@ import type * as React from "react";
 
 import { cn } from "#/lib/utils.ts";
 
-export function TableCaption({
-	className,
-	...props
-}: React.ComponentProps<"caption">) {
+interface Props extends React.ComponentProps<"caption"> {}
+export function TableCaption({ className, ...props }: Props) {
 	return (
 		<caption
 			data-slot="table-caption"

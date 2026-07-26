@@ -1,7 +1,6 @@
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"div">;
-
+interface Props extends React.ComponentProps<"div"> {}
 /** Clips the track and fades its cut-off edges into the band background. */
 export function LogoMarqueeViewport({ className, children, ...props }: Props) {
 	return (

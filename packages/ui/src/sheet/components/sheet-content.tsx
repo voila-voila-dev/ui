@@ -9,6 +9,13 @@ import { SheetPortal } from "#/sheet/components/sheet-portal.tsx";
 // scale for wide editing panels and full-bleed surfaces.
 export type SheetContentSize = "sm" | "default" | "lg" | "xl" | "full";
 
+interface Props extends SheetPrimitive.Popup.Props {
+	side?: "top" | "right" | "bottom" | "left";
+	size?: SheetContentSize;
+	showCloseButton?: boolean;
+	closeButtonLabel?: string;
+}
+
 export function SheetContent({
 	className,
 	children,
@@ -17,12 +24,7 @@ export function SheetContent({
 	showCloseButton = true,
 	closeButtonLabel = "Close",
 	...props
-}: SheetPrimitive.Popup.Props & {
-	side?: "top" | "right" | "bottom" | "left";
-	size?: SheetContentSize;
-	showCloseButton?: boolean;
-	closeButtonLabel?: string;
-}) {
+}: Props) {
 	return (
 		<SheetPortal>
 			<SheetOverlay />

@@ -1,5 +1,6 @@
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
 
-export function DropdownMenuGroup({ ...props }: MenuPrimitive.Group.Props) {
+interface Props extends MenuPrimitive.Group.Props {}
+export function DropdownMenuGroup({ ...props }: Props) {
 	return <MenuPrimitive.Group data-slot="dropdown-menu-group" {...props} />;
 }

@@ -7,6 +7,13 @@ import {
 	starSizeClasses,
 } from "#/rating/components/rating-stars.ts";
 
+interface Props extends Omit<React.ComponentProps<"div">, "children"> {
+	value: number;
+	count?: number;
+	size?: RatingSize;
+	max?: number;
+}
+
 /**
  * Read-only star display. `value` (0–5) controls how many stars fill with the
  * amber `--warning` token; the rest stay muted. Pass `count` to append the
@@ -19,12 +26,7 @@ export function RatingRoot({
 	max = MAX_STARS,
 	className,
 	...props
-}: Omit<React.ComponentProps<"div">, "children"> & {
-	value: number;
-	count?: number;
-	size?: RatingSize;
-	max?: number;
-}) {
+}: Props) {
 	const clamped = Math.max(0, Math.min(max, value));
 	const rounded = Math.round(clamped);
 

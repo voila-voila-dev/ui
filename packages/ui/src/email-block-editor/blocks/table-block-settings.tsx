@@ -6,7 +6,7 @@ import type { EmailEditorTableBlock } from "#/email-block-editor/document/types.
 import { BlockOptionSection } from "#/email-block-editor/sections/block-options/block-option-section.tsx";
 import { ToggleOption } from "#/email-block-editor/sections/block-options/toggle-option.tsx";
 
-type Props = EmailBlockComponentProps<EmailEditorTableBlock>;
+interface Props extends EmailBlockComponentProps<EmailEditorTableBlock> {}
 export function TableBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

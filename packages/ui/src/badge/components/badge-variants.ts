@@ -1,17 +1,8 @@
 import { cva, type VariantProps } from "#/lib/cva.ts";
 
-/**
- * The single canonical badge cva - base, variants, palette and sizes - shared
- * by `Badge` and `Chip`. Like `button-variants.ts`/`menu-variants.ts`, the
- * recipe lives in a React-free module so it stays importable from non-React
- * surfaces and cross-component without pulling the component in.
- */
 export const badgeVariants = cva({
 	base: "group/badge inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-4xl border border-transparent font-medium whitespace-nowrap transition-all focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none [&>svg:not([class*='size-'])]:size-3",
 	variants: {
-		// Solid variants only hover when rendered as an anchor ([a]:hover) -
-		// static chips should stay inert - while `ghost` and `link` exist for
-		// interactive use and hover unconditionally.
 		variant: {
 			default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
 			secondary:
@@ -27,9 +18,6 @@ export const badgeVariants = cva({
 				"hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
 			link: "text-primary underline-offset-4 hover:underline",
 		},
-		// Catalog palette. Declared after `variant` so its bg/text win conflicts
-		// via tailwind-merge when both a `variant` and a `color` are passed. Keep
-		// in sync with `BadgeColorEnum` in the domain and the `--badge-*` tokens.
 		color: {
 			slate:
 				"bg-badge-slate text-badge-slate-foreground [a]:hover:bg-badge-slate/90",

@@ -123,4 +123,35 @@ describe("Alert", () => {
 		);
 		expect(screen.getByRole("button", { name: "Fermer" })).toBeTruthy();
 	});
+
+	it("lets Alert.Title become a semantic heading via the render prop", () => {
+		const screen = render(
+			<Alert.Root>
+				<Alert.Title render={<h2>Booking confirmed</h2>} />
+			</Alert.Root>,
+		);
+		const title = screen
+			.getByRole("alert")
+			.querySelector("[data-slot=alert-title]");
+		expect(title?.tagName).toBe("H2");
+		expect(title?.textContent).toBe("Booking confirmed");
+	});
+
+	it("lets the alert root render as a different element via render", () => {
+		const screen = render(<Alert.Root render={<section />}>Status</Alert.Root>);
+		const alert = screen.getByRole("alert");
+		expect(alert.tagName).toBe("SECTION");
+		expect(alert.getAttribute("data-slot")).toBe("alert");
+	});
+
+	it("lets Alert.Close render as a link while keeping its styling", () => {
+		const screen = render(
+			<Alert.Root>
+				<Alert.Close render={<a href="#dismiss">Dismiss</a>} />
+			</Alert.Root>,
+		);
+		const close = screen.getByRole("link", { name: "Dismiss" });
+		expect(close.getAttribute("data-slot")).toBe("alert-close");
+		expect(close.closest("[data-slot=alert-action]")).not.toBeNull();
+	});
 });

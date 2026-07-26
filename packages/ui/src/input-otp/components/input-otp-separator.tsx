@@ -1,7 +1,8 @@
 import { MinusIcon } from "@phosphor-icons/react";
 import type * as React from "react";
 
-export function InputOTPSeparator({ ...props }: React.ComponentProps<"div">) {
+interface Props extends React.ComponentProps<"div"> {}
+export function InputOTPSeparator({ ...props }: Props) {
 	return (
 		<div
 			data-slot="input-otp-separator"

@@ -29,7 +29,7 @@ bun add @voila.dev/ui
 
 Two imports, two jobs: `globals.css` brings the token contract (what a colour is
 called), a theme brings the values (what it is). Swap the second line for
-`indigo`, `ocean`, `emerald`, `olive` or `aubergine` — or your own file — and the
+`indigo`, `iris`, `sand`, `emerald` or `olive` — or your own file — and the
 whole system follows.
 
 The package declares its own Tailwind sources relative to itself, so there is

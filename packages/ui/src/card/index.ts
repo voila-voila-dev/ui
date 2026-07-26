@@ -1,1 +1,1 @@
-export { Card, type CardSize } from "#/card/components/card.tsx";
+export { Card } from "#/card/components/card.tsx";

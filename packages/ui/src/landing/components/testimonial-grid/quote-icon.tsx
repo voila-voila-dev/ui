@@ -1,8 +1,7 @@
 import { QuotesIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<typeof QuotesIcon>;
-
+interface Props extends React.ComponentProps<typeof QuotesIcon> {}
 export function TestimonialQuoteIcon({ className, ...props }: Props) {
 	return (
 		<QuotesIcon

@@ -2,10 +2,9 @@ import type * as React from "react";
 import { Item } from "#/item/components/item.tsx";
 import { cn } from "#/lib/utils.ts";
 
-export function ListRoot({
-	className,
-	...props
-}: Omit<React.ComponentProps<typeof Item.Group>, "render">) {
+interface Props
+	extends Omit<React.ComponentProps<typeof Item.Group>, "render"> {}
+export function ListRoot({ className, ...props }: Props) {
 	return (
 		<Item.Group
 			data-slot="list"

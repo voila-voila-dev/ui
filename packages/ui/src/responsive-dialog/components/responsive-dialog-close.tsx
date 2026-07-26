@@ -3,14 +3,13 @@ import { Dialog } from "#/dialog/components/dialog.tsx";
 import { Drawer } from "#/drawer/components/drawer.tsx";
 import { useResponsiveDialogIsMobile } from "#/responsive-dialog/context/responsive-dialog-context.ts";
 
-export function ResponsiveDialogClose({
-	render,
-	children,
-	...props
-}: Omit<React.ComponentProps<typeof Drawer.Close>, "asChild"> & {
+interface Props
+	extends Omit<React.ComponentProps<typeof Drawer.Close>, "asChild"> {
 	/** Element form only — the drawer half clones it, so render functions are unsupported. */
 	render?: React.ReactElement;
-}) {
+}
+
+export function ResponsiveDialogClose({ render, children, ...props }: Props) {
 	const isMobile = useResponsiveDialogIsMobile("ResponsiveDialog.Close");
 	if (isMobile) {
 		if (render) {

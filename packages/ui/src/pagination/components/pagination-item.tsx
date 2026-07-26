@@ -1,5 +1,6 @@
 import type * as React from "react";
 
-export function PaginationItem({ ...props }: React.ComponentProps<"li">) {
+interface Props extends React.ComponentProps<"li"> {}
+export function PaginationItem({ ...props }: Props) {
 	return <li data-slot="pagination-item" {...props} />;
 }

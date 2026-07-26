@@ -2,7 +2,7 @@ import { CheckboxGroup as CheckboxGroupPrimitive } from "@base-ui/react/checkbox
 
 import { cn } from "#/lib/utils.ts";
 
-export type CheckboxGroupProps = CheckboxGroupPrimitive.Props & {
+interface Props extends CheckboxGroupPrimitive.Props {
 	/**
 	 * Layout direction of the items. `vertical` stacks them (the default);
 	 * `horizontal` lays them out in a wrapping row - saves consumers from
@@ -10,7 +10,7 @@ export type CheckboxGroupProps = CheckboxGroupPrimitive.Props & {
 	 * `RadioGroup`.)
 	 */
 	orientation?: "vertical" | "horizontal";
-};
+}
 
 /**
  * Shared `value: string[]` state for a set of `Checkbox`es - each box opts in
@@ -25,7 +25,7 @@ export function CheckboxGroup({
 	className,
 	orientation = "vertical",
 	...props
-}: CheckboxGroupProps) {
+}: Props) {
 	return (
 		<CheckboxGroupPrimitive
 			data-slot="checkbox-group"

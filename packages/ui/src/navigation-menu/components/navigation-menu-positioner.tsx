@@ -1,6 +1,7 @@
 import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu";
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends NavigationMenuPrimitive.Positioner.Props {}
 export function NavigationMenuPositioner({
 	className,
 	side = "bottom",
@@ -8,7 +9,7 @@ export function NavigationMenuPositioner({
 	align = "start",
 	alignOffset = 0,
 	...props
-}: NavigationMenuPrimitive.Positioner.Props) {
+}: Props) {
 	return (
 		<NavigationMenuPrimitive.Portal>
 			<NavigationMenuPrimitive.Positioner

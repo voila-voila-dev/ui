@@ -8,7 +8,7 @@ import * as React from "react";
 // `Group` > `Label`/`Item`). Fragments and `.map()` are fine; wrapper elements
 // (e.g. a `<div>` around items) are not — they'd hide the items from the scan.
 
-export type ItemProps = {
+export type SelectItemShape = {
 	value: string;
 	disabled?: boolean;
 	children?: React.ReactNode;

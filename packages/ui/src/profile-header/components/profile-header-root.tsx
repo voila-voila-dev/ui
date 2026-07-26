@@ -21,6 +21,16 @@ function isAvatarDescriptor(
 	);
 }
 
+interface Props extends Omit<React.ComponentProps<"div">, "title"> {
+	name: string;
+	headline?: React.ReactNode;
+	coverImage?: React.ReactNode | string;
+	avatar?: React.ReactNode | ProfileHeaderAvatar;
+	theme?: ProfileTheme;
+	badges?: React.ReactNode;
+	actions?: React.ReactNode;
+}
+
 /**
  * Hero band for a freelancer or client profile: a themed cover, an
  * overlapping circular avatar, name + optional headline, a trust-badge row
@@ -38,15 +48,7 @@ export function ProfileHeaderRoot({
 	className,
 	children,
 	...props
-}: Omit<React.ComponentProps<"div">, "title"> & {
-	name: string;
-	headline?: React.ReactNode;
-	coverImage?: React.ReactNode | string;
-	avatar?: React.ReactNode | ProfileHeaderAvatar;
-	theme?: ProfileTheme;
-	badges?: React.ReactNode;
-	actions?: React.ReactNode;
-}) {
+}: Props) {
 	const avatarNode = isAvatarDescriptor(avatar) ? (
 		<Avatar.Root
 			size="lg"

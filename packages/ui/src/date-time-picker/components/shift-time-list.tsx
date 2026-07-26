@@ -2,6 +2,15 @@ import * as React from "react";
 import { Button } from "#/button/components/button.tsx";
 import { timeLabel } from "#/date-time-picker/components/date-time-values.ts";
 
+interface Props {
+	options: ReadonlyArray<number>;
+	selectedMinutes: number | null;
+	isDisabled: (minutes: number) => boolean;
+	onSelect: (minutes: number) => void;
+	locale: string | undefined;
+	ariaLabel: string;
+}
+
 /** The active step's time options as a single scrollable column. */
 export function ShiftTimeList({
 	options,
@@ -10,14 +19,7 @@ export function ShiftTimeList({
 	onSelect,
 	locale,
 	ariaLabel,
-}: {
-	options: ReadonlyArray<number>;
-	selectedMinutes: number | null;
-	isDisabled: (minutes: number) => boolean;
-	onSelect: (minutes: number) => void;
-	locale: string | undefined;
-	ariaLabel: string;
-}) {
+}: Props) {
 	const centerOption = React.useCallback((node: HTMLButtonElement | null) => {
 		if (!node) return;
 		requestAnimationFrame(() => node.scrollIntoView?.({ block: "center" }));

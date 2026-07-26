@@ -10,6 +10,18 @@ import {
 	type FilterValues,
 } from "#/filter/types.ts";
 
+interface Props {
+	readonly definitions: ReadonlyArray<FilterDefinition>;
+	readonly values: FilterValues;
+	readonly onValuesChange: (values: FilterValues) => void;
+	/** Omit both search props for a list that filters without free text. */
+	readonly searchValue?: string;
+	readonly onSearchChange?: (value: string) => void;
+	readonly resultCount?: number;
+	readonly labels?: Partial<FilterLabels>;
+	readonly locale?: string;
+}
+
 /**
  * The whole filtering surface of a list, in one component: the search-shaped
  * trigger, the overlay editor behind it, the chips stating what is active, and
@@ -26,17 +38,7 @@ export function FilterBar({
 	resultCount,
 	labels: labelOverrides,
 	locale = "en-US",
-}: {
-	readonly definitions: ReadonlyArray<FilterDefinition>;
-	readonly values: FilterValues;
-	readonly onValuesChange: (values: FilterValues) => void;
-	/** Omit both search props for a list that filters without free text. */
-	readonly searchValue?: string;
-	readonly onSearchChange?: (value: string) => void;
-	readonly resultCount?: number;
-	readonly labels?: Partial<FilterLabels>;
-	readonly locale?: string;
-}) {
+}: Props) {
 	const [open, setOpen] = useState(false);
 	const labels: FilterLabels = { ...defaultFilterLabels, ...labelOverrides };
 	const activeCount = countActiveFilters(values);

@@ -1,7 +1,6 @@
 import { cn } from "#/lib/utils.ts";
 
-type Props = React.ComponentProps<"article">;
-
+interface Props extends React.ComponentProps<"article"> {}
 /** The card surface (Astro `Card` default/none/lift as `article`). */
 export function ArticleCardFrame({ className, ...props }: Props) {
 	return (

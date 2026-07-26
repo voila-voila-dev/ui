@@ -3,10 +3,8 @@ import { cn } from "#/lib/utils.ts";
 import { useResponsiveSheetIsMobile } from "#/responsive-sheet/context/responsive-sheet-context.ts";
 import { Sheet } from "#/sheet/components/sheet.tsx";
 
-export function ResponsiveSheetHeader({
-	className,
-	...props
-}: React.ComponentProps<"div">) {
+interface Props extends React.ComponentProps<"div"> {}
+export function ResponsiveSheetHeader({ className, ...props }: Props) {
 	const isMobile = useResponsiveSheetIsMobile("ResponsiveSheet.Header");
 	return isMobile ? (
 		// The bottom drawer centers its header by default; a detail panel reads

@@ -2,20 +2,20 @@ import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group";
 
 import { cn } from "#/lib/utils.ts";
 
-export type RadioGroupProps = RadioGroupPrimitive.Props & {
+interface Props extends RadioGroupPrimitive.Props {
 	/**
 	 * Layout direction of the items. `vertical` stacks them (the default);
 	 * `horizontal` lays them out in a wrapping row - saves consumers from
 	 * rebuilding a `flex-row` wrapper for short option sets.
 	 */
 	orientation?: "vertical" | "horizontal";
-};
+}
 
 export function RadioGroupRoot({
 	className,
 	orientation = "vertical",
 	...props
-}: RadioGroupProps) {
+}: Props) {
 	return (
 		<RadioGroupPrimitive
 			data-slot="radio-group"

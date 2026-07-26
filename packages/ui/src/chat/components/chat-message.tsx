@@ -5,12 +5,11 @@ import {
 } from "#/chat/components/chat-message-variants.ts";
 import { cn } from "#/lib/utils.ts";
 
-export function ChatMessage({
-	variant,
-	className,
-	...props
-}: React.ComponentProps<"div"> &
-	Required<Pick<ChatMessageVariants, "variant">>) {
+interface Props
+	extends React.ComponentProps<"div">,
+		Required<Pick<ChatMessageVariants, "variant">> {}
+
+export function ChatMessage({ variant, className, ...props }: Props) {
 	return (
 		<div
 			data-slot="chat-message"

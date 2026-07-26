@@ -17,7 +17,7 @@ function firstImageFile(data: DataTransfer | null): File | null {
 	return null;
 }
 
-interface SpreadsheetImageDropProps {
+interface Options {
 	onDragEnter: React.DragEventHandler<HTMLTableCellElement>;
 	onDragOver: React.DragEventHandler<HTMLTableCellElement>;
 	onDragLeave: React.DragEventHandler<HTMLTableCellElement>;
@@ -47,7 +47,7 @@ export function useSpreadsheetImageDrop({
 }: {
 	onFileSelect: (file: File) => void;
 	disabled: boolean;
-}): { dragging: boolean; cellProps: SpreadsheetImageDropProps } {
+}): { dragging: boolean; cellProps: Options } {
 	const [dragging, setDragging] = React.useState(false);
 	const depth = React.useRef(0);
 

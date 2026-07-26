@@ -8,18 +8,20 @@ import type {
 } from "#/filter/types.ts";
 import { Input } from "#/input/components/input.tsx";
 
+interface Props {
+	readonly definition: TextFilterDefinition;
+	readonly value: TextFilterValue | undefined;
+	readonly onValueChange: (value: TextFilterValue) => void;
+	readonly labels: FilterLabels;
+}
+
 /** Free-text contains/does-not-contain filter. */
 export function TextFilterField({
 	definition,
 	value,
 	onValueChange,
 	labels,
-}: {
-	readonly definition: TextFilterDefinition;
-	readonly value: TextFilterValue | undefined;
-	readonly onValueChange: (value: TextFilterValue) => void;
-	readonly labels: FilterLabels;
-}) {
+}: Props) {
 	const controlId = useId();
 	const text = value?.text ?? "";
 	const excluded = value?.excluded ?? false;

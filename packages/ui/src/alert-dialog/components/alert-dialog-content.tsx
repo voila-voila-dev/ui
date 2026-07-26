@@ -3,15 +3,15 @@ import { AlertDialogOverlay } from "#/alert-dialog/components/alert-dialog-overl
 import { AlertDialogPortal } from "#/alert-dialog/components/alert-dialog-portal.tsx";
 import { cn } from "#/lib/utils.ts";
 
-export type AlertDialogContentSize = "default" | "sm";
+interface Props extends AlertDialogPrimitive.Popup.Props {
+	size?: "default" | "sm";
+}
 
 export function AlertDialogContent({
 	className,
 	size = "default",
 	...props
-}: AlertDialogPrimitive.Popup.Props & {
-	size?: AlertDialogContentSize;
-}) {
+}: Props) {
 	return (
 		<AlertDialogPortal>
 			<AlertDialogOverlay />

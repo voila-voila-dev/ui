@@ -2,10 +2,8 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 import { useSidebar } from "#/sidebar/context/sidebar-context.tsx";
 
-export function SidebarRail({
-	className,
-	...props
-}: React.ComponentProps<"button">) {
+interface Props extends React.ComponentProps<"button"> {}
+export function SidebarRail({ className, ...props }: Props) {
 	const { toggleSidebar } = useSidebar();
 
 	return (

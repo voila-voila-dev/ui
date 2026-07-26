@@ -1,10 +1,10 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export type NativeDateFieldProps = Omit<
-	React.ComponentProps<"input">,
-	"type" | "size"
-> & {
+interface Props extends Omit<React.ComponentProps<"input">, "type" | "size"> {
+	type: "date" | "time" | "datetime-local";
+	slot: string;
+	icon: React.ReactNode;
 	size?: "sm" | "default";
 	/**
 	 * Classes for the wrapper `<div>` that hosts the leading icon. Use this for
@@ -12,7 +12,7 @@ export type NativeDateFieldProps = Omit<
 	 * `<input>` itself, matching the rest of the kit's form controls.
 	 */
 	wrapperClassName?: string;
-};
+}
 
 /**
  * Shared chrome for the native date/time/datetime-local inputs: the kit's
@@ -29,11 +29,7 @@ export function NativeDateField({
 	size = "default",
 	onClick,
 	...props
-}: NativeDateFieldProps & {
-	type: "date" | "time" | "datetime-local";
-	slot: string;
-	icon: React.ReactNode;
-}) {
+}: Props) {
 	return (
 		<div
 			className={cn(

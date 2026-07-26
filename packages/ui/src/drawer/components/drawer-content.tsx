@@ -7,6 +7,14 @@ import { DrawerOverlay } from "#/drawer/components/drawer-overlay.tsx";
 import { DrawerPortal } from "#/drawer/components/drawer-portal.tsx";
 import { cn } from "#/lib/utils.ts";
 
+interface Props extends React.ComponentProps<typeof DrawerPrimitive.Content> {
+	showHandle?: boolean;
+	/** Renders an X button on `left`/`right` drawers, which have no grab handle. */
+	showCloseButton?: boolean;
+	closeButtonLabel?: string;
+	overlayClassName?: string;
+}
+
 export function DrawerContent({
 	className,
 	children,
@@ -15,13 +23,7 @@ export function DrawerContent({
 	closeButtonLabel = "Close",
 	overlayClassName,
 	...props
-}: React.ComponentProps<typeof DrawerPrimitive.Content> & {
-	showHandle?: boolean;
-	/** Renders an X button on `left`/`right` drawers, which have no grab handle. */
-	showCloseButton?: boolean;
-	closeButtonLabel?: string;
-	overlayClassName?: string;
-}) {
+}: Props) {
 	return (
 		<DrawerPortal>
 			<DrawerOverlay className={overlayClassName} />

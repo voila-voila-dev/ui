@@ -1,8 +1,7 @@
 import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu";
 
-export function ContextMenuRadioGroup({
-	...props
-}: ContextMenuPrimitive.RadioGroup.Props) {
+interface Props extends ContextMenuPrimitive.RadioGroup.Props {}
+export function ContextMenuRadioGroup({ ...props }: Props) {
 	return (
 		<ContextMenuPrimitive.RadioGroup
 			data-slot="context-menu-radio-group"

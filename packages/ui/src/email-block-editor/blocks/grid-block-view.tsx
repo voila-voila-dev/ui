@@ -1,8 +1,8 @@
 import type { EmailBlockComponentProps } from "#/email-block-editor/blocks/block-definitions.tsx";
-import { EMAIL_GRID_GAP_PX } from "#/email-block-editor/blocks/grid-block.tsx";
 import type { EmailEditorGridBlock } from "#/email-block-editor/document/types.ts";
+import { EMAIL_GRID_GAP_PX } from "#/email-block-editor/theme.ts";
 
-type Props = EmailBlockComponentProps<EmailEditorGridBlock>;
+interface Props extends EmailBlockComponentProps<EmailEditorGridBlock> {}
 /**
  * The layout shell of a multi-column row. The cells themselves — the child
  * block rows and the add slot — are composed by the canvas and slotted

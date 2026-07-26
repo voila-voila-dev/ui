@@ -5,6 +5,13 @@ import { cn } from "#/lib/utils.ts";
 import type { toggleVariants } from "#/toggle/components/toggle-variants.ts";
 import { ToggleGroupContext } from "#/toggle-group/context/toggle-group-context.ts";
 
+interface Props
+	extends ToggleGroupPrimitive.Props,
+		VariantProps<typeof toggleVariants> {
+	spacing?: number;
+	orientation?: "horizontal" | "vertical";
+}
+
 export function ToggleGroupRoot({
 	className,
 	variant,
@@ -13,11 +20,7 @@ export function ToggleGroupRoot({
 	orientation = "horizontal",
 	children,
 	...props
-}: ToggleGroupPrimitive.Props &
-	VariantProps<typeof toggleVariants> & {
-		spacing?: number;
-		orientation?: "horizontal" | "vertical";
-	}) {
+}: Props) {
 	return (
 		<ToggleGroupPrimitive
 			data-slot="toggle-group"

@@ -1,10 +1,8 @@
 import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
-export function NativeSelectOption({
-	className,
-	...props
-}: React.ComponentProps<"option">) {
+interface Props extends React.ComponentProps<"option"> {}
+export function NativeSelectOption({ className, ...props }: Props) {
 	return (
 		<option
 			data-slot="native-select-option"

@@ -12,6 +12,14 @@ import type {
 	FilterValue,
 } from "#/filter/types.ts";
 
+interface Props {
+	readonly definition: FilterDefinition;
+	readonly value: FilterValue | undefined;
+	readonly onValueChange: (value: FilterValue | undefined) => void;
+	readonly labels: FilterLabels;
+	readonly locale: string;
+}
+
 /**
  * Renders the editor a definition asks for. The value union is discriminated by
  * the same `kind` as the definition, so each branch narrows both at once — a new
@@ -23,13 +31,7 @@ export function FilterField({
 	onValueChange,
 	labels,
 	locale,
-}: {
-	readonly definition: FilterDefinition;
-	readonly value: FilterValue | undefined;
-	readonly onValueChange: (value: FilterValue | undefined) => void;
-	readonly labels: FilterLabels;
-	readonly locale: string;
-}) {
+}: Props) {
 	const valueOfKind = <Kind extends FilterValue["kind"]>(kind: Kind) =>
 		value?.kind === kind
 			? (value as Extract<FilterValue, { kind: Kind }>)

@@ -1,9 +1,10 @@
 import { CalendarDotsIcon } from "@phosphor-icons/react";
+import type { Button } from "#/button/components/button.tsx";
 import { Calendar } from "#/calendar/components/calendar.tsx";
 import { DatePicker } from "#/date-picker/components/date-picker.tsx";
 import { DateTimeHiddenInput } from "#/date-time-picker/components/date-time-hidden-input.tsx";
 import { DateTimeOptionList } from "#/date-time-picker/components/date-time-option-list.tsx";
-import type { DateTimePickerProps } from "#/date-time-picker/components/date-time-picker-props.ts";
+import type { DateTimeShared } from "#/date-time-picker/components/date-time-picker-props.ts";
 import {
 	createDateTimeSelectionHandlers,
 	dateTimeTriggerLabel,
@@ -16,7 +17,22 @@ import { usePickerState } from "#/hooks/use-picker-state.ts";
 import { minutesOfDay } from "#/lib/time-math.ts";
 import { Popover } from "#/popover/components/popover.tsx";
 
-export type { DateTimePickerProps } from "#/date-time-picker/components/date-time-picker-props.ts";
+interface Props extends DateTimeShared {
+	/**
+	 * `Intl.DateTimeFormat` options for the trigger label. Defaults to
+	 * `{ dateStyle: "medium", timeStyle: "short" }` (e.g. "Jun 20, 2026, 2:30 PM").
+	 */
+	formatOptions?: Intl.DateTimeFormatOptions;
+	variant?: React.ComponentProps<typeof Button>["variant"];
+	/** Escape hatch for the underlying Calendar (disabled days, week numbers…). */
+	calendarProps?: Omit<
+		React.ComponentProps<typeof Calendar.Root>,
+		"mode" | "selected" | "onSelect" | "locale"
+	>;
+	defaultOpen?: boolean;
+	open?: boolean;
+	onOpenChange?: (open: boolean) => void;
+}
 
 /**
  * Composed date + time picker built on the kit's Base UI `Popover` and `Calendar`:
@@ -38,7 +54,7 @@ export function DateTimePicker({
 	open: controlledOpen,
 	onOpenChange,
 	...triggerProps
-}: DateTimePickerProps) {
+}: Props) {
 	const { isControlled, value, setUncontrolledValue, open, setOpen } =
 		usePickerState<Date>({
 			value: controlledValue,

@@ -23,6 +23,23 @@ const ARROW_KEY_OFFSETS: Record<string, number> = {
 	ArrowDown: GRID_COLUMNS,
 };
 
+interface Props {
+	/** Controlled selection; omit to let the picker manage its own state. */
+	value?: BadgeColor | null;
+	/** Initial selection for uncontrolled usage. */
+	defaultValue?: BadgeColor | null;
+	onValueChange?: (color: BadgeColor | null) => void;
+	placeholder?: string;
+	clearLabel?: string;
+	/** Offer a clear affordance that reports `null`. */
+	clearable?: boolean;
+	/** When set, renders a hidden input so plain form posts include the color. */
+	name?: string;
+	disabled?: boolean;
+	className?: string;
+	contentClassName?: string;
+}
+
 /**
  * Select-like trigger opening a swatch radiogroup over the catalog palette.
  * Swatch classes come from the static maps in badge-variants.ts so the palette never
@@ -39,22 +56,7 @@ export function ColorPicker({
 	disabled = false,
 	className,
 	contentClassName,
-}: {
-	/** Controlled selection; omit to let the picker manage its own state. */
-	value?: BadgeColor | null;
-	/** Initial selection for uncontrolled usage. */
-	defaultValue?: BadgeColor | null;
-	onValueChange?: (color: BadgeColor | null) => void;
-	placeholder?: string;
-	clearLabel?: string;
-	/** Offer a clear affordance that reports `null`. */
-	clearable?: boolean;
-	/** When set, renders a hidden input so plain form posts include the color. */
-	name?: string;
-	disabled?: boolean;
-	className?: string;
-	contentClassName?: string;
-}) {
+}: Props) {
 	const [open, setOpen] = useState(false);
 	const [uncontrolledValue, setUncontrolledValue] = useState<BadgeColor | null>(
 		defaultValue,
