@@ -9,6 +9,7 @@ interface Props {
 	onUploadImage?: (file: File) => Promise<string>;
 }
 
+/** The settings panel of whichever block is selected. */
 export function SelectedBlockSettings({
 	block,
 	dispatch,

@@ -1,4 +1,4 @@
-import { DEFAULT_MINUTES } from "#/date-time-picker/components/date-time-values.ts";
+import { DEFAULT_MINUTES } from "#/date-time-picker/lib/date-time-values.ts";
 import { minutesOfDay, withMinutes } from "#/lib/time-math.ts";
 
 /**

@@ -26,6 +26,7 @@ const MOBILE_COLUMN_OPTIONS: ReadonlyArray<{
 
 interface Props extends EmailBlockComponentProps<EmailEditorGridBlock> {}
 
+/** The settings panel for a grid block: column counts and spacing. */
 export function GridBlockSettings({ block, onChange }: Props) {
 	return (
 		<BlockOptionSection title="Appearance">

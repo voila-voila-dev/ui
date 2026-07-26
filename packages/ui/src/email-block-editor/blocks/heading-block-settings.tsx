@@ -17,6 +17,7 @@ const HEADING_LEVEL_OPTIONS: ReadonlyArray<{
 
 interface Props extends EmailBlockComponentProps<EmailEditorHeadingBlock> {}
 
+/** The settings panel for a heading block. */
 export function HeadingBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

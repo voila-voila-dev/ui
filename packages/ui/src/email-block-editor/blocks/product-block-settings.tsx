@@ -9,6 +9,7 @@ import type { EmailEditorProductBlock } from "#/email-block-editor/document/type
 
 interface Props extends EmailBlockComponentProps<EmailEditorProductBlock> {}
 
+/** The settings panel for a product block. */
 export function ProductBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

@@ -2,7 +2,7 @@ import type * as React from "react";
 import {
 	type FeatureGridCardVariants,
 	featureGridCardVariants,
-} from "#/landing/components/feature-grid-variants.ts";
+} from "#/landing/components/feature-grid/feature-grid-variants.ts";
 
 import { cn } from "#/lib/utils.ts";
 

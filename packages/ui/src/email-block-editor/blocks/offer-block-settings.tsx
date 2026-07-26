@@ -10,6 +10,7 @@ import type { EmailEditorOfferBlock } from "#/email-block-editor/document/types.
 
 interface Props extends EmailBlockComponentProps<EmailEditorOfferBlock> {}
 
+/** The settings panel for an offer block. */
 export function OfferBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

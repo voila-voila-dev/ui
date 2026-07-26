@@ -16,6 +16,7 @@ interface Props {
 	coarsePointer: boolean;
 }
 
+/** Bold / italic / underline / link for the current text selection. */
 export function RichTextControls({ active, coarsePointer }: Props) {
 	return (
 		<>

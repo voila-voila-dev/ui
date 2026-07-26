@@ -21,6 +21,7 @@ interface Props
 	>;
 }
 
+/** The card itself, positioned against the trigger. */
 export function HoverCardContent({
 	className,
 	align = "center",

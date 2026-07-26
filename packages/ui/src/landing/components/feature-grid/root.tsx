@@ -3,7 +3,7 @@ import { FeatureGridToneContext } from "#/landing/components/feature-grid/contex
 import {
 	type FeatureGridVariants,
 	featureGridVariants,
-} from "#/landing/components/feature-grid-variants.ts";
+} from "#/landing/components/feature-grid/feature-grid-variants.ts";
 import type { Tone } from "#/landing/lib/tones.ts";
 import { cn } from "#/lib/utils.ts";
 

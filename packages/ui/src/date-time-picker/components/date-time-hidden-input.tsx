@@ -1,4 +1,4 @@
-import { toLocalInputValue } from "#/date-time-picker/components/date-time-values.ts";
+import { toLocalInputValue } from "#/date-time-picker/lib/date-time-values.ts";
 
 interface Props {
 	name: string | undefined;

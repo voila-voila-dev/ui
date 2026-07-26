@@ -18,6 +18,7 @@ const STYLE_OPTIONS: ReadonlyArray<{
 
 interface Props extends EmailBlockComponentProps<EmailEditorRatingBlock> {}
 
+/** The settings panel for a rating block. */
 export function RatingBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

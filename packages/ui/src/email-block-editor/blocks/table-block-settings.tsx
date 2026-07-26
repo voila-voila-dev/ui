@@ -8,6 +8,7 @@ import type { EmailEditorTableBlock } from "#/email-block-editor/document/types.
 
 interface Props extends EmailBlockComponentProps<EmailEditorTableBlock> {}
 
+/** The settings panel for a table block. */
 export function TableBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

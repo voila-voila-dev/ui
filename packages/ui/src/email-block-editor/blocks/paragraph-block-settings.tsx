@@ -1,3 +1,7 @@
+/**
+ * The settings panel for a paragraph block — the text itself is edited on
+ * the canvas, so this holds only the block-level options.
+ */
 export function ParagraphBlockSettings() {
 	return (
 		<p className="text-muted-foreground text-xs">

@@ -2,7 +2,7 @@ import type * as React from "react";
 import {
 	parseLocalInputValue,
 	toLocalInputValue,
-} from "#/date-time-picker/components/date-time-values.ts";
+} from "#/date-time-picker/lib/date-time-values.ts";
 import { NativeDatePickerDateTime } from "#/native-date-picker/components/native-date-picker-date-time.tsx";
 
 interface Props

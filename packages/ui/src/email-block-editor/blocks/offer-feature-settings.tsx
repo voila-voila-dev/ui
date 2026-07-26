@@ -8,6 +8,7 @@ interface Props {
 	onChange: (block: EmailEditorOfferBlock) => void;
 }
 
+/** The editable list of an offer's included features. */
 export function OfferFeatureSettings({ block, onChange }: Props) {
 	return (
 		<div className="flex flex-col gap-2">

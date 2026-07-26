@@ -7,6 +7,7 @@ import type { EmailEditorStatBlock } from "#/email-block-editor/document/types.t
 
 interface Props extends EmailBlockComponentProps<EmailEditorStatBlock> {}
 
+/** The settings panel for a stat block. */
 export function StatBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

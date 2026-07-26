@@ -2,7 +2,7 @@ import * as React from "react";
 import {
 	startOfDay,
 	toLocalInputValue,
-} from "#/date-time-picker/components/date-time-values.ts";
+} from "#/date-time-picker/lib/date-time-values.ts";
 
 /** A start/end pair, each `null` until picked, as {@link DateTimeRangeInput} holds it. */
 export type DateTimeRange = {

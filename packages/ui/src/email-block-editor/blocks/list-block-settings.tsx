@@ -18,6 +18,7 @@ const MARKER_OPTIONS: ReadonlyArray<{
 
 interface Props extends EmailBlockComponentProps<EmailEditorListBlock> {}
 
+/** The settings panel for a list block. */
 export function ListBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

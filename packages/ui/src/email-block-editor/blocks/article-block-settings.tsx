@@ -7,6 +7,7 @@ import type { EmailEditorArticleBlock } from "#/email-block-editor/document/type
 
 interface Props extends EmailBlockComponentProps<EmailEditorArticleBlock> {}
 
+/** The settings panel for an article block. */
 export function ArticleBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

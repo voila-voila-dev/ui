@@ -1,6 +1,5 @@
 import { Calendar } from "#/calendar/components/calendar.tsx";
 import type { DateTimeRange } from "#/date-time-picker/components/date-time-range.ts";
-import { useTimeOptions } from "#/date-time-picker/components/date-time-values.ts";
 import { ShiftTimeList } from "#/date-time-picker/components/shift-time-list.tsx";
 import {
 	endLabelText,
@@ -11,6 +10,7 @@ import {
 	shiftCalendarDisabled,
 	startLabelText,
 } from "#/date-time-picker/components/shift-time-range.ts";
+import { useTimeOptions } from "#/date-time-picker/hooks/use-time-options.ts";
 
 interface Props {
 	range: DateTimeRange;

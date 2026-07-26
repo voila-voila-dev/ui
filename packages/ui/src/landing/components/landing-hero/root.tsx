@@ -3,7 +3,7 @@ import { Container } from "#/landing/components/container.tsx";
 import {
 	type LandingHeroLayoutVariants,
 	landingHeroLayoutVariants,
-} from "#/landing/components/landing-hero-variants.ts";
+} from "#/landing/components/landing-hero/landing-hero-variants.ts";
 import { Section } from "#/landing/components/section.tsx";
 import { cn } from "#/lib/utils.ts";
 

@@ -11,6 +11,7 @@ interface Props {
 	context: CanvasContext;
 }
 
+/** A grid block's cells, each a drop target for leaf blocks. */
 export function GridBlockCells({ block, context }: Props) {
 	const definition = emailBlockDefinition(block);
 	const selected = context.state.selectedBlockId === block.id;

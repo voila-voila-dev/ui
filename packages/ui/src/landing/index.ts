@@ -19,16 +19,16 @@ export {
 	toneOptions,
 } from "#/landing/components/eyebrow/index.ts";
 export {
+	featureGridCardVariants,
+	featureGridVariants,
+} from "#/landing/components/feature-grid/feature-grid-variants.ts";
+export {
 	FeatureGrid,
 	type FeatureGridCardVariants,
 	type FeatureGridVariants,
 	featureGridCardVariantOptions,
 	featureGridColumnsOptions,
 } from "#/landing/components/feature-grid/index.ts";
-export {
-	featureGridCardVariants,
-	featureGridVariants,
-} from "#/landing/components/feature-grid-variants.ts";
 export {
 	Heading,
 	type HeadingLevel,
@@ -44,14 +44,14 @@ export {
 	type LandingHeroLayoutVariants,
 	landingHeroLayoutOptions,
 } from "#/landing/components/landing-hero/index.ts";
-export { landingHeroLayoutVariants } from "#/landing/components/landing-hero-variants.ts";
+export { landingHeroLayoutVariants } from "#/landing/components/landing-hero/landing-hero-variants.ts";
 export { LogoMarquee } from "#/landing/components/logo-marquee/index.ts";
 export {
 	NumberedCards,
 	type NumberedCardsVariants,
 	numberedCardsColumnsOptions,
 } from "#/landing/components/numbered-cards/index.ts";
-export { numberedCardsVariants } from "#/landing/components/numbered-cards-variants.ts";
+export { numberedCardsVariants } from "#/landing/components/numbered-cards/numbered-cards-variants.ts";
 export { PageHeader } from "#/landing/components/page-header/index.ts";
 export { ProseArticle } from "#/landing/components/prose-article.tsx";
 export { Section } from "#/landing/components/section.tsx";
@@ -61,7 +61,7 @@ export {
 	sectionIntroSpacingOptions,
 	sectionIntroWidthOptions,
 } from "#/landing/components/section-intro/index.ts";
-export { sectionIntroVariants } from "#/landing/components/section-intro-variants.ts";
+export { sectionIntroVariants } from "#/landing/components/section-intro/section-intro-variants.ts";
 export {
 	type SectionVariants,
 	sectionBackgroundOptions,
@@ -76,7 +76,7 @@ export {
 	TestimonialGrid,
 	testimonialAvatarAccentOptions,
 } from "#/landing/components/testimonial-grid/index.ts";
-export { testimonialAvatarVariants } from "#/landing/components/testimonial-grid-variants.ts";
+export { testimonialAvatarVariants } from "#/landing/components/testimonial-grid/testimonial-grid-variants.ts";
 export { Text } from "#/landing/components/text.tsx";
 export {
 	type TextVariants,

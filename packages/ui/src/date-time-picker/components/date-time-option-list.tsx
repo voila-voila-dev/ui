@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Button } from "#/button/components/button.tsx";
-import { timeLabel } from "#/date-time-picker/components/date-time-values.ts";
+import { timeLabel } from "#/date-time-picker/lib/date-time-values.ts";
 
 interface Props {
 	options: ReadonlyArray<number>;

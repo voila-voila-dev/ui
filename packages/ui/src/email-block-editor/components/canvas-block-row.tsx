@@ -19,6 +19,10 @@ interface Props {
 	toolbarSlot?: HTMLElement | null;
 }
 
+/**
+ * One block on the canvas, wrapped in its selection affordance and
+ * toolbar.
+ */
 export function CanvasBlockRow({
 	block,
 	index,

@@ -2,7 +2,7 @@ import type * as React from "react";
 import {
 	type SectionIntroVariants,
 	sectionIntroVariants,
-} from "#/landing/components/section-intro-variants.ts";
+} from "#/landing/components/section-intro/section-intro-variants.ts";
 
 import { cn } from "#/lib/utils.ts";
 

@@ -58,6 +58,10 @@ interface Props
 	closeOnSelect?: boolean;
 }
 
+/**
+ * A searchable grid of Phosphor icons behind a trigger button, for
+ * letting an author pick the icon a record shows with.
+ */
 export function IconPicker({
 	value: controlledValue,
 	defaultValue = null,

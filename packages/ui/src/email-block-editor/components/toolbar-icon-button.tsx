@@ -11,6 +11,7 @@ interface Props {
 	children: React.ReactNode;
 }
 
+/** An icon button sized for the block toolbar's touch target floor. */
 export function ToolbarIconButton({
 	label,
 	active = false,

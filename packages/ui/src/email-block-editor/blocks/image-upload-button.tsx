@@ -9,6 +9,7 @@ interface Props {
 	onUploadImage: (file: File) => Promise<string>;
 }
 
+/** Replaces the block's image from a file the author picks. */
 export function ImageUploadButton({ block, onChange, onUploadImage }: Props) {
 	const fileInputRef = useRef<HTMLInputElement>(null);
 	return (

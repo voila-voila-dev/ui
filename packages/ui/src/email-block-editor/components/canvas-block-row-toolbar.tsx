@@ -40,6 +40,7 @@ interface Props {
  * handlers are unaffected.
  */
 // fallow-ignore-next-line complexity -- prop wiring: one dispatch per toolbar action, plus the nested/root split.
+/** The per-block toolbar shown on the canvas: reorder, duplicate, delete. */
 export function CanvasBlockRowToolbar({
 	block,
 	index,

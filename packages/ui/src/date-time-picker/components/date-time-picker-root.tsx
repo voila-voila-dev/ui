@@ -10,10 +10,8 @@ import {
 	createDateTimeSelectionHandlers,
 	dateTimeTriggerLabel,
 } from "#/date-time-picker/components/date-time-picker-selection.ts";
-import {
-	DEFAULT_DATE_TIME_FORMAT,
-	useTimeOptions,
-} from "#/date-time-picker/components/date-time-values.ts";
+import { useTimeOptions } from "#/date-time-picker/hooks/use-time-options.ts";
+import { DEFAULT_DATE_TIME_FORMAT } from "#/date-time-picker/lib/date-time-values.ts";
 import { usePickerState } from "#/hooks/use-picker-state.ts";
 import { minutesOfDay } from "#/lib/time-math.ts";
 import { Popover } from "#/popover/components/popover.tsx";

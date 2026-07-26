@@ -3,7 +3,7 @@ import { NumberedCardsToneContext } from "#/landing/components/numbered-cards/co
 import {
 	type NumberedCardsVariants,
 	numberedCardsVariants,
-} from "#/landing/components/numbered-cards-variants.ts";
+} from "#/landing/components/numbered-cards/numbered-cards-variants.ts";
 import type { Tone } from "#/landing/lib/tones.ts";
 import { cn } from "#/lib/utils.ts";
 

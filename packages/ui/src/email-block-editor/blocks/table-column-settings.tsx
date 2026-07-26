@@ -19,6 +19,10 @@ interface Props {
 	onChange: (block: EmailEditorTableBlock) => void;
 }
 
+/**
+ * One table column's header and alignment, inside the table block's
+ * settings.
+ */
 export function TableColumnSettings({ block, onChange }: Props) {
 	return (
 		<>

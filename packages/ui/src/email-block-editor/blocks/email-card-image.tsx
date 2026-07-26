@@ -6,6 +6,7 @@ interface Props {
 	image: EmailEditorCardImage;
 }
 
+/** The image slot of a card block, with its rounded top corners. */
 export function EmailCardImage({ image }: Props) {
 	if (image.src === "") {
 		return (

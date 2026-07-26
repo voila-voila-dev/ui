@@ -11,6 +11,10 @@ interface Props extends React.ComponentProps<"li"> {
 	step: number;
 }
 
+/**
+ * One step: its indicator, title and description, plus the state the
+ * separator after it reads.
+ */
 export function StepperItem({ className, step, ...props }: Props) {
 	const { value, orientation } = useStepperContext("Stepper.Item");
 	const state: StepperStepState =

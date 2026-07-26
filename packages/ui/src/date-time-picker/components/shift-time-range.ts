@@ -3,7 +3,7 @@ import {
 	DEFAULT_MINUTES,
 	startOfDay,
 	timeLabel,
-} from "#/date-time-picker/components/date-time-values.ts";
+} from "#/date-time-picker/lib/date-time-values.ts";
 import { minutesOfDay, withMinutes } from "#/lib/time-math.ts";
 
 /** Which end of the range the popover is currently editing. */

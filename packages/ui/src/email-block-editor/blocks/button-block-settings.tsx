@@ -19,6 +19,7 @@ const VARIANT_OPTIONS: ReadonlyArray<{
 
 interface Props extends EmailBlockComponentProps<EmailEditorButtonBlock> {}
 
+/** The settings panel for a button block. */
 export function ButtonBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

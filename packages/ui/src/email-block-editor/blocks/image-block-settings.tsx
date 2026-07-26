@@ -28,6 +28,7 @@ const OVERLAY_OPTIONS: ReadonlyArray<{
 
 interface Props extends EmailBlockComponentProps<EmailEditorImageBlock> {}
 
+/** The settings panel for an image block. */
 export function ImageBlockSettings({ block, onChange, onUploadImage }: Props) {
 	return (
 		<>
