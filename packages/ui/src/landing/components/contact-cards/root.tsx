@@ -1,6 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"div"> {}
+
 /**
  * Bordered contact cards (email/phone). Compose: Root > Card > CardTitle +
  * CardDescription + an action (e.g. a `@voila.dev/ui` Button rendered as a

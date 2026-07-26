@@ -13,6 +13,7 @@ interface Props {
 	showTitle: boolean;
 	onChange: (item: EmailEditorListItem) => void;
 }
+
 /**
  * One entry. The lead-in is optional, so an empty one only takes up room while
  * the block is selected — otherwise the canvas would not match the email.

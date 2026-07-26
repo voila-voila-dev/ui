@@ -3,6 +3,7 @@ import { cn } from "#/lib/utils.ts";
 import { Textarea } from "#/textarea/components/textarea.tsx";
 
 interface Props extends React.ComponentProps<typeof Textarea> {}
+
 export function InputGroupTextarea({ className, ...props }: Props) {
 	return (
 		<Textarea

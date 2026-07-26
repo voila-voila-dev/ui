@@ -3,6 +3,7 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<typeof CommandPrimitive.Group> {}
+
 export function CommandGroup({ className, ...props }: Props) {
 	return (
 		<CommandPrimitive.Group

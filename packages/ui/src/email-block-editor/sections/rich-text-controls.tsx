@@ -15,6 +15,7 @@ interface Props {
 	active: ReadonlySet<string>;
 	coarsePointer: boolean;
 }
+
 export function RichTextControls({ active, coarsePointer }: Props) {
 	return (
 		<>

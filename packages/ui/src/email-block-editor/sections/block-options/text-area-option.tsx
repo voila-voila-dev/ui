@@ -10,6 +10,7 @@ interface Props {
 	description?: string;
 	rows?: number;
 }
+
 /** A multi-line text option (a card description, a rating question). */
 export function TextAreaOption({
 	label,

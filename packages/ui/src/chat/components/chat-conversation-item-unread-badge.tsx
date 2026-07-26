@@ -4,6 +4,7 @@ interface Props {
 	unreadCount: number;
 	unreadLabel?: string;
 }
+
 export function ChatConversationItemUnreadBadge({
 	unreadCount,
 	unreadLabel,

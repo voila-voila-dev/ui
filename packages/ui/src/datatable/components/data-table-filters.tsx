@@ -2,6 +2,7 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"div"> {}
+
 /**
  * Filters emplacement for the toolbar - groups selects, checkbox groups,
  * toggle filters... so every table lays them out the same way.

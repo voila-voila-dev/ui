@@ -5,6 +5,7 @@ import type { EmailEditorImageBlock } from "#/email-block-editor/document/types.
 import { EMAIL_IMAGE_WIDTH_RATIO } from "#/email-block-editor/theme.ts";
 
 interface Props extends EmailBlockComponentProps<EmailEditorImageBlock> {}
+
 /**
  * A content image. Without a source it renders a dashed drop zone that opens a
  * file picker; the actual upload is delegated to the host through

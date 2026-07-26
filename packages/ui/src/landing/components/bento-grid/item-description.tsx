@@ -1,6 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"p"> {}
+
 export function BentoGridItemDescription({ className, ...props }: Props) {
 	return (
 		<p

@@ -1,6 +1,7 @@
 import { PreviewCard as PreviewCardPrimitive } from "@base-ui/react/preview-card";
 
 interface Props extends PreviewCardPrimitive.Root.Props {}
+
 /**
  * Rich hover preview (Base UI PreviewCard) for link/mention triggers — an
  * avatar, a bio, a few stats. For a plain text hint on any control, use

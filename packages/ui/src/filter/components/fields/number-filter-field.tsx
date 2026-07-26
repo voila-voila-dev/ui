@@ -13,6 +13,7 @@ interface Props {
 	readonly onValueChange: (value: NumberFilterValue) => void;
 	readonly labels: FilterLabels;
 }
+
 /** A single numeric value. */
 export function NumberFilterField({
 	definition,

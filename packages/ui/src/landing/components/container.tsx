@@ -7,6 +7,7 @@ import {
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends useRender.ComponentProps<"div">, ContainerVariants {}
+
 /** Centered max-width column with responsive gutters. */
 export function Container({ className, render, size, ...props }: Props) {
 	return useRender({

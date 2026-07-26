@@ -18,6 +18,7 @@ const RICH_TEXT_BLOCK_TYPES: ReadonlySet<string> = new Set([
 	"list",
 	"rating",
 ]);
+
 interface Props {
 	block: EmailEditorBlock;
 	index: number;
@@ -26,6 +27,7 @@ interface Props {
 	handle: SortableBlockHandle;
 	toolbarSlot: HTMLElement | null;
 }
+
 /**
  * The controls of the selected row. It stays mounted while dragging — dnd-kit
  * holds a reference to the drag handle it contains — but is hidden, so it

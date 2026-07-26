@@ -3,6 +3,7 @@ import { cn } from "#/lib/utils.ts";
 import { useSidebar } from "#/sidebar/context/sidebar-context.tsx";
 
 interface Props extends React.ComponentProps<"button"> {}
+
 export function SidebarRail({ className, ...props }: Props) {
 	const { toggleSidebar } = useSidebar();
 

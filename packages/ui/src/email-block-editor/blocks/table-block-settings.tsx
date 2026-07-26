@@ -7,6 +7,7 @@ import { BlockOptionSection } from "#/email-block-editor/sections/block-options/
 import { ToggleOption } from "#/email-block-editor/sections/block-options/toggle-option.tsx";
 
 interface Props extends EmailBlockComponentProps<EmailEditorTableBlock> {}
+
 export function TableBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

@@ -1,6 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"div"> {}
+
 export function StatsRowDivider({ className, ...props }: Props) {
 	return (
 		<div

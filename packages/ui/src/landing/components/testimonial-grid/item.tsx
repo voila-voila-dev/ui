@@ -1,6 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"figure"> {}
+
 export function TestimonialItem({ className, ...props }: Props) {
 	return (
 		<figure

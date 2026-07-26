@@ -7,6 +7,7 @@ import {
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends useRender.ComponentProps<"p">, TextVariants {}
+
 /** Marketing copy block — renders a `p`; pass `render` for `span`/`div`. */
 export function Text({
 	className,

@@ -23,6 +23,7 @@ interface Props {
 	headerSlot?: ReactNode;
 	footerSlot?: ReactNode;
 }
+
 /**
  * The composed WYSIWYG email editor. On a wide viewport it is the canvas plus
  * a per-block settings column; below `lg` the column would push the options a

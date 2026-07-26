@@ -8,6 +8,7 @@ interface Props {
 	onChange: (checked: boolean) => void;
 	description?: string;
 }
+
 /** The one boolean control: a switch beside its label, description below. */
 export function ToggleOption({ label, checked, onChange, description }: Props) {
 	const id = useId();

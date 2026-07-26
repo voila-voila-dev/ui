@@ -8,6 +8,7 @@ import { TextOption } from "#/email-block-editor/sections/block-options/text-opt
 import { ToggleOption } from "#/email-block-editor/sections/block-options/toggle-option.tsx";
 
 interface Props extends EmailBlockComponentProps<EmailEditorProductBlock> {}
+
 export function ProductBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

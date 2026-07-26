@@ -3,6 +3,7 @@ import * as ResizablePrimitive from "react-resizable-panels";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends ResizablePrimitive.GroupProps {}
+
 /**
  * Resizable panel layout (react-resizable-panels v4).
  *

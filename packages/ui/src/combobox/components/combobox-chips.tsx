@@ -2,6 +2,7 @@ import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends ComboboxPrimitive.Chips.Props {}
+
 export function ComboboxChips({ className, ...props }: Props) {
 	return (
 		<ComboboxPrimitive.Chips

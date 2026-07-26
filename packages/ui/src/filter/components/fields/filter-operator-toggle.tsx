@@ -11,6 +11,7 @@ interface Props {
 	 */
 	readonly disabled?: boolean;
 }
+
 /**
  * The inversion switch: two segments, "is" and "is not". A checkbox reads as
  * an option you might miss; two segments state the operator outright, which is

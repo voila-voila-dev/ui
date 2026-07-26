@@ -3,6 +3,7 @@ import { cn } from "#/lib/utils.ts";
 import { menuSeparatorVariants } from "#/menu/components/menu-variants.ts";
 
 interface Props extends MenuPrimitive.Separator.Props {}
+
 export function DropdownMenuSeparator({ className, ...props }: Props) {
 	return (
 		<MenuPrimitive.Separator

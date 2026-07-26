@@ -6,6 +6,7 @@ import { cn } from "#/lib/utils.ts";
 interface Props extends React.ComponentProps<"div"> {
 	closeLabel?: string;
 }
+
 export function DialogFooter({
 	className,
 	closeLabel,

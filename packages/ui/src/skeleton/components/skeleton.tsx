@@ -3,6 +3,7 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"div"> {}
+
 /**
  * Purely visual placeholder with no semantics of its own: wrap the loading
  * region in `role="status"` with sr-only "Loading..." text (or mark the

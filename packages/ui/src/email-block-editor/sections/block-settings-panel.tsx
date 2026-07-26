@@ -10,6 +10,7 @@ interface Props {
 	dispatch: (action: EmailEditorAction) => void;
 	onUploadImage?: (file: File) => Promise<string>;
 }
+
 /**
  * The settings of the selected block, driven by the block registry. Rendered
  * bare so it can live either in the desktop sidebar card or in the mobile

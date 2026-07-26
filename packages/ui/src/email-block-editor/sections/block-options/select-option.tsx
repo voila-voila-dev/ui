@@ -9,6 +9,7 @@ interface Props<Value extends string | number> {
 	onChange: (value: Value) => void;
 	description?: string;
 }
+
 /**
  * The one control for a small closed choice — the admin-form default in this
  * repo. Option values may be numbers (a heading level); they are matched back

@@ -3,6 +3,7 @@ import { useRender } from "@base-ui/react/use-render";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends useRender.ComponentProps<"div"> {}
+
 export function ItemGroup({ className, render, ...props }: Props) {
 	return useRender({
 		defaultTagName: "div",

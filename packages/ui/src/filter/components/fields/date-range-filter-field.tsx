@@ -15,6 +15,7 @@ interface Props {
 	readonly labels: FilterLabels;
 	readonly locale: string;
 }
+
 /** A start and an end date, either of which may be left open. */
 export function DateRangeFilterField({
 	definition,

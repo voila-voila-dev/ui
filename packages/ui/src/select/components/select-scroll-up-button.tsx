@@ -3,6 +3,7 @@ import { CaretUpIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends SelectPrimitive.ScrollUpArrow.Props {}
+
 export function SelectScrollUpButton({ className, ...props }: Props) {
 	return (
 		<SelectPrimitive.ScrollUpArrow

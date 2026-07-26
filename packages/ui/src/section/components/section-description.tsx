@@ -1,6 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"p"> {}
+
 export function SectionDescription({ className, ...props }: Props) {
 	return (
 		<p

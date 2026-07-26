@@ -18,6 +18,7 @@ interface Props {
 	 * it; see {@link GridBlockCells}. */
 	toolbarSlot?: HTMLElement | null;
 }
+
 export function CanvasBlockRow({
 	block,
 	index,

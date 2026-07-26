@@ -7,6 +7,7 @@ interface Props {
 	maxLength: number | undefined;
 	overLimit: boolean;
 }
+
 /** The composer's optional hint + character counter row. */
 export function ChatComposerFooter({
 	hint,

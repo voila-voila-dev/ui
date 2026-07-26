@@ -4,6 +4,7 @@ import { DotsThreeIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends useRender.ComponentProps<"span"> {}
+
 export function BreadcrumbEllipsis({ className, render, ...props }: Props) {
 	return useRender({
 		defaultTagName: "span",

@@ -4,6 +4,7 @@ import { useResponsiveSheetIsMobile } from "#/responsive-sheet/context/responsiv
 import { Sheet } from "#/sheet/components/sheet.tsx";
 
 interface Props extends React.ComponentProps<"div"> {}
+
 export function ResponsiveSheetHeader({ className, ...props }: Props) {
 	const isMobile = useResponsiveSheetIsMobile("ResponsiveSheet.Header");
 	return isMobile ? (

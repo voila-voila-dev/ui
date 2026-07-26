@@ -3,6 +3,7 @@ import { cn } from "#/lib/utils.ts";
 import { Separator } from "#/separator/components/separator.tsx";
 
 interface Props extends React.ComponentProps<typeof Separator> {}
+
 export function SidebarSeparator({ className, ...props }: Props) {
 	return (
 		<Separator

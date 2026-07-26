@@ -12,6 +12,7 @@ interface Props {
 	dispatch: (action: EmailEditorAction) => void;
 	onUploadImage?: (file: File) => Promise<string>;
 }
+
 /** The block settings panel as a bottom sheet, for the viewports where a 280px
  * column would put the options a screenful away from their block. */
 export function BlockSettingsSheet({

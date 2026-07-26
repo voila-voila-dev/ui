@@ -3,6 +3,7 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"button"> {}
+
 export function ChipRemove({ className, children, ...props }: Props) {
 	return (
 		<button

@@ -7,6 +7,7 @@ interface Props {
 	readonly selected: boolean;
 	readonly onToggle: () => void;
 }
+
 /**
  * One option, as a toggle. Options are pressable pills rather than a dropdown:
  * the whole choice set stays visible while you build a filter, which is what

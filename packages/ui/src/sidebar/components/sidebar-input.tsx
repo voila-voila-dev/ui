@@ -3,6 +3,7 @@ import { Input } from "#/input/components/input.tsx";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<typeof Input> {}
+
 export function SidebarInput({ className, ...props }: Props) {
 	return (
 		<Input

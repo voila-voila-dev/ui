@@ -7,6 +7,7 @@ interface Props {
 	badges?: React.ReactNode;
 	unread: boolean;
 }
+
 /** The row's text column: title with trailing badges, then the description. */
 export function ChatConversationItemText({
 	title,

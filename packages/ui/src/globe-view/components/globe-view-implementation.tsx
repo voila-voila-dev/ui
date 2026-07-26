@@ -41,7 +41,9 @@ function resolveCssColor(
 	const [r, g, b, a] = context.getImageData(0, 0, 1, 1).data;
 	return `rgba(${r}, ${g}, ${b}, ${((a ?? 0) / 255).toFixed(3)})`;
 }
+
 interface Props extends React.ComponentProps<typeof GlobeView> {}
+
 /**
  * The MapLibre-backed body of `GlobeView`, loaded through `React.lazy` from
  * `globe-view.tsx` so the ~270 kB runtime never rides along with a page that

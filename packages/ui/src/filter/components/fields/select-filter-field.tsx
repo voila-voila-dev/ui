@@ -21,12 +21,14 @@ function toggleValue(
 	}
 	return multiple ? [...values, value] : [value];
 }
+
 interface Props {
 	readonly definition: SelectFilterDefinition;
 	readonly value: SelectFilterValue | undefined;
 	readonly onValueChange: (value: SelectFilterValue) => void;
 	readonly labels: FilterLabels;
 }
+
 /** Single or multiple choice among a known set, optionally inverted. */
 export function SelectFilterField({
 	definition,

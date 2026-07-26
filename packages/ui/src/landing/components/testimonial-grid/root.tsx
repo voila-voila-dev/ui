@@ -1,6 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"div"> {}
+
 /**
  * Testimonial figure cards (quote, avatar initial, star rating). Compose: Root >
  * Item > QuoteIcon + Quote + Footer (Avatar + Author > AuthorName/AuthorRole +

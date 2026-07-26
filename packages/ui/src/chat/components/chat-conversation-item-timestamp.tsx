@@ -5,6 +5,7 @@ interface Props {
 	timestamp?: React.ReactNode;
 	unread: boolean;
 }
+
 export function ChatConversationItemTimestamp({ timestamp, unread }: Props) {
 	if (timestamp === undefined || timestamp === null) {
 		return null;

@@ -9,6 +9,7 @@ interface Props {
 	onMouseDown?: (event: { preventDefault: () => void }) => void;
 	children: React.ReactNode;
 }
+
 export function ToolbarIconButton({
 	label,
 	active = false,

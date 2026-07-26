@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 interface Props {
 	readonly children: ReactNode;
 }
+
 /** Two bounds side by side — the layout shared by every range field. */
 export function FilterRangeRow({ children }: Props) {
 	return (

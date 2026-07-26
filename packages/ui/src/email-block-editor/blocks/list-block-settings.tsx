@@ -15,7 +15,9 @@ const MARKER_OPTIONS: ReadonlyArray<{
 	{ value: "number", label: "Number" },
 	{ value: "badge", label: "Numbered badge" },
 ];
+
 interface Props extends EmailBlockComponentProps<EmailEditorListBlock> {}
+
 export function ListBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

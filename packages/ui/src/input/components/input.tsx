@@ -3,6 +3,7 @@ import { Input as InputPrimitive } from "@base-ui/react/input";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends InputPrimitive.Props {}
+
 export function Input({ className, ...props }: Props) {
 	return (
 		<InputPrimitive

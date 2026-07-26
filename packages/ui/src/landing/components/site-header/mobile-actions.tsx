@@ -1,6 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"li"> {}
+
 /** Call-to-action cluster closing the mobile menu. */
 export function SiteHeaderMobileActions({ className, ...props }: Props) {
 	return (

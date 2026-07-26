@@ -3,6 +3,7 @@ import { useCarousel } from "#/carousel/hooks/use-carousel.ts";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"div"> {}
+
 export function CarouselDots({ className, ...props }: Props) {
 	const { orientation, scrollSnaps, selectedIndex, scrollTo } = useCarousel();
 

@@ -63,12 +63,14 @@ function usePlaceSearch(
 
 	return { results, busy };
 }
+
 interface Props {
 	readonly definition: GeoRadiusFilterDefinition;
 	readonly value: GeoRadiusFilterValue | undefined;
 	readonly onValueChange: (value: GeoRadiusFilterValue | undefined) => void;
 	readonly labels: FilterLabels;
 }
+
 /**
  * "Within N km of somewhere": pick a place, then size the circle. The map is
  * the answer to "is that the area I meant?" — a lat/lon pair and a number are

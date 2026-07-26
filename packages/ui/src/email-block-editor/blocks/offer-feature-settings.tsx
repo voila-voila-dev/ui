@@ -6,6 +6,7 @@ interface Props {
 	block: EmailEditorOfferBlock;
 	onChange: (block: EmailEditorOfferBlock) => void;
 }
+
 export function OfferFeatureSettings({ block, onChange }: Props) {
 	return (
 		<div className="flex flex-col gap-2">

@@ -3,6 +3,7 @@ import { useRender } from "@base-ui/react/use-render";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends useRender.ComponentProps<"img"> {}
+
 /** One logo — renders an `img` by default; pass `render` for custom markup. */
 export function LogoMarqueeItem({ className, render, ...props }: Props) {
 	return useRender({

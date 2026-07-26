@@ -3,6 +3,7 @@ import { EMAIL_COLOR } from "#/email-block-editor/theme.ts";
 interface Props {
 	label: string;
 }
+
 /** A card's call to action. The target lives in the settings, so the canvas
  * only shows the pill; an empty label means the card has no button. */
 export function EmailCardButton({ label }: Props) {

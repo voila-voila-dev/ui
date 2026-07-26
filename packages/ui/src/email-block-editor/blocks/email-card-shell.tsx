@@ -9,6 +9,7 @@ interface Props {
 	highlighted?: boolean;
 	children: ReactNode;
 }
+
 /**
  * The one card shape. The article, product and offer blocks are all
  * card-shaped, so they share this shell (and its `emailCard` counterpart in

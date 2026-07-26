@@ -6,6 +6,7 @@ interface Props {
 	gridId: string;
 	context: CanvasContext;
 }
+
 /** The dashed add slot of a grid cell. */
 export function GridAddCell({ gridId, context }: Props) {
 	return (

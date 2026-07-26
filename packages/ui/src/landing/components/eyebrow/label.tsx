@@ -4,6 +4,7 @@ import { toneTextClass } from "#/landing/lib/tones.ts";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"span"> {}
+
 export function EyebrowLabel({ className, ...props }: Props) {
 	const tone = useContext(EyebrowToneContext);
 

@@ -6,6 +6,7 @@ interface Props {
 	onUploadImage?: (file: File) => Promise<string>;
 	onUploaded: (src: string) => void;
 }
+
 /** The empty state: a dashed zone that opens the file picker. The upload
  * itself is the host's job, so without `onUploadImage` it is simply inert. */
 export function ImageDropZone({ onUploadImage, onUploaded }: Props) {

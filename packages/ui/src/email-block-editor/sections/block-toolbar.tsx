@@ -35,6 +35,7 @@ const useActiveInlineMarks = (): ReadonlySet<string> => {
 	}, []);
 	return active;
 };
+
 interface Props {
 	handle: SortableBlockHandle;
 	/** Show the bold/italic/underline/link group (paragraph blocks). */
@@ -52,6 +53,7 @@ interface Props {
 	 * only reachable through the thin band around its cells. */
 	onSelectContainer?: () => void;
 }
+
 /**
  * The controls of the selected block: add-below, drag handle, inline
  * formatting when the block holds rich text, duplicate, delete, plus a

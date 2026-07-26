@@ -1,6 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"div"> {}
+
 /**
  * Parallel tone-colored step tracks with a vertical connector line and numbered
  * icon tiles. Compose: Root > Track (tone) > Header (HeaderIcon + HeaderText >

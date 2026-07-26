@@ -8,6 +8,7 @@ interface Props {
 	onChange: (block: EmailEditorImageBlock) => void;
 	onUploadImage: (file: File) => Promise<string>;
 }
+
 export function ImageUploadButton({ block, onChange, onUploadImage }: Props) {
 	const fileInputRef = useRef<HTMLInputElement>(null);
 	return (

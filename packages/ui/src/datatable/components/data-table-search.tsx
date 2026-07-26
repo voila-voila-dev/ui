@@ -4,6 +4,7 @@ import { InputGroup } from "#/input-group/components/input-group.tsx";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<typeof InputGroup.Input> {}
+
 /**
  * Search emplacement for the toolbar - a leading-icon search input. Controlled
  * like a plain input (`value`/`onChange`); debouncing and where the filtering

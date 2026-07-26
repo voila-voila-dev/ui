@@ -5,6 +5,7 @@ interface Props {
 	marker: EmailEditorListMarker;
 	index: number;
 }
+
 /** The marker shown before an item, mirroring the domain `emailList`. */
 export function ListMarker({ marker, index }: Props) {
 	if (marker === "badge") {

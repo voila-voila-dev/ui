@@ -17,6 +17,7 @@ interface Props {
 	describedBy: string | undefined;
 	sendLabel: string;
 }
+
 export function ChatComposerInput({
 	value,
 	onValueChange,

@@ -5,6 +5,7 @@ import { EMAIL_COLOR } from "#/email-block-editor/theme.ts";
 interface Props {
 	image: EmailEditorCardImage;
 }
+
 export function EmailCardImage({ image }: Props) {
 	if (image.src === "") {
 		return (

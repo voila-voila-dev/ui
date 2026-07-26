@@ -5,6 +5,7 @@ import { cn } from "#/lib/utils.ts";
 import { useStepperItemContext } from "#/stepper/context/stepper-item-context.tsx";
 
 interface Props extends React.ComponentProps<"span"> {}
+
 /**
  * Step circle: renders the step number (or custom children) and swaps to a
  * check mark once the step is completed.

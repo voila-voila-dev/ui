@@ -9,7 +9,9 @@ import { EMAIL_COLOR, EMAIL_FONT } from "#/email-block-editor/theme.ts";
 const TEXT_ALIGN: {
 	readonly [A in EmailEditorAlignment]: "left" | "center" | "right";
 } = { left: "left", center: "center", right: "right" };
+
 interface Props extends EmailBlockComponentProps<EmailEditorStatBlock> {}
+
 /**
  * One figure with its caption. A row of three is a three-column grid of stat
  * blocks — the block never invents its own multi-column layout (§1.5 of the

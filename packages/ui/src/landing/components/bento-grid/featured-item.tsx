@@ -5,6 +5,7 @@ import {
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"article"> {}
+
 /** The gradient hero tile — spans two rows on desktop, owns the blur blobs. */
 export function BentoGridFeaturedItem({
 	className,

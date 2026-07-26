@@ -11,12 +11,14 @@ import type {
 
 const toInputValue = (bound: number | undefined): string =>
 	bound === undefined ? "" : String(bound);
+
 interface Props {
 	readonly definition: NumberRangeFilterDefinition;
 	readonly value: NumberRangeFilterValue | undefined;
 	readonly onValueChange: (value: NumberRangeFilterValue) => void;
 	readonly labels: FilterLabels;
 }
+
 /** A lower and an upper bound, either of which may be left open. */
 export function NumberRangeFilterField({
 	definition,

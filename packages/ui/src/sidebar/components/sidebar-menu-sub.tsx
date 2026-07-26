@@ -2,6 +2,7 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"ul"> {}
+
 export function SidebarMenuSub({ className, ...props }: Props) {
 	return (
 		<ul

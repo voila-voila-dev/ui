@@ -8,6 +8,7 @@ interface Props {
 	dispatch: (action: EmailEditorAction) => void;
 	onUploadImage?: (file: File) => Promise<string>;
 }
+
 export function SelectedBlockSettings({
 	block,
 	dispatch,

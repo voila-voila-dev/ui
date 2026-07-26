@@ -4,6 +4,7 @@ import { cn } from "#/lib/utils.ts";
 import { navigationMenuTriggerStyle } from "#/navigation-menu/components/navigation-menu-variants.ts";
 
 interface Props extends NavigationMenuPrimitive.Trigger.Props {}
+
 export function NavigationMenuTrigger({
 	className,
 	children,

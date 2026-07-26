@@ -8,6 +8,7 @@ interface Props {
 	className?: string;
 	children: (handle: SortableBlockHandle) => ReactNode;
 }
+
 /** One draggable row; renders its content through a render prop that receives
  * the drag handle to attach to the block toolbar. */
 export function SortableBlockItem({ blockId, className, children }: Props) {

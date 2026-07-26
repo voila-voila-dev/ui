@@ -6,6 +6,7 @@ import { TextAreaOption } from "#/email-block-editor/sections/block-options/text
 import { TextOption } from "#/email-block-editor/sections/block-options/text-option.tsx";
 
 interface Props extends EmailBlockComponentProps<EmailEditorStatBlock> {}
+
 export function StatBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

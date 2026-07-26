@@ -19,10 +19,12 @@ export const selectedAnchorElement = (): HTMLAnchorElement | null => {
 	const element = node instanceof Element ? node : node.parentElement;
 	return element?.closest("a") ?? null;
 };
+
 interface Props {
 	active: boolean;
 	coarsePointer: boolean;
 }
+
 /** Link editing on the current text selection. Opening on a caret inside an
  * existing link edits that whole link (URL prefilled); the selection is saved
  * while the popover holds focus and restored before the command applies. */

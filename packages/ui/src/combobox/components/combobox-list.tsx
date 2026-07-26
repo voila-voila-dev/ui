@@ -2,6 +2,7 @@ import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends ComboboxPrimitive.List.Props {}
+
 export function ComboboxList({ className, ...props }: Props) {
 	return (
 		<ComboboxPrimitive.List

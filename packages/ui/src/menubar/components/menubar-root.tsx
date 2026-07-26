@@ -2,6 +2,7 @@ import { Menubar as MenubarPrimitive } from "@base-ui/react/menubar";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends MenubarPrimitive.Props {}
+
 export function MenubarRoot({ className, ...props }: Props) {
 	return (
 		<MenubarPrimitive

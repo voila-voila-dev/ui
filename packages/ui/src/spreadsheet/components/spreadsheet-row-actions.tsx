@@ -2,6 +2,7 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"td"> {}
+
 /**
  * Trailing cell for per-row actions - put `<Button variant="ghost"
  * size="icon-sm" aria-label=... />` inside.

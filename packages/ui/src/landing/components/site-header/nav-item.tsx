@@ -3,6 +3,7 @@ import { useRender } from "@base-ui/react/use-render";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends useRender.ComponentProps<"a"> {}
+
 /** A desktop nav entry — the anchor comes wrapped in its own `li`. */
 export function SiteHeaderNavItem({ className, render, ...props }: Props) {
 	const anchor = useRender({

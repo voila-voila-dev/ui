@@ -25,7 +25,9 @@ const OVERLAY_OPTIONS: ReadonlyArray<{
 	{ value: "none", label: "None" },
 	{ value: "play", label: "Play button (video thumbnail)" },
 ];
+
 interface Props extends EmailBlockComponentProps<EmailEditorImageBlock> {}
+
 export function ImageBlockSettings({ block, onChange, onUploadImage }: Props) {
 	return (
 		<>

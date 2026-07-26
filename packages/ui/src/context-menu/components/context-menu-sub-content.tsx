@@ -3,6 +3,7 @@ import { ContextMenuContent } from "#/context-menu/components/context-menu-conte
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<typeof ContextMenuContent> {}
+
 export function ContextMenuSubContent({
 	className,
 	side = "right",

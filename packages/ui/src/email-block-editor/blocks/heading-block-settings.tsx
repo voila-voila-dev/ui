@@ -14,7 +14,9 @@ const HEADING_LEVEL_OPTIONS: ReadonlyArray<{
 	{ value: 1, label: EMAIL_HEADING_STYLE[1].label },
 	{ value: 2, label: EMAIL_HEADING_STYLE[2].label },
 ];
+
 interface Props extends EmailBlockComponentProps<EmailEditorHeadingBlock> {}
+
 export function HeadingBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

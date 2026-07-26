@@ -6,7 +6,9 @@ import { EMAIL_COLOR, EMAIL_FONT } from "#/email-block-editor/theme.ts";
 
 /** The scale, mirroring the domain's `EMAIL_RATING_SCALE`. */
 const RATING_SCALE = [1, 2, 3, 4, 5] as const;
+
 interface Props extends EmailBlockComponentProps<EmailEditorRatingBlock> {}
+
 /**
  * A one-to-five satisfaction question. In the sent email each star is its own
  * link carrying `?rating=N`, which makes the five steps five separately

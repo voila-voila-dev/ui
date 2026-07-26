@@ -9,6 +9,7 @@ interface Props {
 	dispatch: (action: EmailEditorAction) => void;
 	onUploadImage?: (file: File) => Promise<string>;
 }
+
 /** The desktop settings column: the panel above, in its own titled card. */
 export function EditorSidebar({ state, dispatch, onUploadImage }: Props) {
 	return (

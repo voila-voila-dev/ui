@@ -3,6 +3,7 @@ import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends TabsPrimitive.Tab.Props {}
+
 export function TabsTrigger({ className, ...props }: Props) {
 	return (
 		<TabsPrimitive.Tab

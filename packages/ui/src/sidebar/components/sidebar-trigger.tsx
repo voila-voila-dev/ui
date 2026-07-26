@@ -4,6 +4,7 @@ import { Button } from "#/button/components/button.tsx";
 import { useSidebar } from "#/sidebar/context/sidebar-context.tsx";
 
 interface Props extends React.ComponentProps<typeof Button> {}
+
 export function SidebarTrigger({
 	className,
 	onClick,

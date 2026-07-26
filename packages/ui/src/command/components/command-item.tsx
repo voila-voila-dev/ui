@@ -5,6 +5,7 @@ import { cn } from "#/lib/utils.ts";
 import { menuItemVariants } from "#/menu/components/menu-variants.ts";
 
 interface Props extends React.ComponentProps<typeof CommandPrimitive.Item> {}
+
 export function CommandItem({ className, children, ...props }: Props) {
 	return (
 		<CommandPrimitive.Item

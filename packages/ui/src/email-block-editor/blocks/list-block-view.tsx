@@ -6,6 +6,7 @@ import type {
 } from "#/email-block-editor/document/types.ts";
 
 interface Props extends EmailBlockComponentProps<EmailEditorListBlock> {}
+
 /**
  * A bulleted, numbered or badge list. Each item is the same rich-text surface
  * the paragraph uses, so the toolbar's bold/italic/underline/link controls act

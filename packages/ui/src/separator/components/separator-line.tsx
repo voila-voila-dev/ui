@@ -4,6 +4,7 @@ import { cn } from "#/lib/utils.ts";
 interface Props {
 	orientation: NonNullable<SeparatorPrimitive.Props["orientation"]>;
 }
+
 export function SeparatorLine({ orientation }: Props) {
 	return (
 		<span

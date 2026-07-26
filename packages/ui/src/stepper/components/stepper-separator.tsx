@@ -4,6 +4,7 @@ import { cn } from "#/lib/utils.ts";
 import { useStepperContext } from "#/stepper/context/stepper-context.tsx";
 
 interface Props extends React.ComponentProps<"div"> {}
+
 /**
  * Connecting line to the next step. Horizontal: a flexible rule filling the
  * gap between items. Vertical: an absolute line dropping from the indicator,

@@ -9,6 +9,7 @@ interface Props {
 	placeholder?: string;
 	description?: string;
 }
+
 /** A single-line text option (a label, a title, a price caption). */
 export function TextOption({
 	label,

@@ -8,6 +8,7 @@ interface Props {
 	readonly labels: FilterLabels;
 	readonly onPick: (place: PlaceSuggestion) => void;
 }
+
 export function PlaceResults({ results, busy, query, labels, onPick }: Props) {
 	if (busy) {
 		return (

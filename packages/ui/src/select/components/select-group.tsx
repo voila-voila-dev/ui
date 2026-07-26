@@ -2,6 +2,7 @@ import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends SelectPrimitive.Group.Props {}
+
 export function SelectGroup({ className, ...props }: Props) {
 	return (
 		<SelectPrimitive.Group

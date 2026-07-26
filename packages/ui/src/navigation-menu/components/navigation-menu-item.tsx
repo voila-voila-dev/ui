@@ -2,6 +2,7 @@ import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/naviga
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends NavigationMenuPrimitive.Item.Props {}
+
 export function NavigationMenuItem({ className, ...props }: Props) {
 	return (
 		<NavigationMenuPrimitive.Item

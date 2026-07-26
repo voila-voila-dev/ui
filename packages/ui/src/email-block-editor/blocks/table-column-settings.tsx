@@ -13,10 +13,12 @@ const ALIGN_OPTIONS: ReadonlyArray<{
 	{ value: "left", label: "Left" },
 	{ value: "right", label: "Right" },
 ];
+
 interface Props {
 	block: EmailEditorTableBlock;
 	onChange: (block: EmailEditorTableBlock) => void;
 }
+
 export function TableColumnSettings({ block, onChange }: Props) {
 	return (
 		<>

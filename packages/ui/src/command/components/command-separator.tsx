@@ -5,6 +5,7 @@ import { menuSeparatorVariants } from "#/menu/components/menu-variants.ts";
 
 interface Props
 	extends React.ComponentProps<typeof CommandPrimitive.Separator> {}
+
 export function CommandSeparator({ className, ...props }: Props) {
 	return (
 		<CommandPrimitive.Separator

@@ -2,6 +2,7 @@ import { Label } from "#/label/components/label.tsx";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<typeof Label> {}
+
 export function FieldLabel({ className, ...props }: Props) {
 	return (
 		<Label

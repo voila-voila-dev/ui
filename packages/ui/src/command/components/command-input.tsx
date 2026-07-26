@@ -5,6 +5,7 @@ import { InputGroup } from "#/input-group/components/input-group.tsx";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<typeof CommandPrimitive.Input> {}
+
 export function CommandInput({ className, ...props }: Props) {
 	return (
 		<div data-slot="command-input-wrapper" className="p-1 pb-0">

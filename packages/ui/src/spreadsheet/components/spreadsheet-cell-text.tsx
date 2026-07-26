@@ -3,6 +3,7 @@ import { cn } from "#/lib/utils.ts";
 import { textCellClassName } from "#/spreadsheet/components/spreadsheet-styles.ts";
 
 interface Props extends React.ComponentProps<"td"> {}
+
 /** Read-only cell (row labels, computed values) in the same dense grid. */
 export function SpreadsheetCellText({ className, ...props }: Props) {
 	return (

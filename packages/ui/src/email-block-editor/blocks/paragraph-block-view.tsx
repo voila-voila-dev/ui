@@ -4,6 +4,7 @@ import type { EmailEditorParagraphBlock } from "#/email-block-editor/document/ty
 import { EMAIL_COLOR, EMAIL_FONT } from "#/email-block-editor/theme.ts";
 
 interface Props extends EmailBlockComponentProps<EmailEditorParagraphBlock> {}
+
 /**
  * A rich body paragraph, edited in place (bold, italic, underline and links
  * via the block toolbar). Mirrors the domain `emailParagraph` component

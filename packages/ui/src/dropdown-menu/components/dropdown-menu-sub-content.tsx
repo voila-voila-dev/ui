@@ -3,6 +3,7 @@ import { DropdownMenuContent } from "#/dropdown-menu/components/dropdown-menu-co
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<typeof DropdownMenuContent> {}
+
 export function DropdownMenuSubContent({
 	alignOffset = -3,
 	side = "inline-end",

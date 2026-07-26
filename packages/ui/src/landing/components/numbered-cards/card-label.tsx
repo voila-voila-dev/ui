@@ -1,6 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"span"> {}
+
 /** The "Step N" label next to the icon. */
 export function NumberedCardLabel({ className, ...props }: Props) {
 	return (

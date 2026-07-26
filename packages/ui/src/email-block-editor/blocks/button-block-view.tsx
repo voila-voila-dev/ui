@@ -11,7 +11,9 @@ const JUSTIFY: { readonly [A in EmailEditorAlignment]: string } = {
 	center: "center",
 	right: "flex-end",
 };
+
 interface Props extends EmailBlockComponentProps<EmailEditorButtonBlock> {}
+
 /**
  * The call-to-action button. The label is edited in place; the target URL, the
  * alignment and the variant live in the settings sidebar (no inline chip — the

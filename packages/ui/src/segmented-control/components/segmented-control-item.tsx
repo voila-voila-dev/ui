@@ -4,6 +4,7 @@ import { cn } from "#/lib/utils.ts";
 import { SegmentedControlContext } from "#/segmented-control/context/segmented-control-context.ts";
 
 interface Props extends RadioPrimitive.Root.Props {}
+
 export function SegmentedControlItem({ className, ...props }: Props) {
 	const { size } = React.useContext(SegmentedControlContext);
 

@@ -14,6 +14,7 @@ const fromIsoDay = (isoDate: string | undefined): Date | null => {
 	const parsed = new Date(`${isoDate}T00:00:00`);
 	return Number.isNaN(parsed.getTime()) ? null : parsed;
 };
+
 interface Props {
 	readonly id?: string;
 	readonly value: string | undefined;
@@ -23,6 +24,7 @@ interface Props {
 	readonly max?: string;
 	readonly locale: string;
 }
+
 /**
  * One bound, on the surface that suits the device: the calendar popover on
  * desktop, the OS date picker under the mobile breakpoint.

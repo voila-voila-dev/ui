@@ -1,6 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"span"> {}
+
 /** Date / reading-time entry — icon child + text. */
 export function ArticleCardMetaItem({ className, ...props }: Props) {
 	return (

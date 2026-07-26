@@ -2,6 +2,7 @@ import { SpinnerGapIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"svg"> {}
+
 export function Spinner({ className, ...props }: Props) {
 	return (
 		<SpinnerGapIcon

@@ -66,6 +66,7 @@ const resolveDropOnBlock = (
 		index: siblings.findIndex((block) => block.id === blockId),
 	};
 };
+
 interface Props {
 	blocks: ReadonlyArray<EmailEditorBlock>;
 	onMove: (
@@ -75,6 +76,7 @@ interface Props {
 	) => void;
 	children: ReactNode;
 }
+
 /**
  * The dnd-kit context for the whole document: one instance at the editor root,
  * one `SortableContext` per container below it. Reordering is announced

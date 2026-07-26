@@ -4,6 +4,7 @@ import { cn } from "#/lib/utils.ts";
 import { ScrollBar } from "#/scroll-area/components/scroll-area-bar.tsx";
 
 interface Props extends ScrollAreaPrimitive.Root.Props {}
+
 export function ScrollAreaRoot({ className, children, ...props }: Props) {
 	return (
 		<ScrollAreaPrimitive.Root

@@ -19,7 +19,9 @@ const rowOfWidth = (
 	width: number,
 ): ReadonlyArray<string> =>
 	Array.from({ length: width }, (_, index) => row[index] ?? "");
+
 interface Props extends EmailBlockComponentProps<EmailEditorTableBlock> {}
+
 /**
  * A plain-text data table — an order recap, a schedule, a price list. Mirrors
  * the domain `emailLineItemsTable` component: header rules, row separators and

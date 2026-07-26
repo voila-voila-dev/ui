@@ -8,6 +8,7 @@ interface Props {
 	unreadCount: number;
 	unreadLabel?: string;
 }
+
 /** The row's trailing column: timestamp over the unread badge. */
 export function ChatConversationItemMeta({
 	timestamp,

@@ -7,6 +7,7 @@ import { formatPreviewPrice } from "#/email-block-editor/sections/block-options/
 import { EMAIL_COLOR } from "#/email-block-editor/theme.ts";
 
 interface Props extends EmailBlockComponentProps<EmailEditorProductBlock> {}
+
 /**
  * A catalogue item on the shared card shell: visual, name, description, price
  * with an optional struck-through base price, and a call to action.

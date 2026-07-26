@@ -9,6 +9,7 @@ interface Props {
 	outputSize?: { readonly width: number; readonly height: number };
 	onCropped: (blob: Blob) => void;
 }
+
 /**
  * Confirm / cancel controls for an active crop. Rendered inside
  * <ImageCropper.Root> so it can reach `cropToBlob`; shown only once a file is

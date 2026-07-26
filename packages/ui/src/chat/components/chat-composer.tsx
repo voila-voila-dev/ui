@@ -33,6 +33,7 @@ interface Props extends Omit<React.ComponentProps<"form">, "onSubmit"> {
 	error?: React.ReactNode;
 	hint?: React.ReactNode;
 }
+
 export function ChatComposer({
 	value,
 	onValueChange,

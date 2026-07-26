@@ -2,6 +2,7 @@ import { Container } from "#/landing/components/container.tsx";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"div"> {}
+
 /**
  * Partner/brand logo band, either an animated marquee or a static wrap. The
  * marquee keyframes live in `@voila.dev/ui/landing.css`.

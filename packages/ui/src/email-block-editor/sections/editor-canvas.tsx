@@ -31,6 +31,7 @@ interface Props {
 	headerSlot?: ReactNode;
 	footerSlot?: ReactNode;
 }
+
 /**
  * The editing surface, dressed as the email it produces: the grey canvas, the
  * 600px white card, the blocks, and header/footer placeholders.

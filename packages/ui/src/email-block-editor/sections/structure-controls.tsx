@@ -18,6 +18,7 @@ interface Props {
 	onAddBelow: (type: EmailEditorBlockType) => void;
 	onSelectContainer?: () => void;
 }
+
 /** Where the block sits in the document: add a sibling below, drag it, and —
  * for a block in a grid cell — reach the row it belongs to. */
 export function StructureControls({

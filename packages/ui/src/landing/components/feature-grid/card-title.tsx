@@ -1,6 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"h3"> {}
+
 export function FeatureGridCardTitle({ className, ...props }: Props) {
 	return (
 		<h3

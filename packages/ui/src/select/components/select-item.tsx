@@ -3,6 +3,7 @@ import { CheckIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends SelectPrimitive.Item.Props {}
+
 export function SelectItem({ className, children, ...props }: Props) {
 	return (
 		<SelectPrimitive.Item

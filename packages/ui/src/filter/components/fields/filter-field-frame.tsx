@@ -19,6 +19,7 @@ interface Props {
 	readonly labels: FilterLabels;
 	readonly children: ReactNode;
 }
+
 /**
  * The chrome every filter field shares: a label row that also hosts the
  * "is / is not" switch and the clear action, then the control itself. One frame

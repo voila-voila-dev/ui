@@ -2,6 +2,7 @@ import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends SelectPrimitive.Separator.Props {}
+
 export function SelectSeparator({ className, ...props }: Props) {
 	return (
 		<SelectPrimitive.Separator

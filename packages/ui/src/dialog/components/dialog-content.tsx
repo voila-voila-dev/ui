@@ -12,6 +12,7 @@ interface Props extends DialogPrimitive.Popup.Props {
 	closeButtonLabel?: string;
 	overlayClassName?: string;
 }
+
 export function DialogContent({
 	className,
 	children,

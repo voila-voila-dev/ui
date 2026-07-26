@@ -3,6 +3,7 @@ import { Drawer as DrawerPrimitive } from "vaul";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<typeof DrawerPrimitive.Title> {}
+
 export function DrawerTitle({ className, ...props }: Props) {
 	return (
 		<DrawerPrimitive.Title

@@ -8,6 +8,7 @@ import {
 } from "#/email-block-editor/theme.ts";
 
 interface Props extends EmailBlockComponentProps<EmailEditorHeadingBlock> {}
+
 /**
  * A title line, edited in place. Mirrors the domain `emailHeading` component
  * (bold, brand-colored) so the canvas matches the sent email; the level picks

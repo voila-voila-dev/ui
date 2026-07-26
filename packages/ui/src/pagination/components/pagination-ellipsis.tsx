@@ -3,6 +3,7 @@ import type * as React from "react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"span"> {}
+
 export function PaginationEllipsis({ className, ...props }: Props) {
 	return (
 		// Decorative gap indicator: `aria-hidden` hides it from the a11y tree, so

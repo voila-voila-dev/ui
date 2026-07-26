@@ -15,7 +15,9 @@ const STYLE_OPTIONS: ReadonlyArray<{
 	{ value: "filled", label: "Filled stars" },
 	{ value: "outline", label: "Outlined stars" },
 ];
+
 interface Props extends EmailBlockComponentProps<EmailEditorRatingBlock> {}
+
 export function RatingBlockSettings({ block, onChange }: Props) {
 	return (
 		<>

@@ -14,6 +14,7 @@ function resolveThumbValues(
 }
 
 interface Props extends SliderPrimitive.Root.Props {}
+
 export function SliderRoot({
 	className,
 	children,

@@ -3,6 +3,7 @@ import { CaretDownIcon } from "@phosphor-icons/react";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends SelectPrimitive.ScrollDownArrow.Props {}
+
 export function SelectScrollDownButton({ className, ...props }: Props) {
 	return (
 		<SelectPrimitive.ScrollDownArrow

@@ -8,6 +8,7 @@ interface Props {
 	block: EmailEditorOfferBlock;
 	onChange: (block: EmailEditorOfferBlock) => void;
 }
+
 /** The plan's identity: its optional surtitle, its name, and the price with
  * its optional recurrence. */
 export function OfferHeader({ block, onChange }: Props) {

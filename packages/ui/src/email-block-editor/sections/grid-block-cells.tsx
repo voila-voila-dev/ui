@@ -10,6 +10,7 @@ interface Props {
 	block: EmailEditorGridBlock;
 	context: CanvasContext;
 }
+
 export function GridBlockCells({ block, context }: Props) {
 	const definition = emailBlockDefinition(block);
 	const selected = context.state.selectedBlockId === block.id;

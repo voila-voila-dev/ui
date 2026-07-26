@@ -7,6 +7,7 @@ import {
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends useRender.ComponentProps<"section">, SectionVariants {}
+
 /**
  * Full-width landing band — vertical rhythm + background treatment. Marketing
  * scale (`py-24`…): not interchangeable with the app-shell `Section` from

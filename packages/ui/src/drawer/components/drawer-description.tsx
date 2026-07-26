@@ -4,6 +4,7 @@ import { cn } from "#/lib/utils.ts";
 
 interface Props
 	extends React.ComponentProps<typeof DrawerPrimitive.Description> {}
+
 export function DrawerDescription({ className, ...props }: Props) {
 	return (
 		<DrawerPrimitive.Description

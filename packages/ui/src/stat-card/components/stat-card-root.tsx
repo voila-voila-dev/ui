@@ -2,6 +2,7 @@ import { Card } from "#/card/components/card.tsx";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<typeof Card.Root> {}
+
 /**
  * KPI tile for dashboards: a Card composition pairing a muted label, a large
  * value, an optional trend delta and an optional full-bleed sparkline. Put a

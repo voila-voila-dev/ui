@@ -17,6 +17,7 @@ interface Props {
 	onPickedChange: (hasPicked: boolean) => void;
 	onFileCropped: (blob: Blob) => void;
 }
+
 /** The dropzone → crop → confirm flow itself, minus the surrounding chrome. */
 export function ImageUploadCropper({
 	shape,

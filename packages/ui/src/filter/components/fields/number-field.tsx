@@ -10,6 +10,7 @@ interface Props {
 	readonly max?: number;
 	readonly step?: number;
 }
+
 export function NumberField({
 	id,
 	value,

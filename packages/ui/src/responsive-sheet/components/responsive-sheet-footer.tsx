@@ -3,6 +3,7 @@ import { useResponsiveSheetIsMobile } from "#/responsive-sheet/context/responsiv
 import { Sheet } from "#/sheet/components/sheet.tsx";
 
 interface Props extends React.ComponentProps<"div"> {}
+
 export function ResponsiveSheetFooter({ className, ...props }: Props) {
 	const isMobile = useResponsiveSheetIsMobile("ResponsiveSheet.Footer");
 	return isMobile ? (

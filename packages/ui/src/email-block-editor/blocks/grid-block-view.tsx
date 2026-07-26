@@ -3,6 +3,7 @@ import type { EmailEditorGridBlock } from "#/email-block-editor/document/types.t
 import { EMAIL_GRID_GAP_PX } from "#/email-block-editor/theme.ts";
 
 interface Props extends EmailBlockComponentProps<EmailEditorGridBlock> {}
+
 /**
  * The layout shell of a multi-column row. The cells themselves — the child
  * block rows and the add slot — are composed by the canvas and slotted

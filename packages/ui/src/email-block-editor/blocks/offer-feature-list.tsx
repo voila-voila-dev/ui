@@ -4,6 +4,7 @@ import { EMAIL_COLOR } from "#/email-block-editor/theme.ts";
 interface Props {
 	features: ReadonlyArray<string>;
 }
+
 /** The ticked included features, mirroring the bulleted list the renderer
  * emits for them. */
 export function OfferFeatureList({ features }: Props) {

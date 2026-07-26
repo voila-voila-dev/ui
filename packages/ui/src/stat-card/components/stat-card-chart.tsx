@@ -1,6 +1,7 @@
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends React.ComponentProps<"div"> {}
+
 /**
  * Full-bleed chart slot pinned to the bottom edge of the card: the negative
  * margin cancels the card's bottom padding and the card's `overflow-hidden`

@@ -13,6 +13,7 @@ import { ResponsiveSelectLabel } from "#/responsive-select/components/responsive
 interface Props {
 	children: React.ReactNode;
 }
+
 export function NativeOptionsFromContent({ children }: Props) {
 	return (
 		<>

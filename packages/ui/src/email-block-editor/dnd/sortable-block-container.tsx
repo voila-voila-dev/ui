@@ -13,6 +13,7 @@ import type { EmailEditorContainerId } from "#/email-block-editor/document/reduc
 
 const containerDroppableId = (containerId: EmailEditorContainerId): string =>
 	containerId === null ? ROOT_CONTAINER : `${CONTAINER_PREFIX}${containerId}`;
+
 interface Props {
 	containerId: EmailEditorContainerId;
 	blockIds: ReadonlyArray<string>;
@@ -21,6 +22,7 @@ interface Props {
 	style?: React.CSSProperties;
 	children: ReactNode;
 }
+
 /**
  * One container's sortable children. `layout` picks the sorting strategy: a
  * vertical list for the document root, a rectangular one for a grid's cells.
