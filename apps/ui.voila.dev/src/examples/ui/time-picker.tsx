@@ -7,3 +7,17 @@ export function Default() {
 		<TimePicker value={time} onValueChange={setTime} placeholder="Start time" />
 	);
 }
+
+export function Bounded() {
+	const [time, setTime] = useState<string | null>(null);
+	return (
+		<TimePicker
+			value={time}
+			onValueChange={setTime}
+			min="09:00"
+			max="17:30"
+			step={15}
+			placeholder="Appointment"
+		/>
+	);
+}
