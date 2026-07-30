@@ -188,6 +188,11 @@ function buildTable(entry: DocsPropEntry): Table {
 		type: "table",
 		align: [null, null, null, null],
 		children: [header, ...rows],
+		// Generated tables always have these same four columns, so they can be
+		// given fixed proportions — left to `auto`, a 20-member union took 60%
+		// of the width and squeezed the description into a 126px ribbon.
+		// `hProperties` is how mdast passes attributes through to hast.
+		data: { hProperties: { className: ["prop-table"] } },
 	};
 }
 
