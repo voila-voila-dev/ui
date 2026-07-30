@@ -1,6 +1,6 @@
 /**
  * Build-time plumbing for the docs content. Node-only: imported from
- * `vite.config.ts`, never from client code. Three jobs:
+ * `vite.config.ts`, never from client code. Four jobs:
  *
  * - `docsPages()` enumerates every content slug so the static prerender does
  *   not depend on link crawling to find all 180+ pages.
@@ -9,6 +9,8 @@
  * - `docsSearchIndex()` serves `virtual:docs-search-index` — the raw documents
  *   the ⌘K palette feeds to MiniSearch. A lazy virtual module rather than a
  *   JSON asset, so it code-splits away and only loads when search opens.
+ * - `docsPropsWatch()` makes the dev server watch `packages/ui`, which the
+ *   generated props tables are built from but nothing here imports.
  */
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
@@ -24,6 +26,7 @@ import type {
 	DocsSearchDocument,
 } from "./docs-manifest.types";
 import { docsSections } from "./docs-nav.config";
+import { invalidatePropsManifest } from "./remark-prop-table";
 
 const contentDir = path.join(import.meta.dirname, "../content/docs");
 
@@ -164,6 +167,35 @@ function virtualJsonPlugin(
 				if (!file.startsWith(contentDir)) return;
 				const mod = server.moduleGraph.getModuleById(resolvedId);
 				if (mod) server.moduleGraph.invalidateModule(mod);
+			});
+		},
+	};
+}
+
+/**
+ * Dev only: a props table is generated from `packages/ui`, which Vite has no
+ * reason to watch — nothing in the docs imports the source. Without this, a prop
+ * added to a component keeps showing the old table until the server restarts.
+ */
+export function docsPropsWatch(): Plugin {
+	const packageSrc = path.join(
+		import.meta.dirname,
+		"../../../../packages/ui/src",
+	);
+	return {
+		name: "voila:docs-props-watch",
+		configureServer(server) {
+			server.watcher.add(packageSrc);
+			server.watcher.on("all", (_event, file) => {
+				if (!file.startsWith(packageSrc)) return;
+				invalidatePropsManifest();
+				// The tables are baked into the compiled MDX, so every page that
+				// carries one has to be recompiled.
+				for (const mod of server.moduleGraph.idToModuleMap.values()) {
+					if (mod.id?.endsWith(".mdx"))
+						server.moduleGraph.invalidateModule(mod);
+				}
+				server.ws.send({ type: "full-reload" });
 			});
 		},
 	};

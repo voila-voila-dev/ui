@@ -64,12 +64,11 @@ clickable are distinguishable. For a chip the user can remove, reach for
 
 ## API
 
-| Prop | Default | |
-| --- | --- | --- |
-| `variant` | `"default"` | `secondary`, `outline`, `destructive`, `ghost`, `link`, plus `brand` and `highlight`. |
-| `color` | — | Catalogue palette; overrides `variant`. |
-| `size` | `"default"` | `sm` for dense surfaces such as table cells. Below that, use text. |
-| `render` | — | Base UI: render as another element. |
+<PropTable of="Badge" />
+
+`color` draws from the catalogue palette and overrides `variant` when both are
+set. `size="sm"` is for dense surfaces such as table cells; below that, use
+text. `render` is Base UI's escape hatch for rendering as another element.
 
 Colour alone is not an accessible status indicator; the label inside the badge
 is doing the work and the colour is reinforcement. Never ship a badge whose

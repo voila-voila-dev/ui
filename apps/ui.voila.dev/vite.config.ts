@@ -13,8 +13,10 @@ import { defineConfig, type UserConfig } from "vite";
 import {
 	docsManifest,
 	docsPages,
+	docsPropsWatch,
 	docsSearchIndex,
 } from "./src/lib/docs-plugin";
+import { remarkPropTable } from "./src/lib/remark-prop-table";
 import { remarkTocExport } from "./src/lib/remark-toc-export";
 
 export default defineConfig({
@@ -27,6 +29,7 @@ export default defineConfig({
 		tailwindcss(),
 		docsManifest(),
 		docsSearchIndex(),
+		docsPropsWatch(),
 		{
 			// `enforce: "pre"` so MDX compiles to JSX before React's plugin runs.
 			enforce: "pre",
@@ -36,6 +39,8 @@ export default defineConfig({
 					remarkFrontmatter,
 					[remarkMdxFrontmatter, { name: "frontmatter" }],
 					remarkGfm,
+					// After GFM, so the tables it builds get GFM's table handling.
+					remarkPropTable,
 					remarkTocExport,
 				],
 				rehypePlugins: [

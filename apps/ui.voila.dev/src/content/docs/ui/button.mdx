@@ -67,15 +67,13 @@ and behaviour:
 
 ## API
 
-| Prop | Default | |
-| --- | --- | --- |
-| `variant` | `"default"` | `secondary`, `outline`, `ghost`, `destructive`, `link`, plus the surface variants `brand` and `highlight`. |
-| `size` | `"default"` | `xs`, `sm`, `lg`, and the square `icon-*` set. |
-| `shape` | `"default"` | `pill` forces a fully rounded button. |
-| `loading` | `false` | Leading spinner, `disabled`, `aria-busy`. |
-| `render` | — | Base UI: render as another element. |
+<PropTable of="Button" />
 
-All remaining props go to the underlying element. Picking a variant: `default`
+`loading` shows a leading spinner and sets `disabled` and `aria-busy` together.
+`shape="pill"` forces a fully rounded button, and `render` is Base UI's escape
+hatch for rendering as another element.
+
+Picking a variant: `default`
 is the one action the page exists for, at most one per view; `secondary` an
 equal-weight alternative; `outline` for toolbars and anything that repeats in a
 row; `ghost` inside dense surfaces; `destructive` for what cannot be undone;
