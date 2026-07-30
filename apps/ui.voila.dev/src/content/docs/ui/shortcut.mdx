@@ -5,8 +5,7 @@ sidebar:
   order: 72
 ---
 
-import Preview from "@/components/docs/preview";
-import * as Example from "../../../examples/ui/display";
+import * as Example from "@/examples/ui/display";
 
 <Preview layout="stack">
 	<Example.ShortcutExample />
@@ -17,6 +16,10 @@ import * as Example from "../../../examples/ui/display";
 <Shortcut keys={["⌘", "K"]} />
 ```
 
-The `keys` form renders each key as a [Kbd](/ui/kbd/); the children form is
+The `keys` form renders each key as a [Kbd](/ui/kbd); the children form is
 plain muted text. Menus have their own version of this —
 `DropdownMenu.Shortcut` and its siblings — which is what you want inside one.
+
+## API
+
+<PropTable of="Shortcut" />
