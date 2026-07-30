@@ -20,13 +20,19 @@ export const docFrontmatterSchema = z.object({
 	 * meta description, so it has to stand alone away from the page.
 	 */
 	description: z.string().min(1),
-	sidebar: z.object({
-		/**
-		 * Position within the section. Not unique and not required to be — ties
-		 * fall through to alphabetical.
-		 */
-		order: z.number().int().nonnegative(),
-	}),
+	/**
+	 * Position within the section, for sections ordered by number. Ties fall
+	 * through to alphabetical. Mutually exclusive with `category`: which one a
+	 * page needs is decided by its section in `docs-nav.config.ts`, and
+	 * `docs-plugin.ts` enforces it.
+	 */
+	sidebar: z.object({ order: z.number().int().nonnegative() }).optional(),
+	/**
+	 * Sub-group within the section, for sections that declare `categories`.
+	 * Pages are alphabetical inside their group, so adding a component never
+	 * means renumbering its neighbours.
+	 */
+	category: z.string().min(1).optional(),
 });
 
 export type DocFrontmatter = z.infer<typeof docFrontmatterSchema>;
