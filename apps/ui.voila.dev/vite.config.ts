@@ -16,6 +16,7 @@ import {
 	docsPropsWatch,
 	docsSearchIndex,
 } from "./src/lib/docs-plugin";
+import { failOnPrerenderError } from "./src/lib/prerender-guard";
 import { remarkPropTable } from "./src/lib/remark-prop-table";
 import { remarkTocExport } from "./src/lib/remark-toc-export";
 
@@ -83,6 +84,8 @@ export default defineConfig({
 			],
 			sitemap: { enabled: true, host: "https://ui.voila.dev" },
 		}),
+		// After `tanstackStart`, so its prerender runs inside this plugin's watch.
+		failOnPrerenderError(),
 		viteReact(),
 		{
 			// On Rolldown-Vite, `output.strictExecutionOrder` severs Base UI's
