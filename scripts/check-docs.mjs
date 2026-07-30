@@ -82,9 +82,10 @@ console.log(`checked internal links across ${pages.length} pages`);
 
 /**
  * Names the MDX provider supplies to every page, so using them needs no import.
- * `PropTable` is expanded by the remark transform before React ever sees it.
+ * `PropTable` is expanded by the remark transform before React ever sees it;
+ * `Preview` comes from `mdxComponents`.
  */
-const PROVIDED = new Set(["PropTable"]);
+const PROVIDED = new Set(["PropTable", "Preview"]);
 
 for (const page of pages) {
 	// Fenced blocks and inline code show tags as examples, not as JSX.

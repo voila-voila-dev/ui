@@ -5,8 +5,7 @@ sidebar:
   order: 2
 ---
 
-import Preview from "@/components/docs/preview";
-import * as Example from "../../../examples/ui/badge";
+import * as Example from "@/examples/ui/badge";
 
 <Preview layout="row">
 	<Example.Default />
@@ -65,10 +64,6 @@ clickable are distinguishable. For a chip the user can remove, reach for
 ## API
 
 <PropTable of="Badge" />
-
-`color` draws from the catalogue palette and overrides `variant` when both are
-set. `size="sm"` is for dense surfaces such as table cells; below that, use
-text. `render` is Base UI's escape hatch for rendering as another element.
 
 Colour alone is not an accessible status indicator; the label inside the badge
 is doing the work and the colour is reinforcement. Never ship a badge whose

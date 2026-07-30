@@ -20,6 +20,7 @@ import remarkParse from "remark-parse";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type { Plugin } from "vite";
+import { type DocFrontmatter, parseFrontmatter } from "./docs-frontmatter";
 import type {
 	DocsManifest,
 	DocsManifestItem,
@@ -61,39 +62,41 @@ function listDocFiles(): DocFile[] {
 	return out;
 }
 
-interface DocFrontmatter {
-	title?: string;
-	description?: string;
-	sidebar?: { order?: number; label?: string };
-}
-
 function readManifest(): DocsManifest {
 	const byDir = new Map<string, (DocFile & { fm: DocFrontmatter })[]>();
 	for (const doc of listDocFiles()) {
-		const fm = matter(readFileSync(doc.file, "utf8")).data as DocFrontmatter;
+		const fm = parseFrontmatter(
+			path.relative(contentDir, doc.file),
+			matter(readFileSync(doc.file, "utf8")).data,
+		);
 		const list = byDir.get(doc.dir) ?? [];
 		list.push({ ...doc, fm });
 		byDir.set(doc.dir, list);
 	}
 
+	// A directory of pages that no section claims renders nowhere: not in the
+	// sidebar, not in prev/next, not in the breadcrumbs. Adding a section should
+	// be a build error, not a page nobody can reach.
+	const claimed = new Set(docsSections.map((section) => section.dir));
+	const orphans = [...byDir.keys()].filter((dir) => !claimed.has(dir)).sort();
+	if (orphans.length) {
+		throw new Error(
+			`content/docs has ${orphans.length} director(ies) with no entry in docsSections: ${orphans.join(", ")}. ` +
+				"Add them to docs-nav.config.ts or their pages will not appear in the sidebar, prev/next or breadcrumbs.",
+		);
+	}
+
 	const manifest: DocsManifest = { sections: [], flat: [] };
 	for (const section of docsSections) {
 		const docs = byDir.get(section.dir) ?? [];
-		docs.sort((a, b) => {
-			const pin = (d: DocFile) => {
-				const i = section.order?.indexOf(d.stem) ?? -1;
-				return i === -1 ? Number.MAX_SAFE_INTEGER : i;
-			};
-			const order = (d: DocFile & { fm: DocFrontmatter }) =>
-				d.fm.sidebar?.order ?? Number.MAX_SAFE_INTEGER;
-			return (
-				pin(a) - pin(b) || order(a) - order(b) || a.stem.localeCompare(b.stem)
-			);
-		});
+		docs.sort(
+			(a, b) =>
+				a.fm.sidebar.order - b.fm.sidebar.order || a.stem.localeCompare(b.stem),
+		);
 		const items: DocsManifestItem[] = docs.map((d) => ({
 			slug: d.slug,
-			title: d.fm.sidebar?.label ?? d.fm.title ?? d.stem,
-			description: d.fm.description ?? "",
+			title: d.fm.title,
+			description: d.fm.description,
 		}));
 		manifest.sections.push({
 			label: section.label,
@@ -113,7 +116,7 @@ function readSearchDocuments(): DocsSearchDocument[] {
 	const parser = unified().use(remarkParse);
 	return listDocFiles().map((doc) => {
 		const { data, content } = matter(readFileSync(doc.file, "utf8"));
-		const fm = data as DocFrontmatter;
+		const fm = parseFrontmatter(path.relative(contentDir, doc.file), data);
 		// Strip ESM and JSX lines so remark-parse sees plain markdown; the odd
 		// leftover angle bracket only adds noise words, which MiniSearch shrugs at.
 		const markdown = content
@@ -132,8 +135,8 @@ function readSearchDocuments(): DocsSearchDocument[] {
 		return {
 			slug: doc.slug,
 			section: sectionLabel.get(doc.dir.split("/")[0] ?? "") ?? doc.dir,
-			title: fm.title ?? doc.stem,
-			description: fm.description ?? "",
+			title: fm.title,
+			description: fm.description,
 			headings,
 			text: text.slice(0, 8000),
 		};

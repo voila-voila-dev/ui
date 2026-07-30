@@ -15,7 +15,16 @@
  * half-written page still previews. `scripts/check-docs.mjs` is what turns a
  * typo into a red build.
  */
-import type { PhrasingContent, Root, RowContent, Table, TableRow } from "mdast";
+import type {
+	Paragraph,
+	PhrasingContent,
+	Root,
+	RowContent,
+	Table,
+	TableRow,
+} from "mdast";
+import remarkParse from "remark-parse";
+import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type { DocsPropEntry, DocsPropsManifest } from "./docs-props.types";
 import { readPropsManifest } from "./props-extract";
@@ -42,6 +51,51 @@ function code(value: string): PhrasingContent {
 
 function text(value: string): PhrasingContent {
 	return { type: "text", value };
+}
+
+const inlineParser = unified().use(remarkParse);
+
+/**
+ * JSDoc is markdown, and the props here use it: Base UI writes ``the `render`
+ * prop``, and the cva recipes in this repo do the same. Emitted as a plain text
+ * node the backticks and asterisks reach the page literally, so the doc is
+ * parsed and its inline nodes spliced into the cell.
+ *
+ * Paragraphs are joined with a space rather than kept apart — a table cell is
+ * one line of prose, and a JSDoc block that needs two paragraphs is saying more
+ * than a cell can hold.
+ */
+function docCell(doc: string): PhrasingContent[] {
+	const tree = inlineParser.parse(doc);
+	const out: PhrasingContent[] = [];
+	for (const node of tree.children) {
+		if (node.type !== "paragraph") continue;
+		if (out.length) out.push(text(" "));
+		out.push(...dropHtml((node as Paragraph).children));
+	}
+	return out.length ? out : [text(doc.replace(/\s+/g, " "))];
+}
+
+/**
+ * Two of Base UI's prop docs use inline HTML — `<kbd>Enter</kbd>`. Markdown
+ * parses those to `html` nodes, which become `raw` hast nodes, which MDX
+ * refuses to compile ("Cannot handle unknown node `raw`") and fails the whole
+ * build. Dropping the tags keeps the text between them.
+ */
+function dropHtml(nodes: PhrasingContent[]): PhrasingContent[] {
+	const out: PhrasingContent[] = [];
+	for (const node of nodes) {
+		if (node.type === "html") continue;
+		if ("children" in node && Array.isArray(node.children)) {
+			out.push({
+				...node,
+				children: dropHtml(node.children as PhrasingContent[]),
+			} as PhrasingContent);
+			continue;
+		}
+		out.push(node);
+	}
+	return out;
 }
 
 function cell(children: PhrasingContent[]): RowContent {
@@ -127,7 +181,7 @@ function buildTable(entry: DocsPropEntry): Table {
 						? text("—")
 						: { type: "emphasis", children: [text("required")] },
 			]),
-			cell(member.doc ? [text(member.doc.replace(/\s+/g, " "))] : []),
+			cell(member.doc ? docCell(member.doc) : []),
 		]),
 	);
 	return {

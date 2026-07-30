@@ -5,8 +5,7 @@ sidebar:
   order: 25
 ---
 
-import Preview from "@/components/docs/preview";
-import * as Example from "../../../examples/ui/forms";
+import * as Example from "@/examples/ui/forms";
 
 <Preview layout="center">
 	<Example.IconPickerExample />
@@ -17,5 +16,9 @@ import * as Example from "../../../examples/ui/forms";
 ```
 
 The value is a Phosphor export name like `"FirstAidKitIcon"`, which is what
-[Icon](/ui-icon/icon/) renders. The grid caps at 120 swatches — the full set is
+[Icon](/ui-icon/icon) renders. The grid caps at 120 swatches — the full set is
 around 1,500 and is not virtualised — so the rest is reached by searching.
+
+## API
+
+<PropTable of="IconPicker" />
