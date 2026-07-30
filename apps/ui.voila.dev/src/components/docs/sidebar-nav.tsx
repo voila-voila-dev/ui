@@ -41,13 +41,13 @@ function SectionGroup({
 	activeSlug: string;
 }) {
 	const hasActive = section.items.some((item) => item.slug === activeSlug);
-	const [open, setOpen] = useSidebarOpenState(
+	const [defaultOpen, remember] = useSidebarOpenState(
 		section.dir,
 		hasActive || !section.collapsed,
 	);
 
 	return (
-		<Collapsible.Root open={open} onOpenChange={setOpen}>
+		<Collapsible.Root defaultOpen={defaultOpen} onOpenChange={remember}>
 			<Collapsible.Trigger className="group flex w-full items-center justify-between rounded-md px-2 py-1.5 text-left text-[0.8125rem] font-semibold text-foreground hover:bg-accent">
 				<span className="truncate font-mono">{section.label}</span>
 				<CaretRightIcon
