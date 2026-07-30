@@ -17,6 +17,7 @@ import path from "node:path";
 
 const repoRoot = path.join(import.meta.dirname, "..");
 const clientDir = path.join(repoRoot, "apps/ui.voila.dev/dist/client");
+const contentDir = path.join(repoRoot, "apps/ui.voila.dev/src/content/docs");
 
 function listPages() {
 	return readdirSync(clientDir, { recursive: true, withFileTypes: true })
@@ -46,6 +47,33 @@ if (pages.length < 190) {
 	process.exit(1);
 }
 
+/**
+ * Routes whose `## API` is deliberately hand-written, declared in the page as
+ * `{/* no-prop-table: why *␀/}`. Only one page qualifies today —
+ * `ui/direction`, a bare re-export of Base UI's provider, so there is no source
+ * under `packages/ui` for the extractor to read. The marker lives in the MDX
+ * rather than in a list here so the exemption is visible to whoever is reading
+ * the page, and it is stripped at compile time, which is why this reads the
+ * source instead of looking for it in the HTML.
+ */
+const exempt = new Set(
+	readdirSync(contentDir, { recursive: true, withFileTypes: true })
+		.filter((entry) => entry.isFile() && entry.name.endsWith(".mdx"))
+		.filter((entry) =>
+			readFileSync(path.join(entry.parentPath, entry.name), "utf8").includes(
+				"no-prop-table:",
+			),
+		)
+		.map(
+			(entry) =>
+				`/${path
+					.relative(contentDir, path.join(entry.parentPath, entry.name))
+					.replace(/\.mdx$/, "")
+					.split(path.sep)
+					.join("/")}`,
+		),
+);
+
 const problems = [];
 let stages = 0;
 let tables = 0;
@@ -63,7 +91,12 @@ for (const page of pages) {
 	const table = page.html.match(/class="prop-table"/g)?.length ?? 0;
 	apiHeadings += api;
 	tables += table;
-	if (api && !table && !page.html.includes("Plus every")) {
+	if (
+		api &&
+		!table &&
+		!page.html.includes("Plus every") &&
+		!exempt.has(page.route)
+	) {
 		problems.push(
 			`${page.route} — has an "API" heading but no generated table.`,
 		);

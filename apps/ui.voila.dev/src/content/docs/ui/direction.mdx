@@ -20,3 +20,24 @@ This only informs Base UI's logical positioning and keyboard navigation. It
 does not set `dir` on the DOM, so text alignment and portaled popups still
 follow the nearest `dir` ancestor. Localising to a right-to-left language means
 setting `dir="rtl"` on `<html>` as well as rendering this provider.
+
+## API
+
+{/* no-prop-table: a re-export of Base UI's provider, so there is no source in
+    packages/ui for the extractor to read props from. */}
+
+`@voila.dev/ui/direction` is a re-export, not a component of its own, so there
+is no generated table for it: the props are Base UI's and are documented with
+[the provider itself](https://base-ui.com/react/utils/direction-provider). It
+takes one, `direction`, which is `"ltr"` or `"rtl"`.
+
+The module also re-exports `useDirection`, for reading the current direction
+inside a component, and the `Direction` type.
+
+```ts
+import { type Direction, DirectionProvider, useDirection } from "@voila.dev/ui/direction";
+```
+
+## Related
+
+[Sidebar](/ui/sidebar) · [Menubar](/ui/menubar) · [Tabs](/ui/tabs)
