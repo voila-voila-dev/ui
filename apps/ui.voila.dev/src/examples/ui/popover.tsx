@@ -40,3 +40,18 @@ export function Default() {
 		</>
 	);
 }
+
+export function Placement() {
+	return (
+		<Popover.Root>
+			<Popover.Trigger
+				render={<Button variant="outline">Above, aligned left</Button>}
+			/>
+			<Popover.Content side="top" align="start" sideOffset={8}>
+				<p className="text-muted-foreground">
+					Flips to the other side when there is no room.
+				</p>
+			</Popover.Content>
+		</Popover.Root>
+	);
+}
