@@ -3,7 +3,7 @@ import { Input } from "@voila.dev/ui/input";
 import { Label } from "@voila.dev/ui/label";
 import { Popover } from "@voila.dev/ui/popover";
 
-export function PopoverExample() {
+export function Default() {
 	return (
 		<>
 			<Popover.Root>

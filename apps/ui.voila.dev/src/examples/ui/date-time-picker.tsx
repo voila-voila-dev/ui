@@ -1,7 +1,7 @@
 import { DateTimePicker } from "@voila.dev/ui/date-time-picker";
 import { useState } from "react";
 
-export function DateTimePickerExample() {
+export function Default() {
 	const [value, setValue] = useState<Date | null>(new Date(2026, 5, 20, 9, 30));
 	return (
 		<DateTimePicker.Root

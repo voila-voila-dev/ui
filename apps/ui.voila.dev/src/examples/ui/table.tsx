@@ -1,7 +1,7 @@
 import { Table } from "@voila.dev/ui/table";
 import { projects } from "./fixtures";
 
-export function TableExample() {
+export function Default() {
 	return (
 		<Table.Root>
 			<Table.Caption>Recent projects for your workspace.</Table.Caption>

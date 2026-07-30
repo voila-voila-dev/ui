@@ -1,6 +1,6 @@
 import { NavigationMenu } from "@voila.dev/ui/navigation-menu";
 
-export function NavigationMenuExample() {
+export function Default() {
 	return (
 		<NavigationMenu.Root>
 			<NavigationMenu.List>

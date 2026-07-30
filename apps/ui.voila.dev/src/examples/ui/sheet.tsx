@@ -1,7 +1,7 @@
 import { Button } from "@voila.dev/ui/button";
 import { Sheet } from "@voila.dev/ui/sheet";
 
-export function SheetExample() {
+export function Default() {
 	return (
 		<Sheet.Root>
 			<Sheet.Trigger render={<Button variant="outline" />}>

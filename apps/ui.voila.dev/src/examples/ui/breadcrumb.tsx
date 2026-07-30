@@ -1,6 +1,6 @@
 import { Breadcrumb } from "@voila.dev/ui/breadcrumb";
 
-export function BreadcrumbExample() {
+export function Default() {
 	return (
 		<Breadcrumb.Root>
 			<Breadcrumb.List>

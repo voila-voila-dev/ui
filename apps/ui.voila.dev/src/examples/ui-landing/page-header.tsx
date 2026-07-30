@@ -1,6 +1,6 @@
 import { PageHeader } from "@voila.dev/ui/landing";
 
-export function PageHeaderExample() {
+export function Default() {
 	return (
 		<PageHeader.Root>
 			<PageHeader.Title>Contact</PageHeader.Title>

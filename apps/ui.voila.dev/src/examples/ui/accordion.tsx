@@ -1,6 +1,6 @@
 import { Accordion } from "@voila.dev/ui/accordion";
 
-export function AccordionExample() {
+export function Default() {
 	return (
 		<Accordion.Root className="w-full max-w-96" defaultValue={["publishing"]}>
 			<Accordion.Item value="publishing">

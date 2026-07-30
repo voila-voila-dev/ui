@@ -1,7 +1,7 @@
 import { Button } from "@voila.dev/ui/button";
 import { Dialog } from "@voila.dev/ui/dialog";
 
-export function DialogExample() {
+export function Default() {
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger render={<Button variant="outline" />}>

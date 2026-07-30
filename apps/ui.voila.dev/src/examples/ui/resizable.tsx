@@ -1,6 +1,6 @@
 import { Resizable } from "@voila.dev/ui/resizable";
 
-export function ResizableExample() {
+export function Default() {
 	return (
 		<div className="h-48 w-full max-w-xl">
 			<Resizable.PanelGroup className="rounded-lg border">

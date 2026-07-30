@@ -8,7 +8,7 @@ const coverImage = `data:image/svg+xml;utf8,${encodeURIComponent(
 /* Card                                                                       */
 /* -------------------------------------------------------------------------- */
 
-export function AspectRatioExample() {
+export function Default() {
 	return (
 		<div className="w-full max-w-96">
 			<AspectRatio ratio={16 / 9}>

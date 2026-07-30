@@ -1,6 +1,6 @@
 import { Carousel } from "@voila.dev/ui/carousel";
 
-export function CarouselExample() {
+export function Default() {
 	return (
 		<div className="mx-12 w-full max-w-xs">
 			<Carousel.Root opts={{ loop: true }}>

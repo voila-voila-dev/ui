@@ -1,6 +1,6 @@
 import { StatCard } from "@voila.dev/ui/stat-card";
 
-export function StatCardExample() {
+export function Default() {
 	return (
 		<div className="grid w-full gap-4 sm:grid-cols-2">
 			<StatCard.Root>

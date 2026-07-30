@@ -20,7 +20,7 @@ const sidebarItems = [
 	{ title: "Billing", icon: ReceiptIcon, isActive: false, badge: undefined },
 ];
 
-export function SidebarExample() {
+export function Default() {
 	return (
 		<div className="h-96 w-full overflow-hidden rounded-lg border">
 			<Sidebar.Provider>

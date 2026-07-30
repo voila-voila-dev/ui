@@ -1,7 +1,7 @@
 import { Calendar } from "@voila.dev/ui/calendar";
 import { useState } from "react";
 
-export function CalendarExample() {
+export function Default() {
 	const [selected, setSelected] = useState<Date | undefined>(
 		new Date(2026, 5, 20),
 	);

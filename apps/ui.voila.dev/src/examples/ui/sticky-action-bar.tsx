@@ -1,7 +1,7 @@
 import { Button } from "@voila.dev/ui/button";
 import { StickyActionBar } from "@voila.dev/ui/sticky-action-bar";
 
-export function StickyActionBarExample() {
+export function Default() {
 	return (
 		<div className="relative h-80 w-full max-w-md overflow-y-auto rounded-lg border">
 			<div className="flex flex-col gap-3 p-4 pb-2">

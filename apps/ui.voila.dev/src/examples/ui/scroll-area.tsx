@@ -1,6 +1,6 @@
 import { ScrollArea } from "@voila.dev/ui/scroll-area";
 
-export function ScrollAreaExample() {
+export function Default() {
 	return (
 		<ScrollArea.Root className="h-56 w-full max-w-72 rounded-lg border">
 			<div className="p-3">

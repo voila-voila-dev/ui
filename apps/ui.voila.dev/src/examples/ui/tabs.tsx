@@ -1,6 +1,6 @@
 import { Tabs } from "@voila.dev/ui/tabs";
 
-export function TabsExample() {
+export function Default() {
 	return (
 		<Tabs.Root defaultValue="projects" className="w-full max-w-96">
 			<Tabs.List>
@@ -21,7 +21,7 @@ export function TabsExample() {
 	);
 }
 
-export function TabsLine() {
+export function Line() {
 	return (
 		<Tabs.Root defaultValue="projects" className="w-full max-w-96">
 			<Tabs.List variant="line">

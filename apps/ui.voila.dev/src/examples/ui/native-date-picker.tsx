@@ -1,6 +1,6 @@
 import { NativeDatePicker } from "@voila.dev/ui/native-date-picker";
 
-export function NativeDatePickerExample() {
+export function Default() {
 	return (
 		<div className="flex flex-col gap-3">
 			<NativeDatePicker.Date defaultValue="2026-06-20" />

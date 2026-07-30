@@ -2,7 +2,7 @@ import { CaretDownIcon } from "@phosphor-icons/react";
 import { Button } from "@voila.dev/ui/button";
 import { Collapsible } from "@voila.dev/ui/collapsible";
 
-export function CollapsibleExample() {
+export function Default() {
 	return (
 		<Collapsible.Root className="flex w-full max-w-80 flex-col gap-2">
 			<div className="flex items-center justify-between gap-4 px-1">

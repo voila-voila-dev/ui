@@ -2,7 +2,7 @@ import { Button } from "@voila.dev/ui/button";
 import { Card } from "@voila.dev/ui/card";
 import { Section } from "@voila.dev/ui/section";
 
-export function SectionExample() {
+export function Default() {
 	return (
 		<Section.Root className="w-full">
 			<Section.Header>

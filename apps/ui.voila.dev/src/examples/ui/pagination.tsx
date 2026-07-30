@@ -1,6 +1,6 @@
 import { Pagination } from "@voila.dev/ui/pagination";
 
-export function PaginationExample() {
+export function Default() {
 	return (
 		<Pagination.Root>
 			<Pagination.Content>
