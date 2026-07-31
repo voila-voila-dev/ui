@@ -20,11 +20,16 @@ const sidebarItems = [
 	{ title: "Billing", icon: ReceiptIcon, isActive: false, badge: undefined },
 ];
 
+/*
+ * `Sidebar.Root` pins itself with `position: fixed`, which in a real app means
+ * the viewport. `transform-gpu` gives this frame its own containing block, so
+ * the demo stays inside the preview instead of covering the page.
+ */
 export function Default() {
 	return (
-		<div className="h-96 w-full overflow-hidden rounded-lg border">
-			<Sidebar.Provider>
-				<Sidebar.Root collapsible="icon">
+		<div className="h-96 w-full transform-gpu overflow-hidden rounded-lg border">
+			<Sidebar.Provider className="h-full min-h-full">
+				<Sidebar.Root collapsible="icon" className="h-full">
 					<Sidebar.Header>
 						<div className="px-2 py-1.5 font-semibold text-sm group-data-[collapsible=icon]:hidden">
 							Northwind Trading
