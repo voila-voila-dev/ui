@@ -21,3 +21,25 @@ export function Default() {
 		</div>
 	);
 }
+
+/* -------------------------------------------------------------------------- */
+/* Ratios                                                                     */
+/* -------------------------------------------------------------------------- */
+
+export function Ratios() {
+	return (
+		<div className="grid w-full max-w-lg grid-cols-3 gap-3">
+			{[
+				{ label: "1", ratio: 1 as const },
+				{ label: "3/4", ratio: "3/4" as const },
+				{ label: "16 / 9", ratio: 16 / 9 },
+			].map(({ label, ratio }) => (
+				<AspectRatio key={label} ratio={ratio}>
+					<div className="flex size-full items-center justify-center rounded-lg bg-muted font-medium text-muted-foreground text-sm">
+						{label}
+					</div>
+				</AspectRatio>
+			))}
+		</div>
+	);
+}

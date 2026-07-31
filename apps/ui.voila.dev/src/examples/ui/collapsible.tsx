@@ -27,3 +27,27 @@ export function Default() {
 		</Collapsible.Root>
 	);
 }
+
+export function ShowMore() {
+	return (
+		<Collapsible.Root className="flex w-full max-w-80 flex-col gap-2">
+			<p className="text-sm">
+				Northwind Trading is a wholesale importer working with 40 suppliers
+				across Europe.
+			</p>
+			<Collapsible.Content className="text-muted-foreground text-sm">
+				The redesign covers the public catalogue, the reseller portal and the
+				order-tracking emails. Delivery is staged over three sprints.
+			</Collapsible.Content>
+			<Collapsible.Trigger
+				render={<Button variant="link" size="sm" className="self-start px-0" />}
+				className="group/show-more"
+			>
+				<span className="group-aria-expanded/show-more:hidden">Show more</span>
+				<span className="hidden group-aria-expanded/show-more:inline">
+					Show less
+				</span>
+			</Collapsible.Trigger>
+		</Collapsible.Root>
+	);
+}
