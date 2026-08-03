@@ -2,7 +2,6 @@ import {
 	CheckCircleIcon,
 	MagnifyingGlassIcon,
 	PlusIcon,
-	XIcon,
 } from "@phosphor-icons/react";
 import { useState } from "react";
 import { Button } from "#/button/components/button.tsx";
@@ -17,8 +16,8 @@ export interface ChipPickerOption {
 
 /** Every user-facing string, so the component stays i18n-agnostic. */
 export interface ChipPickerLabels {
-	/** The dashed trigger appended to the selected chips (e.g. "Add"). */
-	readonly add: string;
+	/** The trigger under the read-only chips (e.g. "Select"). */
+	readonly select: string;
 	/** The sheet's closing button (e.g. "Done"). */
 	readonly done: string;
 	/** Shown when the search matches nothing. */
@@ -30,36 +29,12 @@ export interface ChipPickerLabels {
 	readonly selectionCount: (count: number) => string;
 }
 
-function ChipToggle({
-	label,
-	selected,
-	disabled = false,
-	onToggle,
-}: {
-	label: string;
-	selected: boolean;
-	disabled?: boolean;
-	onToggle: () => void;
-}) {
+/** Read-only pill for a current selection; editing happens in the sheet. */
+function SelectedChip({ label }: { label: string }) {
 	return (
-		<button
-			type="button"
-			onClick={onToggle}
-			disabled={disabled}
-			className={cn(
-				"inline-flex items-center gap-1 rounded-full border px-3 py-1.5 font-medium text-sm transition-colors disabled:opacity-40",
-				selected
-					? "border-primary bg-primary text-primary-foreground"
-					: "bg-background text-foreground hover:bg-muted",
-			)}
-		>
-			{selected ? (
-				<XIcon className="size-3.5" />
-			) : (
-				<PlusIcon className="size-3.5" />
-			)}
+		<span className="inline-flex items-center rounded-full border border-primary bg-primary px-3 py-1.5 font-medium text-primary-foreground text-sm">
 			{label}
-		</button>
+		</span>
 	);
 }
 
@@ -229,26 +204,19 @@ export function ChipPicker({
 	const [open, setOpen] = useState(false);
 	const labelOf = (id: string): string =>
 		options.find((option) => option.id === id)?.label ?? id;
-	const isFull = maxSelected !== undefined && selected.size >= maxSelected;
 
 	return (
 		<div className="flex flex-wrap gap-2">
 			{[...selected].map((id) => (
-				<ChipToggle
-					key={id}
-					label={labelOf(id)}
-					selected
-					onToggle={() => onToggle(id)}
-				/>
+				<SelectedChip key={id} label={labelOf(id)} />
 			))}
 			<button
 				type="button"
 				onClick={() => setOpen(true)}
-				disabled={isFull}
-				className="inline-flex items-center gap-1 rounded-full border border-dashed px-3 py-1.5 font-medium text-muted-foreground text-sm transition-colors hover:bg-muted disabled:opacity-40"
+				className="inline-flex items-center gap-1 rounded-full border border-dashed px-3 py-1.5 font-medium text-muted-foreground text-sm transition-colors hover:bg-muted"
 			>
 				<PlusIcon className="size-3.5" />
-				{labels.add}
+				{labels.select}
 			</button>
 			<ChipPickerSheet
 				open={open}

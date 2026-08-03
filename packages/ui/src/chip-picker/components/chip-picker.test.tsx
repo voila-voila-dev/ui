@@ -27,7 +27,7 @@ afterEach(() => {
 });
 
 const labels = {
-	add: "Add",
+	select: "Select",
 	done: "Done",
 	noResult: "No result.",
 	selectionCount: (count: number) => `${count} selected`,
@@ -58,16 +58,18 @@ function renderPicker(overrides?: {
 }
 
 describe("ChipPicker", () => {
-	it("collapses to the selected chips plus the add trigger", () => {
+	it("collapses to read-only chips plus the select trigger", () => {
 		renderPicker({ selected: new Set(["cooking"]) });
 		expect(screen.getByText("Cooking")).toBeDefined();
 		expect(screen.queryByText("Boxing")).toBeNull();
-		expect(screen.getByRole("button", { name: "Add" })).toBeDefined();
+		// The chip is not a button: deselection happens inside the sheet.
+		expect(screen.queryByRole("button", { name: "Cooking" })).toBeNull();
+		expect(screen.getByRole("button", { name: "Select" })).toBeDefined();
 	});
 
 	it("opens the sheet with every option sorted alphabetically", () => {
 		renderPicker();
-		fireEvent.click(screen.getByRole("button", { name: "Add" }));
+		fireEvent.click(screen.getByRole("button", { name: "Select" }));
 		const rows = screen
 			.getAllByRole("button", { pressed: false })
 			.map((row) => row.textContent);
@@ -76,7 +78,7 @@ describe("ChipPicker", () => {
 
 	it("filters the list from the search field", () => {
 		renderPicker();
-		fireEvent.click(screen.getByRole("button", { name: "Add" }));
+		fireEvent.click(screen.getByRole("button", { name: "Select" }));
 		fireEvent.change(screen.getByPlaceholderText("Search…"), {
 			target: { value: "sing" },
 		});
@@ -91,17 +93,17 @@ describe("ChipPicker", () => {
 			onToggle: (id) => toggledIds.push(id),
 			maxSelected: 2,
 		});
-		fireEvent.click(screen.getByRole("button", { name: "Add" }));
+		fireEvent.click(screen.getByRole("button", { name: "Select" }));
 		expect(screen.getByText("1 / 2")).toBeDefined();
 		fireEvent.click(screen.getByRole("button", { name: "Boxing" }));
 		expect(toggledIds).toEqual(["boxing"]);
 	});
 
-	it("disables the add trigger once the cap is reached", () => {
+	it("keeps the select trigger enabled at the cap so items can be removed", () => {
 		renderPicker({ selected: new Set(["cooking"]), maxSelected: 1 });
-		expect(screen.getByRole("button", { name: "Add" })).toHaveProperty(
-			"disabled",
-			true,
-		);
+		const trigger = screen.getByRole("button", { name: "Select" });
+		expect(trigger).toHaveProperty("disabled", false);
+		fireEvent.click(trigger);
+		expect(screen.getByText("1 / 1")).toBeDefined();
 	});
 });
