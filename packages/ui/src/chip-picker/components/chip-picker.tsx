@@ -133,7 +133,9 @@ function ChipPickerSheet({
 		<ResponsiveSheet.Root open={open} onOpenChange={onOpenChange}>
 			<ResponsiveSheet.Content>
 				<ResponsiveSheet.Header>
-					<div className="flex items-center justify-between gap-3">
+					{/* On desktop the sheet's close button sits top-right; keep the
+					    counter clear of it. */}
+					<div className="flex items-center justify-between gap-3 sm:pr-10">
 						<ResponsiveSheet.Title>{title}</ResponsiveSheet.Title>
 						<span className="text-muted-foreground text-xs">
 							{maxSelected !== undefined
