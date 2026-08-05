@@ -1,7 +1,7 @@
 import { ArrowDownIcon } from "@phosphor-icons/react";
 import type * as React from "react";
-import { MessageScrollerButton } from "#/chat/components/message-scroller-button.tsx";
 import { Button } from "#/button/components/button.tsx";
+import { MessageScrollerButton } from "#/chat/components/message-scroller-button.tsx";
 import { cn } from "#/lib/utils.ts";
 
 type Props = React.ComponentProps<typeof MessageScrollerButton> & {
