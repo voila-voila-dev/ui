@@ -35,7 +35,7 @@ const EVENTS: CalendarEvent[] = [
 		id: "offsite",
 		title: "Team offsite",
 		start: at(2, 0, 0),
-		end: at(4, 0, 0),
+		end: at(5, 0, 0),
 		allDay: true,
 		color: "#0891b2",
 	},
