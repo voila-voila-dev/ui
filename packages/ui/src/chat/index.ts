@@ -2,6 +2,7 @@ export {
 	type ChatBubbleVariants,
 	chatBubbleVariants,
 } from "#/chat/components/chat-bubble-variants.ts";
+export { CHAT_QUICK_REACTIONS } from "#/chat/components/chat-message-actions.tsx";
 export {
 	type ChatMarkerVariants,
 	chatMarkerVariants,
