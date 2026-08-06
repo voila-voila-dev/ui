@@ -1,7 +1,14 @@
 import { cva, type VariantProps } from "#/lib/cva.ts";
 
 export const chatBubbleVariants = cva({
-	base: "group/bubble relative flex w-fit min-w-0 max-w-[85%] flex-col gap-1 data-[align=end]:self-end data-[variant=ghost]:max-w-full group-data-[align=end]/message:self-end sm:max-w-[75%]",
+	// The reaction pill (`Chat.Reactions`) is absolutely positioned and
+	// overhangs the bubble's top/bottom edge. Left to overflow, it gets clipped
+	// by the scroller (`overflow-y:auto` also clips the x-axis) or overlaps the
+	// neighbouring bubble. Reserving a margin the size of the overhang when a
+	// pill is present keeps the component self-sufficient instead of relying on
+	// the consumer to pad the row (the `BubbleReactions` story only works
+	// because its container adds `py-4`).
+	base: "group/bubble relative flex w-fit min-w-0 max-w-[85%] flex-col gap-1 has-[[data-slot=chat-reactions][data-side=top]]:mt-4 has-[[data-slot=chat-reactions][data-side=bottom]]:mb-4 data-[align=end]:self-end data-[variant=ghost]:max-w-full group-data-[align=end]/message:self-end sm:max-w-[75%]",
 	variants: {
 		variant: {
 			default:
