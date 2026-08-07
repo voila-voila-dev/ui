@@ -19,6 +19,7 @@ export {
 	type EmailEditorRegistry,
 } from "#/email-block-editor/blocks/registry.ts";
 export { RichTextEditable } from "#/email-block-editor/blocks/rich-text-editable.tsx";
+export { AddBlockMenu } from "#/email-block-editor/components/add-block-menu.tsx";
 export { AlignmentOption } from "#/email-block-editor/components/block-options/alignment-option.tsx";
 export { BlockOptionRow } from "#/email-block-editor/components/block-options/block-option-row.tsx";
 export { BlockOptionSection } from "#/email-block-editor/components/block-options/block-option-section.tsx";
@@ -29,7 +30,6 @@ export { SelectOption } from "#/email-block-editor/components/block-options/sele
 export { TextAreaOption } from "#/email-block-editor/components/block-options/text-area-option.tsx";
 export { TextOption } from "#/email-block-editor/components/block-options/text-option.tsx";
 export { ToggleOption } from "#/email-block-editor/components/block-options/toggle-option.tsx";
-export { AddBlockMenu } from "#/email-block-editor/components/add-block-menu.tsx";
 export { EmailBlockEditor } from "#/email-block-editor/components/email-block-editor.tsx";
 export { PreviewToggle } from "#/email-block-editor/components/preview-toggle.tsx";
 export {
