@@ -1,3 +1,8 @@
+import {
+	CopySimpleIcon,
+	PencilSimpleIcon,
+	TrashIcon,
+} from "@phosphor-icons/react";
 import type { Meta, StoryObj } from "@storybook/tanstack-react";
 import { Avatar } from "@voila.dev/ui/avatar";
 import { Badge } from "@voila.dev/ui/badge";
@@ -782,9 +787,11 @@ export const AppendAutoScroll: Story = {
 
 const demoActions = (
 	<>
-		<Chat.MessageAction>Copy</Chat.MessageAction>
-		<Chat.MessageAction>Edit</Chat.MessageAction>
-		<Chat.MessageAction variant="destructive">Delete</Chat.MessageAction>
+		<Chat.MessageAction icon={<CopySimpleIcon />}>Copy</Chat.MessageAction>
+		<Chat.MessageAction icon={<PencilSimpleIcon />}>Edit</Chat.MessageAction>
+		<Chat.MessageAction icon={<TrashIcon />} variant="destructive">
+			Delete
+		</Chat.MessageAction>
 	</>
 );
 
@@ -908,16 +915,17 @@ function MessageActionsWithReactionsPlayground() {
 
 /** The non-regression combination: `Chat.MessageActions` wrapping bubbles that
  * carry reactions, on both sides of the thread. The pill sits in the flow and
- * pushes the next bubble; hovering shows the quick-reaction bar; right-click
- * opens the menu; tapping a pill or a quick reaction toggles it and pops the
- * counter. */
+ * pushes the next bubble; hovering shows the bar with the quick reactions and
+ * the icon actions; right-click opens the menu; tapping a pill or a quick
+ * reaction toggles it and pops the counter. */
 export const MessageActionsWithReactions: Story = {
 	render: () => <MessageActionsWithReactionsPlayground />,
 };
 
 /** The desktop affordance alone: hover the bubble with a mouse to get the
- * floating quick-reaction bar, whose "…" opens the same menu as a right
- * click. Nothing shows on a touch screen. */
+ * floating bar — the quick reactions, then each icon-carrying action one
+ * press away. Right-click still opens the full menu. Nothing shows on a
+ * touch screen. */
 export const HoverActionBar: Story = {
 	render: () => (
 		<div className="flex w-full max-w-xl flex-col gap-1 py-16">

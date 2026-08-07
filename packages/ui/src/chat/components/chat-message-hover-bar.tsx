@@ -1,7 +1,7 @@
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
-import { DotsThreeIcon } from "@phosphor-icons/react";
 import type * as React from "react";
 import { ChatQuickReactionRow } from "#/chat/components/chat-quick-reaction-row.tsx";
+import { ChatMessageActionsHostContext } from "#/chat/context/chat-message-actions-host-context.ts";
 import { cn } from "#/lib/utils.ts";
 
 interface Props {
@@ -18,17 +18,22 @@ interface Props {
 	activeEmojis: ReadonlySet<string>;
 	onReact?: (emoji: string) => void;
 	reactionsLabel?: string;
-	/** Accessible name of the "…" button opening the full menu. */
-	menuLabel?: string;
-	/** Opens the full menu anchored to the "…" button. */
-	onOpenMenu: (anchor: DOMRect) => void;
+	/** The same tree the menu gets; only the actions carrying an icon show. */
+	actions?: React.ReactNode;
 }
 
 /**
  * The floating bar a fine pointer summons by hovering a bubble: the one-tap
- * emoji row plus a "…" button opening the full menu. Portaled into the trigger
- * itself so it sits right after the bubble in the DOM and a keyboard reaches
- * it with Tab; the positioner still flips and shifts to stay in the viewport.
+ * emoji row, then the actions themselves as icons.
+ *
+ * The actions are inline rather than behind a "…" because the bar exists to
+ * save a click, and a menu that opens a menu saves none — copy, edit and
+ * delete are one press each here. Right-click still opens the full menu, which
+ * is where an action with no icon lives.
+ *
+ * Portaled into the trigger itself so it sits right after the bubble in the
+ * DOM and a keyboard reaches it with Tab; the positioner still flips and
+ * shifts to stay in the viewport.
  */
 export function ChatMessageHoverBar({
 	open,
@@ -40,13 +45,9 @@ export function ChatMessageHoverBar({
 	activeEmojis,
 	onReact,
 	reactionsLabel,
-	menuLabel,
-	onOpenMenu,
+	actions,
 }: Props) {
 	const hasReactions = onReact !== undefined && emojis.length > 0;
-	const openMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
-		onOpenMenu(event.currentTarget.getBoundingClientRect());
-	};
 	return (
 		<PopoverPrimitive.Root
 			open={open}
@@ -85,19 +86,14 @@ export function ChatMessageHoverBar({
 								}}
 							/>
 						)}
-						{hasReactions && <div aria-hidden className="h-5 w-px bg-border" />}
-						<button
-							type="button"
-							data-slot="chat-message-hover-bar-menu"
-							aria-label={menuLabel}
-							onClick={openMenu}
-							className={cn(
-								"flex size-8 shrink-0 items-center justify-center rounded-full outline-none transition-colors",
-								"hover:bg-foreground/5 focus-visible:ring-2 focus-visible:ring-ring/50",
-							)}
+						{hasReactions && actions !== undefined && (
+							<div aria-hidden className="h-5 w-px bg-border" />
+						)}
+						<ChatMessageActionsHostContext.Provider
+							value={{ host: "bar", close: onClose }}
 						>
-							<DotsThreeIcon weight="bold" className="size-5" />
-						</button>
+							{actions}
+						</ChatMessageActionsHostContext.Provider>
 					</PopoverPrimitive.Popup>
 				</PopoverPrimitive.Positioner>
 			</PopoverPrimitive.Portal>

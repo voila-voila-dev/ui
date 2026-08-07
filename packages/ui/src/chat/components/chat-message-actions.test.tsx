@@ -162,30 +162,31 @@ describe("Chat.MessageActions hover bar", () => {
 	it("appears when a fine pointer hovers the message", () => {
 		mockPointer("fine");
 		render(
-			<Chat.MessageActions onReact={() => {}} menuLabel="More">
+			<Chat.MessageActions onReact={() => {}} reactionsLabel="React">
 				<span>hello</span>
 			</Chat.MessageActions>,
 		);
 		fireEvent.pointerEnter(trigger());
-		expect(screen.getByLabelText("More")).toBeTruthy();
+		expect(screen.getByLabelText("React")).toBeTruthy();
+		expect(screen.getByRole("button", { name: "👍" })).toBeTruthy();
 	});
 
 	it("stays away from a coarse pointer", () => {
 		mockPointer("coarse");
 		render(
-			<Chat.MessageActions onReact={() => {}} menuLabel="More">
+			<Chat.MessageActions onReact={() => {}} reactionsLabel="React">
 				<span>hello</span>
 			</Chat.MessageActions>,
 		);
 		fireEvent.pointerEnter(trigger());
-		expect(screen.queryByLabelText("More")).toBeNull();
+		expect(screen.queryByLabelText("React")).toBeNull();
 	});
 
 	it("reports the emoji tapped from the bar", () => {
 		mockPointer("fine");
 		const onReact = vi.fn();
 		render(
-			<Chat.MessageActions onReact={onReact} emojis={["👍"]} menuLabel="More">
+			<Chat.MessageActions onReact={onReact} emojis={["👍"]}>
 				<span>hello</span>
 			</Chat.MessageActions>,
 		);
@@ -194,19 +195,39 @@ describe("Chat.MessageActions hover bar", () => {
 		expect(onReact).toHaveBeenCalledWith("👍");
 	});
 
-	it("opens the full menu from the … button", () => {
+	it("shows an icon action as an icon-only button, and runs it", () => {
+		mockPointer("fine");
+		const onCopy = vi.fn();
+		render(
+			<Chat.MessageActions
+				actions={
+					<Chat.MessageAction icon={<svg aria-hidden />} onClick={onCopy}>
+						Copy
+					</Chat.MessageAction>
+				}
+			>
+				<span>hello</span>
+			</Chat.MessageActions>,
+		);
+		fireEvent.pointerEnter(trigger());
+		const action = screen.getByRole("button", { name: "Copy" });
+		expect(action.textContent).toBe("");
+		fireEvent.click(action);
+		expect(onCopy).toHaveBeenCalled();
+		expect(screen.queryByRole("button", { name: "Copy" })).toBeNull();
+	});
+
+	it("keeps an action without an icon out of the bar", () => {
 		mockPointer("fine");
 		render(
 			<Chat.MessageActions
-				menuLabel="More"
 				actions={<Chat.MessageAction>Copy</Chat.MessageAction>}
 			>
 				<span>hello</span>
 			</Chat.MessageActions>,
 		);
 		fireEvent.pointerEnter(trigger());
-		fireEvent.click(screen.getByLabelText("More"));
-		expect(screen.getByText("Copy")).toBeTruthy();
+		expect(screen.queryByText("Copy")).toBeNull();
 	});
 });
 

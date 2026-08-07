@@ -1,13 +1,17 @@
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import * as React from "react";
 import { ChatQuickReactionRow } from "#/chat/components/chat-quick-reaction-row.tsx";
-import { ChatMessageActionsSurfaceContext } from "#/chat/context/chat-message-actions-surface-context.ts";
+import { ChatMessageActionsHostContext } from "#/chat/context/chat-message-actions-host-context.ts";
 import { cn } from "#/lib/utils.ts";
 
 /** Room the emoji row needs above the bubble before it falls back below. */
 const REACTION_ROW_SPACE = 64;
-/** Room the actions card wants below the bubble before it moves above. */
-const ACTIONS_SPACE = 220;
+/**
+ * The smallest actions card worth giving its own side of the bubble. Below
+ * this the card would scroll from the first item, and stacking it with the
+ * emoji row on the roomier side reads better than a two-line scroller.
+ */
+const MIN_ACTIONS_SPACE = 132;
 /** Breathing room between the bubble and the floating blocks. */
 const GAP = 10;
 /** Minimum inset from the viewport edges. */
@@ -40,10 +44,70 @@ interface Props {
 	children: React.ReactNode;
 }
 
+/** Where the two floating blocks land relative to the pressed bubble. */
+interface Placement {
+	readonly reactionsAbove: boolean;
+	readonly actionsAbove: boolean;
+	/** The card had to join the emoji row rather than take the other side. */
+	readonly actionsShareSide: boolean;
+	/** Vertical room the card may use once its side is settled. */
+	readonly actionsRoom: number;
+}
+
+/**
+ * Reactions over the message, menu under it — the arrangement every chat app
+ * uses, and the one a thumb reaches for.
+ *
+ * The emoji row picks its side first, because it is the one that has to hug
+ * the bubble to read as belonging to it; above unless the bubble sits too
+ * close to the top. The card then takes the opposite side, and only falls back
+ * to sharing the row's side when the other one is too short to be worth
+ * reading — near the bottom of the screen, both end up above.
+ */
+function placeBlocks(input: {
+	roomAbove: number;
+	roomBelow: number;
+	hasReactionRow: boolean;
+}): Placement {
+	const { roomAbove, roomBelow, hasReactionRow } = input;
+
+	// No emoji row: the card simply takes the side it fits on, preferring below.
+	if (!hasReactionRow) {
+		const above = roomBelow < MIN_ACTIONS_SPACE && roomAbove > roomBelow;
+		return {
+			reactionsAbove: false,
+			actionsAbove: above,
+			actionsShareSide: false,
+			actionsRoom: above ? roomAbove : roomBelow,
+		};
+	}
+
+	const reactionsAbove = roomAbove >= REACTION_ROW_SPACE;
+	const oppositeRoom = reactionsAbove ? roomBelow : roomAbove;
+	if (oppositeRoom >= MIN_ACTIONS_SPACE) {
+		return {
+			reactionsAbove,
+			actionsAbove: !reactionsAbove,
+			actionsShareSide: false,
+			actionsRoom: oppositeRoom,
+		};
+	}
+
+	const sharedRoom =
+		(reactionsAbove ? roomAbove : roomBelow) - REACTION_ROW_SPACE - GAP;
+	return {
+		reactionsAbove,
+		actionsAbove: reactionsAbove,
+		actionsShareSide: true,
+		actionsRoom: sharedRoom,
+	};
+}
+
 /**
  * The long-press surface of a touch screen: the thread dims and blurs, the
- * pressed bubble stays put above the veil, the one-tap emoji row lands next
- * to it and the message actions stack on whichever side has room.
+ * pressed bubble stays put above the veil, the one-tap emoji row lands over
+ * it and the message actions under it — see {@link placeBlocks} for what
+ * happens when a screen edge gets in the way.
  */
 export function ChatMessagePressSurface({
 	pressed,
@@ -69,10 +133,11 @@ export function ChatMessagePressSurface({
 
 	const { rect, end } = shown;
 	const viewportHeight = window.innerHeight;
-	const reactionsAbove = rect.top >= REACTION_ROW_SPACE;
-	const spaceBelow = viewportHeight - rect.bottom;
-	const actionsBelow =
-		!reactionsAbove || spaceBelow >= ACTIONS_SPACE || spaceBelow >= rect.top;
+	const placement = placeBlocks({
+		roomAbove: rect.top - GAP - EDGE,
+		roomBelow: viewportHeight - rect.bottom - GAP - EDGE,
+		hasReactionRow: onReact !== undefined && emojis.length > 0,
+	});
 
 	const horizontal: React.CSSProperties = end
 		? { right: Math.max(EDGE, window.innerWidth - rect.right) }
@@ -102,16 +167,13 @@ export function ChatMessagePressSurface({
 			<div
 				data-slot="chat-message-actions"
 				className="min-w-52 overflow-y-auto rounded-xl bg-popover p-1 text-popover-foreground shadow-lg ring-1 ring-foreground/10"
-				style={{
-					maxHeight: Math.max(
-						120,
-						(actionsBelow ? spaceBelow : rect.top) - REACTION_ROW_SPACE - GAP,
-					),
-				}}
+				style={{ maxHeight: Math.max(120, placement.actionsRoom) }}
 			>
-				<ChatMessageActionsSurfaceContext.Provider value={{ close: onClose }}>
+				<ChatMessageActionsHostContext.Provider
+					value={{ host: "surface", close: onClose }}
+				>
 					{actions}
-				</ChatMessageActionsSurfaceContext.Provider>
+				</ChatMessageActionsHostContext.Provider>
 			</div>
 		);
 
@@ -160,26 +222,33 @@ export function ChatMessagePressSurface({
 					>
 						{children}
 					</div>
-					<div
-						className={cn(
-							"absolute flex flex-col gap-2.5",
-							end ? "items-end" : "items-start",
-						)}
-						style={slot(reactionsAbove)}
-					>
-						{/* Whichever block sits against the bubble goes last above it,
-						    first below it, so the emoji row always hugs the message. */}
-						{reactionsAbove && !actionsBelow && actionsCard}
-						{reactionRow}
-						{!reactionsAbove && actionsBelow && actionsCard}
-					</div>
-					{reactionsAbove && actionsBelow && actionsCard !== null && (
+					{reactionRow !== null && (
+						<div
+							className={cn(
+								"absolute flex flex-col gap-2.5",
+								end ? "items-end" : "items-start",
+							)}
+							style={slot(placement.reactionsAbove)}
+						>
+							{/* Shared only when the opposite side was too short. The emoji
+							    row still hugs the message, so the card goes above it above
+							    the bubble and below it below the bubble. */}
+							{placement.actionsShareSide &&
+								placement.reactionsAbove &&
+								actionsCard}
+							{reactionRow}
+							{placement.actionsShareSide &&
+								!placement.reactionsAbove &&
+								actionsCard}
+						</div>
+					)}
+					{!placement.actionsShareSide && actionsCard !== null && (
 						<div
 							className={cn(
 								"absolute flex flex-col",
 								end ? "items-end" : "items-start",
 							)}
-							style={slot(false)}
+							style={slot(placement.actionsAbove)}
 						>
 							{actionsCard}
 						</div>

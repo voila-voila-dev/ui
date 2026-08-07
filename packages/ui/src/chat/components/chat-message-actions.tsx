@@ -67,7 +67,7 @@ interface Props {
 	onReact?: (emoji: string) => void;
 	/** Accessible name of the emoji row. */
 	reactionsLabel?: string;
-	/** Accessible name of the "…" button and of the long-press surface. */
+	/** Accessible name of the long-press surface. */
 	menuLabel?: string;
 	/** The menu items, composed by the caller from `Chat.MessageAction`. */
 	actions?: React.ReactNode;
@@ -76,11 +76,12 @@ interface Props {
 
 /**
  * The message menu, one per input. A fine pointer hovers the bubble and gets
- * a floating bar (quick reactions + a "…" opening the full menu) — right-click
- * still opens the menu directly. A touch screen long-presses and gets the
- * full-screen surface: thread blurred, bubble lifted, emoji row and actions
- * around it. The quick-reaction row also stays inside the menu itself, so the
- * menu is complete on its own.
+ * a floating bar — quick reactions, then the actions themselves as icons, each
+ * one press away; right-click still opens the full menu, which is where an
+ * action with no icon lives. A touch screen long-presses and gets the
+ * full-screen surface: thread blurred, bubble lifted, emoji row over it and
+ * the actions under it. The quick-reaction row also stays inside the menu
+ * itself, so the menu is complete on its own.
  *
  * The kit ships no copy: every label arrives as a prop or as composed
  * children, because the consumer owns the language.
@@ -135,24 +136,6 @@ export function ChatMessageActions({
 		setBarAlign(endAligned() ? "end" : "start");
 	};
 	React.useEffect(() => cancelBarClose, []);
-
-	// The "…" button re-enters through the same door as a right click, so the
-	// two paths cannot drift: a synthetic contextmenu event at the button's
-	// position opens the one and only menu right there.
-	const openMenuAt = (anchor: DOMRect) => {
-		const trigger = triggerRef.current;
-		if (trigger === null) {
-			return;
-		}
-		trigger.dispatchEvent(
-			new MouseEvent("contextmenu", {
-				bubbles: true,
-				cancelable: true,
-				clientX: anchor.left + anchor.width / 2,
-				clientY: anchor.top + anchor.height / 2,
-			}),
-		);
-	};
 
 	const handleMenuOpenChange = (next: boolean) => {
 		if (next && coarsePointer()) {
@@ -226,11 +209,7 @@ export function ChatMessageActions({
 					activeEmojis={active}
 					onReact={onReact}
 					reactionsLabel={reactionsLabel}
-					menuLabel={menuLabel}
-					onOpenMenu={(anchor) => {
-						closeBar();
-						openMenuAt(anchor);
-					}}
+					actions={actions}
 				/>
 			</ContextMenuTrigger>
 			<ContextMenuContent
