@@ -5,6 +5,7 @@ import { Button } from "@voila.dev/ui/button";
 import {
 	type ColumnDef,
 	DataTable,
+	type DataTableView,
 	dataTableSelectionColumn,
 	type RowSelectionState,
 } from "@voila.dev/ui/data-table";
@@ -344,4 +345,109 @@ function SelectionBarExample() {
 
 export const SelectionBar: Story = {
 	render: () => <SelectionBarExample />,
+};
+
+interface Organization {
+	name: string;
+	activity: string;
+	logo?: string;
+}
+
+function organizationLogo(initials: string, background: string) {
+	return `data:image/svg+xml;utf8,${encodeURIComponent(
+		`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" rx="20" fill="${background}"/><text x="48" y="61" font-family="system-ui, sans-serif" font-size="34" font-weight="600" fill="#fff" text-anchor="middle">${initials}</text></svg>`,
+	)}`;
+}
+
+const organizations: Organization[] = [
+	{
+		name: "Riverside Rowing",
+		activity: "Rowing",
+		logo: organizationLogo("RR", "#0e7490"),
+	},
+	{
+		name: "Northgate Chess",
+		activity: "Chess",
+		logo: organizationLogo("NC", "#7c3aed"),
+	},
+	{
+		name: "Harbour Runners",
+		activity: "Athletics",
+		logo: organizationLogo("HR", "#ea580c"),
+	},
+	{
+		name: "Eastfield Tennis",
+		activity: "Tennis",
+		logo: organizationLogo("ET", "#16a34a"),
+	},
+	{
+		name: "Southbank Judo",
+		activity: "Judo",
+		logo: organizationLogo("SJ", "#dc2626"),
+	},
+	{ name: "Old Town Chorale", activity: "Choral singing" },
+	{
+		name: "Westside Cycling",
+		activity: "Cycling",
+		logo: organizationLogo("WC", "#ca8a04"),
+	},
+	{
+		name: "Lakeside Sailing",
+		activity: "Sailing",
+		logo: organizationLogo("LS", "#2563eb"),
+	},
+	{
+		name: "Highfield Basketball",
+		activity: "Basketball",
+		logo: organizationLogo("HB", "#db2777"),
+	},
+	{ name: "Millbrook Drama", activity: "Theatre" },
+];
+
+const organizationColumns: ColumnDef<Organization>[] = [
+	{ accessorKey: "name", header: "Name" },
+	{ accessorKey: "activity", header: "Activity" },
+];
+
+/**
+ * `view="gallery"` turns the filtered rows into a directory of cards — logo
+ * large, name below, activity last — with every row on screen and no
+ * pagination footer. `DataTable.ViewToggle` flips between the two layouts and
+ * the toolbar's search keeps filtering either one.
+ */
+function GalleryViewExample() {
+	const [view, setView] = useState<DataTableView>("gallery");
+	const [search, setSearch] = useState("");
+
+	return (
+		<DataTable.Root
+			columns={organizationColumns}
+			data={organizations}
+			globalFilter={search}
+			view={view}
+			renderGalleryCard={(organization) => (
+				<DataTable.GalleryCard
+					src={organization.logo}
+					name={organization.name}
+					activity={organization.activity}
+				/>
+			)}
+			toolbar={
+				<DataTable.Toolbar>
+					<DataTable.Search
+						value={search}
+						onChange={(event) => setSearch(event.target.value)}
+						placeholder="Search organizations..."
+					/>
+					<DataTable.Actions>
+						<DataTable.ViewToggle view={view} onViewChange={setView} />
+					</DataTable.Actions>
+				</DataTable.Toolbar>
+			}
+		/>
+	);
+}
+
+export const GalleryView: Story = {
+	render: () => <GalleryViewExample />,
 };

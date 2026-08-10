@@ -560,6 +560,136 @@ describe("DataTable column visibility and export", () => {
 	});
 });
 
+describe("DataTable gallery view", () => {
+	const renderCard = (project: Project) => (
+		<DataTable.GalleryCard name={project.client} activity={project.reference} />
+	);
+
+	it("swaps the table for a card grid with every row and no footer", () => {
+		const screen = render(
+			<DataTable.Root
+				columns={columns}
+				data={projects}
+				view="gallery"
+				renderGalleryCard={renderCard}
+				pagination={{
+					page: 0,
+					pageSize: 2,
+					total: projects.length,
+					onPageChange: () => {},
+				}}
+			/>,
+		);
+		const gallery = screen.baseElement.querySelector(
+			"[data-slot=data-table-gallery]",
+		);
+		expect(gallery?.querySelectorAll("li")).toHaveLength(projects.length);
+		expect(screen.baseElement.querySelector("table")).toBeNull();
+		// Gallery view shows everything at once — no pagination footer.
+		expect(
+			screen.baseElement.querySelector("[data-slot=data-table-pagination]"),
+		).toBeNull();
+	});
+
+	it("keeps the table when no gallery card renderer is supplied", () => {
+		const screen = render(
+			<DataTable.Root columns={columns} data={projects} view="gallery" />,
+		);
+		expect(screen.baseElement.querySelector("table")).not.toBeNull();
+		expect(
+			screen.baseElement.querySelector("[data-slot=data-table-gallery]"),
+		).toBeNull();
+	});
+
+	it("follows the sorted, filtered row model", () => {
+		const screen = render(
+			<DataTable.Root
+				columns={columns}
+				data={projects}
+				view="gallery"
+				renderGalleryCard={renderCard}
+				initialSorting={[{ id: "client", desc: false }]}
+				globalFilter="PRJ-00"
+			/>,
+		);
+		const cards = Array.from(screen.baseElement.querySelectorAll("li"));
+		expect(cards[0]?.textContent).toContain("Acme Studio");
+	});
+
+	it("keeps cards clickable through onRowClick", () => {
+		const onRowClick = vi.fn();
+		const screen = render(
+			<DataTable.Root
+				columns={columns}
+				data={projects}
+				view="gallery"
+				renderGalleryCard={renderCard}
+				onRowClick={onRowClick}
+			/>,
+		);
+		fireEvent.click(screen.getByText("Globex Media"));
+		expect(onRowClick).toHaveBeenCalledWith(projects[1]);
+	});
+
+	it("renders the empty state when nothing matches", () => {
+		const screen = render(
+			<DataTable.Root
+				columns={columns}
+				data={[]}
+				view="gallery"
+				renderGalleryCard={renderCard}
+			/>,
+		);
+		expect(screen.getByText("No results")).toBeDefined();
+	});
+});
+
+describe("DataTable.GalleryCard", () => {
+	it("renders the name, the activity and a first-letter fallback", () => {
+		const screen = render(
+			<DataTable.GalleryCard name="Riverside Rowing" activity="Rowing club" />,
+		);
+		expect(screen.getByText("Riverside Rowing")).toBeDefined();
+		expect(screen.getByText("Rowing club")).toBeDefined();
+		expect(
+			screen.baseElement.querySelector("[data-slot=avatar-fallback]")
+				?.textContent,
+		).toBe("R");
+	});
+
+	it("prefers an explicit fallback", () => {
+		const screen = render(
+			<DataTable.GalleryCard name="Riverside Rowing" fallback="RR" />,
+		);
+		expect(
+			screen.baseElement.querySelector("[data-slot=avatar-fallback]")
+				?.textContent,
+		).toBe("RR");
+	});
+});
+
+describe("DataTable.ViewToggle", () => {
+	it("reports the picked view", () => {
+		const onViewChange = vi.fn();
+		const screen = render(
+			<DataTable.ViewToggle view="table" onViewChange={onViewChange} />,
+		);
+		fireEvent.click(screen.getByRole("button", { name: "Gallery view" }));
+		expect(onViewChange).toHaveBeenCalledWith("gallery");
+	});
+
+	it("marks the current view as pressed", () => {
+		const screen = render(
+			<DataTable.ViewToggle view="gallery" onViewChange={() => {}} />,
+		);
+		expect(
+			screen
+				.getByRole("button", { name: "Gallery view" })
+				.getAttribute("aria-pressed"),
+		).toBe("true");
+	});
+});
+
 describe("DataTable global filter", () => {
 	it("narrows the rows to the matching ones", () => {
 		const screen = render(
