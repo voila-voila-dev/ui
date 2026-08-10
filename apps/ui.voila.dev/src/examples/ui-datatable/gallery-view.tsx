@@ -1,3 +1,4 @@
+import { CardGallery } from "@voila.dev/ui/card-gallery";
 import {
 	type ColumnDef,
 	DataTable,
@@ -7,7 +8,7 @@ import { useState } from "react";
 
 interface Organization {
 	name: string;
-	activity: string;
+	category: string;
 	logo?: string;
 }
 
@@ -18,31 +19,47 @@ function logo(initials: string, background: string) {
 }
 
 const ORGANIZATIONS: Organization[] = [
-	{ name: "Riverside Rowing", activity: "Rowing", logo: logo("RR", "#0e7490") },
-	{ name: "Northgate Chess", activity: "Chess", logo: logo("NC", "#7c3aed") },
 	{
-		name: "Harbour Runners",
-		activity: "Athletics",
-		logo: logo("HR", "#ea580c"),
-	},
-	{ name: "Eastfield Tennis", activity: "Tennis", logo: logo("ET", "#16a34a") },
-	{ name: "Southbank Judo", activity: "Judo", logo: logo("SJ", "#dc2626") },
-	{ name: "Old Town Chorale", activity: "Choral singing" },
-	{
-		name: "Westside Cycling",
-		activity: "Cycling",
-		logo: logo("WC", "#ca8a04"),
+		name: "Riverside Studio",
+		category: "Design studio",
+		logo: logo("RS", "#0e7490"),
 	},
 	{
-		name: "Lakeside Sailing",
-		activity: "Sailing",
-		logo: logo("LS", "#2563eb"),
+		name: "Northgate Labs",
+		category: "Research",
+		logo: logo("NL", "#7c3aed"),
+	},
+	{
+		name: "Harbour Media",
+		category: "Media production",
+		logo: logo("HM", "#ea580c"),
+	},
+	{
+		name: "Eastfield Group",
+		category: "Consulting",
+		logo: logo("EG", "#16a34a"),
+	},
+	{
+		name: "Southbank Digital",
+		category: "Software",
+		logo: logo("SD", "#2563eb"),
+	},
+	{ name: "Old Town Press", category: "Publishing" },
+	{
+		name: "Westside Ventures",
+		category: "Finance",
+		logo: logo("WV", "#ca8a04"),
+	},
+	{
+		name: "Lakeside Health",
+		category: "Healthcare",
+		logo: logo("LH", "#dc2626"),
 	},
 ];
 
 const columns: ColumnDef<Organization>[] = [
 	{ accessorKey: "name", header: "Name" },
-	{ accessorKey: "activity", header: "Activity" },
+	{ accessorKey: "category", header: "Category" },
 ];
 
 export function GalleryView() {
@@ -56,11 +73,15 @@ export function GalleryView() {
 				globalFilter={search}
 				view={view}
 				renderGalleryCard={(organization) => (
-					<DataTable.GalleryCard
-						src={organization.logo}
-						name={organization.name}
-						activity={organization.activity}
-					/>
+					<>
+						<CardGallery.Logo src={organization.logo}>
+							{organization.name.charAt(0)}
+						</CardGallery.Logo>
+						<CardGallery.Title>{organization.name}</CardGallery.Title>
+						<CardGallery.Description>
+							{organization.category}
+						</CardGallery.Description>
+					</>
 				)}
 				toolbar={
 					<DataTable.Toolbar>

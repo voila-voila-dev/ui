@@ -3,7 +3,6 @@ import { DataTableDensityToggle } from "#/data-table/components/data-table-densi
 import { DataTableEmpty } from "#/data-table/components/data-table-empty.tsx";
 import { DataTableExport } from "#/data-table/components/data-table-export.tsx";
 import { DataTableFilters } from "#/data-table/components/data-table-filters.tsx";
-import { DataTableGalleryCard } from "#/data-table/components/data-table-gallery-card.tsx";
 import { DataTablePagination } from "#/data-table/components/data-table-pagination.tsx";
 import { DataTableRoot } from "#/data-table/components/data-table-root.tsx";
 import { DataTableSearch } from "#/data-table/components/data-table-search.tsx";
@@ -40,7 +39,6 @@ export const DataTable = {
 	Empty: DataTableEmpty,
 	Export: DataTableExport,
 	Filters: DataTableFilters,
-	GalleryCard: DataTableGalleryCard,
 	Pagination: DataTablePagination,
 	Search: DataTableSearch,
 	SelectionBar: DataTableSelectionBar,

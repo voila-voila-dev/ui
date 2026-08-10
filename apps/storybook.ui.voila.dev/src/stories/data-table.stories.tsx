@@ -2,6 +2,7 @@ import { ExportIcon } from "@phosphor-icons/react";
 import type { Meta, StoryObj } from "@storybook/tanstack-react";
 import { Badge } from "@voila.dev/ui/badge";
 import { Button } from "@voila.dev/ui/button";
+import { CardGallery } from "@voila.dev/ui/card-gallery";
 import {
 	type ColumnDef,
 	DataTable,
@@ -349,7 +350,7 @@ export const SelectionBar: Story = {
 
 interface Organization {
 	name: string;
-	activity: string;
+	category: string;
 	logo?: string;
 }
 
@@ -361,59 +362,60 @@ function organizationLogo(initials: string, background: string) {
 
 const organizations: Organization[] = [
 	{
-		name: "Riverside Rowing",
-		activity: "Rowing",
-		logo: organizationLogo("RR", "#0e7490"),
+		name: "Riverside Studio",
+		category: "Design studio",
+		logo: organizationLogo("RS", "#0e7490"),
 	},
 	{
-		name: "Northgate Chess",
-		activity: "Chess",
-		logo: organizationLogo("NC", "#7c3aed"),
+		name: "Northgate Labs",
+		category: "Research",
+		logo: organizationLogo("NL", "#7c3aed"),
 	},
 	{
-		name: "Harbour Runners",
-		activity: "Athletics",
-		logo: organizationLogo("HR", "#ea580c"),
+		name: "Harbour Media",
+		category: "Media production",
+		logo: organizationLogo("HM", "#ea580c"),
 	},
 	{
-		name: "Eastfield Tennis",
-		activity: "Tennis",
-		logo: organizationLogo("ET", "#16a34a"),
+		name: "Eastfield Group",
+		category: "Consulting",
+		logo: organizationLogo("EG", "#16a34a"),
 	},
 	{
-		name: "Southbank Judo",
-		activity: "Judo",
-		logo: organizationLogo("SJ", "#dc2626"),
+		name: "Southbank Digital",
+		category: "Software",
+		logo: organizationLogo("SD", "#2563eb"),
 	},
-	{ name: "Old Town Chorale", activity: "Choral singing" },
+	{ name: "Old Town Press", category: "Publishing" },
 	{
-		name: "Westside Cycling",
-		activity: "Cycling",
-		logo: organizationLogo("WC", "#ca8a04"),
-	},
-	{
-		name: "Lakeside Sailing",
-		activity: "Sailing",
-		logo: organizationLogo("LS", "#2563eb"),
+		name: "Westside Ventures",
+		category: "Finance",
+		logo: organizationLogo("WV", "#ca8a04"),
 	},
 	{
-		name: "Highfield Basketball",
-		activity: "Basketball",
-		logo: organizationLogo("HB", "#db2777"),
+		name: "Lakeside Health",
+		category: "Healthcare",
+		logo: organizationLogo("LH", "#dc2626"),
 	},
-	{ name: "Millbrook Drama", activity: "Theatre" },
+	{
+		name: "Highfield Energy",
+		category: "Renewables",
+		logo: organizationLogo("HE", "#db2777"),
+	},
+	{ name: "Millbrook Archive", category: "Heritage" },
 ];
 
 const organizationColumns: ColumnDef<Organization>[] = [
 	{ accessorKey: "name", header: "Name" },
-	{ accessorKey: "activity", header: "Activity" },
+	{ accessorKey: "category", header: "Category" },
 ];
 
 /**
- * `view="gallery"` turns the filtered rows into a directory of cards — logo
- * large, name below, activity last — with every row on screen and no
- * pagination footer. `DataTable.ViewToggle` flips between the two layouts and
- * the toolbar's search keeps filtering either one.
+ * `view="gallery"` turns the filtered rows into a `CardGallery` grid — logo
+ * large, name below, category last. `DataTable.ViewToggle` flips between the
+ * two layouts, the toolbar's search keeps filtering either one, and the
+ * `pagination` footer is equally at home in both — omitted here to show the
+ * whole directory at once.
  */
 function GalleryViewExample() {
 	const [view, setView] = useState<DataTableView>("gallery");
@@ -426,11 +428,15 @@ function GalleryViewExample() {
 			globalFilter={search}
 			view={view}
 			renderGalleryCard={(organization) => (
-				<DataTable.GalleryCard
-					src={organization.logo}
-					name={organization.name}
-					activity={organization.activity}
-				/>
+				<>
+					<CardGallery.Logo src={organization.logo}>
+						{organization.name.charAt(0)}
+					</CardGallery.Logo>
+					<CardGallery.Title>{organization.name}</CardGallery.Title>
+					<CardGallery.Description>
+						{organization.category}
+					</CardGallery.Description>
+				</>
 			)}
 			toolbar={
 				<DataTable.Toolbar>

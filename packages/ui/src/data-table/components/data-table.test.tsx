@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { CardGallery } from "#/card-gallery/components/card-gallery.tsx";
 import {
 	type ColumnDef,
 	DataTable,
@@ -562,10 +563,32 @@ describe("DataTable column visibility and export", () => {
 
 describe("DataTable gallery view", () => {
 	const renderCard = (project: Project) => (
-		<DataTable.GalleryCard name={project.client} activity={project.reference} />
+		<CardGallery.Title>{project.client}</CardGallery.Title>
 	);
 
-	it("swaps the table for a card grid with every row and no footer", () => {
+	it("swaps the table for a card grid with one tile per row", () => {
+		const screen = render(
+			<DataTable.Root
+				columns={columns}
+				data={projects}
+				view="gallery"
+				renderGalleryCard={renderCard}
+			/>,
+		);
+		const gallery = screen.baseElement.querySelector(
+			"[data-slot=data-table-gallery]",
+		);
+		expect(
+			gallery?.querySelectorAll("[data-slot=card-gallery-item]"),
+		).toHaveLength(projects.length);
+		expect(screen.baseElement.querySelector("table")).toBeNull();
+		// No pagination prop, no footer — the grid shows everything at once.
+		expect(
+			screen.baseElement.querySelector("[data-slot=data-table-pagination]"),
+		).toBeNull();
+	});
+
+	it("keeps the pagination footer when one is supplied", () => {
 		const screen = render(
 			<DataTable.Root
 				columns={columns}
@@ -574,21 +597,16 @@ describe("DataTable gallery view", () => {
 				renderGalleryCard={renderCard}
 				pagination={{
 					page: 0,
-					pageSize: 2,
-					total: projects.length,
+					pageSize: 3,
+					total: 9,
 					onPageChange: () => {},
 				}}
 			/>,
 		);
-		const gallery = screen.baseElement.querySelector(
-			"[data-slot=data-table-gallery]",
-		);
-		expect(gallery?.querySelectorAll("li")).toHaveLength(projects.length);
-		expect(screen.baseElement.querySelector("table")).toBeNull();
-		// Gallery view shows everything at once — no pagination footer.
 		expect(
-			screen.baseElement.querySelector("[data-slot=data-table-pagination]"),
-		).toBeNull();
+			screen.baseElement.querySelector("[data-slot=data-table-gallery]"),
+		).not.toBeNull();
+		expect(screen.getByText("1-3 of 9")).toBeDefined();
 	});
 
 	it("keeps the table when no gallery card renderer is supplied", () => {
@@ -612,7 +630,9 @@ describe("DataTable gallery view", () => {
 				globalFilter="PRJ-00"
 			/>,
 		);
-		const cards = Array.from(screen.baseElement.querySelectorAll("li"));
+		const cards = Array.from(
+			screen.baseElement.querySelectorAll("[data-slot=card-gallery-item]"),
+		);
 		expect(cards[0]?.textContent).toContain("Acme Studio");
 	});
 
@@ -641,30 +661,6 @@ describe("DataTable gallery view", () => {
 			/>,
 		);
 		expect(screen.getByText("No results")).toBeDefined();
-	});
-});
-
-describe("DataTable.GalleryCard", () => {
-	it("renders the name, the activity and a first-letter fallback", () => {
-		const screen = render(
-			<DataTable.GalleryCard name="Riverside Rowing" activity="Rowing club" />,
-		);
-		expect(screen.getByText("Riverside Rowing")).toBeDefined();
-		expect(screen.getByText("Rowing club")).toBeDefined();
-		expect(
-			screen.baseElement.querySelector("[data-slot=avatar-fallback]")
-				?.textContent,
-		).toBe("R");
-	});
-
-	it("prefers an explicit fallback", () => {
-		const screen = render(
-			<DataTable.GalleryCard name="Riverside Rowing" fallback="RR" />,
-		);
-		expect(
-			screen.baseElement.querySelector("[data-slot=avatar-fallback]")
-				?.textContent,
-		).toBe("RR");
 	});
 });
 

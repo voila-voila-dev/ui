@@ -1,6 +1,6 @@
 ---
 title: "Gallery view"
-description: "The same rows as a card grid — logo large, name below, no pages."
+description: "The same rows as a CardGallery grid — with or without the pagination footer."
 sidebar:
   order: 12
 ---
@@ -19,11 +19,13 @@ const [view, setView] = useState<DataTableView>("table");
 	data={organizations}
 	view={view}
 	renderGalleryCard={(organization) => (
-		<DataTable.GalleryCard
-			src={organization.logo}
-			name={organization.name}
-			activity={organization.activity}
-		/>
+		<>
+			<CardGallery.Logo src={organization.logo}>
+				{organization.name.charAt(0)}
+			</CardGallery.Logo>
+			<CardGallery.Title>{organization.name}</CardGallery.Title>
+			<CardGallery.Description>{organization.category}</CardGallery.Description>
+		</>
 	)}
 	toolbar={
 		<DataTable.Toolbar>
@@ -35,14 +37,17 @@ const [view, setView] = useState<DataTableView>("table");
 />;
 ```
 
-`view="gallery"` swaps the table for a card grid built from the same sorted,
-filtered row model, so the toolbar's [search](/ui-datatable/global-filter) and
-filters keep working unchanged. The grid shows every row at once and never
-renders the `pagination` footer — a directory people browse, not page through.
-With server-side pagination, fetch the full result set before switching.
+`view="gallery"` swaps the table for a [CardGallery](/ui/card-gallery) grid
+built from the same sorted, filtered row model, so the toolbar's
+[search](/ui-datatable/global-filter) and filters keep working unchanged.
+`renderGalleryCard` fills each tile — the tile itself is supplied, stays
+clickable through `onRowClick`, and the grid adapts its column count to the
+container on its own.
 
-Cards stay clickable through `onRowClick`, and the columns still exist
-underneath — sorting set in table view carries over.
+Pagination is the consumer's call, exactly as in table view: pass the
+`pagination` prop and the footer stays; omit it and the grid shows everything
+at once. Sorting set in table view carries over — the columns still exist
+underneath.
 
 ## API
 
@@ -52,11 +57,3 @@ underneath — sorting set in table view carries over.
 
 The table ⇄ gallery switch, at home in `DataTable.Actions`. It holds no state:
 pass `view` back to `DataTable.Root`.
-
-### DataTable.GalleryCard
-
-<PropTable of="DataTable.GalleryCard" />
-
-The directory-entry anatomy — logo large on top, name below, activity last —
-to return from `renderGalleryCard`. Without a logo it falls back to the name's
-first letter. Any other card content works too; the prop takes arbitrary JSX.

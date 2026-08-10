@@ -47,20 +47,18 @@ interface Props<TData, TValue>
 	/** Row height. `compact` fits about a third more rows on a screen. */
 	density?: DataTableDensity;
 	/**
-	 * Row layout. `gallery` swaps the table for a card grid built from the same
-	 * (sorted, filtered) row model and shows every row at once — the
-	 * `pagination` footer is not rendered. Needs `renderGalleryCard`; drive it
-	 * with `DataTable.ViewToggle`.
+	 * Row layout. `gallery` swaps the table for a `CardGallery` grid built
+	 * from the same (sorted, filtered) row model. Needs `renderGalleryCard`;
+	 * drive it with `DataTable.ViewToggle`. The `pagination` footer works in
+	 * either layout — omit it to show everything at once.
 	 */
 	view?: DataTableView;
 	/**
-	 * Card content for one row in gallery view — compose
-	 * `DataTable.GalleryCard` for the logo/name/activity anatomy. Cards stay
-	 * clickable through `onRowClick`.
+	 * Card content for one row in gallery view — compose the `CardGallery`
+	 * parts (`Logo`, `Title`, `Description`) or any JSX; the tile itself is
+	 * supplied and stays clickable through `onRowClick`.
 	 */
 	renderGalleryCard?: (row: TData) => React.ReactNode;
-	/** Forwarded to the gallery grid — replace the column classes to retune it. */
-	galleryClassName?: string;
 }
 
 /**
@@ -104,7 +102,6 @@ export function DataTableRoot<TData, TValue>({
 	globalFilter,
 	view = "table",
 	renderGalleryCard,
-	galleryClassName,
 	className,
 	...props
 }: Props<TData, TValue>) {
@@ -147,7 +144,6 @@ export function DataTableRoot<TData, TValue>({
 					emptyState={emptyState}
 					onRowClick={onRowClick}
 					renderGalleryCard={renderGalleryCard}
-					galleryClassName={galleryClassName}
 				/>
 			) : (
 				<>
@@ -179,9 +175,9 @@ export function DataTableRoot<TData, TValue>({
 							0
 						}
 					/>
-					{pagination !== undefined && <DataTablePagination {...pagination} />}
 				</>
 			)}
+			{pagination !== undefined && <DataTablePagination {...pagination} />}
 		</div>
 	);
 }
