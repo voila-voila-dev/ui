@@ -310,29 +310,23 @@ describe("Chat.Marker", () => {
 		);
 	});
 
-	it.each([
-		"default",
-		"separator",
-		"border",
-	] as const)("exposes the %s variant as a data attribute", (variant) => {
-		const screen = render(
-			<Chat.Marker variant={variant}>
-				<Chat.MarkerContent>x</Chat.MarkerContent>
-			</Chat.Marker>,
-		);
-		expect(
-			queryBySlot(screen, "chat-marker")?.getAttribute("data-variant"),
-		).toBe(variant);
-	});
+	it.each(["default", "separator", "border"] as const)(
+		"exposes the %s variant as a data attribute",
+		(variant) => {
+			const screen = render(
+				<Chat.Marker variant={variant}>
+					<Chat.MarkerContent>x</Chat.MarkerContent>
+				</Chat.Marker>,
+			);
+			expect(
+				queryBySlot(screen, "chat-marker")?.getAttribute("data-variant"),
+			).toBe(variant);
+		},
+	);
 
 	it("becomes a real link through the render prop", () => {
 		const screen = render(
-			<Chat.Marker
-				render={
-					// biome-ignore lint/a11y/useAnchorContent: content is merged in from Chat.Marker
-					<a href="/details" />
-				}
-			>
+			<Chat.Marker render={<a href="/details" />}>
 				<Chat.MarkerContent>Voir le détail</Chat.MarkerContent>
 			</Chat.Marker>,
 		);

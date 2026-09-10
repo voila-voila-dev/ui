@@ -29,12 +29,13 @@ describe("Button", () => {
 		expect(button?.getAttribute("data-size")).toBe("default");
 	});
 
-	it.each(
-		buttonVariantOptions,
-	)("exposes variant %s as a data attribute", (variant) => {
-		const screen = render(<Button variant={variant}>Publish</Button>);
-		expect(queryButton(screen)?.getAttribute("data-variant")).toBe(variant);
-	});
+	it.each(buttonVariantOptions)(
+		"exposes variant %s as a data attribute",
+		(variant) => {
+			const screen = render(<Button variant={variant}>Publish</Button>);
+			expect(queryButton(screen)?.getAttribute("data-variant")).toBe(variant);
+		},
+	);
 
 	it.each(buttonSizeOptions)("exposes size %s as a data attribute", (size) => {
 		const screen = render(<Button size={size}>Publish</Button>);
