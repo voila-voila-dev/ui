@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { cleanup, render } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { Button } from "#/button/components/button.tsx";
 import {
 	buttonSizeOptions,
@@ -67,6 +67,21 @@ describe("Button", () => {
 		expect(button?.getAttribute("href")).toBe("/projects");
 		expect(button?.textContent).toBe("Open projects");
 		expect(button?.classList.contains("bg-primary")).toBe(true);
+	});
+
+	it("gives an anchor the button role it needs, without being told", () => {
+		// Base UI only wires the non-native button handling up when told the
+		// element is not a `<button>`, and warns when left to assume; the tag in
+		// `render` answers that, so no caller passes `nativeButton` by hand.
+		const consoleError = vi
+			.spyOn(console, "error")
+			.mockImplementation(() => {});
+		const screen = render(
+			<Button render={<a href="/projects">Open projects</a>} />,
+		);
+		expect(queryButton(screen)?.getAttribute("role")).toBe("button");
+		expect(consoleError).not.toHaveBeenCalled();
+		consoleError.mockRestore();
 	});
 
 	it("disables the button when disabled is set", () => {
