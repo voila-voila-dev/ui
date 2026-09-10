@@ -177,7 +177,7 @@
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"tailwindcss": "^4.0.0",
-		"maplibre-gl": "^5.0.0",
+		"maplibre-gl": "^6.0.0",
 		"@tanstack/react-table": "^9.2.4",
 		"@tanstack/react-virtual": "^3.14.6",
 		"@dnd-kit/core": "^6.3.1",

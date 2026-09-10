@@ -49,7 +49,7 @@
 				"@tailwindcss/typography": "0.5.20"
 			},
 			"maplibre": {
-				"maplibre-gl": "5.24.0"
+				"maplibre-gl": "6.9.0"
 			}
 		}
 	},
