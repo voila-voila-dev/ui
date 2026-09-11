@@ -4,7 +4,10 @@ import { cn } from "#/lib/utils.ts";
 import { toggleVariants } from "#/toggle/components/toggle-variants.ts";
 
 interface Props
-	extends TogglePrimitive.Props,
+	extends Omit<
+			TogglePrimitive.Props,
+			keyof VariantProps<typeof toggleVariants>
+		>,
 		VariantProps<typeof toggleVariants> {}
 
 export function Toggle({

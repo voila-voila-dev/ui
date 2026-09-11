@@ -5,7 +5,7 @@ import { cn } from "#/lib/utils.ts";
 
 interface Props
 	extends Pick<ButtonVariants, "size" | "variant">,
-		React.ComponentProps<"a"> {
+		Omit<React.ComponentProps<"a">, "size" | "variant"> {
 	isActive?: boolean;
 	/**
 	 * Render the link as non-interactive (e.g. Previous on the first page):

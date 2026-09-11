@@ -3,7 +3,7 @@ import { Button } from "#/button/components/button.tsx";
 import type { ButtonVariants } from "#/button/components/button-variants.ts";
 
 interface Props
-	extends AlertDialogPrimitive.Close.Props,
+	extends Omit<AlertDialogPrimitive.Close.Props, "variant" | "size">,
 		Pick<ButtonVariants, "variant" | "size"> {}
 
 export function AlertDialogCancel({

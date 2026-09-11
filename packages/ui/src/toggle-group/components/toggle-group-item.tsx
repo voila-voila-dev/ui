@@ -6,7 +6,10 @@ import { toggleVariants } from "#/toggle/components/toggle-variants.ts";
 import { ToggleGroupContext } from "#/toggle-group/context/toggle-group-context.ts";
 
 interface Props
-	extends TogglePrimitive.Props,
+	extends Omit<
+			TogglePrimitive.Props,
+			keyof VariantProps<typeof toggleVariants>
+		>,
 		VariantProps<typeof toggleVariants> {}
 
 export function ToggleGroupItem({

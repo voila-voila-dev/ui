@@ -8,7 +8,10 @@ import { useSidebar } from "#/sidebar/context/sidebar-context.ts";
 import { Tooltip } from "#/tooltip/components/tooltip.tsx";
 
 interface Props
-	extends useRender.ComponentProps<"button">,
+	extends Omit<
+			useRender.ComponentProps<"button">,
+			keyof VariantProps<typeof sidebarMenuButtonVariants>
+		>,
 		VariantProps<typeof sidebarMenuButtonVariants> {
 	isActive?: boolean;
 	tooltip?: string | React.ComponentProps<typeof Tooltip.Content>;
