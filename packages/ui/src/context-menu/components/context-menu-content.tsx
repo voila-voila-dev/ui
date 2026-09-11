@@ -1,6 +1,7 @@
 import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu";
 import { cn } from "#/lib/utils.ts";
 import { menuContentVariants } from "#/menu/components/menu-variants.ts";
+import { usePortalContainer } from "#/portal-container/components/portal-container.tsx";
 
 interface Props
 	extends ContextMenuPrimitive.Popup.Props,
@@ -17,8 +18,9 @@ export function ContextMenuContent({
 	sideOffset = 0,
 	...props
 }: Props) {
+	const portalContainer = usePortalContainer();
 	return (
-		<ContextMenuPrimitive.Portal>
+		<ContextMenuPrimitive.Portal container={portalContainer}>
 			<ContextMenuPrimitive.Positioner
 				className="isolate z-50 outline-none"
 				align={align}

@@ -1,6 +1,7 @@
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 
 import { cn } from "#/lib/utils.ts";
+import { usePortalContainer } from "#/portal-container/components/portal-container.tsx";
 
 interface Props
 	extends TooltipPrimitive.Popup.Props,
@@ -19,8 +20,9 @@ export function TooltipContent({
 	children,
 	...props
 }: Props) {
+	const portalContainer = usePortalContainer();
 	return (
-		<TooltipPrimitive.Portal>
+		<TooltipPrimitive.Portal container={portalContainer}>
 			<TooltipPrimitive.Positioner
 				data-slot="tooltip-positioner"
 				align={align}

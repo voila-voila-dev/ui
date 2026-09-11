@@ -1,0 +1,67 @@
+---
+title: "PortalContainerProvider"
+description: "Choose where every overlay in a subtree is portaled."
+category: "layout"
+---
+
+import * as Example from "@/examples/ui/portal-container";
+
+<Preview layout="center">
+	<Example.Default />
+</Preview>
+
+## Usage
+
+```ts
+import { PortalContainerProvider } from "@voila.dev/ui/portal-container";
+```
+
+```tsx
+const root = useRef<HTMLDivElement | null>(null);
+
+<div ref={root} className="my-widget">
+	<PortalContainerProvider container={root}>
+		<App />
+	</PortalContainerProvider>
+</div>;
+```
+
+Every part that leaves the tree to render on top of the page — `Dialog`,
+`AlertDialog`, `Sheet`, `Drawer`, `Popover`, `Tooltip`, `HoverCard`,
+`DropdownMenu`, `ContextMenu`, `Menubar`, `Select`, `Combobox`,
+`NavigationMenu`, the chart tooltip, the data-table selection bar — is portaled
+to `document.body` by default. That is the right default for an app that owns
+its page. It is the wrong one for a component island whose styles only apply
+under an ancestor: a widget embedded in someone else's site, a Shadow DOM, a
+preview iframe that scopes its Tailwind to one root. There the popup lands
+outside the styled ancestor and renders unstyled.
+
+Render this provider once, around the island, with the element (or a ref to it)
+that carries the scope. Every overlay below reads it from context; a `container`
+prop given to a single `*.Portal` still wins, so one popup can opt out.
+
+The value can be a ref: the container is often a sibling that mounts in the
+same render, and reading `ref.current` too early would give `null`. Base UI
+resolves the ref when the popup opens.
+
+## API
+
+<PropTable of="PortalContainerProvider" />
+
+The module also exports `usePortalContainer`, which returns the value of the
+nearest provider (or `undefined` without one), and `usePortalContainerNode`,
+which resolves a ref to its element for portals that need a node rather than a
+ref — the `createPortal` calls inside the package use it.
+
+```ts
+import {
+	type PortalContainer,
+	PortalContainerProvider,
+	usePortalContainer,
+	usePortalContainerNode,
+} from "@voila.dev/ui/portal-container";
+```
+
+## Related
+
+[Dialog](/ui/dialog) · [Popover](/ui/popover) · [DirectionProvider](/ui/direction)

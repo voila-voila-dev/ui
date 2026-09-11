@@ -1,5 +1,6 @@
 import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu";
 import { cn } from "#/lib/utils.ts";
+import { usePortalContainer } from "#/portal-container/components/portal-container.tsx";
 
 interface Props extends NavigationMenuPrimitive.Positioner.Props {}
 
@@ -11,8 +12,9 @@ export function NavigationMenuPositioner({
 	alignOffset = 0,
 	...props
 }: Props) {
+	const portalContainer = usePortalContainer();
 	return (
-		<NavigationMenuPrimitive.Portal>
+		<NavigationMenuPrimitive.Portal container={portalContainer}>
 			<NavigationMenuPrimitive.Positioner
 				data-slot="navigation-menu-positioner"
 				side={side}

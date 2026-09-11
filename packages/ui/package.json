@@ -109,6 +109,7 @@
 		"./navigation-menu": "./src/navigation-menu/index.ts",
 		"./pagination": "./src/pagination/index.ts",
 		"./popover": "./src/popover/index.ts",
+		"./portal-container": "./src/portal-container/index.ts",
 		"./profile-header": "./src/profile-header/index.ts",
 		"./progress": "./src/progress/index.ts",
 		"./radio-group": "./src/radio-group/index.ts",

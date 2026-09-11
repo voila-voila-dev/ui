@@ -3,6 +3,7 @@ import * as React from "react";
 import { ChatQuickReactionRow } from "#/chat/components/chat-quick-reaction-row.tsx";
 import { ChatMessageActionsHostContext } from "#/chat/context/chat-message-actions-host-context.ts";
 import { cn } from "#/lib/utils.ts";
+import { usePortalContainer } from "#/portal-container/components/portal-container.tsx";
 
 /** Room the emoji row needs above the bubble before it falls back below. */
 const REACTION_ROW_SPACE = 64;
@@ -120,6 +121,7 @@ export function ChatMessagePressSurface({
 	actions,
 	children,
 }: Props) {
+	const portalContainer = usePortalContainer();
 	// The last press is kept so the layout survives while the exit animation
 	// plays after `pressed` goes back to null.
 	const lastPressedRef = React.useRef<ChatPressedMessage | null>(null);
@@ -186,7 +188,7 @@ export function ChatMessagePressSurface({
 				}
 			}}
 		>
-			<DialogPrimitive.Portal>
+			<DialogPrimitive.Portal container={portalContainer}>
 				<DialogPrimitive.Backdrop
 					data-slot="chat-message-press-surface-backdrop"
 					className={cn(

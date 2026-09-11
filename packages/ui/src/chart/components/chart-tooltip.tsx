@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { ChartTooltipContent } from "#/chart/components/chart-tooltip-content.tsx";
 import { useChartContext } from "#/chart/context/chart-context.tsx";
 import { cn } from "#/lib/utils.ts";
+import { usePortalContainerNode } from "#/portal-container/components/portal-container.tsx";
 
 // `content` is omitted from the base: React declares it on every element as
 // the `<meta content>` string.
@@ -34,6 +35,7 @@ export function ChartTooltip({
 	className,
 	...props
 }: Props) {
+	const portalNode = usePortalContainerNode();
 	const { active, chartId, margin, overlay } = useChartContext();
 
 	if (active === null || overlay === null) {
@@ -75,6 +77,6 @@ export function ChartTooltip({
 		>
 			{content ?? <ChartTooltipContent />}
 		</div>,
-		overlay.ownerDocument.body,
+		portalNode ?? overlay.ownerDocument.body,
 	);
 }
