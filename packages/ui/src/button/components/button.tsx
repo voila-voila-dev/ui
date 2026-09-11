@@ -7,7 +7,15 @@ import {
 import { cn } from "#/lib/utils.ts";
 import { Spinner } from "#/spinner/components/spinner.tsx";
 
-interface Props extends ButtonPrimitive.Props, ButtonVariants {
+/**
+ * `variant`, `size` and `shape` come from the kit, never from the native
+ * element: a host that augments React's `ButtonHTMLAttributes` with its own
+ * `variant` (Shopify's App Bridge types do) would otherwise intersect the two
+ * unions and leave only the values they share.
+ */
+interface Props
+	extends Omit<ButtonPrimitive.Props, keyof ButtonVariants>,
+		ButtonVariants {
 	/**
 	 * Show a leading spinner and mark the button `aria-busy`, disabling
 	 * interaction while an async action is in flight (e.g. a form submit).

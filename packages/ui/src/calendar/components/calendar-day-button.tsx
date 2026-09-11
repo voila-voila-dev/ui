@@ -3,7 +3,8 @@ import { type DayButton, getDefaultClassNames } from "react-day-picker";
 import { Button } from "#/button/components/button.tsx";
 import { cn } from "#/lib/utils.ts";
 
-interface Props extends React.ComponentProps<typeof DayButton> {
+interface Props
+	extends Omit<React.ComponentProps<typeof DayButton>, "variant" | "size"> {
 	/** BCP-47 tag used to format the `data-day` attribute on each cell. */
 	locale?: string;
 }
