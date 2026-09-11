@@ -1,6 +1,7 @@
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { cn } from "#/lib/utils.ts";
 import { menuContentVariants } from "#/menu/components/menu-variants.ts";
+import { usePortalContainer } from "#/portal-container/components/portal-container.tsx";
 
 interface Props
 	extends ComboboxPrimitive.Popup.Props,
@@ -18,8 +19,9 @@ export function ComboboxContent({
 	anchor,
 	...props
 }: Props) {
+	const portalContainer = usePortalContainer();
 	return (
-		<ComboboxPrimitive.Portal>
+		<ComboboxPrimitive.Portal container={portalContainer}>
 			<ComboboxPrimitive.Positioner
 				side={side}
 				sideOffset={sideOffset}

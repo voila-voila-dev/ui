@@ -1,5 +1,6 @@
 import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { cn } from "#/lib/utils.ts";
+import { usePortalContainer } from "#/portal-container/components/portal-container.tsx";
 import { SelectScrollDownButton } from "#/select/components/select-scroll-down-button.tsx";
 import { SelectScrollUpButton } from "#/select/components/select-scroll-up-button.tsx";
 
@@ -29,8 +30,9 @@ export function SelectContent({
 	collisionPadding,
 	...props
 }: Props) {
+	const portalContainer = usePortalContainer();
 	return (
-		<SelectPrimitive.Portal>
+		<SelectPrimitive.Portal container={portalContainer}>
 			<SelectPrimitive.Positioner
 				side={side}
 				sideOffset={sideOffset}

@@ -1,6 +1,7 @@
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
 import { cn } from "#/lib/utils.ts";
 import { menuContentVariants } from "#/menu/components/menu-variants.ts";
+import { usePortalContainer } from "#/portal-container/components/portal-container.tsx";
 
 interface Props
 	extends MenuPrimitive.Popup.Props,
@@ -17,8 +18,9 @@ export function DropdownMenuContent({
 	className,
 	...props
 }: Props) {
+	const portalContainer = usePortalContainer();
 	return (
-		<MenuPrimitive.Portal>
+		<MenuPrimitive.Portal container={portalContainer}>
 			<MenuPrimitive.Positioner
 				className="isolate z-50 outline-none"
 				align={align}

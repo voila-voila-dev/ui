@@ -3,6 +3,7 @@ import type * as React from "react";
 import { createPortal } from "react-dom";
 import { Button } from "#/button/components/button.tsx";
 import { cn } from "#/lib/utils.ts";
+import { usePortalContainerNode } from "#/portal-container/components/portal-container.tsx";
 
 interface Props extends React.ComponentProps<"div"> {
 	/** Selected-row count. The bar only renders while it is above zero. */
@@ -41,6 +42,7 @@ export function DataTableSelectionBar({
 	children,
 	...props
 }: Props) {
+	const portalNode = usePortalContainerNode();
 	if (count <= 0) {
 		return null;
 	}
@@ -80,6 +82,6 @@ export function DataTableSelectionBar({
 				</Button>
 			</div>
 		</div>,
-		document.body,
+		portalNode ?? document.body,
 	);
 }

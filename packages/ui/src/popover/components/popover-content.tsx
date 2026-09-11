@@ -1,6 +1,7 @@
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
 
 import { cn } from "#/lib/utils.ts";
+import { usePortalContainer } from "#/portal-container/components/portal-container.tsx";
 
 interface Props
 	extends PopoverPrimitive.Popup.Props,
@@ -27,10 +28,11 @@ export function PopoverContent({
 	positionerProps,
 	...props
 }: Props) {
+	const portalContainer = usePortalContainer();
 	const { className: positionerClassName, ...restPositionerProps } =
 		positionerProps ?? {};
 	return (
-		<PopoverPrimitive.Portal>
+		<PopoverPrimitive.Portal container={portalContainer}>
 			<PopoverPrimitive.Positioner
 				align={align}
 				alignOffset={alignOffset}
