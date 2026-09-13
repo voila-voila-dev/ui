@@ -20,17 +20,10 @@ export type ContentListStyle = "disc" | "decimal";
 export interface ContentParagraphNode extends ContentNodeLike {
 	readonly type: "p";
 	readonly id?: string;
+	/** A list item's nesting starts at 1; a plain paragraph's indent at 1 too. */
 	readonly indent?: number;
 	readonly listStyleType?: ContentListStyle;
 	readonly listStart?: number;
-}
-
-function indentStyle(node: ContentParagraphNode) {
-	return node.indent ? { paddingLeft: `${node.indent * 1.5}em` } : undefined;
-}
-
-function indentAttribute(node: ContentParagraphNode): string {
-	return node.indent ? ` style="padding-left:${node.indent * 1.5}em"` : "";
 }
 
 const listRun: ContentRunWrapper<ContentParagraphNode> = {
@@ -60,6 +53,22 @@ const listRun: ContentRunWrapper<ContentParagraphNode> = {
 		return `<${tag}${start}>${inner}</${tag}>`;
 	},
 };
+
+/** A list item's first level is `indent: 1` and sits flush; deeper levels step in. */
+function indentLevels(node: ContentParagraphNode): number {
+	const indent = node.indent ?? 0;
+	return listRun.of(node) !== null ? Math.max(indent - 1, 0) : indent;
+}
+
+function indentStyle(node: ContentParagraphNode) {
+	const levels = indentLevels(node);
+	return levels > 0 ? { paddingLeft: `${levels * 1.5}em` } : undefined;
+}
+
+function indentAttribute(node: ContentParagraphNode): string {
+	const levels = indentLevels(node);
+	return levels > 0 ? ` style="padding-left:${levels * 1.5}em"` : "";
+}
 
 export const paragraphNode: ContentInsertableNodeReader<ContentParagraphNode> =
 	{

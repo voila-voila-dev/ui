@@ -153,7 +153,7 @@ export const ReadOnly: Story = {
 				features={READERS}
 				render={<article className="text-sm" />}
 			/>
-			<pre className="overflow-auto rounded-md bg-muted p-3 text-xs">
+			<pre className="overflow-auto whitespace-pre-wrap rounded-md bg-muted p-3 text-xs">
 				{contentToHtml(sampleContent, { features: READERS })}
 			</pre>
 		</div>
@@ -164,7 +164,7 @@ export const ReadOnly: Story = {
 export const Markdown: Story = {
 	args: { features: FEATURES, value: sampleContent, onChange: () => {} },
 	render: () => (
-		<pre className="overflow-auto rounded-md bg-muted p-3 text-xs">
+		<pre className="overflow-auto whitespace-pre-wrap rounded-md bg-muted p-3 text-xs">
 			{contentToMarkdown(sampleContent, { features: FEATURES })}
 		</pre>
 	),

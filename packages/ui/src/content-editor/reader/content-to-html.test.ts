@@ -46,7 +46,7 @@ describe("contentToHtml", () => {
 				{
 					type: "p",
 					listStyleType: "disc",
-					indent: 1,
+					indent: 2,
 					children: [{ text: "two" }],
 				},
 				{ type: "p", children: [{ text: "between" }] },

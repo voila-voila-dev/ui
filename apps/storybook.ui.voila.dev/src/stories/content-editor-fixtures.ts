@@ -32,14 +32,24 @@ export const sampleContent: ContentValue = [
 		],
 	},
 	{ type: "h3", children: [{ text: "Lists" }] },
-	{ type: "p", listStyleType: "disc", children: [{ text: "Bulleted" }] },
+	{
+		type: "p",
+		listStyleType: "disc",
+		indent: 1,
+		children: [{ text: "Bulleted" }],
+	},
 	{
 		type: "p",
 		listStyleType: "disc",
 		indent: 1,
 		children: [{ text: "Indented with Tab" }],
 	},
-	{ type: "p", listStyleType: "decimal", children: [{ text: "Numbered" }] },
+	{
+		type: "p",
+		listStyleType: "decimal",
+		indent: 1,
+		children: [{ text: "Numbered" }],
+	},
 	{
 		type: "blockquote",
 		children: [{ text: "A quote, for when someone else said it better." }],
