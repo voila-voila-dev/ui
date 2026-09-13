@@ -13,6 +13,7 @@ export interface ContentEditorChromeLabels {
 	readonly caption: string;
 	readonly altText: string;
 	readonly url: string;
+	readonly urlPlaceholder: string;
 	readonly name: string;
 	readonly apply: string;
 	readonly remove: string;
@@ -88,6 +89,7 @@ export const DEFAULT_CONTENT_EDITOR_LABELS: ContentEditorLabels = {
 		caption: "Add a caption…",
 		altText: "Alternative text",
 		url: "URL",
+		urlPlaceholder: "https://",
 		name: "Name",
 		apply: "Apply",
 		remove: "Remove",

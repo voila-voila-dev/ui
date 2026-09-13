@@ -3,6 +3,7 @@ import { calloutFeature } from "#/content-editor/features/callout/feature.tsx";
 import { dividerFeature } from "#/content-editor/features/divider/feature.tsx";
 import { fileFeature } from "#/content-editor/features/file/feature.tsx";
 import { headingFeature } from "#/content-editor/features/heading/feature.tsx";
+import { historyFeature } from "#/content-editor/features/history/feature.tsx";
 import { imageFeature } from "#/content-editor/features/image/feature.tsx";
 import { linkFeature } from "#/content-editor/features/link/feature.tsx";
 import { listFeature } from "#/content-editor/features/list/feature.tsx";
@@ -33,6 +34,7 @@ export function createContentFeatures({
 	embeds = ["youtube", "x-post", "video", "file"],
 }: ContentReadersOptions = {}) {
 	return [
+		historyFeature,
 		paragraphFeature,
 		textMarksFeature,
 		headingFeature(headings),

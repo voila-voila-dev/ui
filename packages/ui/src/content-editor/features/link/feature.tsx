@@ -1,6 +1,14 @@
+import { LinkIcon } from "@phosphor-icons/react";
 import { LinkPlugin } from "@platejs/link/react";
 import { PlateElement, type PlateElementProps } from "platejs/react";
-import type { ContentFeature } from "#/content-editor/features/feature-definition.tsx";
+import {
+	ContentLinkPopover,
+	linkAtSelection,
+} from "#/content-editor/components/link-popover.tsx";
+import type {
+	ContentFeature,
+	ContentToolbarItem,
+} from "#/content-editor/features/feature-definition.tsx";
 import { linkReader } from "#/content-editor/features/link/reader.tsx";
 
 /**
@@ -18,10 +26,25 @@ export function LinkElement(props: PlateElementProps) {
 	);
 }
 
-/** The link form itself is a toolbar popover, added with the toolbar parts. */
+const linkItem: ContentToolbarItem = {
+	key: "link",
+	group: "text",
+	icon: LinkIcon,
+	label: "link",
+	kbd: ["⌘", "K"],
+	isActive: (editor) => linkAtSelection(editor) !== null,
+	isDisabled: (editor) =>
+		editor.selection === null ||
+		(editor.api.isCollapsed() && linkAtSelection(editor) === null),
+	run: () => {},
+	Popover: ContentLinkPopover,
+};
+
 export const linkFeature: ContentFeature = {
 	...linkReader,
 	plugins: () => [LinkPlugin],
 	components: { a: LinkElement },
+	toolbar: [linkItem],
+	floating: [linkItem],
 	allowIn: () => true,
 };

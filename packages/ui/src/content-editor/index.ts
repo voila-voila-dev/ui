@@ -1,4 +1,8 @@
 export {
+	ContentLinkPopover,
+	linkAtSelection,
+} from "#/content-editor/components/link-popover.tsx";
+export {
 	type ContentEditorConfigContextValue,
 	useContentEditorConfig,
 	useContentEditorLabels,
@@ -75,6 +79,7 @@ export {
 } from "#/content-editor/parts/layout.tsx";
 export { ContentEditor } from "#/content-editor/parts/namespace.ts";
 export type { ContentEditorRootProps } from "#/content-editor/parts/root.tsx";
+export { groupToolbarItems } from "#/content-editor/parts/toolbar.tsx";
 export { ContentRenderer } from "#/content-editor/reader/content-renderer.tsx";
 export {
 	type ContentToHtmlOptions,
