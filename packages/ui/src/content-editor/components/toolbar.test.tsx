@@ -72,23 +72,36 @@ describe("ContentEditor.Toolbar", () => {
 		expect(labels).not.toContain("Table options");
 	});
 
-	it("toggles a mark and reflects it as pressed", async () => {
+	it("toggles a mark from the toolbar", () => {
 		render(
 			<EditorUnderTest
 				initial={[{ type: "p", children: [{ text: "Hello world" }] }]}
 			/>,
 		);
 		selectAll();
-		const bold = await screen.findByRole("button", { name: "Bold" });
 		act(() => {
-			fireEvent.click(bold);
+			fireEvent.click(screen.getByRole("button", { name: "Bold" }));
 		});
 		expect(editor().children[0]?.children[0]).toMatchObject({
 			text: "Hello",
 			bold: true,
 		});
-		// jsdom on the CI runner drops the Slate selection after the click; the
-		// pressed state is about the marks at the selection, so select again.
+	});
+
+	it("shows a mark under the selection as pressed", async () => {
+		render(
+			<EditorUnderTest
+				initial={[
+					{
+						type: "p",
+						children: [{ text: "Hello", bold: true }, { text: " world" }],
+					},
+				]}
+			/>,
+		);
+		expect(
+			screen.getByRole("button", { name: "Bold" }).getAttribute("aria-pressed"),
+		).toBe("false");
 		selectAll();
 		await waitFor(() => {
 			expect(
