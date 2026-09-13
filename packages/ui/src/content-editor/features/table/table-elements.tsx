@@ -12,6 +12,7 @@ import type {
 	ContentTableCellAttributes,
 	ContentTableNode,
 } from "#/content-editor/features/table/reader.tsx";
+import { TableToolbar } from "#/content-editor/features/table/table-toolbar.tsx";
 import { cn } from "#/lib/utils.ts";
 
 function TableElementInner({ children, ...props }: PlateElementProps) {
@@ -21,6 +22,7 @@ function TableElementInner({ children, ...props }: PlateElementProps) {
 	const node = props.element as unknown as ContentTableNode;
 	return (
 		<PlateElement {...props} className="py-1">
+			<TableToolbar element={props.element} />
 			<div className="overflow-x-auto">
 				<table
 					{...tableProps}
