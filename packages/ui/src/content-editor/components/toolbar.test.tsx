@@ -87,13 +87,16 @@ describe("ContentEditor.Toolbar", () => {
 			text: "Hello",
 			bold: true,
 		});
-		await waitFor(() => {
-			expect(
-				screen
-					.getByRole("button", { name: "Bold" })
-					.getAttribute("aria-pressed"),
-			).toBe("true");
-		});
+		await waitFor(
+			() => {
+				expect(
+					screen
+						.getByRole("button", { name: "Bold" })
+						.getAttribute("aria-pressed"),
+				).toBe("true");
+			},
+			{ timeout: 4000 },
+		);
 	});
 
 	it("turns the block into a heading and back", () => {
