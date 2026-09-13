@@ -17,6 +17,7 @@
 		"@voila.dev/ui-branding": "workspace:*",
 		"input-otp": "^1.5.0",
 		"maplibre-gl": "catalog:maplibre",
+		"platejs": "^49.2.21",
 		"react": "catalog:react",
 		"react-dom": "catalog:react",
 		"tailwindcss": "catalog:tailwind"
