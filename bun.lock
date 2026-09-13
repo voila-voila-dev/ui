@@ -133,6 +133,7 @@
         "jsdom": "30.0.1",
         "maplibre-gl": "catalog:maplibre",
         "platejs": "^49.2.21",
+        "remark-gfm": "^4.0.1",
         "typescript": "catalog:",
         "vitest": "catalog:",
       },
@@ -155,6 +156,7 @@
         "platejs": "^49.2.21",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
+        "remark-gfm": "^4.0.1",
         "tailwindcss": "^4.0.0",
       },
       "optionalPeers": [
@@ -174,6 +176,7 @@
         "@tanstack/react-virtual",
         "maplibre-gl",
         "platejs",
+        "remark-gfm",
       ],
     },
     "packages/ui-branding": {

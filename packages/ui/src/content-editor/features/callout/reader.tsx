@@ -4,6 +4,7 @@ import type {
 	ContentInsertableNodeReader,
 } from "#/content-editor/features/reader-definition.tsx";
 import { newContentNodeId } from "#/content-editor/lib/ids.ts";
+import { mdxRule } from "#/content-editor/lib/mdx-rule.ts";
 import {
 	classAttribute,
 	escapeHtml,
@@ -21,6 +22,16 @@ export const DEFAULT_CALLOUT_ICON = "💡";
 
 export const calloutNode: ContentInsertableNodeReader<ContentCalloutNode> = {
 	type: "callout",
+	markdown: mdxRule<ContentCalloutNode>(
+		"callout",
+		["icon"],
+		(attributes, children) => ({
+			type: "callout",
+			icon: attributes.icon ?? DEFAULT_CALLOUT_ICON,
+			children,
+		}),
+		{ withChildren: true },
+	),
 	createNode: (init) => ({
 		id: newContentNodeId(),
 		type: "callout",

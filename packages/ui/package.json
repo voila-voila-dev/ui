@@ -197,7 +197,8 @@
 		"@platejs/list": "^49.2.17",
 		"@platejs/markdown": "^49.2.15",
 		"@platejs/slash-command": "^49.0.0",
-		"@platejs/table": "^49.1.13"
+		"@platejs/table": "^49.1.13",
+		"remark-gfm": "^4.0.1"
 	},
 	"peerDependenciesMeta": {
 		"maplibre-gl": {
@@ -247,6 +248,9 @@
 		},
 		"@platejs/table": {
 			"optional": true
+		},
+		"remark-gfm": {
+			"optional": true
 		}
 	},
 	"devDependencies": {
@@ -273,6 +277,7 @@
 		"@platejs/list": "^49.2.17",
 		"@platejs/markdown": "^49.2.15",
 		"@platejs/slash-command": "^49.0.0",
-		"@platejs/table": "^49.1.13"
+		"@platejs/table": "^49.1.13",
+		"remark-gfm": "^4.0.1"
 	}
 }

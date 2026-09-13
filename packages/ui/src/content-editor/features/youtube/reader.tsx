@@ -4,6 +4,7 @@ import type {
 	ContentInsertableNodeReader,
 } from "#/content-editor/features/reader-definition.tsx";
 import { newContentNodeId } from "#/content-editor/lib/ids.ts";
+import { mdxRule } from "#/content-editor/lib/mdx-rule.ts";
 import {
 	classAttribute,
 	escapeHtml,
@@ -24,6 +25,16 @@ export function youtubeEmbedUrl(videoId: string): string {
 export const youtubeNode: ContentInsertableNodeReader<ContentYoutubeNode> = {
 	type: "youtube-video",
 	kind: "void",
+	markdown: mdxRule<ContentYoutubeNode>(
+		"youtube-video",
+		["videoId", "caption"],
+		(attributes) => ({
+			type: "youtube-video",
+			videoId: attributes.videoId ?? "",
+			caption: attributes.caption,
+			children: [{ text: "" }],
+		}),
+	),
 	createNode: (init) => ({
 		id: newContentNodeId(),
 		type: "youtube-video",

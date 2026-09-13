@@ -4,6 +4,7 @@ import type {
 	ContentInsertableNodeReader,
 } from "#/content-editor/features/reader-definition.tsx";
 import { newContentNodeId } from "#/content-editor/lib/ids.ts";
+import { mdxRule } from "#/content-editor/lib/mdx-rule.ts";
 import {
 	classAttribute,
 	escapeHtml,
@@ -21,6 +22,17 @@ export interface ContentFileNode extends ContentNodeLike {
 export const fileNode: ContentInsertableNodeReader<ContentFileNode> = {
 	type: "file",
 	kind: "void",
+	markdown: mdxRule<ContentFileNode>(
+		"file",
+		["url", "name", "caption"],
+		(attributes) => ({
+			type: "file",
+			url: attributes.url ?? "",
+			name: attributes.name ?? "",
+			caption: attributes.caption,
+			children: [{ text: "" }],
+		}),
+	),
 	createNode: (init) => ({
 		id: newContentNodeId(),
 		type: "file",

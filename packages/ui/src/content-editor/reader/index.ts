@@ -10,6 +10,8 @@ export type {
 	ContentFeatureReader,
 	ContentHtmlOptions,
 	ContentLeafDecorator,
+	ContentMarkdownContext,
+	ContentMarkdownRule,
 	ContentNodeOf,
 	ContentNodeReader,
 	ContentRenderProps,

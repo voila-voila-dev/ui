@@ -36,6 +36,8 @@ export type {
 	ContentFeatureReader,
 	ContentHtmlOptions,
 	ContentLeafDecorator,
+	ContentMarkdownContext,
+	ContentMarkdownRule,
 	ContentNodeOf,
 	ContentNodeReader,
 	ContentRenderProps,
@@ -63,6 +65,12 @@ export {
 	isEmptyContentValue,
 } from "#/content-editor/lib/empty-value.ts";
 export { removeLink, upsertLink } from "#/content-editor/lib/links.ts";
+export {
+	type ContentMarkdownOptions,
+	contentFromMarkdown,
+	contentToMarkdown,
+} from "#/content-editor/lib/markdown.ts";
+export { mdxRule } from "#/content-editor/lib/mdx-rule.ts";
 export {
 	mapContentText,
 	scrubImportedContent,

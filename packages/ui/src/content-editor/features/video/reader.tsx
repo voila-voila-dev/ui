@@ -4,6 +4,7 @@ import type {
 	ContentInsertableNodeReader,
 } from "#/content-editor/features/reader-definition.tsx";
 import { newContentNodeId } from "#/content-editor/lib/ids.ts";
+import { mdxRule } from "#/content-editor/lib/mdx-rule.ts";
 import {
 	classAttribute,
 	escapeHtml,
@@ -20,6 +21,16 @@ export interface ContentVideoNode extends ContentNodeLike {
 export const videoNode: ContentInsertableNodeReader<ContentVideoNode> = {
 	type: "video",
 	kind: "void",
+	markdown: mdxRule<ContentVideoNode>(
+		"video",
+		["url", "caption"],
+		(attributes) => ({
+			type: "video",
+			url: attributes.url ?? "",
+			caption: attributes.caption,
+			children: [{ text: "" }],
+		}),
+	),
 	createNode: (init) => ({
 		id: newContentNodeId(),
 		type: "video",

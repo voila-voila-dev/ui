@@ -4,6 +4,7 @@ import type {
 	ContentInsertableNodeReader,
 } from "#/content-editor/features/reader-definition.tsx";
 import { newContentNodeId } from "#/content-editor/lib/ids.ts";
+import { mdxRule } from "#/content-editor/lib/mdx-rule.ts";
 import {
 	classAttribute,
 	escapeHtml,
@@ -29,6 +30,16 @@ export function xPostUrl(postId: string): string {
 export const xPostNode: ContentInsertableNodeReader<ContentXPostNode> = {
 	type: "x-post",
 	kind: "void",
+	markdown: mdxRule<ContentXPostNode>(
+		"x-post",
+		["postId", "caption"],
+		(attributes) => ({
+			type: "x-post",
+			postId: attributes.postId ?? "",
+			caption: attributes.caption,
+			children: [{ text: "" }],
+		}),
+	),
 	createNode: (init) => ({
 		id: newContentNodeId(),
 		type: "x-post",

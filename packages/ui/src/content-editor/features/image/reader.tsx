@@ -21,9 +21,37 @@ export interface ContentImageNode extends ContentNodeLike {
 	readonly height?: number;
 }
 
+interface MdastImage {
+	readonly url: string;
+	readonly alt?: string | null;
+	readonly title?: string | null;
+}
+
 export const imageNode: ContentInsertableNodeReader<ContentImageNode> = {
 	type: "image",
 	kind: "void",
+	markdown: {
+		deserializeKey: "img",
+		serialize: (node) => ({
+			type: "paragraph",
+			children: [
+				{
+					type: "image",
+					url: node.url,
+					alt: node.alt ?? node.caption ?? "",
+					title: node.caption ?? null,
+				},
+			],
+		}),
+		deserialize: (mdast: MdastImage) => ({
+			type: "image",
+			url: mdast.url,
+			alt: mdast.alt ?? undefined,
+			caption: mdast.title ?? undefined,
+			children: [{ text: "" }],
+		}),
+		loss: "width and height",
+	},
 	createNode: (init) => ({
 		id: newContentNodeId(),
 		type: "image",

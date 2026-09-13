@@ -1,5 +1,8 @@
 import type { ComponentType, ReactNode } from "react";
-import type { ContentNodeLike } from "#/content-editor/features/content-value.ts";
+import type {
+	ContentDescendant,
+	ContentNodeLike,
+} from "#/content-editor/features/content-value.ts";
 
 /**
  * The half of a feature a reader needs: how one node kind renders to React
@@ -43,6 +46,30 @@ export interface ContentRunWrapper<N extends ContentNodeLike> {
 	readonly toHtml: (runKey: string, inner: string, first: N) => string;
 }
 
+/** What a Markdown rule gets to work with, without naming Plate's own helpers. */
+export interface ContentMarkdownContext {
+	/** The node's children as mdast nodes. */
+	readonly serializeChildren: (node: ContentNodeLike) => ReadonlyArray<unknown>;
+	/** An mdast node's children as content nodes. */
+	readonly deserializeChildren: (
+		mdast: unknown,
+	) => ReadonlyArray<ContentDescendant>;
+}
+
+/**
+ * How a node kind crosses into Markdown. Plate's own rules cover the kinds
+ * Markdown has words for; a kind of ours (a callout, an embed) declares how
+ * it becomes an mdast node, MDX elements included, and how it comes back.
+ */
+export interface ContentMarkdownRule<N extends ContentNodeLike> {
+	readonly serialize?: (node: N, context: ContentMarkdownContext) => unknown;
+	readonly deserialize?: (mdast: never, context: ContentMarkdownContext) => N;
+	/** The key Plate deserializes the mdast kind under, when it is not `type` (an mdast image is `img`). */
+	readonly deserializeKey?: string;
+	/** What Markdown cannot say about this node, for the reader of the export. */
+	readonly loss?: string;
+}
+
 export interface ContentNodeReader<N extends ContentNodeLike> {
 	readonly type: N["type"];
 	/** Inline nodes (a link) flow inside text; blocks stack; voids carry no editable text. */
@@ -56,6 +83,7 @@ export interface ContentNodeReader<N extends ContentNodeLike> {
 		options: ContentHtmlOptions,
 	) => string;
 	readonly wrapRun?: ContentRunWrapper<N>;
+	readonly markdown?: ContentMarkdownRule<N>;
 	/** How the editor mints a fresh node of this kind. Absent for a kind that
 	 * is never inserted on its own (a table row). */
 	readonly createNode?: (init?: Partial<N>) => N;
