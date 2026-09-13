@@ -11,7 +11,7 @@
  * Two shapes are refused under each editor's directory: a user-facing prop
  * given a string literal (`label="Price"`), and a JSX text node starting with a
  * capital letter. `labels.ts` is where the strings are supposed to be, so it
- * is the one file exempt.
+ * is the one file exempt; tests assert on literals and are skipped too.
  *
  * Run from the repo root: `node scripts/check-editor-labels.mjs`.
  */
@@ -58,7 +58,11 @@ const walk = (directory, hook) => {
 		const full = path.join(directory, entry.name);
 		if (entry.isDirectory()) {
 			walk(full, hook);
-		} else if (/\.tsx?$/.test(entry.name) && !EXEMPT.has(entry.name)) {
+		} else if (
+			/\.tsx?$/.test(entry.name) &&
+			!/\.test\.tsx?$/.test(entry.name) &&
+			!EXEMPT.has(entry.name)
+		) {
 			files.push({ file: full, hook });
 		}
 	}

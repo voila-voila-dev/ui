@@ -40,9 +40,7 @@ describe("scrubImportedContent", () => {
 		expect(scrubImportedContent(value)).toEqual([
 			{
 				type: "p",
-				children: [
-					{ text: "one two three four", italic: true },
-				],
+				children: [{ text: "one two three four", italic: true }],
 			},
 		]);
 	});
