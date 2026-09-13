@@ -87,20 +87,16 @@ describe("ContentEditor.Toolbar", () => {
 			text: "Hello",
 			bold: true,
 		});
-		await waitFor(
-			() => {
-				const pressed = screen
+		// jsdom on the CI runner drops the Slate selection after the click; the
+		// pressed state is about the marks at the selection, so select again.
+		selectAll();
+		await waitFor(() => {
+			expect(
+				screen
 					.getByRole("button", { name: "Bold" })
-					.getAttribute("aria-pressed");
-				const diagnostics = JSON.stringify({
-					selection: editor().selection,
-					marks: editor().api.marks(),
-					first: editor().children[0],
-				});
-				expect(`${pressed} ${diagnostics}`).toMatch(/^true /);
-			},
-			{ timeout: 4000 },
-		);
+					.getAttribute("aria-pressed"),
+			).toBe("true");
+		});
 	});
 
 	it("turns the block into a heading and back", () => {
