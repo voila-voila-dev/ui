@@ -89,11 +89,15 @@ describe("ContentEditor.Toolbar", () => {
 		});
 		await waitFor(
 			() => {
-				expect(
-					screen
-						.getByRole("button", { name: "Bold" })
-						.getAttribute("aria-pressed"),
-				).toBe("true");
+				const pressed = screen
+					.getByRole("button", { name: "Bold" })
+					.getAttribute("aria-pressed");
+				const diagnostics = JSON.stringify({
+					selection: editor().selection,
+					marks: editor().api.marks(),
+					first: editor().children[0],
+				});
+				expect(`${pressed} ${diagnostics}`).toMatch(/^true /);
 			},
 			{ timeout: 4000 },
 		);
