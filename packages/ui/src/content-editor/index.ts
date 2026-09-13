@@ -75,11 +75,13 @@ export {
 	mapContentText,
 	scrubImportedContent,
 } from "#/content-editor/lib/normalize-value.ts";
+export { SingleLinePlugin } from "#/content-editor/lib/single-line-plugin.ts";
 export { installContentEditorTestDom } from "#/content-editor/lib/test-dom.ts";
 export {
 	countContentCharacters,
 	countContentWords,
 } from "#/content-editor/parts/character-count.tsx";
+export { ContentEditorField } from "#/content-editor/parts/content-editor-field.tsx";
 export {
 	type ContentEditorPart,
 	type ContentEditorSlot,

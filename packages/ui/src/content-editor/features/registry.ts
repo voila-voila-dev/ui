@@ -17,6 +17,7 @@ import {
 	type ContentReaderRegistry,
 	createContentReaderRegistry,
 } from "#/content-editor/features/reader-registry.ts";
+import { SingleLinePlugin } from "#/content-editor/lib/single-line-plugin.ts";
 
 export interface ContentRegistry {
 	readonly features: ReadonlyArray<ContentFeature>;
@@ -81,6 +82,9 @@ export function createContentRegistry(
 	const plugins: AnyPlatePlugin[] = active.flatMap((feature) => [
 		...feature.plugins(context),
 	]);
+	if (mode === "single-line") {
+		plugins.push(SingleLinePlugin);
+	}
 	const autoformat = active.flatMap((feature) => feature.autoformat ?? []);
 	if (autoformat.length > 0) {
 		plugins.push(
