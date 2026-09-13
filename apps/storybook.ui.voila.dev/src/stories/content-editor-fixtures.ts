@@ -57,12 +57,14 @@ export const sampleContent: ContentValue = [
 	{ type: "hr", children: [{ text: "" }] },
 	{
 		type: "table",
+		colSizes: [220, 160, 160],
 		children: [
 			{
 				type: "tr",
 				children: [
 					{ type: "th", children: [{ text: "Plan" }] },
 					{ type: "th", children: [{ text: "Price" }] },
+					{ type: "th", children: [{ text: "Seats" }] },
 				],
 			},
 			{
@@ -70,13 +72,22 @@ export const sampleContent: ContentValue = [
 				children: [
 					{ type: "td", children: [{ text: "Starter" }] },
 					{ type: "td", children: [{ text: "Free" }] },
+					{ type: "td", children: [{ text: "1" }] },
 				],
 			},
 			{
 				type: "tr",
 				children: [
-					{ type: "td", children: [{ text: "Team" }] },
-					{ type: "td", children: [{ text: "29 €" }] },
+					{
+						type: "td",
+						background: "var(--color-muted)",
+						children: [{ text: "Team" }],
+					},
+					{
+						type: "td",
+						colSpan: 2,
+						children: [{ text: "29 € for up to 10 seats" }],
+					},
 				],
 			},
 		],

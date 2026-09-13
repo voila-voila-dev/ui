@@ -69,7 +69,7 @@ describe("ContentEditor.Toolbar", () => {
 		expect(labels).toContain("Heading 2");
 		expect(labels).toContain("Bulleted list");
 		expect(labels).toContain("Table");
-		expect(labels).not.toContain("Add row below");
+		expect(labels).not.toContain("Table options");
 	});
 
 	it("toggles a mark and reflects it as pressed", async () => {
@@ -140,9 +140,14 @@ describe("ContentEditor.Toolbar", () => {
 			fireEvent.click(screen.getByRole("button", { name: "Table" }));
 		});
 		expect(editor().children.some((node) => node.type === "table")).toBe(true);
+		const table = editor().children.find((node) => node.type === "table") as
+			| { children: Array<{ children: Array<{ type: string }> }> }
+			| undefined;
+		expect(table?.children[0]?.children[0]).toMatchObject({ type: "th" });
 		expect(
-			await screen.findByRole("button", { name: "Add row below" }),
+			await screen.findByRole("button", { name: "Table options" }),
 		).toBeTruthy();
+		expect(screen.queryByRole("button", { name: "Table" })).toBeNull();
 	});
 
 	it("renders no control for a feature the editor does not have", () => {

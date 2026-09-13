@@ -89,6 +89,10 @@ for (const { file, hook } of files) {
 		if (trimmed.startsWith("//") || trimmed.startsWith("*")) {
 			return;
 		}
+		// One identifier and a comma is an argument on its own line, not prose.
+		if (/^[A-Z][A-Za-z0-9]*,$/.test(trimmed)) {
+			return;
+		}
 		const literal = LITERAL_PROP.exec(line);
 		if (literal) {
 			failures.push(

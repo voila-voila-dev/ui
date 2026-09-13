@@ -67,6 +67,17 @@ export interface ContentEditorItemLabels {
 	readonly deleteRow: string;
 	readonly deleteColumn: string;
 	readonly deleteTable: string;
+	readonly tableMenu: string;
+	readonly headerRow: string;
+	readonly mergeCells: string;
+	readonly splitCell: string;
+	readonly cellBackground: string;
+	readonly noBackground: string;
+	readonly backgroundGray: string;
+	readonly backgroundYellow: string;
+	readonly backgroundGreen: string;
+	readonly backgroundBlue: string;
+	readonly backgroundRed: string;
 }
 
 export interface ContentEditorLabels {
@@ -140,6 +151,17 @@ export const DEFAULT_CONTENT_EDITOR_LABELS: ContentEditorLabels = {
 		deleteRow: "Delete row",
 		deleteColumn: "Delete column",
 		deleteTable: "Delete table",
+		tableMenu: "Table options",
+		headerRow: "Header row",
+		mergeCells: "Merge cells",
+		splitCell: "Split cell",
+		cellBackground: "Cell background",
+		noBackground: "No background",
+		backgroundGray: "Gray fill",
+		backgroundYellow: "Yellow fill",
+		backgroundGreen: "Green fill",
+		backgroundBlue: "Blue fill",
+		backgroundRed: "Red fill",
 	},
 };
 

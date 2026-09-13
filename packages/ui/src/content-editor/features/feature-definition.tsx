@@ -62,6 +62,8 @@ export interface ContentToolbarItem {
 	readonly run: (editor: ContentEditorApi, context: ContentItemContext) => void;
 	/** When present, the item opens this instead of running (a link form). */
 	readonly Popover?: ComponentType<{ readonly onClose: () => void }>;
+	/** When present, the item opens a menu of these instead of running. */
+	readonly menu?: ReadonlyArray<ContentToolbarItem>;
 }
 
 export interface ContentSlashItem {
