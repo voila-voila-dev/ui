@@ -12,6 +12,7 @@ export function insertBlockBelow(
 	node: ContentNodeLike,
 ) {
 	editor.tf.insertNodes([node, paragraphNode.createNode()] as never, {
+		at: editor.selection === null ? [editor.children.length] : undefined,
 		select: true,
 	});
 }

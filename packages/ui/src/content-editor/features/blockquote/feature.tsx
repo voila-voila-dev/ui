@@ -1,4 +1,5 @@
 import { QuotesIcon } from "@phosphor-icons/react";
+import { BlockquoteRules } from "@platejs/basic-nodes";
 import { BlockquotePlugin } from "@platejs/basic-nodes/react";
 import { PlateElement, type PlateElementProps } from "platejs/react";
 import { blockquoteReader } from "#/content-editor/features/blockquote/reader.tsx";
@@ -16,9 +17,10 @@ export function BlockquoteElement(props: PlateElementProps) {
 
 export const blockquoteFeature: ContentFeature = {
 	...blockquoteReader,
-	plugins: () => [BlockquotePlugin],
+	plugins: () => [
+		BlockquotePlugin.configure({ inputRules: [BlockquoteRules.markdown()] }),
+	],
 	components: { blockquote: BlockquoteElement },
-	autoformat: [{ mode: "block", type: "blockquote", match: "> " }],
 	toolbar: [
 		{
 			key: "quote",

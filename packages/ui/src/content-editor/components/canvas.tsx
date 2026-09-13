@@ -70,9 +70,12 @@ export function ContentEditorCanvas({
 				}
 				onPasteCapture?.(event);
 			}}
+			data-mode={mode}
 			className={cn(
-				"min-h-(--content-editor-min-height) w-full max-w-(--content-editor-prose-width) rounded-md px-3 py-2 text-sm leading-relaxed outline-none focus-visible:ring-2 focus-visible:ring-ring/50 data-[mode=single-line]:min-h-0",
-				"[&_[data-slate-node=element]+[data-slate-node=element]]:mt-(--content-editor-block-gap)",
+				"w-full outline-none",
+				mode === "single-line"
+					? "h-8 min-h-0 overflow-hidden rounded-lg border border-input bg-transparent px-2.5 py-1 text-base whitespace-nowrap transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm dark:bg-input/30 [&_[data-slate-node=element]]:truncate"
+					: "min-h-(--content-editor-min-height) max-w-(--content-editor-prose-width) rounded-md px-3 py-2 text-sm leading-relaxed focus-visible:ring-2 focus-visible:ring-ring/50 [&_[data-slate-node=element]+[data-slate-node=element]]:mt-(--content-editor-block-gap)",
 				className,
 			)}
 			{...props}

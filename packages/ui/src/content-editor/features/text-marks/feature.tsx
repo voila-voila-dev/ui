@@ -6,6 +6,13 @@ import {
 	TextUnderlineIcon,
 } from "@phosphor-icons/react";
 import {
+	BoldRules,
+	CodeRules,
+	ItalicRules,
+	StrikethroughRules,
+	UnderlineRules,
+} from "@platejs/basic-nodes";
+import {
 	BoldPlugin,
 	CodePlugin,
 	ItalicPlugin,
@@ -45,11 +52,13 @@ const items = [
 export const textMarksFeature: ContentFeature = {
 	...textMarksReader,
 	plugins: () => [
-		BoldPlugin,
-		ItalicPlugin,
-		UnderlinePlugin,
-		StrikethroughPlugin,
-		CodePlugin,
+		BoldPlugin.configure({ inputRules: [BoldRules.markdown()] }),
+		ItalicPlugin.configure({ inputRules: [ItalicRules.markdown()] }),
+		UnderlinePlugin.configure({ inputRules: [UnderlineRules.markdown()] }),
+		StrikethroughPlugin.configure({
+			inputRules: [StrikethroughRules.markdown()],
+		}),
+		CodePlugin.configure({ inputRules: [CodeRules.markdown()] }),
 	],
 	toolbar: items,
 	floating: items,

@@ -3,6 +3,7 @@ import {
 	TextHThreeIcon,
 	TextHTwoIcon,
 } from "@phosphor-icons/react";
+import { HeadingRules } from "@platejs/basic-nodes";
 import { H2Plugin, H3Plugin, H4Plugin } from "@platejs/basic-nodes/react";
 import { PlateElement, type PlateElementProps } from "platejs/react";
 import type {
@@ -21,21 +22,18 @@ const headingSettings = {
 		icon: TextHTwoIcon,
 		label: "heading2",
 		className: "font-semibold text-xl leading-tight",
-		autoformat: "## ",
 	},
 	h3: {
 		plugin: H3Plugin,
 		icon: TextHThreeIcon,
 		label: "heading3",
 		className: "font-semibold text-lg leading-snug",
-		autoformat: "### ",
 	},
 	h4: {
 		plugin: H4Plugin,
 		icon: TextHFourIcon,
 		label: "heading4",
 		className: "font-semibold text-base",
-		autoformat: "#### ",
 	},
 } as const;
 
@@ -71,15 +69,18 @@ export function headingFeature(
 	}));
 	return {
 		...headingReader(levels),
-		plugins: () => levels.map((level) => headingSettings[level].plugin),
+		// One markdown rule covers every level; it rides the first heading plugin.
+		plugins: () =>
+			levels.map((level, index) =>
+				index === 0
+					? headingSettings[level].plugin.configure({
+							inputRules: [HeadingRules.markdown()],
+						})
+					: headingSettings[level].plugin,
+			),
 		components: Object.fromEntries(
 			levels.map((level) => [level, headingElement(level)]),
 		),
-		autoformat: levels.map((level) => ({
-			mode: "block",
-			type: level,
-			match: headingSettings[level].autoformat,
-		})),
 		toolbar,
 		slash,
 	};

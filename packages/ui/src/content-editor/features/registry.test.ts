@@ -70,15 +70,13 @@ describe("createContentRegistry", () => {
 		expect(editing.reader.nodeTypes).toEqual(reading.nodeTypes);
 	});
 
-	it("assembles a Plate editor whose autoformat rules are pooled and whose indent targets every indentable block", () => {
+	it("assembles a Plate editor whose input rules come from the features and whose indent targets every indentable block", () => {
 		const registry = createContentRegistry(createContentFeatures());
 		const editor = createPlateEditor({ plugins: [...registry.plugins] });
-		const rules = editor.getOptions({ key: "autoformat" })
-			.rules as ReadonlyArray<unknown>;
-		expect(
-			registry.plugins.filter((plugin) => plugin.key === "autoformat"),
-		).toHaveLength(1);
-		expect(rules.length).toBeGreaterThan(6);
+		const rules = editor.meta.inputRules.insertText.all;
+		expect(rules.map((rule) => rule.pluginKey)).toEqual(
+			expect.arrayContaining(["h2", "blockquote", "hr", "bold", "list"]),
+		);
 		expect(editor.getPlugin({ key: "indent" }).inject.targetPlugins).toEqual([
 			"p",
 			"h2",

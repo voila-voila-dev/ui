@@ -5,6 +5,7 @@ import {
 	fireEvent,
 	render,
 	screen,
+	waitFor,
 } from "@testing-library/react";
 import type { PlateEditor } from "platejs/react";
 import { useEditorRef } from "platejs/react";
@@ -86,11 +87,13 @@ describe("ContentEditor.Toolbar", () => {
 			text: "Hello",
 			bold: true,
 		});
-		expect(
-			(await screen.findByRole("button", { name: "Bold" })).getAttribute(
-				"aria-pressed",
-			),
-		).toBe("true");
+		await waitFor(() => {
+			expect(
+				screen
+					.getByRole("button", { name: "Bold" })
+					.getAttribute("aria-pressed"),
+			).toBe("true");
+		});
 	});
 
 	it("turns the block into a heading and back", () => {

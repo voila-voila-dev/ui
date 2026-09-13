@@ -1,8 +1,7 @@
-import { AutoformatPlugin } from "@platejs/autoformat";
 import {
 	type AnyPlatePlugin,
+	createPlatePlugin,
 	type PlateElementProps,
-	toPlatePlugin,
 } from "platejs/react";
 import type { FunctionComponent } from "react";
 import type {
@@ -79,19 +78,29 @@ export function createContentRegistry(
 	const active = features.filter((feature) => allowedIn(feature, mode));
 	const context = { mode, indentableTypes: reader.indentableTypes };
 
-	const plugins: AnyPlatePlugin[] = active.flatMap((feature) => [
-		...feature.plugins(context),
-	]);
+	// A node a feature declares without a plugin of its own gets the plugin
+	// its reader describes: an element, void or inline as the kind says. A
+	// host feature that only renders and inserts then works without touching
+	// Plate.
+	const plugins: AnyPlatePlugin[] = active.flatMap((feature) => {
+		const declared = [...feature.plugins(context)];
+		const keys = new Set(declared.map((plugin) => plugin.key));
+		const derived = (feature.nodes ?? [])
+			.filter((node) => !keys.has(node.type))
+			.map((node) =>
+				createPlatePlugin({
+					key: node.type,
+					node: {
+						isElement: true,
+						isVoid: node.kind === "void",
+						isInline: node.kind === "inline",
+					},
+				}),
+			);
+		return [...declared, ...derived];
+	});
 	if (mode === "single-line") {
 		plugins.push(SingleLinePlugin);
-	}
-	const autoformat = active.flatMap((feature) => feature.autoformat ?? []);
-	if (autoformat.length > 0) {
-		plugins.push(
-			toPlatePlugin(AutoformatPlugin).configure({
-				options: { rules: autoformat, enableUndoOnDelete: true },
-			}),
-		);
 	}
 
 	const components = Object.assign(

@@ -27,6 +27,14 @@ import {
 } from "#/content-editor/theme.ts";
 import { cn } from "#/lib/utils.ts";
 
+function featureKeys(
+	features: ReadonlyArray<ContentFeature> | ContentRegistry,
+): ReadonlyArray<string> {
+	return (
+		Array.isArray(features) ? features : (features as ContentRegistry).features
+	).map((feature) => feature.key);
+}
+
 export interface ContentEditorRootProps<
 	Value extends ContentValue = ContentValue,
 > {
@@ -82,10 +90,22 @@ export function ContentEditorRoot<Value extends ContentValue = ContentValue>({
 	className,
 	children,
 }: ContentEditorRootProps<Value>) {
-	const registry = useMemo(
-		() => toContentRegistry(features, mode),
-		[features, mode],
-	);
+	// A host that builds its feature list inline hands down a new array on
+	// every render; the registry, and with it the Plate editor, is rebuilt
+	// only when the feature keys or the mode differ, since rebuilding the
+	// editor would reseed it and undo the edit that caused the render.
+	const previous = useRef<{
+		readonly signature: string;
+		readonly registry: ContentRegistry;
+	} | null>(null);
+	const signature = `${mode}:${featureKeys(features).join(",")}`;
+	if (previous.current === null || previous.current.signature !== signature) {
+		previous.current = {
+			signature,
+			registry: toContentRegistry(features, mode),
+		};
+	}
+	const registry = previous.current.registry;
 	const initialValue = useMemo(
 		() => (value === null || value.length === 0 ? emptyContentValue() : value),
 		// Seeds the editor once; later values arrive through the sync effect below.

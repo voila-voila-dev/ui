@@ -7,7 +7,8 @@ import {
 	type PlateElementProps,
 	useEditorRef,
 } from "platejs/react";
-import { useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Command } from "#/command/components/command.tsx";
 import { useContentEditorConfig } from "#/content-editor/context/content-editor-context.tsx";
 import type { ContentSlashItem } from "#/content-editor/features/feature-definition.tsx";
@@ -48,6 +49,18 @@ export function SlashInputElement(props: PlateElementProps) {
 		ref: inputRef,
 		cursorState,
 	});
+
+	// Rendered into document.body under the input: inside the inline element
+	// the list would be clipped by the canvas and squeezed by the line box.
+	const [anchor, setAnchor] = useState<{ top: number; left: number } | null>(
+		null,
+	);
+	useLayoutEffect(() => {
+		const rect = inputRef.current?.getBoundingClientRect();
+		if (rect !== undefined) {
+			setAnchor({ top: rect.bottom + 4, left: rect.left - 8 });
+		}
+	}, [query]);
 
 	const items = useMemo(
 		() => filterSlashItems(registry.slashItems(capabilities), labels, query),
@@ -105,38 +118,49 @@ export function SlashInputElement(props: PlateElementProps) {
 					aria-label={labels.chrome.insert}
 					className="min-w-[8ch] bg-transparent text-sm outline-none"
 				/>
-				<Command.Root
-					data-slot="content-editor-slash-menu"
-					shouldFilter={false}
-					value={items[highlight]?.key ?? ""}
-					onValueChange={(key) => {
-						const index = items.findIndex((item) => item.key === key);
-						if (index >= 0) {
-							setHighlighted(index);
-						}
-					}}
-					className="absolute top-full left-0 z-50 mt-1 w-56 rounded-md border border-border shadow-md"
-				>
-					<Command.List>
-						{items.length === 0 ? (
-							<Command.Empty>{labels.chrome.slashEmpty}</Command.Empty>
-						) : null}
-						{items.map((item) => {
-							const Icon = item.icon;
-							return (
-								<Command.Item
-									key={item.key}
-									value={item.key}
-									onMouseDown={(event) => event.preventDefault()}
-									onSelect={() => apply(item)}
-								>
-									<Icon />
-									{labels.items[item.label] ?? item.label}
-								</Command.Item>
-							);
-						})}
-					</Command.List>
-				</Command.Root>
+				{anchor === null
+					? null
+					: createPortal(
+							<Command.Root
+								data-slot="content-editor-slash-menu"
+								shouldFilter={false}
+								value={items[highlight]?.key ?? ""}
+								onValueChange={(key) => {
+									const index = items.findIndex((item) => item.key === key);
+									if (index >= 0) {
+										setHighlighted(index);
+									}
+								}}
+								style={{
+									position: "fixed",
+									top: anchor?.top,
+									left: anchor?.left,
+									zIndex: 50,
+								}}
+								className="h-auto w-56 rounded-md border border-border shadow-md"
+							>
+								<Command.List>
+									{items.length === 0 ? (
+										<Command.Empty>{labels.chrome.slashEmpty}</Command.Empty>
+									) : null}
+									{items.map((item) => {
+										const Icon = item.icon;
+										return (
+											<Command.Item
+												key={item.key}
+												value={item.key}
+												onMouseDown={(event) => event.preventDefault()}
+												onSelect={() => apply(item)}
+											>
+												<Icon />
+												{labels.items[item.label] ?? item.label}
+											</Command.Item>
+										);
+									})}
+								</Command.List>
+							</Command.Root>,
+							document.body,
+						)}
 			</span>
 			{props.children}
 		</PlateElement>

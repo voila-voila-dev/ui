@@ -1,5 +1,4 @@
 import type { Icon } from "@phosphor-icons/react";
-import type { AutoformatRule } from "@platejs/autoformat";
 import type {
 	AnyPlatePlugin,
 	PlateEditor,
@@ -95,8 +94,6 @@ export interface ContentFeature extends ContentFeatureReader {
 	readonly components?: Readonly<
 		Record<string, FunctionComponent<PlateElementProps>>
 	>;
-	/** Typed shortcuts ("- " makes a list); the registry hands every rule to one AutoformatPlugin. */
-	readonly autoformat?: ReadonlyArray<AutoformatRule>;
 	readonly toolbar?: ReadonlyArray<ContentToolbarItem>;
 	readonly floating?: ReadonlyArray<ContentToolbarItem>;
 	readonly slash?: ReadonlyArray<ContentSlashItem>;

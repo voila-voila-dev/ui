@@ -1,4 +1,5 @@
 import { MinusIcon } from "@phosphor-icons/react";
+import { HorizontalRuleRules } from "@platejs/basic-nodes";
 import { HorizontalRulePlugin } from "@platejs/basic-nodes/react";
 import { PlateElement, type PlateElementProps } from "platejs/react";
 import {
@@ -28,16 +29,12 @@ function insertDivider(editor: ContentEditorApi) {
 
 export const dividerFeature: ContentFeature = {
 	...dividerReader,
-	plugins: () => [HorizontalRulePlugin],
-	components: { hr: DividerElement },
-	autoformat: [
-		{
-			mode: "block",
-			type: "hr",
-			match: ["---", "—-"],
-			format: (editor) => insertDivider(editor as ContentEditorApi),
-		},
+	plugins: () => [
+		HorizontalRulePlugin.configure({
+			inputRules: [HorizontalRuleRules.markdown()],
+		}),
 	],
+	components: { hr: DividerElement },
 	toolbar: [
 		{
 			key: "divider",

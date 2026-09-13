@@ -6,7 +6,12 @@ import {
 } from "@phosphor-icons/react";
 import { indent, outdent } from "@platejs/indent";
 import { IndentPlugin } from "@platejs/indent/react";
-import { indentList, someList, toggleList } from "@platejs/list";
+import {
+	BulletedListRules,
+	OrderedListRules,
+	someList,
+	toggleList,
+} from "@platejs/list";
 import { ListPlugin } from "@platejs/list/react";
 import type {
 	ContentEditorApi,
@@ -37,23 +42,14 @@ export const listFeature: ContentFeature = {
 	key: "list",
 	plugins: ({ indentableTypes }) => [
 		IndentPlugin.configure({ inject: { targetPlugins: [...indentableTypes] } }),
-		ListPlugin,
-	],
-	autoformat: [
-		...["- ", "* "].map((match) => ({
-			mode: "block" as const,
-			match,
-			allowSameTypeAbove: true,
-			format: (editor: Parameters<typeof indentList>[0]) =>
-				indentList(editor, { listStyleType: "disc" }),
-		})),
-		...["1. ", "1) "].map((match) => ({
-			mode: "block" as const,
-			match,
-			allowSameTypeAbove: true,
-			format: (editor: Parameters<typeof indentList>[0]) =>
-				indentList(editor, { listStyleType: "decimal" }),
-		})),
+		ListPlugin.configure({
+			inputRules: [
+				BulletedListRules.markdown({ variant: "-" }),
+				BulletedListRules.markdown({ variant: "*" }),
+				OrderedListRules.markdown({ variant: "." }),
+				OrderedListRules.markdown({ variant: ")" }),
+			],
+		}),
 	],
 	toolbar: [
 		{ ...bulleted, group: "list" },
