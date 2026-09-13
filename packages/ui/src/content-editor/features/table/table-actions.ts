@@ -97,7 +97,7 @@ const CELL_BACKGROUNDS: ReadonlyArray<{
 	},
 ];
 
-export const tableActions: ReadonlyArray<ContentToolbarItem> = [
+const rowAndColumnActions: ReadonlyArray<ContentToolbarItem> = [
 	control("addRowAbove", RowsPlusTopIcon, (editor) =>
 		insertTableRow(editor, { before: true, header: false }),
 	),
@@ -129,6 +129,9 @@ export const tableActions: ReadonlyArray<ContentToolbarItem> = [
 			},
 		},
 	),
+];
+
+const fillActions: ReadonlyArray<ContentToolbarItem> = [
 	...CELL_BACKGROUNDS.map(({ key, color }) =>
 		control(key, PaintBucketIcon, (editor) =>
 			setCellBackground(editor, {
@@ -137,7 +140,38 @@ export const tableActions: ReadonlyArray<ContentToolbarItem> = [
 			}),
 		),
 	),
+];
+
+const deleteActions: ReadonlyArray<ContentToolbarItem> = [
 	control("deleteRow", TrashIcon, (editor) => deleteRow(editor)),
 	control("deleteColumn", TrashIcon, (editor) => deleteColumn(editor)),
 	control("deleteTable", TrashIcon, (editor) => deleteTable(editor)),
+];
+
+/** Every action, flat: what the toolbar's table menu lists. */
+export const tableActions: ReadonlyArray<ContentToolbarItem> = [
+	...rowAndColumnActions,
+	...fillActions,
+	...deleteActions,
+];
+
+/** The same actions as a bar: fills and deletes folded into a menu each. */
+export const tableBarItems: ReadonlyArray<ContentToolbarItem> = [
+	...rowAndColumnActions,
+	{
+		key: "cellBackground",
+		group: "table",
+		icon: PaintBucketIcon,
+		label: "cellBackground",
+		run: () => {},
+		menu: fillActions,
+	},
+	{
+		key: "deleteMenu",
+		group: "table",
+		icon: TrashIcon,
+		label: "deleteMenu",
+		run: () => {},
+		menu: deleteActions,
+	},
 ];

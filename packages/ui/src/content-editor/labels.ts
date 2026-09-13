@@ -78,6 +78,7 @@ export interface ContentEditorItemLabels {
 	readonly backgroundGreen: string;
 	readonly backgroundBlue: string;
 	readonly backgroundRed: string;
+	readonly deleteMenu: string;
 }
 
 export interface ContentEditorLabels {
@@ -162,6 +163,7 @@ export const DEFAULT_CONTENT_EDITOR_LABELS: ContentEditorLabels = {
 		backgroundGreen: "Green fill",
 		backgroundBlue: "Blue fill",
 		backgroundRed: "Red fill",
+		deleteMenu: "Delete",
 	},
 };
 

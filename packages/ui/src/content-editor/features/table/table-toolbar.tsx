@@ -2,7 +2,7 @@ import { getTableEntries } from "@platejs/table";
 import type { TElement } from "platejs";
 import { useEditorRef, useEditorSelector } from "platejs/react";
 import { ContentEditorToolbarItem } from "#/content-editor/components/toolbar-item.tsx";
-import { tableActions } from "#/content-editor/features/table/table-actions.ts";
+import { tableBarItems } from "#/content-editor/features/table/table-actions.ts";
 
 interface Props {
 	element: TElement;
@@ -34,7 +34,7 @@ export function TableToolbar({ element }: Props) {
 			data-slot="content-editor-table-toolbar"
 			className="mb-1 flex w-fit select-none flex-wrap items-center gap-0.5 rounded-md border border-border bg-popover p-0.5 text-popover-foreground shadow-sm"
 		>
-			{tableActions.map((item) => (
+			{tableBarItems.map((item) => (
 				<ContentEditorToolbarItem key={item.key} item={item} size="sm" />
 			))}
 		</div>
