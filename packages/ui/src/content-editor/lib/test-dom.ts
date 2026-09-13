@@ -33,6 +33,14 @@ export function installContentEditorTestDom(): void {
 			},
 		}) as unknown as DOMRectList;
 	Element.prototype.scrollIntoView = () => {};
+	// slate-react forwards paste and drop to the host only on an editable
+	// target, which it reads from `isContentEditable`; jsdom never sets it.
+	Object.defineProperty(HTMLElement.prototype, "isContentEditable", {
+		configurable: true,
+		get(this: HTMLElement) {
+			return this.closest('[contenteditable="true"]') !== null;
+		},
+	});
 	if (typeof globalThis.ResizeObserver === "undefined") {
 		globalThis.ResizeObserver = class {
 			observe() {}

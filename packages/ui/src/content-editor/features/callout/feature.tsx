@@ -1,5 +1,6 @@
 import { LightbulbIcon } from "@phosphor-icons/react";
 import { createPlatePlugin } from "platejs/react";
+import { CalloutElement } from "#/content-editor/features/callout/callout-element.tsx";
 import {
 	calloutNode,
 	calloutReader,
@@ -22,6 +23,7 @@ function insertCallout(editor: ContentEditorApi) {
 export const calloutFeature: ContentFeature = {
 	...calloutReader,
 	plugins: () => [CalloutPlugin],
+	components: { callout: CalloutElement },
 	toolbar: [
 		{
 			key: "callout",

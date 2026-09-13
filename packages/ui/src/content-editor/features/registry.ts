@@ -9,6 +9,7 @@ import type {
 	ContentCapability,
 	ContentEditorMode,
 	ContentFeature,
+	ContentFileHandler,
 	ContentSlashItem,
 	ContentToolbarItem,
 } from "#/content-editor/features/feature-definition.tsx";
@@ -34,6 +35,9 @@ export interface ContentRegistry {
 	readonly slashItems: (
 		capabilities: ReadonlySet<ContentCapability>,
 	) => ReadonlyArray<ContentSlashItem>;
+	readonly fileHandlers: (
+		capabilities: ReadonlySet<ContentCapability>,
+	) => ReadonlyArray<ContentFileHandler>;
 	readonly reader: ContentReaderRegistry;
 }
 
@@ -109,6 +113,7 @@ export function createContentRegistry(
 		toolbarItems: items((feature) => feature.toolbar),
 		floatingItems: items((feature) => feature.floating),
 		slashItems: items((feature) => feature.slash),
+		fileHandlers: items((feature) => (feature.files ? [feature.files] : [])),
 		reader,
 	};
 }

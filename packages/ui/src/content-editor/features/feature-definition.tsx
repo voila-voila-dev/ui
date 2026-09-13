@@ -73,10 +73,24 @@ export interface ContentSlashItem {
 	readonly run: (editor: ContentEditorApi, context: ContentItemContext) => void;
 }
 
+/**
+ * How a feature takes files the user drops on or pastes into the canvas.
+ * The first feature whose `accepts` says yes gets each file.
+ */
+export interface ContentFileHandler {
+	readonly accepts: (file: File) => boolean;
+	readonly insert: (
+		editor: ContentEditorApi,
+		files: ReadonlyArray<File>,
+		context: ContentItemContext,
+	) => void;
+}
+
 export interface ContentFeature extends ContentFeatureReader {
 	readonly plugins: (
 		context: ContentPluginContext,
 	) => ReadonlyArray<AnyPlatePlugin>;
+	readonly files?: ContentFileHandler;
 	/** Canvas element per node type; a table registers four. */
 	readonly components?: Readonly<
 		Record<string, FunctionComponent<PlateElementProps>>
