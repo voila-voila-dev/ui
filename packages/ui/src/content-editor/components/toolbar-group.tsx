@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
+import { ContentEditorToolbarItem } from "#/content-editor/components/toolbar-item.tsx";
 import type { ContentToolbarItem } from "#/content-editor/features/feature-definition.tsx";
-import { ContentEditorToolbarItem } from "#/content-editor/parts/toolbar-item.tsx";
 import { cn } from "#/lib/utils.ts";
 
 interface Props {

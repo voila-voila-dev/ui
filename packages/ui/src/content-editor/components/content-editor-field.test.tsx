@@ -4,14 +4,14 @@ import type { PlateEditor } from "platejs/react";
 import { useEditorRef } from "platejs/react";
 import { useState } from "react";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { ContentEditorField } from "#/content-editor/components/content-editor-field.tsx";
+import { ContentEditor } from "#/content-editor/components/namespace.ts";
 import type { ContentValue } from "#/content-editor/features/content-value.ts";
 import {
 	createContentFeatures,
 	createInlineContentFeatures,
 } from "#/content-editor/features/create-content-features.ts";
 import { installContentEditorTestDom } from "#/content-editor/lib/test-dom.ts";
-import { ContentEditorField } from "#/content-editor/parts/content-editor-field.tsx";
-import { ContentEditor } from "#/content-editor/parts/namespace.ts";
 
 beforeEach(installContentEditorTestDom);
 afterEach(cleanup);

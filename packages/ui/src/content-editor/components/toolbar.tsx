@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
+import { ContentEditorToolbarGroup } from "#/content-editor/components/toolbar-group.tsx";
 import { useContentEditorConfig } from "#/content-editor/context/content-editor-context.tsx";
 import type {
 	ContentToolbarGroup,
 	ContentToolbarItem,
 } from "#/content-editor/features/feature-definition.tsx";
-import { ContentEditorToolbarGroup } from "#/content-editor/parts/toolbar-group.tsx";
 import { cn } from "#/lib/utils.ts";
 
 const GROUP_ORDER: ReadonlyArray<ContentToolbarGroup> = [

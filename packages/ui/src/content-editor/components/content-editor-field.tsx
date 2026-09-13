@@ -1,5 +1,5 @@
-import { ContentEditor } from "#/content-editor/parts/namespace.ts";
-import type { ContentEditorRootProps } from "#/content-editor/parts/root.tsx";
+import { ContentEditor } from "#/content-editor/components/namespace.ts";
+import type { ContentEditorRootProps } from "#/content-editor/components/root.tsx";
 
 interface Props extends Omit<ContentEditorRootProps, "children"> {
 	/** `false` for a chrome-less field: the floating toolbar and the slash menu remain. */

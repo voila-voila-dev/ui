@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { cleanup, render } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { ContentRenderer } from "#/content-editor/reader/content-renderer.tsx";
+import { ContentRenderer } from "#/content-editor/components/content-renderer.tsx";
 import { createContentReaders } from "#/content-editor/reader/readers.ts";
 
 afterEach(cleanup);

@@ -3,9 +3,9 @@ import {
 	type PlateContentProps,
 	useEditorRef,
 } from "platejs/react";
+import { useRegisterContentEditorPart } from "#/content-editor/components/layout.tsx";
 import { useContentEditorConfig } from "#/content-editor/context/content-editor-context.tsx";
 import { dispatchFiles, filesOf } from "#/content-editor/lib/files.ts";
-import { useRegisterContentEditorPart } from "#/content-editor/parts/layout.tsx";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends Omit<PlateContentProps, "placeholder" | "readOnly"> {

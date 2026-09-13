@@ -1,3 +1,4 @@
+export { ContentRenderer } from "#/content-editor/components/content-renderer.tsx";
 export type {
 	ContentDescendant,
 	ContentNodeLike,
@@ -26,7 +27,6 @@ export {
 	emptyContentValue,
 	isEmptyContentValue,
 } from "#/content-editor/lib/empty-value.ts";
-export { ContentRenderer } from "#/content-editor/reader/content-renderer.tsx";
 export {
 	type ContentToHtmlOptions,
 	collectContentUrls,

@@ -1,7 +1,21 @@
 export {
+	countContentCharacters,
+	countContentWords,
+} from "#/content-editor/components/character-count.tsx";
+export { ContentEditorField } from "#/content-editor/components/content-editor-field.tsx";
+export { ContentRenderer } from "#/content-editor/components/content-renderer.tsx";
+export {
+	type ContentEditorPart,
+	type ContentEditorSlot,
+	useRegisterContentEditorPart,
+} from "#/content-editor/components/layout.tsx";
+export {
 	ContentLinkPopover,
 	linkAtSelection,
 } from "#/content-editor/components/link-popover.tsx";
+export { ContentEditor } from "#/content-editor/components/namespace.ts";
+export type { ContentEditorRootProps } from "#/content-editor/components/root.tsx";
+export { groupToolbarItems } from "#/content-editor/components/toolbar.tsx";
 export {
 	type ContentEditorConfigContextValue,
 	useContentEditorConfig,
@@ -64,6 +78,7 @@ export {
 	emptyContentValue,
 	isEmptyContentValue,
 } from "#/content-editor/lib/empty-value.ts";
+export { newContentNodeId } from "#/content-editor/lib/ids.ts";
 export { removeLink, upsertLink } from "#/content-editor/lib/links.ts";
 export {
 	type ContentMarkdownOptions,
@@ -77,20 +92,6 @@ export {
 } from "#/content-editor/lib/normalize-value.ts";
 export { SingleLinePlugin } from "#/content-editor/lib/single-line-plugin.ts";
 export { installContentEditorTestDom } from "#/content-editor/lib/test-dom.ts";
-export {
-	countContentCharacters,
-	countContentWords,
-} from "#/content-editor/parts/character-count.tsx";
-export { ContentEditorField } from "#/content-editor/parts/content-editor-field.tsx";
-export {
-	type ContentEditorPart,
-	type ContentEditorSlot,
-	useRegisterContentEditorPart,
-} from "#/content-editor/parts/layout.tsx";
-export { ContentEditor } from "#/content-editor/parts/namespace.ts";
-export type { ContentEditorRootProps } from "#/content-editor/parts/root.tsx";
-export { groupToolbarItems } from "#/content-editor/parts/toolbar.tsx";
-export { ContentRenderer } from "#/content-editor/reader/content-renderer.tsx";
 export {
 	type ContentToHtmlOptions,
 	collectContentUrls,

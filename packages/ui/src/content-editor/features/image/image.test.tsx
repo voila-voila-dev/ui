@@ -12,10 +12,10 @@ import type { PlateEditor } from "platejs/react";
 import { useEditorRef } from "platejs/react";
 import { useState } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { ContentEditor } from "#/content-editor/components/namespace.ts";
 import type { ContentValue } from "#/content-editor/features/content-value.ts";
 import { createContentFeatures } from "#/content-editor/features/create-content-features.ts";
 import { installContentEditorTestDom } from "#/content-editor/lib/test-dom.ts";
-import { ContentEditor } from "#/content-editor/parts/namespace.ts";
 
 beforeEach(installContentEditorTestDom);
 afterEach(cleanup);

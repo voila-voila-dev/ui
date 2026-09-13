@@ -1,9 +1,9 @@
 import { useEditorRef, useEditorSelector } from "platejs/react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { ContentEditorToolbarItem } from "#/content-editor/components/toolbar-item.tsx";
 import { useContentEditorConfig } from "#/content-editor/context/content-editor-context.tsx";
 import type { ContentEditorApi } from "#/content-editor/features/feature-definition.tsx";
-import { ContentEditorToolbarItem } from "#/content-editor/parts/toolbar-item.tsx";
 import { cn } from "#/lib/utils.ts";
 
 /**
