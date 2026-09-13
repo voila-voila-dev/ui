@@ -73,16 +73,31 @@ describe("createContentRegistry", () => {
 	it("assembles a Plate editor whose autoformat rules are pooled and whose indent targets every indentable block", () => {
 		const registry = createContentRegistry(createContentFeatures());
 		const editor = createPlateEditor({ plugins: [...registry.plugins] });
-		const rules = editor.getOptions({ key: "autoformat" }).rules as ReadonlyArray<unknown>;
-		expect(registry.plugins.filter((plugin) => plugin.key === "autoformat")).toHaveLength(1);
+		const rules = editor.getOptions({ key: "autoformat" })
+			.rules as ReadonlyArray<unknown>;
+		expect(
+			registry.plugins.filter((plugin) => plugin.key === "autoformat"),
+		).toHaveLength(1);
 		expect(rules.length).toBeGreaterThan(6);
-		expect(editor.getPlugin({ key: "indent" }).inject.targetPlugins).toEqual(["p", "h2", "h3", "blockquote"]);
+		expect(editor.getPlugin({ key: "indent" }).inject.targetPlugins).toEqual([
+			"p",
+			"h2",
+			"h3",
+			"blockquote",
+		]);
 	});
 
 	it("keeps indent working when the heading feature is left out", () => {
-		const features = createContentFeatures().filter((feature) => feature.key !== "heading");
-		const editor = createPlateEditor({ plugins: [...createContentRegistry(features).plugins] });
-		expect(editor.getPlugin({ key: "indent" }).inject.targetPlugins).toEqual(["p", "blockquote"]);
+		const features = createContentFeatures().filter(
+			(feature) => feature.key !== "heading",
+		);
+		const editor = createPlateEditor({
+			plugins: [...createContentRegistry(features).plugins],
+		});
+		expect(editor.getPlugin({ key: "indent" }).inject.targetPlugins).toEqual([
+			"p",
+			"blockquote",
+		]);
 	});
 
 	it("hides a feature until its capability is wired", () => {

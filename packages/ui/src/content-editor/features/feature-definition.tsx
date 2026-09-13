@@ -5,7 +5,7 @@ import type {
 	PlateEditor,
 	PlateElementProps,
 } from "platejs/react";
-import type { ComponentType } from "react";
+import type { ComponentType, FunctionComponent } from "react";
 import type { ContentFeatureReader } from "#/content-editor/features/reader-definition.tsx";
 import type { ContentEditorLabels } from "#/content-editor/labels.ts";
 
@@ -79,7 +79,7 @@ export interface ContentFeature extends ContentFeatureReader {
 	) => ReadonlyArray<AnyPlatePlugin>;
 	/** Canvas element per node type; a table registers four. */
 	readonly components?: Readonly<
-		Record<string, ComponentType<PlateElementProps>>
+		Record<string, FunctionComponent<PlateElementProps>>
 	>;
 	/** Typed shortcuts ("- " makes a list); the registry hands every rule to one AutoformatPlugin. */
 	readonly autoformat?: ReadonlyArray<AutoformatRule>;

@@ -1,3 +1,9 @@
+export {
+	type ContentEditorConfigContextValue,
+	useContentEditorConfig,
+	useContentEditorLabels,
+	useContentEditorRegistry,
+} from "#/content-editor/context/content-editor-context.tsx";
 export type {
 	ContentDescendant,
 	ContentNodeLike,
@@ -57,6 +63,18 @@ export {
 	mapContentText,
 	scrubImportedContent,
 } from "#/content-editor/lib/normalize-value.ts";
+export { installContentEditorTestDom } from "#/content-editor/lib/test-dom.ts";
+export {
+	countContentCharacters,
+	countContentWords,
+} from "#/content-editor/parts/character-count.tsx";
+export {
+	type ContentEditorPart,
+	type ContentEditorSlot,
+	useRegisterContentEditorPart,
+} from "#/content-editor/parts/layout.tsx";
+export { ContentEditor } from "#/content-editor/parts/namespace.ts";
+export type { ContentEditorRootProps } from "#/content-editor/parts/root.tsx";
 export { ContentRenderer } from "#/content-editor/reader/content-renderer.tsx";
 export {
 	type ContentToHtmlOptions,
@@ -69,3 +87,9 @@ export {
 	type ContentReadersOptions,
 	createContentReaders,
 } from "#/content-editor/reader/readers.ts";
+export {
+	type ContentEditorTheme,
+	type ContentEditorThemeInput,
+	DEFAULT_CONTENT_EDITOR_THEME,
+	mergeContentEditorTheme,
+} from "#/content-editor/theme.ts";

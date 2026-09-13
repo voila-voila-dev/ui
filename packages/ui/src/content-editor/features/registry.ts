@@ -4,7 +4,7 @@ import {
 	type PlateElementProps,
 	toPlatePlugin,
 } from "platejs/react";
-import type { ComponentType } from "react";
+import type { FunctionComponent } from "react";
 import type {
 	ContentCapability,
 	ContentEditorMode,
@@ -23,7 +23,7 @@ export interface ContentRegistry {
 	readonly mode: ContentEditorMode;
 	readonly plugins: ReadonlyArray<AnyPlatePlugin>;
 	readonly components: Readonly<
-		Record<string, ComponentType<PlateElementProps>>
+		Record<string, FunctionComponent<PlateElementProps>>
 	>;
 	readonly toolbarItems: (
 		capabilities: ReadonlySet<ContentCapability>,
@@ -89,7 +89,7 @@ export function createContentRegistry(
 	const components = Object.assign(
 		{},
 		...active.map((feature) => feature.components ?? {}),
-	) as Readonly<Record<string, ComponentType<PlateElementProps>>>;
+	) as Readonly<Record<string, FunctionComponent<PlateElementProps>>>;
 
 	const items =
 		<Item>(
