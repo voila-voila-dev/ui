@@ -8,7 +8,10 @@ export function SidebarSeparator({ className, ...props }: Props) {
 	return (
 		<Separator
 			data-slot="sidebar-separator"
-			className={cn("mx-2 w-auto bg-sidebar-border", className)}
+			className={cn(
+				"mx-2 bg-sidebar-border data-[orientation=horizontal]:w-auto",
+				className,
+			)}
 			{...props}
 		/>
 	);
