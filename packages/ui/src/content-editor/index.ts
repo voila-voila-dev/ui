@@ -31,6 +31,12 @@ export {
 	useContentEditorRegistry,
 } from "#/content-editor/context/content-editor-context.tsx";
 export { useContentEditorTheme } from "#/content-editor/context/theme-context.ts";
+export { buttonFeature } from "#/content-editor/features/button/feature.tsx";
+export {
+	buttonReader,
+	type ContentButtonNode,
+	type ContentButtonVariant,
+} from "#/content-editor/features/button/reader.tsx";
 export { columnsFeature } from "#/content-editor/features/columns/feature.tsx";
 export {
 	type ContentColumnNode,

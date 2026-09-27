@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/tanstack-react";
 import {
 	badgeListFeature,
+	buttonFeature,
 	ContentEditor,
 	type ContentEditorAppearance,
 	type ContentValue,
@@ -15,6 +16,7 @@ const FEATURES = [
 	badgeListFeature,
 	highlightFeature,
 	finePrintFeature,
+	buttonFeature,
 ];
 
 const BRAND_THEME = {
@@ -178,4 +180,38 @@ export const FinePrint: Story = {
 export const FinePrintInADocument: Story = {
 	args: noArgs,
 	render: () => <Composer initial={finePrint} appearance="document" />,
+};
+
+const button = (
+	label: string,
+	variant: "primary" | "secondary",
+	align: "left" | "center" | "right",
+) => ({
+	type: "button",
+	label,
+	href: "https://example.com/book",
+	variant,
+	align,
+	children: text(""),
+});
+
+const buttons: ContentValue = [
+	{ type: "p", children: text("Click a button to edit it in the settings.") },
+	button("Book a slot", "primary", "center"),
+	button("See the schedule", "secondary", "center"),
+	button("Aligned left", "primary", "left"),
+	button("Aligned right", "secondary", "right"),
+	button("", "primary", "center"),
+];
+
+/** Filled and outlined, in each alignment, and an empty one showing its placeholder. */
+export const Button: Story = {
+	args: noArgs,
+	render: () => <Composer initial={buttons} />,
+};
+
+/** The buttons in the document appearance. */
+export const ButtonInADocument: Story = {
+	args: noArgs,
+	render: () => <Composer initial={buttons} appearance="document" />,
 };

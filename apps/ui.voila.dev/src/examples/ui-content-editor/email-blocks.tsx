@@ -1,5 +1,6 @@
 import {
 	badgeListFeature,
+	buttonFeature,
 	ContentEditor,
 	type ContentValue,
 	createContentFeatures,
@@ -13,6 +14,7 @@ const FEATURES = [
 	badgeListFeature,
 	highlightFeature,
 	finePrintFeature,
+	buttonFeature,
 ];
 
 const THEME = {
@@ -126,6 +128,33 @@ export function FinePrint() {
 						},
 						{ text: "." },
 					],
+				},
+			]}
+		/>
+	);
+}
+
+/** A filled and an outlined button: click one to edit it. */
+export function Button() {
+	return (
+		<EmailComposer
+			initial={[
+				{ type: "p", children: text("Places are limited.") },
+				{
+					type: "button",
+					label: "Book a slot",
+					href: "https://example.com/book",
+					variant: "primary",
+					align: "center",
+					children: text(""),
+				},
+				{
+					type: "button",
+					label: "See the schedule",
+					href: "https://example.com/schedule",
+					variant: "secondary",
+					align: "center",
+					children: text(""),
 				},
 			]}
 		/>

@@ -1,5 +1,10 @@
 export { ContentRenderer } from "#/content-editor/components/content-renderer.tsx";
 export {
+	buttonReader,
+	type ContentButtonNode,
+	type ContentButtonVariant,
+} from "#/content-editor/features/button/reader.tsx";
+export {
 	type ContentColumnNode,
 	type ContentColumnsDesktopCount,
 	type ContentColumnsMobileCount,
