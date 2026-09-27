@@ -16,20 +16,29 @@ export function SlashInputElement(props: PlateElementProps) {
 	const filter = useCallback(
 		(query: string) => {
 			const needle = query.trim().toLowerCase();
-			return items
-				.map((item) => ({
-					item,
-					label: labels.items[item.label] ?? item.label,
-				}))
-				.filter(
-					({ item, label }) =>
-						needle === "" ||
-						label.toLowerCase().includes(needle) ||
-						item.keywords.some((keyword) =>
-							keyword.toLowerCase().includes(needle),
-						),
-				)
-				.map(({ item, label }) => ({ key: item.key, label, icon: item.icon }));
+			return (
+				items
+					.map((item) => ({
+						item,
+						label: labels.items[item.label] ?? item.label,
+					}))
+					.filter(
+						({ item, label }) =>
+							needle === "" ||
+							label.toLowerCase().includes(needle) ||
+							item.keywords.some((keyword) =>
+								keyword.toLowerCase().includes(needle),
+							),
+					)
+					// What the author typed the name of comes before what only has
+					// it as a keyword: "/columns" is the columns, then the table.
+					.toSorted(
+						(a, b) =>
+							Number(!a.label.toLowerCase().includes(needle)) -
+							Number(!b.label.toLowerCase().includes(needle)),
+					)
+					.map(({ item, label }) => ({ key: item.key, label, icon: item.icon }))
+			);
 		},
 		[items, labels],
 	);

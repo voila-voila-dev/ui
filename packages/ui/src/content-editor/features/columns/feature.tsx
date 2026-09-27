@@ -31,7 +31,17 @@ import { insertBlockBelow } from "#/content-editor/lib/insert-block.ts";
 function insertColumns(editor: ContentEditorApi) {
 	const row = freshColumns();
 	const around = editor.api.above({ match: { type: COLUMNS_TYPE } });
-	if (around === undefined) {
+	const block = editor.api.block();
+	if (
+		around === undefined &&
+		block !== undefined &&
+		block[1].length === 1 &&
+		editor.api.isEmpty(block[0])
+	) {
+		// The empty line the slash was typed on stays, under the row, as the
+		// line the caret leaves the row for.
+		editor.tf.insertNodes(row as never, { at: block[1] });
+	} else if (around === undefined) {
 		insertBlockBelow(editor, row);
 	} else {
 		const after = [around[1][0] + 1];
