@@ -139,23 +139,23 @@ function normalizeColumns(
 		const extra = path.concat(row.desktopColumns);
 		const kept = path.concat(row.desktopColumns - 1);
 		const extraNode = node.children[row.desktopColumns] as Descendant;
+		const keptNode = node.children[row.desktopColumns - 1] as Descendant;
 		editor.tf.withoutNormalizing(() => {
-			if (!isEmptyColumn(extraNode) && ElementApi.isElement(extraNode)) {
-				const keptNode = node.children[row.desktopColumns - 1];
+			if (!isEmptyColumn(extraNode)) {
+				// An empty kept column gives its paragraph up to what lands in it.
+				const keptEmpty = isEmptyColumn(keptNode);
+				if (keptEmpty) {
+					editor.tf.removeNodes({ at: kept.concat(0) });
+				}
 				const keptLength = ElementApi.isElement(keptNode)
 					? keptNode.children.length
 					: 0;
-				// An empty kept column gives its paragraph up to what lands in it.
-				if (isEmptyColumn(keptNode as Descendant)) {
-					editor.tf.removeNodes({ at: kept.concat(0) });
-				}
-				const target = isEmptyColumn(keptNode as Descendant) ? 0 : keptLength;
 				editor.tf.moveNodes({
 					at: extra,
 					match: (_, candidate) =>
 						candidate.length === extra.length + 1 &&
 						PathApi.isParent(extra, candidate),
-					to: kept.concat(target),
+					to: kept.concat(keptEmpty ? 0 : keptLength),
 				});
 			}
 			editor.tf.removeNodes({ at: extra });
