@@ -3,6 +3,7 @@ import {
 	ContentEditor,
 	type ContentValue,
 	createContentFeatures,
+	finePrintFeature,
 	highlightFeature,
 } from "@voila.dev/ui/content-editor";
 import { useState } from "react";
@@ -11,6 +12,7 @@ const FEATURES = [
 	...createContentFeatures({ headings: ["h1", "h2"] }),
 	badgeListFeature,
 	highlightFeature,
+	finePrintFeature,
 ];
 
 const THEME = {
@@ -102,6 +104,29 @@ export function Highlight() {
 					children: text("10% off everything with the code LAUNCH10"),
 				},
 				{ type: "p", children: text("Valid until Sunday.") },
+			]}
+		/>
+	);
+}
+
+/** The conditions at the foot of an email, with a link to the terms. */
+export function FinePrint() {
+	return (
+		<EmailComposer
+			initial={[
+				{ type: "p", children: text("See you on Saturday.") },
+				{
+					type: "fine-print",
+					children: [
+						{ text: "Offer valid until 30 June. " },
+						{
+							type: "a",
+							url: "https://example.com/terms",
+							children: text("Terms and conditions"),
+						},
+						{ text: "." },
+					],
+				},
 			]}
 		/>
 	);

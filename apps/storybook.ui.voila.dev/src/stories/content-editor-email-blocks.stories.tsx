@@ -5,6 +5,7 @@ import {
 	type ContentEditorAppearance,
 	type ContentValue,
 	createContentFeatures,
+	finePrintFeature,
 	highlightFeature,
 } from "@voila.dev/ui/content-editor";
 import { useState } from "react";
@@ -13,6 +14,7 @@ const FEATURES = [
 	...createContentFeatures({ headings: ["h1", "h2"] }),
 	badgeListFeature,
 	highlightFeature,
+	finePrintFeature,
 ];
 
 const BRAND_THEME = {
@@ -148,4 +150,32 @@ export const Highlight: Story = {
 export const HighlightInADocument: Story = {
 	args: noArgs,
 	render: () => <Composer initial={highlights} appearance="document" />,
+};
+
+const finePrint: ContentValue = [
+	{ type: "p", children: text("See you on Saturday.") },
+	{
+		type: "fine-print",
+		children: [
+			{ text: "Offer valid until 30 June, one per household. " },
+			{
+				type: "a",
+				url: "https://example.com/terms",
+				children: text("Terms and conditions"),
+			},
+			{ text: ".\nYou receive this email because you joined the club." },
+		],
+	},
+];
+
+/** The small print, with a link and a line break. */
+export const FinePrint: Story = {
+	args: noArgs,
+	render: () => <Composer initial={finePrint} />,
+};
+
+/** The small print in the document appearance. */
+export const FinePrintInADocument: Story = {
+	args: noArgs,
+	render: () => <Composer initial={finePrint} appearance="document" />,
 };

@@ -79,6 +79,11 @@ export type {
 	ContentTextField,
 	ContentUrlField,
 } from "#/content-editor/features/field-definition.ts";
+export { finePrintFeature } from "#/content-editor/features/fine-print/feature.tsx";
+export {
+	type ContentFinePrintNode,
+	finePrintReader,
+} from "#/content-editor/features/fine-print/reader.tsx";
 export { highlightFeature } from "#/content-editor/features/highlight/feature.tsx";
 export {
 	type ContentHighlightNode,
