@@ -202,3 +202,16 @@ export function Image() {
 		/>
 	);
 }
+
+/** A rule between two paragraphs. */
+export function Divider() {
+	return (
+		<EmailComposer
+			initial={[
+				{ type: "p", children: text("Above the rule.") },
+				{ type: "hr", children: text("") },
+				{ type: "p", children: text("Type --- on an empty line for another.") },
+			]}
+		/>
+	);
+}

@@ -279,3 +279,21 @@ export const ImageInADocument: Story = {
 	args: noArgs,
 	render: () => <Composer initial={images} appearance="document" />,
 };
+
+const dividers: ContentValue = [
+	{ type: "p", children: text("Above the rule.") },
+	{ type: "hr", children: text("") },
+	{ type: "p", children: text("Type --- on an empty line for another.") },
+];
+
+/** The divider in the theme's border colour. */
+export const Divider: Story = {
+	args: noArgs,
+	render: () => <Composer initial={dividers} />,
+};
+
+/** The divider in the document appearance. */
+export const DividerInADocument: Story = {
+	args: noArgs,
+	render: () => <Composer initial={dividers} appearance="document" />,
+};
