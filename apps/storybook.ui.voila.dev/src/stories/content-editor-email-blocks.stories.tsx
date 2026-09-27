@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/tanstack-react";
 import {
+	badgeListFeature,
 	ContentEditor,
 	type ContentEditorAppearance,
 	type ContentValue,
@@ -7,7 +8,10 @@ import {
 } from "@voila.dev/ui/content-editor";
 import { useState } from "react";
 
-const FEATURES = [...createContentFeatures({ headings: ["h1", "h2"] })];
+const FEATURES = [
+	...createContentFeatures({ headings: ["h1", "h2"] }),
+	badgeListFeature,
+];
 
 const BRAND_THEME = {
 	color: {
@@ -86,4 +90,37 @@ export const Headings: Story = {
 export const HeadingsInADocument: Story = {
 	args: noArgs,
 	render: () => <Composer initial={headings} appearance="document" />,
+};
+
+const item = (listStyleType: string, value: string, listStart?: number) => ({
+	type: "p",
+	listStyleType,
+	indent: 1,
+	...(listStart === undefined ? {} : { listStart }),
+	children: text(value),
+});
+
+const lists: ContentValue = [
+	{ type: "p", children: text("Three steps, as badges:") },
+	item("badge", "Create your account"),
+	item("badge", "Pick a slot", 2),
+	item("badge", "Show up on Saturday", 3),
+	{ type: "p", children: text("Bullets and numbers stay as they were:") },
+	item("disc", "Doors open at 9:00"),
+	item("disc", "Bring your badge"),
+	{ type: "p", children: text("") },
+	item("decimal", "Warm up"),
+	item("decimal", "Play", 2),
+];
+
+/** The badge list beside the bulleted and numbered ones; `/badge` makes one. */
+export const BadgeList: Story = {
+	args: noArgs,
+	render: () => <Composer initial={lists} />,
+};
+
+/** The badge list in the document appearance. */
+export const BadgeListInADocument: Story = {
+	args: noArgs,
+	render: () => <Composer initial={lists} appearance="document" />,
 };

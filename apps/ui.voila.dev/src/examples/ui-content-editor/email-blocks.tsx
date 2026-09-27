@@ -1,11 +1,15 @@
 import {
+	badgeListFeature,
 	ContentEditor,
 	type ContentValue,
 	createContentFeatures,
 } from "@voila.dev/ui/content-editor";
 import { useState } from "react";
 
-const FEATURES = [...createContentFeatures({ headings: ["h1", "h2"] })];
+const FEATURES = [
+	...createContentFeatures({ headings: ["h1", "h2"] }),
+	badgeListFeature,
+];
 
 const THEME = {
 	color: {
@@ -49,6 +53,37 @@ export function Headings() {
 				{ type: "p", children: text("Type # for a title, ## for a section.") },
 				{ type: "h2", children: text("What to bring") },
 				{ type: "p", children: text("Your badge and a water bottle.") },
+			]}
+		/>
+	);
+}
+
+/** Three steps as a badge list. */
+export function BadgeList() {
+	return (
+		<EmailComposer
+			initial={[
+				{ type: "p", children: text("Three steps:") },
+				{
+					type: "p",
+					listStyleType: "badge",
+					indent: 1,
+					children: text("Create your account"),
+				},
+				{
+					type: "p",
+					listStyleType: "badge",
+					indent: 1,
+					listStart: 2,
+					children: text("Pick a slot"),
+				},
+				{
+					type: "p",
+					listStyleType: "badge",
+					indent: 1,
+					listStart: 3,
+					children: text("Show up on Saturday"),
+				},
 			]}
 		/>
 	);
