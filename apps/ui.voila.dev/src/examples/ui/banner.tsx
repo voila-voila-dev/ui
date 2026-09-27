@@ -2,7 +2,7 @@ import { MegaphoneIcon, WarningIcon } from "@phosphor-icons/react";
 import { Banner } from "@voila.dev/ui/banner";
 import { Button } from "@voila.dev/ui/button";
 
-export function Default() {
+export function BannerVariants() {
 	return (
 		<div className="flex w-full flex-col gap-3">
 			<Banner.Root>
@@ -32,7 +32,7 @@ export function Default() {
 	);
 }
 
-export function WithAction() {
+export function BannerWithAction() {
 	return (
 		<Banner.Root>
 			<MegaphoneIcon />

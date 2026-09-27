@@ -1,6 +1,6 @@
 import { Progress } from "@voila.dev/ui/progress";
 
-export function Default() {
+export function ProgressDefault() {
 	return (
 		<div className="flex w-full flex-col gap-6">
 			<Progress.Root value={35}>

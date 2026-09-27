@@ -3,16 +3,7 @@ import { Progress as ProgressPrimitive } from "@base-ui/react/progress";
 import { cn } from "#/lib/utils.ts";
 
 interface Props extends ProgressPrimitive.Root.Props {
-	/**
-	 * Classes for the track — the groove the indicator moves along. This is
-	 * where the height of the bar lives; `className` styles the wrapper that
-	 * holds the label row and the track together.
-	 */
 	trackClassName?: string;
-	/**
-	 * Classes for the filled indicator, for tinting the bar to a role colour
-	 * (`bg-destructive` on a quota that is nearly spent).
-	 */
 	indicatorClassName?: string;
 }
 

@@ -1,7 +1,7 @@
 import { Button } from "@voila.dev/ui/button";
 import { Spinner } from "@voila.dev/ui/spinner";
 
-export function Default() {
+export function SpinnerDefault() {
 	return (
 		<>
 			<Spinner className="size-4" />
