@@ -9,7 +9,6 @@ import {
 	COLUMN_TYPE,
 	COLUMNS_DESKTOP_COUNTS,
 	COLUMNS_MOBILE_COUNTS,
-	COLUMNS_TYPE,
 	type ContentColumnsNode,
 	columnNode,
 	columnsNode,
@@ -22,39 +21,43 @@ import type {
 } from "#/content-editor/features/feature-definition.tsx";
 import { paragraphNode } from "#/content-editor/features/paragraph/reader.tsx";
 import { defineElementFeature } from "#/content-editor/lib/define-element-feature.ts";
-import { insertBlockBelow } from "#/content-editor/lib/insert-block.ts";
 
 /**
- * Inserts a row of two columns with the caret in the first. From inside a
- * column, the row goes after the one the caret is in: a column holds
- * leaves only.
+ * Inserts a row of two columns with the caret in the first. The row never
+ * splits the block the caret is in: it takes the place of an empty line
+ * (the one the slash was typed on), or goes after the top-level block,
+ * which from inside a column is the row around it, since a column holds
+ * leaves only. A line follows the row when nothing else would, for the
+ * caret to leave it for.
  */
 function insertColumns(editor: ContentEditorApi) {
 	const row = freshColumns();
-	const around = editor.api.above({ match: { type: COLUMNS_TYPE } });
-	const block = editor.api.block();
-	if (
-		around === undefined &&
-		block !== undefined &&
-		block[1].length === 1 &&
-		editor.api.isEmpty(block[0])
-	) {
-		// The empty line the slash was typed on stays, under the row, as the
-		// line the caret leaves the row for.
-		editor.tf.insertNodes(row as never, { at: block[1] });
-	} else if (around === undefined) {
-		insertBlockBelow(editor, row);
-	} else {
-		const after = [around[1][0] + 1];
-		editor.tf.insertNodes([row, paragraphNode.createNode()] as never, {
-			at: after,
-		});
-	}
+	const index = editor.selection?.anchor.path[0];
+	const top = index === undefined ? undefined : editor.children[index];
+	const replacesEmptyLine =
+		top !== undefined &&
+		top.type === paragraphNode.type &&
+		editor.api.isEmpty(top);
+	const at = index === undefined ? editor.children.length : index + 1;
+	editor.tf.withoutNormalizing(() => {
+		if (replacesEmptyLine) {
+			editor.tf.insertNodes(row as never, { at: [index as number] });
+		} else {
+			// A row straight against the next leaves no line to type between.
+			const next = editor.children[at];
+			const needsLine = next === undefined || next.type === columnsNode.type;
+			editor.tf.insertNodes(
+				(needsLine ? [row, paragraphNode.createNode()] : [row]) as never,
+				{ at: [at] },
+			);
+		}
+	});
 	const inserted = editor.api.node({ at: [], match: { id: row.id } });
 	const start =
 		inserted === undefined ? undefined : editor.api.start(inserted[1]);
 	if (start !== undefined) {
 		editor.tf.select(start);
+		editor.tf.focus();
 	}
 }
 

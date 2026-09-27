@@ -39,7 +39,10 @@ function EditorUnderTest({
 	const [value, setValue] = useState<ContentValue | null>(initial);
 	return (
 		<ContentEditor.Root features={FEATURES} value={value} onChange={setValue}>
-			<ContentEditor.Canvas />
+			<ContentEditor.Layout>
+				<ContentEditor.Toolbar />
+				<ContentEditor.Canvas />
+			</ContentEditor.Layout>
 			<ContentEditor.Inspector />
 			<ExposeEditor onEditor={onEditor} />
 		</ContentEditor.Root>
@@ -246,6 +249,46 @@ describe("columns", () => {
 			expect(inside).not.toContain("column");
 		}
 		expect(columnTexts(editor)[1]).toBe("Two");
+	});
+
+	it("inserts from the toolbar after the block, never splitting it", async () => {
+		const editor = await mount([p("Intro text")]);
+		editor.tf.select({ path: [0, 0], offset: 5 });
+		await page.getByRole("button", { name: "Insert" }).click();
+		await page.getByRole("menuitem", { name: "Columns" }).click();
+		await expect
+			.poll(() => editor.children.map((node) => node.type))
+			.toEqual(["p", "columns", "p"]);
+		expect(NodeApi.string(editor.children[0] as never)).toBe("Intro text");
+		await expect
+			.poll(() => editor.selection?.anchor.path)
+			.toEqual([1, 0, 0, 0]);
+	});
+
+	it("keeps the blocks around a row out of it on Backspace and Delete", async () => {
+		const editor = await mount([
+			p("Before"),
+			row(2, column(p("One")), column(p("Two"))),
+			p("After"),
+			p(""),
+		]);
+		await caretAt(editor, "Before", true);
+		await userEvent.keyboard("{Delete}");
+		await caretAt(editor, "After");
+		await userEvent.keyboard("{Backspace}");
+		await expect
+			.poll(() => editor.children.map((node) => NodeApi.string(node as never)))
+			.toEqual(["Before", "OneTwo", "After", ""]);
+		editor.tf.removeNodes({ at: [2] });
+		editor.tf.select({ path: [2, 0], offset: 0 });
+		await expect.poll(() => editor.selection?.anchor.path).toEqual([2, 0]);
+		await userEvent.keyboard("{Backspace}");
+		await expect
+			.poll(() => editor.children.map((node) => node.type))
+			.toEqual(["p", "columns"]);
+		await expect
+			.poll(() => editor.selection?.anchor.path)
+			.toEqual([1, 1, 0, 0]);
 	});
 
 	it("stacks into the mobile count when the canvas is narrow", async () => {

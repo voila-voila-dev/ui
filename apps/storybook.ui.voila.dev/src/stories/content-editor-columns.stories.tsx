@@ -77,7 +77,7 @@ function Editor({
 			onChange={setValue}
 			appearance={appearance}
 		>
-			<div className="grid items-start gap-6 md:grid-cols-[minmax(0,1fr)_18rem]">
+			<div className="grid grid-cols-1 items-start gap-6 md:grid-cols-[minmax(0,1fr)_18rem]">
 				<ContentEditor.Layout>
 					<ContentEditor.Toolbar />
 					<ContentEditor.Canvas />

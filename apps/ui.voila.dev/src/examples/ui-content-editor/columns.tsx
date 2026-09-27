@@ -35,7 +35,7 @@ export function Columns() {
 	const [value, setValue] = useState<ContentValue | null>(initial);
 	return (
 		<ContentEditor.Root features={FEATURES} value={value} onChange={setValue}>
-			<div className="grid items-start gap-6 md:grid-cols-[minmax(0,1fr)_18rem]">
+			<div className="grid grid-cols-1 items-start gap-6 md:grid-cols-[minmax(0,1fr)_18rem]">
 				<ContentEditor.Layout>
 					<ContentEditor.Toolbar />
 					<ContentEditor.Canvas />
