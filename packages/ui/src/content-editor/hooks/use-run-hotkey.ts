@@ -2,6 +2,7 @@ import { isHotkey } from "platejs";
 import { useEditorRef } from "platejs/react";
 import type { KeyboardEvent } from "react";
 import { useContentEditorConfig } from "#/content-editor/context/content-editor-context.tsx";
+import { focusInspectorFor } from "#/content-editor/lib/popover-hosts.ts";
 
 /**
  * Does what pressing a toolbar item does when its `hotkey` is pressed: runs
@@ -27,7 +28,9 @@ export function useRunHotkey(): (event: KeyboardEvent) => boolean {
 			return true;
 		}
 		if (item.Popover !== undefined) {
-			popovers.open(item.key);
+			if (!focusInspectorFor(item, editor, popovers)) {
+				popovers.open(item.key);
+			}
 		} else {
 			item.run(editor, { labels, uploadImage });
 		}
