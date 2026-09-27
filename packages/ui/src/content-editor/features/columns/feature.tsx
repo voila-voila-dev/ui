@@ -18,6 +18,7 @@ import {
 import type {
 	ContentEditorApi,
 	ContentSlashItem,
+	ContentToolbarItem,
 } from "#/content-editor/features/feature-definition.tsx";
 import { paragraphNode } from "#/content-editor/features/paragraph/reader.tsx";
 import { defineElementFeature } from "#/content-editor/lib/define-element-feature.ts";
@@ -106,5 +107,5 @@ export const columnsFeature = {
 	nodes: [{ ...columnsNode, createNode: freshColumns }, columnNode] as const,
 	components: { ...defined.components, [COLUMN_TYPE]: ColumnElement },
 	slash: [slashItem],
-	toolbar: [{ ...slashItem, group: "insert" }],
+	toolbar: [{ ...slashItem, group: "insert" } satisfies ContentToolbarItem],
 };

@@ -6,7 +6,10 @@ import {
 	type NodeEntry,
 	type Path,
 	PathApi,
+	type Point,
+	RangeApi,
 	TextApi,
+	type TRange,
 } from "platejs";
 import { createPlatePlugin, type PlateEditor } from "platejs/react";
 import {
@@ -182,6 +185,53 @@ function columnEdge(
 	return atEdge ? column[1] : undefined;
 }
 
+/** A range whose ends sit in different columns, or one in a row and one out. */
+function crossesColumns(editor: PlateEditor, range: TRange): boolean {
+	const [start, end] = RangeApi.edges(range);
+	const holder = (at: Point) =>
+		editor.api
+			.above({ at, match: { type: [COLUMN_TYPE, COLUMNS_TYPE] } })?.[1]
+			?.join(".") ?? null;
+	return holder(start) !== holder(end);
+}
+
+/**
+ * Backspace at the start of the block after a row, or Delete at the end of
+ * the block before one, would merge that block with a column's. An empty
+ * block goes, with the caret put at the row's edge; one with text stays.
+ * True when it handled the key.
+ */
+function stepOverRow(
+	editor: PlateEditor,
+	direction: "backward" | "forward",
+): boolean {
+	const selection = editor.selection;
+	if (selection === null || !editor.api.isCollapsed()) {
+		return false;
+	}
+	const top = selection.anchor.path.slice(0, 1);
+	const index = top[0] ?? 0;
+	const neighbour = direction === "backward" ? index - 1 : index + 1;
+	const atEdge =
+		direction === "backward"
+			? editor.api.isStart(selection.anchor, top)
+			: editor.api.isEnd(selection.anchor, top);
+	if (!atEdge || !isElementOf(editor.children[neighbour], COLUMNS_TYPE)) {
+		return false;
+	}
+	const block = editor.children[index];
+	if (block !== undefined && editor.api.isEmpty(block)) {
+		editor.tf.removeNodes({ at: top });
+		const row = [direction === "backward" ? neighbour : index];
+		const edge =
+			direction === "backward" ? editor.api.end(row) : editor.api.start(row);
+		if (edge !== undefined) {
+			editor.tf.select(edge);
+		}
+	}
+	return true;
+}
+
 /**
  * The row and its columns. The columns are `@platejs/layout`'s column
  * plugin (a container, strict siblings, ⌘A inside one column first); the
@@ -199,8 +249,34 @@ export const columnsPlugins = () => [
 		key: COLUMNS_TYPE,
 		node: { isElement: true, isContainer: true },
 	}).overrideEditor(
-		({ editor, tf: { normalizeNode, deleteBackward, deleteForward } }) => ({
+		({
+			editor,
+			tf: { normalizeNode, deleteBackward, deleteForward, deleteFragment },
+		}) => ({
 			transforms: {
+				// Chrome hands Backspace at a block's start over as a range
+				// across the boundary, which slate-react deletes as a fragment:
+				// the same key, so the same rules.
+				deleteFragment: (options) => {
+					const selection = editor.selection;
+					if (
+						selection !== null &&
+						editor.api.isExpanded() &&
+						editor.api.string(selection) === "" &&
+						crossesColumns(editor, selection)
+					) {
+						const [start, end] = RangeApi.edges(selection);
+						const backward = options?.direction !== "forward";
+						editor.tf.select(backward ? end : start);
+						if (backward) {
+							editor.tf.deleteBackward("character");
+						} else {
+							editor.tf.deleteForward("character");
+						}
+						return;
+					}
+					deleteFragment(options);
+				},
 				normalizeNode: (entry, options) => {
 					if (normalizeColumns(editor, entry)) {
 						return;
@@ -230,10 +306,16 @@ export const columnsPlugins = () => [
 						}
 						return;
 					}
+					if (stepOverRow(editor, "backward")) {
+						return;
+					}
 					deleteBackward(unit);
 				},
 				deleteForward: (unit) => {
-					if (columnEdge(editor, "end") !== undefined) {
+					if (
+						columnEdge(editor, "end") !== undefined ||
+						stepOverRow(editor, "forward")
+					) {
 						return;
 					}
 					deleteForward(unit);

@@ -1,7 +1,7 @@
 import { Card } from "@voila.dev/ui/card";
 import { Skeleton } from "@voila.dev/ui/skeleton";
 
-export function SkeletonDefault() {
+export function Default() {
 	return (
 		<div className="flex items-center gap-4">
 			<Skeleton className="size-10 rounded-full" />
@@ -13,7 +13,7 @@ export function SkeletonDefault() {
 	);
 }
 
-export function SkeletonCard() {
+export function Card() {
 	return (
 		<div role="status" className="w-72">
 			<span className="sr-only">Loading project…</span>

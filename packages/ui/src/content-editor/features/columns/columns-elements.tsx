@@ -20,6 +20,7 @@ import {
 	columnsGridStyle,
 	freshColumn,
 } from "#/content-editor/features/columns/reader.tsx";
+import type { ContentNodeLike } from "#/content-editor/features/content-value.ts";
 import type { ContentElementViewProps } from "#/content-editor/lib/define-element-feature.ts";
 import { cn } from "#/lib/utils.ts";
 
@@ -55,14 +56,16 @@ export function ColumnElement(props: PlateElementProps) {
 	return (
 		<PlateElement
 			{...props}
-			data-slot="content-editor-column"
 			className="min-w-0 rounded-sm px-1.5 py-1 outline-1 outline-border outline-dashed"
 		/>
 	);
 }
 
-const columnText = (column: unknown): string =>
-	NodeApi.string(column as never).trim();
+const columnText = (column: ContentNodeLike): string =>
+	(column.children ?? [])
+		.map((block) => NodeApi.string(block as never).trim())
+		.filter((text) => text !== "")
+		.join(" ");
 
 /**
  * Under the counts, the columns themselves: each named by its first words,
@@ -116,7 +119,7 @@ export function ColumnsInspector({
 			<ol className="flex flex-col gap-1">
 				{columns.map((column, index) => {
 					const position = index + 1;
-					const text = columnText(column);
+					const text = columnText(column as ContentNodeLike);
 					return (
 						<li
 							// A column has no identity of its own the author sees; its

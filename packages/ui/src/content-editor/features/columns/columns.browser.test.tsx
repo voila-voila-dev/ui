@@ -86,6 +86,11 @@ const columnTexts = (editor: ContentEditorApi, index = 0) =>
 		NodeApi.string(child as never),
 	);
 
+const columnAt = (editor: ContentEditorApi, index: number) =>
+	((editor.children[0] as ContentNodeLike).children ?? [])[
+		index
+	] as ContentNodeLike;
+
 async function caretAt(editor: ContentEditorApi, text: string, end = false) {
 	await page
 		.elementLocator(
@@ -161,15 +166,7 @@ describe("columns", () => {
 		await userEvent.keyboard("{Delete}");
 		await expect.poll(() => columnTexts(editor)).toEqual(["One", "Two"]);
 		await userEvent.keyboard("{Enter}");
-		await expect
-			.poll(
-				() =>
-					(
-						(editor.children[0] as ContentNodeLike)
-							.children?.[0] as ContentNodeLike
-					).children?.length,
-			)
-			.toBe(2);
+		await expect.poll(() => columnAt(editor, 0).children?.length).toBe(2);
 		await userEvent.keyboard("{Backspace}");
 		await expect.poll(() => columnTexts(editor)).toEqual(["One", "Two"]);
 		await expect
@@ -210,10 +207,7 @@ describe("columns", () => {
 		await page.getByRole("combobox", { name: "Columns (desktop)" }).click();
 		await page.getByRole("option", { name: "2" }).click();
 		await expect.poll(() => columnTexts(editor)).toEqual(["One", "TwoThree"]);
-		expect(
-			((editor.children[0] as ContentNodeLike).children?.[1] as ContentNodeLike)
-				.children,
-		).toHaveLength(2);
+		expect(columnAt(editor, 1).children).toHaveLength(2);
 		await page.getByRole("combobox", { name: "Columns (mobile)" }).click();
 		await page.getByRole("option", { name: "2" }).click();
 		await expect

@@ -32,7 +32,7 @@ export function SlashInputElement(props: PlateElementProps) {
 					)
 					// What the author typed the name of comes before what only has
 					// it as a keyword: "/columns" is the columns, then the table.
-					.toSorted(
+					.sort(
 						(a, b) =>
 							Number(!a.label.toLowerCase().includes(needle)) -
 							Number(!b.label.toLowerCase().includes(needle)),

@@ -1,7 +1,7 @@
 import { Button } from "@voila.dev/ui/button";
 import { Toaster, toast } from "@voila.dev/ui/sonner";
 
-export function SonnerDefault() {
+export function Default() {
 	return (
 		<>
 			<Toaster />

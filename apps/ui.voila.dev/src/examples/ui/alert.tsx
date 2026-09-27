@@ -7,7 +7,7 @@ import {
 import { Alert } from "@voila.dev/ui/alert";
 import { Button } from "@voila.dev/ui/button";
 
-export function AlertVariants() {
+export function Default() {
 	return (
 		<div className="flex w-full flex-col gap-3">
 			<Alert.Root>
@@ -42,7 +42,7 @@ export function AlertVariants() {
 	);
 }
 
-export function AlertWithAction() {
+export function WithAction() {
 	return (
 		<div className="flex w-full flex-col gap-3">
 			<Alert.Root>
