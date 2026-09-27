@@ -121,7 +121,7 @@ describe("ContentEditor.Inspector", () => {
 			.toBeVisible();
 	});
 
-	it("edits the url of the link the caret sits in", async () => {
+	it("edits the url of the link the caret sits in, and Enter hands the caret back", async () => {
 		render(
 			<EditorUnderTest
 				initial={[
@@ -147,6 +147,10 @@ describe("ContentEditor.Inspector", () => {
 		await expect
 			.poll(() => (nodeAt(0).children[1] as ContentNodeLike).url)
 			.toBe("https://new.example");
+		await userEvent.keyboard("{Enter}");
+		await expect
+			.poll(() => document.activeElement?.getAttribute("data-slot"))
+			.toBe("content-editor-canvas");
 	});
 
 	it("edits an image's alternative text and caption, and the canvas follows", async () => {

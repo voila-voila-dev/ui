@@ -25,9 +25,7 @@ export function VoidFrame({ className, inline = false, children }: Props) {
 			data-selected={(selected && focused) || undefined}
 			className={cn(
 				"select-none rounded-md data-selected:bg-accent/60 data-selected:outline-2 data-selected:outline-offset-2 data-selected:outline-ring",
-				inline
-					? "inline-flex align-baseline"
-					: "flex flex-col gap-1 py-1",
+				inline ? "inline-flex align-baseline" : "flex flex-col gap-1 py-1",
 				className,
 			)}
 		>

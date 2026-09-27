@@ -1,3 +1,4 @@
+import { useEditorRef } from "platejs/react";
 import type * as React from "react";
 import { InspectorField } from "#/content-editor/components/inspector-field.tsx";
 import { useContentEditorConfig } from "#/content-editor/context/content-editor-context.tsx";
@@ -13,6 +14,7 @@ interface Props extends React.ComponentProps<"section"> {}
  * `useInspectedElement()` is not null.
  */
 export function ContentEditorInspector({ className, ...props }: Props) {
+	const editor = useEditorRef();
 	const { labels, readOnly } = useContentEditorConfig();
 	const inspected = useInspectedElement();
 	const name =
@@ -39,6 +41,21 @@ export function ContentEditorInspector({ className, ...props }: Props) {
 					key={inspected.identity}
 					disabled={readOnly}
 					className="flex flex-col gap-4"
+					// Enter in a one-line field, or Escape, hands the caret back to
+					// the text, as closing the link form does.
+					onKeyDown={(event) => {
+						const { target, key } = event;
+						const inField =
+							target instanceof HTMLInputElement ||
+							target instanceof HTMLTextAreaElement;
+						const leaves =
+							key === "Escape" ||
+							(key === "Enter" && target instanceof HTMLInputElement);
+						if (inField && leaves) {
+							event.preventDefault();
+							editor.tf.focus();
+						}
+					}}
 				>
 					{inspected.fields.map((field) => (
 						<InspectorField
