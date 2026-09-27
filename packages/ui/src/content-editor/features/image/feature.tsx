@@ -6,11 +6,11 @@ import type {
 	ContentItemContext,
 } from "#/content-editor/features/feature-definition.tsx";
 import { ImageElement } from "#/content-editor/features/image/image-element.tsx";
+import { queueImageUpload } from "#/content-editor/features/image/pending-uploads.ts";
 import {
 	imageNode,
 	imageReader,
 } from "#/content-editor/features/image/reader.tsx";
-import { queueImageUpload } from "#/content-editor/features/image/pending-uploads.ts";
 import { newContentNodeId } from "#/content-editor/lib/ids.ts";
 import { insertBlockBelow } from "#/content-editor/lib/insert-block.ts";
 
