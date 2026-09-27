@@ -247,4 +247,29 @@ describe("node ids", () => {
 			.toEqual(["center", "left"]);
 		expect(duplicates(elementIds(latest))).toEqual([]);
 	});
+
+	it("keeps the ids it gives a document without them to itself until the author edits", async () => {
+		const onChange = vi.fn();
+		render(
+			<ContentEditor.Root
+				features={FEATURES}
+				value={[{ type: "p", children: [{ text: "Hello" }] }]}
+				onChange={onChange}
+			>
+				<ContentEditor.Canvas />
+			</ContentEditor.Root>,
+		);
+		await page.getByText("Hello").click();
+		await userEvent.keyboard("{End}");
+		await expect
+			.poll(() => window.getSelection()?.anchorOffset)
+			.toBe("Hello".length);
+		expect(onChange).not.toHaveBeenCalled();
+
+		await userEvent.keyboard("!");
+		await expect.poll(() => onChange.mock.calls.length).toBe(1);
+		expect(onChange.mock.calls[0]?.[0]).toMatchObject([
+			{ type: "p", id: expect.any(String), children: [{ text: "Hello!" }] },
+		]);
+	});
 });

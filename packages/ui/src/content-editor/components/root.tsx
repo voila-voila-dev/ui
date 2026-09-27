@@ -158,6 +158,18 @@ export function ContentEditorRoot<Value extends ContentValue = ContentValue>({
 	const popovers = useMemo(createPopoverHosts, []);
 
 	const lastEmitted = useRef<ContentValue | null>(initialValue);
+	// Plate calls `onChange` on a selection change too, with the document it
+	// already held. Seeding gives that document ids the host's value lacks, so
+	// passing it on would re-render the host on the author's first click, and
+	// a render landing while Chromium inserts the first character puts the
+	// caret back where Slate last saw it. Only a new document is an edit.
+	const lastDocument = useRef<{
+		readonly editor: object;
+		document: unknown;
+	} | null>(null);
+	if (lastDocument.current?.editor !== editor) {
+		lastDocument.current = { editor, document: editor.children };
+	}
 	useEffect(() => {
 		if (value === null || value === lastEmitted.current) {
 			return;
@@ -206,6 +218,13 @@ export function ContentEditorRoot<Value extends ContentValue = ContentValue>({
 					editor={editor}
 					readOnly={readOnly}
 					onChange={({ value: next }) => {
+						const seen = lastDocument.current;
+						if (seen !== null && seen.document === next) {
+							return;
+						}
+						if (seen !== null) {
+							seen.document = next;
+						}
 						lastEmitted.current = next as ContentValue;
 						onChange(next as Value);
 					}}
