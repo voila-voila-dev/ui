@@ -22,7 +22,10 @@ import {
 	mergeContentEditorLabels,
 } from "#/content-editor/labels.ts";
 import { emptyContentValue } from "#/content-editor/lib/empty-value.ts";
-import { newContentNodeId } from "#/content-editor/lib/ids.ts";
+import {
+	newContentNodeId,
+	withUniqueNodeIds,
+} from "#/content-editor/lib/ids.ts";
 import { createPopoverHosts } from "#/content-editor/lib/popover-hosts.ts";
 import {
 	type ContentEditorAppearance,
@@ -132,7 +135,10 @@ export function ContentEditorRoot<Value extends ContentValue = ContentValue>({
 	}
 	const registry = previous.current.registry;
 	const initialValue = useMemo(
-		() => (value === null || value.length === 0 ? emptyContentValue() : value),
+		() =>
+			value === null || value.length === 0
+				? emptyContentValue()
+				: withUniqueNodeIds(value, generateNodeId),
 		// Seeds the editor once; later values arrive through the sync effect below.
 		[],
 	);
@@ -140,6 +146,10 @@ export function ContentEditorRoot<Value extends ContentValue = ContentValue>({
 		{
 			plugins: [...registry.plugins],
 			value: initialValue as never,
+			// Plate turns its id plugin off under NODE_ENV=test; on here, a
+			// split, a paste or an insert never repeats an id the document
+			// already holds, in a host's tests as in its build.
+			nodeId: { idCreator: generateNodeId },
 			override: { components: { ...registry.components } },
 		},
 		[registry],
@@ -153,8 +163,8 @@ export function ContentEditorRoot<Value extends ContentValue = ContentValue>({
 			return;
 		}
 		lastEmitted.current = value;
-		editor.tf.setValue(value as never);
-	}, [editor, value]);
+		editor.tf.setValue(withUniqueNodeIds(value, generateNodeId) as never);
+	}, [editor, value, generateNodeId]);
 
 	const config = useMemo<ContentEditorConfigContextValue>(() => {
 		const capabilities = new Set<ContentCapability>();
