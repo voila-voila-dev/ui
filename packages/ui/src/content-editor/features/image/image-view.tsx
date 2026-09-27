@@ -1,8 +1,10 @@
 import { ImageIcon } from "@phosphor-icons/react";
 import { useEditorRef } from "platejs/react";
 import { useEffect, useState } from "react";
+import { PlayOverlay } from "#/content-editor/components/email-card/play-overlay.tsx";
 import { VoidEmpty } from "#/content-editor/components/void-frame.tsx";
 import { useContentEditorConfig } from "#/content-editor/context/content-editor-context.tsx";
+import { useContentEditorTheme } from "#/content-editor/context/theme-context.ts";
 import { takeImageUpload } from "#/content-editor/features/image/pending-uploads.ts";
 import type { ContentImageNode } from "#/content-editor/features/image/reader.tsx";
 import type { ContentElementViewProps } from "#/content-editor/lib/define-element-feature.ts";
@@ -16,6 +18,7 @@ import type { ContentElementViewProps } from "#/content-editor/lib/define-elemen
 export function ImageView({ node }: ContentElementViewProps<ContentImageNode>) {
 	const editor = useEditorRef();
 	const { labels, uploadImage } = useContentEditorConfig();
+	const theme = useContentEditorTheme();
 	const [uploading, setUploading] = useState(false);
 	const [failure, setFailure] = useState<string | null>(null);
 
@@ -51,13 +54,23 @@ export function ImageView({ node }: ContentElementViewProps<ContentImageNode>) {
 	return (
 		<>
 			{node.url ? (
-				<img
-					src={node.url}
-					alt={node.alt ?? node.caption ?? ""}
-					width={node.width}
-					height={node.height}
-					className="h-auto w-full rounded-xl border border-border bg-muted"
-				/>
+				// The email block editor's image view: the theme's share of the
+				// width, and the play badge over a video thumbnail.
+				<div
+					className="relative mx-auto"
+					style={{
+						width: `${theme.imageWidthRatio[node.size ?? "full"] * 100}%`,
+					}}
+				>
+					<img
+						src={node.url}
+						alt={node.alt ?? node.caption ?? ""}
+						width={node.width}
+						height={node.height}
+						className="h-auto w-full rounded-xl border border-border bg-muted"
+					/>
+					{node.overlay === "play" ? <PlayOverlay /> : null}
+				</div>
 			) : (
 				<VoidEmpty>
 					<ImageIcon aria-hidden />

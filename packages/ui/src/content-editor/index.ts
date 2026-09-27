@@ -95,6 +95,11 @@ export {
 	type ContentHighlightNode,
 	highlightReader,
 } from "#/content-editor/features/highlight/reader.tsx";
+export type {
+	ContentImageNode,
+	ContentImageOverlay,
+	ContentImageSize,
+} from "#/content-editor/features/image/reader.tsx";
 export { badgeListFeature } from "#/content-editor/features/list/feature.tsx";
 export type {
 	AnyContentNodeReader,

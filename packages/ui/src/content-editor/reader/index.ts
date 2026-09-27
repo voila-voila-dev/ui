@@ -27,6 +27,11 @@ export {
 	highlightReader,
 } from "#/content-editor/features/highlight/reader.tsx";
 export type {
+	ContentImageNode,
+	ContentImageOverlay,
+	ContentImageSize,
+} from "#/content-editor/features/image/reader.tsx";
+export type {
 	AnyContentNodeReader,
 	ContentFeatureReader,
 	ContentHtmlOptions,

@@ -11,6 +11,7 @@ import {
 	statFeature,
 } from "@voila.dev/ui/content-editor";
 import { useState } from "react";
+import { PORTRAIT_IMAGE } from "../fixtures/portrait-image";
 
 const FEATURES = [
 	...createContentFeatures({ headings: ["h1", "h2"] }),
@@ -242,4 +243,39 @@ export const Stat: Story = {
 export const StatInADocument: Story = {
 	args: noArgs,
 	render: () => <Composer initial={stats} appearance="document" />,
+};
+
+const picture = (
+	size: "full" | "contained",
+	overlay: "none" | "play",
+	href: string,
+	caption: string,
+) => ({
+	type: "image",
+	url: PORTRAIT_IMAGE,
+	alt: "",
+	caption,
+	href,
+	size,
+	overlay,
+	children: text(""),
+});
+
+const images: ContentValue = [
+	picture("full", "none", "", "Full width"),
+	picture("contained", "none", "https://example.com", "Reduced width, linked"),
+	picture("full", "play", "https://example.com/video", "A video thumbnail"),
+	{ type: "image", url: "", children: text("") },
+];
+
+/** Full and reduced width, a linked thumbnail with the play badge, and an empty image. */
+export const Image: Story = {
+	args: noArgs,
+	render: () => <Composer initial={images} />,
+};
+
+/** The images in the document appearance. */
+export const ImageInADocument: Story = {
+	args: noArgs,
+	render: () => <Composer initial={images} appearance="document" />,
 };

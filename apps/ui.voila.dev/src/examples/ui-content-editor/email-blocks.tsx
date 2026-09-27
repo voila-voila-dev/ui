@@ -9,6 +9,7 @@ import {
 	statFeature,
 } from "@voila.dev/ui/content-editor";
 import { useState } from "react";
+import { fakeUploadImage } from "./fixtures";
 
 const FEATURES = [
 	...createContentFeatures({ headings: ["h1", "h2"] }),
@@ -38,6 +39,7 @@ function EmailComposer({ initial }: { readonly initial: ContentValue }) {
 			onChange={setValue}
 			appearance="email"
 			theme={THEME}
+			onUploadImage={fakeUploadImage}
 		>
 			<div className="grid items-start gap-6 md:grid-cols-[minmax(0,1fr)_16rem]">
 				<ContentEditor.Layout>
@@ -176,6 +178,26 @@ export function Stat() {
 					align: "center",
 					children: text(""),
 				},
+			]}
+		/>
+	);
+}
+
+/** A linked video thumbnail with the play badge, at reduced width. */
+export function Image() {
+	return (
+		<EmailComposer
+			initial={[
+				{
+					type: "image",
+					url: "/og.png",
+					alt: "The kit's cover",
+					href: "https://ui.voila.dev",
+					size: "contained",
+					overlay: "play",
+					children: text(""),
+				},
+				{ type: "p", children: text("Click the image to edit it.") },
 			]}
 		/>
 	);
