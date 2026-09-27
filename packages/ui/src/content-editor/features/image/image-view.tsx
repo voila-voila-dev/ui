@@ -52,16 +52,16 @@ export function ImageView({ node }: ContentElementViewProps<ContentImageNode>) {
 	}, [editor, node.id, uploadImage]);
 
 	return (
-		<>
+		// The email block editor's image view: the theme's share of the width
+		// (the caption follows it), and the play badge over a video thumbnail.
+		<div
+			className="mx-auto flex flex-col gap-1"
+			style={{
+				width: `${theme.imageWidthRatio[node.size ?? "full"] * 100}%`,
+			}}
+		>
 			{node.url ? (
-				// The email block editor's image view: the theme's share of the
-				// width, and the play badge over a video thumbnail.
-				<div
-					className="relative mx-auto"
-					style={{
-						width: `${theme.imageWidthRatio[node.size ?? "full"] * 100}%`,
-					}}
-				>
+				<div className="relative">
 					<img
 						src={node.url}
 						alt={node.alt ?? node.caption ?? ""}
@@ -87,6 +87,6 @@ export function ImageView({ node }: ContentElementViewProps<ContentImageNode>) {
 					{node.caption}
 				</figcaption>
 			) : null}
-		</>
+		</div>
 	);
 }

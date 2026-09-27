@@ -84,30 +84,29 @@ export const imageNode: ContentNodeReader<ContentImageNode> = {
 			<figure
 				id={options.idFor?.(node) ?? node.id}
 				className={options.classNameFor?.("image") ?? "flex flex-col gap-1"}
+				style={
+					node.size === "contained"
+						? {
+								width: `${CONTAINED_IMAGE_RATIO * 100}%`,
+								marginInline: "auto",
+							}
+						: undefined
+				}
 			>
-				{node.size === "contained" || node.overlay === "play" ? (
-					<div
-						className="relative mx-auto w-full"
-						style={
-							node.size === "contained"
-								? { width: `${CONTAINED_IMAGE_RATIO * 100}%` }
-								: undefined
-						}
-					>
+				{node.overlay === "play" ? (
+					<div className="relative">
 						{linked}
-						{node.overlay === "play" ? (
-							<span
-								aria-hidden
-								className="-translate-x-1/2 -translate-y-1/2 pointer-events-none absolute top-1/2 left-1/2 flex size-14 items-center justify-center rounded-full bg-primary"
+						<span
+							aria-hidden
+							className="-translate-x-1/2 -translate-y-1/2 pointer-events-none absolute top-1/2 left-1/2 flex size-14 items-center justify-center rounded-full bg-primary"
+						>
+							<svg
+								viewBox="0 0 24 24"
+								className="size-6 fill-primary-foreground"
 							>
-								<svg
-									viewBox="0 0 24 24"
-									className="size-6 fill-primary-foreground"
-								>
-									<path d="M8 5v14l11-7z" />
-								</svg>
-							</span>
-						) : null}
+								<path d="M8 5v14l11-7z" />
+							</svg>
+						</span>
 					</div>
 				) : (
 					linked

@@ -65,9 +65,9 @@ describe("image email options", () => {
 				size: "contained",
 				overlay: "play",
 			});
-		const frame = img.parentElement as HTMLElement;
+		const frame = img.parentElement?.parentElement as HTMLElement;
 		await expect.poll(() => frame.style.width).toBe("60%");
-		expect(frame.querySelector("svg")).not.toBeNull();
+		expect(img.parentElement?.querySelector("svg")).not.toBeNull();
 		expect(contentToHtml(latest, { features: FEATURES })).toContain(
 			'style="width:60%;margin-inline:auto" data-overlay="play"><a href="https://example.com/video"><img src="data:image/png',
 		);

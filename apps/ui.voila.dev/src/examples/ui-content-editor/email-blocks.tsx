@@ -41,7 +41,7 @@ function EmailComposer({ initial }: { readonly initial: ContentValue }) {
 			theme={THEME}
 			onUploadImage={fakeUploadImage}
 		>
-			<div className="grid items-start gap-6 md:grid-cols-[minmax(0,1fr)_16rem]">
+			<div className="grid grid-cols-1 items-start gap-6 md:grid-cols-[minmax(0,1fr)_16rem]">
 				<ContentEditor.Layout>
 					<ContentEditor.Toolbar />
 					<ContentEditor.Canvas />

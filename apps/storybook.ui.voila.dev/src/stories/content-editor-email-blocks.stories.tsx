@@ -61,7 +61,7 @@ function Composer({
 			theme={BRAND_THEME}
 			onUploadImage={async (file) => ({ url: URL.createObjectURL(file) })}
 		>
-			<div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+			<div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
 				<ContentEditor.Layout>
 					<ContentEditor.Toolbar />
 					<ContentEditor.Canvas />
