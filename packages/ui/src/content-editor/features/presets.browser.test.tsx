@@ -34,16 +34,18 @@ function ExposeEditor({
 	return null;
 }
 
+const EMPTY: ContentValue = [{ type: "p", children: [{ text: "" }] }];
+
 function EditorUnderTest({
 	features,
+	initial = EMPTY,
 	onEditor,
 }: {
 	readonly features: ReadonlyArray<ContentFeature>;
+	readonly initial?: ContentValue;
 	readonly onEditor: (editor: ContentEditorApi) => void;
 }) {
-	const [value, setValue] = useState<ContentValue | null>([
-		{ type: "p", children: [{ text: "" }] },
-	]);
+	const [value, setValue] = useState<ContentValue | null>(initial);
 	return (
 		<ContentEditor.Root features={features} value={value} onChange={setValue}>
 			<ContentEditor.Canvas />
@@ -54,11 +56,13 @@ function EditorUnderTest({
 
 async function mount(
 	features: ReadonlyArray<ContentFeature>,
+	initial?: ContentValue,
 ): Promise<ContentEditorApi> {
 	let mounted: ContentEditorApi | undefined;
 	render(
 		<EditorUnderTest
 			features={features}
+			initial={initial}
 			onEditor={(editor) => {
 				mounted = editor;
 			}}
@@ -187,6 +191,11 @@ describe.each(presets)("the %s preset", (_name, features) => {
 		for (const word of ["Planning", "Monday", "Anna", "deep", "Quoted"]) {
 			expect(text).toContain(word);
 		}
+		// Each cell is a line of its own, never run into its neighbours.
+		const lines = [...editor.api.nodes({ at: [], match: { type: "p" } })].map(
+			([node]) => NodeApi.string(node),
+		);
+		expect(lines).toEqual(expect.arrayContaining(["Monday", "Anna"]));
 		const present = typesIn(editor.children as unknown as ContentValue);
 		expect([...present].filter((type) => !allowed.has(type))).toEqual([]);
 	});
@@ -207,6 +216,33 @@ describe.each(presets)("the %s preset", (_name, features) => {
 		const present = typesIn(editor.children as unknown as ContentValue);
 		expect([...present].filter((type) => !allowed.has(type))).toEqual([]);
 		expect(present.has("youtube")).toBe(false);
+	});
+});
+
+describe("a stored value", () => {
+	it("is normalized as it loads: foreign nodes unwrapped, badge items numbered", async () => {
+		const editor = await mount(createEmailFeatures(), [
+			...FOREIGN_FRAGMENT,
+			...["One", "Two", "Three"].map((step) => ({
+				type: "p",
+				listStyleType: "badge",
+				indent: 1,
+				children: [{ text: step }],
+			})),
+		]);
+		const present = typesIn(editor.children as unknown as ContentValue);
+		expect(present.has("callout")).toBe(false);
+		expect(present.has("youtube")).toBe(false);
+		expect(present.has("h3")).toBe(false);
+		await expect
+			.poll(() =>
+				[
+					...document.querySelectorAll(
+						"[data-list-style=badge] span[aria-hidden]",
+					),
+				].map((badge) => badge.textContent),
+			)
+			.toEqual(["1", "2", "3"]);
 	});
 });
 

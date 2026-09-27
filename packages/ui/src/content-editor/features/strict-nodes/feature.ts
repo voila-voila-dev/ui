@@ -16,6 +16,9 @@ interface KnownNodes {
 
 const known = new WeakMap<PlateEditor, KnownNodes>();
 
+/** A pasted table cell, in an editor without tables: a block of its own. */
+const LOOSE_CELL = "strict-loose-cell";
+
 /** What this editor's plugins declare, read once: the plugins never change. */
 function knownNodes(editor: PlateEditor): KnownNodes {
 	const cached = known.get(editor);
@@ -26,7 +29,10 @@ function knownNodes(editor: PlateEditor): KnownNodes {
 	const entry = {
 		elements: new Set(
 			plugins
-				.filter((plugin) => plugin.node.isElement === true)
+				.filter(
+					(plugin) =>
+						plugin.node.isElement === true && plugin.node.type !== LOOSE_CELL,
+				)
 				.map((plugin) => plugin.node.type),
 		),
 		marks: new Set(
@@ -124,6 +130,24 @@ const StrictNodesPlugin = createPlatePlugin({
 }));
 
 /**
+ * Without a table plugin, Plate's HTML paste flattens a table into one line,
+ * its cells run together ("DayCoachMondayAnna"). Each cell comes in as a
+ * block instead, which the normalizer then turns into a line of its own.
+ */
+const LooseCellPlugin = createPlatePlugin({
+	key: LOOSE_CELL,
+	node: { isElement: true },
+	parsers: {
+		html: {
+			deserializer: {
+				rules: [{ validNodeName: ["TD", "TH"] }],
+				query: ({ editor }) => editor.plugins.td === undefined,
+			},
+		},
+	},
+});
+
+/**
  * Keeps a document to the node set its features declare, whatever arrives:
  * a paste from Word or from another editor, a value set by the host. A
  * table pasted into a mail without `emailTableFeature` becomes its cells'
@@ -133,6 +157,6 @@ const StrictNodesPlugin = createPlatePlugin({
  */
 export const strictNodesFeature: ContentFeature = {
 	key: "strict-nodes",
-	plugins: () => [StrictNodesPlugin],
+	plugins: () => [LooseCellPlugin, StrictNodesPlugin],
 	allowIn: () => true,
 };
