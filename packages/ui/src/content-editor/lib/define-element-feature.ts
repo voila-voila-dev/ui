@@ -114,6 +114,11 @@ export function defineElementFeature<Node extends ContentNodeLike>(
 			editor.tf.insertNodes(fresh as never, { select: true });
 			return;
 		}
+		// A text element keeps what the author already typed, as a heading does.
+		if (kind === "text" && editor.selection !== null) {
+			editor.tf.setNodes({ type: node.type, ...defaults } as never);
+			return;
+		}
 		insertBlockBelow(editor, fresh);
 		// A void is filled in from the inspector, so it is what the author
 		// wants selected next, not the paragraph under it.
@@ -146,6 +151,14 @@ export function defineElementFeature<Node extends ContentNodeLike>(
 								isVoid: kind === "void",
 								isInline: inline,
 							},
+							// Enter after a highlight starts a paragraph, not a second highlight.
+							rules:
+								kind === "text"
+									? {
+											break: { splitReset: true, empty: "reset" },
+											delete: { start: "reset" },
+										}
+									: undefined,
 						}),
 					];
 		},

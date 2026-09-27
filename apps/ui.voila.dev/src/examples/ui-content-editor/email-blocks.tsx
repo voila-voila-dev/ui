@@ -3,12 +3,14 @@ import {
 	ContentEditor,
 	type ContentValue,
 	createContentFeatures,
+	highlightFeature,
 } from "@voila.dev/ui/content-editor";
 import { useState } from "react";
 
 const FEATURES = [
 	...createContentFeatures({ headings: ["h1", "h2"] }),
 	badgeListFeature,
+	highlightFeature,
 ];
 
 const THEME = {
@@ -84,6 +86,22 @@ export function BadgeList() {
 					listStart: 3,
 					children: text("Show up on Saturday"),
 				},
+			]}
+		/>
+	);
+}
+
+/** A promo line: click it and change its alignment in the inspector. */
+export function Highlight() {
+	return (
+		<EmailComposer
+			initial={[
+				{
+					type: "highlight",
+					align: "center",
+					children: text("10% off everything with the code LAUNCH10"),
+				},
+				{ type: "p", children: text("Valid until Sunday.") },
 			]}
 		/>
 	);

@@ -13,6 +13,10 @@ export type {
 	ContentValue,
 } from "#/content-editor/features/content-value.ts";
 export { isContentText } from "#/content-editor/features/content-value.ts";
+export {
+	type ContentHighlightNode,
+	highlightReader,
+} from "#/content-editor/features/highlight/reader.tsx";
 export type {
 	AnyContentNodeReader,
 	ContentFeatureReader,

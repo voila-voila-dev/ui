@@ -5,12 +5,14 @@ import {
 	type ContentEditorAppearance,
 	type ContentValue,
 	createContentFeatures,
+	highlightFeature,
 } from "@voila.dev/ui/content-editor";
 import { useState } from "react";
 
 const FEATURES = [
 	...createContentFeatures({ headings: ["h1", "h2"] }),
 	badgeListFeature,
+	highlightFeature,
 ];
 
 const BRAND_THEME = {
@@ -123,4 +125,27 @@ export const BadgeList: Story = {
 export const BadgeListInADocument: Story = {
 	args: noArgs,
 	render: () => <Composer initial={lists} appearance="document" />,
+};
+
+const highlights: ContentValue = [
+	{
+		type: "highlight",
+		align: "center",
+		children: text("10% off everything with the code LAUNCH10"),
+	},
+	{ type: "highlight", align: "left", children: text("Aligned left") },
+	{ type: "highlight", align: "right", children: text("Aligned right") },
+	{ type: "p", children: text("Type /highlight to turn a line into one.") },
+];
+
+/** A highlight in each alignment. */
+export const Highlight: Story = {
+	args: noArgs,
+	render: () => <Composer initial={highlights} />,
+};
+
+/** The highlights in the document appearance. */
+export const HighlightInADocument: Story = {
+	args: noArgs,
+	render: () => <Composer initial={highlights} appearance="document" />,
 };

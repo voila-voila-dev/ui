@@ -79,6 +79,11 @@ export type {
 	ContentTextField,
 	ContentUrlField,
 } from "#/content-editor/features/field-definition.ts";
+export { highlightFeature } from "#/content-editor/features/highlight/feature.tsx";
+export {
+	type ContentHighlightNode,
+	highlightReader,
+} from "#/content-editor/features/highlight/reader.tsx";
 export { badgeListFeature } from "#/content-editor/features/list/feature.tsx";
 export type {
 	AnyContentNodeReader,
