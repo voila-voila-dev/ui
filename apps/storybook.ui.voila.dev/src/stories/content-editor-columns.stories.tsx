@@ -89,19 +89,30 @@ function Editor({
 	);
 }
 
+/** The stories render their own editor; these only satisfy the root's props. */
+const noArgs = {
+	features: FEATURES,
+	value: oneToFour,
+	onChange: () => {},
+	children: null,
+};
+
 /** Rows of one to four columns. Click in one to set its counts, add,
  * remove or reorder its columns in the inspector. */
 export const OneToFour: Story = {
+	args: noArgs,
 	render: () => <Editor initial={oneToFour} />,
 };
 
 /** On a phone the columns stack into the mobile count. */
 export const Mobile: Story = {
+	args: noArgs,
 	parameters: { viewport: { defaultViewport: "mobile1" } },
 	render: () => <Editor initial={twoOnMobile} />,
 };
 
 /** In the email card, as the recipient reads it. */
 export const Email: Story = {
+	args: noArgs,
 	render: () => <Editor initial={twoOnMobile} appearance="email" />,
 };
