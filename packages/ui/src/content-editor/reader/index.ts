@@ -44,6 +44,10 @@ export {
 	createContentReaderRegistry,
 } from "#/content-editor/features/reader-registry.ts";
 export {
+	type ContentStatNode,
+	statReader,
+} from "#/content-editor/features/stat/reader.tsx";
+export {
 	type ContentVariableNode,
 	variablePlaceholder,
 	variableReader,

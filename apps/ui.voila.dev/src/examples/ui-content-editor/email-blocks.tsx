@@ -6,6 +6,7 @@ import {
 	createContentFeatures,
 	finePrintFeature,
 	highlightFeature,
+	statFeature,
 } from "@voila.dev/ui/content-editor";
 import { useState } from "react";
 
@@ -15,6 +16,7 @@ const FEATURES = [
 	highlightFeature,
 	finePrintFeature,
 	buttonFeature,
+	statFeature,
 ];
 
 const THEME = {
@@ -153,6 +155,24 @@ export function Button() {
 					label: "See the schedule",
 					href: "https://example.com/schedule",
 					variant: "secondary",
+					align: "center",
+					children: text(""),
+				},
+			]}
+		/>
+	);
+}
+
+/** A key figure: click it to edit it. */
+export function Stat() {
+	return (
+		<EmailComposer
+			initial={[
+				{
+					type: "stat",
+					value: "128",
+					label: "Projects delivered",
+					description: "Since the club opened in 2019.",
 					align: "center",
 					children: text(""),
 				},

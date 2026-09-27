@@ -117,6 +117,11 @@ export {
 	type ContentRegistry,
 	createContentRegistry,
 } from "#/content-editor/features/registry.ts";
+export { statFeature } from "#/content-editor/features/stat/feature.tsx";
+export {
+	type ContentStatNode,
+	statReader,
+} from "#/content-editor/features/stat/reader.tsx";
 export { variableFeature } from "#/content-editor/features/variable/feature.tsx";
 export {
 	type ContentVariableNode,

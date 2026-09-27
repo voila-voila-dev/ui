@@ -8,6 +8,7 @@ import {
 	createContentFeatures,
 	finePrintFeature,
 	highlightFeature,
+	statFeature,
 } from "@voila.dev/ui/content-editor";
 import { useState } from "react";
 
@@ -17,6 +18,7 @@ const FEATURES = [
 	highlightFeature,
 	finePrintFeature,
 	buttonFeature,
+	statFeature,
 ];
 
 const BRAND_THEME = {
@@ -214,4 +216,30 @@ export const Button: Story = {
 export const ButtonInADocument: Story = {
 	args: noArgs,
 	render: () => <Composer initial={buttons} appearance="document" />,
+};
+
+const stat = (
+	value: string,
+	label: string,
+	description: string,
+	align: "left" | "center" | "right",
+) => ({ type: "stat", value, label, description, align, children: text("") });
+
+const stats: ContentValue = [
+	stat("128", "Projects delivered", "Since the club opened in 2019.", "center"),
+	stat("4.9", "Average rating", "", "left"),
+	stat("12", "Coaches", "All certified.", "right"),
+	stat("", "", "", "center"),
+];
+
+/** A figure in each alignment, one without a description, and an empty one. */
+export const Stat: Story = {
+	args: noArgs,
+	render: () => <Composer initial={stats} />,
+};
+
+/** The figures in the document appearance. */
+export const StatInADocument: Story = {
+	args: noArgs,
+	render: () => <Composer initial={stats} appearance="document" />,
 };
