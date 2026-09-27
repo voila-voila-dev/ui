@@ -65,6 +65,9 @@ export function ContentEditorInspector({ className, ...props }: Props) {
 							onChange={(value) => inspected.set(field.key, value)}
 						/>
 					))}
+					{inspected.section === undefined ? null : (
+						<inspected.section node={inspected.node} />
+					)}
 				</fieldset>
 			)}
 		</section>
