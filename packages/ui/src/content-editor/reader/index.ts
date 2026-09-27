@@ -86,6 +86,11 @@ export {
 	isEmailTable,
 } from "#/content-editor/features/table/reader.tsx";
 export {
+	CONTENT_MARKS,
+	type ContentMark,
+	type ContentTextMarks,
+} from "#/content-editor/features/text-marks/reader.tsx";
+export {
 	type ContentVariableNode,
 	variablePlaceholder,
 	variableReader,
@@ -102,7 +107,12 @@ export {
 } from "#/content-editor/reader/content-to-html.ts";
 export { escapeHtml } from "#/content-editor/reader/escape-html.ts";
 export {
+	type ContentCorrespondenceOptions,
+	type ContentEmailOptions,
 	type ContentEmbed,
 	type ContentReadersOptions,
 	createContentReaders,
+	createCorrespondenceReaders,
+	createEmailReaders,
+	EMAIL_MARKS,
 } from "#/content-editor/reader/readers.ts";
