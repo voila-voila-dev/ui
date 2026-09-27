@@ -101,6 +101,7 @@ export const imageNode: ContentNodeReader<ContentImageNode> = {
 							className="-translate-x-1/2 -translate-y-1/2 pointer-events-none absolute top-1/2 left-1/2 flex size-14 items-center justify-center rounded-full bg-primary"
 						>
 							<svg
+								aria-hidden="true"
 								viewBox="0 0 24 24"
 								className="size-6 fill-primary-foreground"
 							>
