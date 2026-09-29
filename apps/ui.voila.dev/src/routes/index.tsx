@@ -273,9 +273,9 @@ function Home() {
 						</SectionIntro.Title>
 						<SectionIntro.Description>
 							Stop paying rent for your own email templates. Drop the content
-							editor into your app, let your users write emails, render the
-							same document server-side. This one is live: click a block to
-							edit it on the side, type / for another.
+							editor into your app, let your users write emails, render the same
+							document server-side. This one is live: click a block to edit it
+							on the side, type / for another.
 						</SectionIntro.Description>
 					</SectionIntro.Root>
 					<div className="mx-auto mt-10 max-w-5xl">
