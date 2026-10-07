@@ -27,6 +27,7 @@ export {
 export { type RuleOptions, ruleX, ruleY } from "#/core/marks/rule.ts";
 export type { ChartMarkOptions } from "#/core/marks/shared.ts";
 export { type TextOptions, text } from "#/core/marks/text.ts";
+export { easeOutCubic, tweenScene } from "#/core/motion/tween.ts";
 export {
 	type ChartFocusStop,
 	findNearest,
