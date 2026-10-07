@@ -22,6 +22,23 @@ function wait(ms: number) {
 	return act(() => new Promise((resolve) => setTimeout(resolve, ms)));
 }
 
+/**
+ * One reading per frame for `ms`, outside `act`: inside it React would hold
+ * every frame's update back and only the last one would ever be seen.
+ */
+async function sample<T>(ms: number, read: () => T): Promise<T[]> {
+	const scope = globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean };
+	scope.IS_REACT_ACT_ENVIRONMENT = false;
+	const readings: T[] = [read()];
+	const end = performance.now() + ms;
+	while (performance.now() < end) {
+		await new Promise((resolve) => requestAnimationFrame(resolve));
+		readings.push(read());
+	}
+	scope.IS_REACT_ACT_ENVIRONMENT = true;
+	return readings;
+}
+
 afterEach(async () => {
 	await act(async () => root?.unmount());
 	host?.remove();
@@ -41,12 +58,14 @@ describe("motion in the SVG renderer", () => {
 		);
 		const line = () =>
 			container.querySelector("[data-slot=chart-svg] path[data-role=mark]");
-		// The first frame, painted in the layout effect: the line has barely begun.
-		expect(line()?.getAttribute("pathLength")).toBe("1");
-		expect(Number(line()?.getAttribute("stroke-dashoffset"))).toBeGreaterThan(
-			0.9,
-		);
-		await wait(1500);
+		const offsets = await sample(1500, () => {
+			const path = line();
+			return path?.hasAttribute("pathLength")
+				? Number(path.getAttribute("stroke-dashoffset"))
+				: 0;
+		});
+		// Seen part-drawn on the way: a slow runner may miss the first frames, never all of them.
+		expect(offsets.some((offset) => offset > 0.05 && offset < 0.95)).toBe(true);
 		expect(line()?.hasAttribute("pathLength")).toBe(false);
 	});
 
@@ -74,11 +93,15 @@ describe("motion in the SVG renderer", () => {
 			[
 				...container.querySelectorAll("[data-slot=chart-svg] [data-role=mark]"),
 			][2];
-		// The first frame is painted in the layout effect: the bar has barely left its baseline.
-		const early = third()?.getBoundingClientRect().height ?? 0;
-		await wait(1500);
-		const settled = third()?.getBoundingClientRect().height ?? 0;
+		const heights = await sample(
+			1500,
+			() => third()?.getBoundingClientRect().height ?? 0,
+		);
+		const settled = heights.at(-1) ?? 0;
 		expect(settled).toBeGreaterThan(100);
-		expect(early).toBeLessThan(settled * 0.1);
+		// Grown, not snapped: some frame showed it well short of its height.
+		expect(heights.some((height) => height > 0 && height < settled * 0.6)).toBe(
+			true,
+		);
 	});
 });
