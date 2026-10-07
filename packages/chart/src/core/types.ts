@@ -152,6 +152,13 @@ export interface ScenePath extends SceneNodeBase {
 	/** What the shape means, when it has a simple meaning: motion moves that, then redraws `d`. */
 	readonly geometry?: SceneGeometry;
 	readonly paint: ChartPaint;
+	/**
+	 * How an update moves this outline into a new one whose commands differ:
+	 * a country, a contour, a cell. Set by the marks whose shapes have no
+	 * simpler meaning, so the morph only loads with them; without it, paths
+	 * whose commands differ swap at the end.
+	 */
+	readonly morph?: PathMorpher;
 }
 
 /** A point of a line, an area or a radar, keyed by its position so an update can slide it. */
@@ -181,6 +188,12 @@ export type SceneGeometry =
 			readonly startAngle: number;
 			readonly endAngle: number;
 	  };
+
+/** The outlines between two paths, 0 at `from` and 1 at `to`. */
+export type PathMorpher = (
+	from: string,
+	to: string,
+) => (progress: number) => string;
 
 export interface SceneCircle extends SceneNodeBase {
 	readonly kind: "circle";

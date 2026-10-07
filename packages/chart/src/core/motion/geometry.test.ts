@@ -258,3 +258,28 @@ describe("draw", () => {
 		expect(createMotionStore(scene, spring).introduce(0)).toBe(false);
 	});
 });
+
+describe("geometry and colour together", () => {
+	it("moves a slice's angles and mixes its new fill on the same frames", () => {
+		const pie = (fill: string, values: number[]) =>
+			arc(
+				values.map((value, index) => ({ kind: `k${index}`, value })),
+				{ category: "kind", value: "value", id: "pie", padAngle: 0, fill },
+			);
+		const all = frames(
+			compile([pie("var(--chart-1)", [10, 90])]),
+			compile([pie("var(--chart-2)", [90, 10])]),
+		);
+		const middle = marks<ScenePath>(
+			all[Math.floor(all.length / 4)] as ChartScene,
+		)[0];
+		expect(middle?.paint.fill).toMatch(
+			/^color-mix\(in oklab, var\(--chart-2\)/,
+		);
+		const angle = (
+			(middle as ScenePath).geometry as Extract<SceneGeometry, { kind: "arc" }>
+		).endAngle;
+		expect(angle).toBeGreaterThan(36);
+		expect(angle).toBeLessThan(324);
+	});
+});
