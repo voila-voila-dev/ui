@@ -84,12 +84,18 @@ describe("motion in the SVG renderer", () => {
 			});
 		}
 		const container = await mount(
-			<Chart ariaLabel="Clubs" definition={bars([10, 20])} />,
+			<Chart ariaLabel="Clubs" animate={1500} definition={bars([10, 20])} />,
 		);
 		// The width is measured after mount; a resize snaps, so let it land first.
 		await wait(100);
 		await act(async () =>
-			root?.render(<Chart ariaLabel="Clubs" definition={bars([10, 20, 30])} />),
+			root?.render(
+				<Chart
+					ariaLabel="Clubs"
+					animate={1500}
+					definition={bars([10, 20, 30])}
+				/>,
+			),
 		);
 		const third = () =>
 			[

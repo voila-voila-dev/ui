@@ -101,6 +101,9 @@ const LOW = [10, 20, 30, 40, 50];
 const HIGH = [90, 80, 70, 60, 50];
 const MIDDLE = [40, 60, 20, 80, 30];
 
+/** Slow enough that a frame dropped on a busy runner moves a bar by a small part of its travel. */
+const SLOW = 1500;
+
 /** Sample every frame the renderer is handed through an update interrupted by another. */
 async function interruptedFrames(
 	renderer: "svg" | "canvas",
@@ -114,7 +117,7 @@ async function interruptedFrames(
 		<Chart
 			definition={bars(LOW)}
 			ariaLabel="Clubs"
-			animate={400}
+			animate={SLOW}
 			renderer={renderer === "canvas" ? Recording : undefined}
 		/>,
 	);
@@ -135,20 +138,20 @@ async function interruptedFrames(
 		<Chart
 			definition={bars(HIGH)}
 			ariaLabel="Clubs"
-			animate={400}
+			animate={SLOW}
 			renderer={renderer === "canvas" ? Recording : undefined}
 		/>,
 	);
-	await watch(100);
+	await watch(300);
 	await update(
 		<Chart
 			definition={bars(MIDDLE)}
 			ariaLabel="Clubs"
-			animate={400}
+			animate={SLOW}
 			renderer={renderer === "canvas" ? Recording : undefined}
 		/>,
 	);
-	await watch(1200);
+	await watch(4000);
 	sampling = false;
 	const frames =
 		renderer === "svg" ? svgFrames : scenes.slice(start).map(heights);
@@ -163,7 +166,7 @@ describe("an update interrupted by another", () => {
 			expect(frames.length).toBeGreaterThan(20);
 			expect(travel).toBeGreaterThan(0);
 			// A restart from the old start or a snap to the target moves a bar by most of its travel at once;
-			// at full speed a spring covers about a sixth of it per frame, a third when a frame is dropped.
+			// at 1.5 s a spring covers a few percent of it per frame, still well under a third with dropped frames.
 			expect(largestStep(frames)).toBeLessThan(travel * 0.35);
 		});
 	}
