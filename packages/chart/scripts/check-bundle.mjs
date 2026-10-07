@@ -18,12 +18,12 @@ const BUDGETS = {
 	canvas: 21_100,
 	polar: 21_100,
 	stats: 25_100,
-	contour: 22_100,
-	voronoi: 26_100,
+	contour: 26_900,
+	voronoi: 30_900,
 	hierarchy: 22_600,
 	sankey: 22_100,
 	force: 25_100,
-	geo: 29_600,
+	geo: 34_400,
 	brush: 20_600,
 };
 

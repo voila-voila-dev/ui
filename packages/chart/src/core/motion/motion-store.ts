@@ -1,6 +1,17 @@
 import { type Generator, spring, tween } from "@voila.dev/motion";
+import {
+	type LeavingGuide,
+	leavingGuides,
+	withLeaving,
+} from "#/core/motion/leaving.ts";
+import {
+	STRING_CHANNELS,
+	type StringChannel,
+	stringMixer,
+	stringOf,
+	withStrings,
+} from "#/core/motion/strings.ts";
 import { type ChartTiming, staggerDelay } from "#/core/motion/timing.ts";
-import { tweenPath } from "#/core/motion/tween.ts";
 import type { ChartScene, SceneNode } from "#/core/types.ts";
 
 /**
@@ -25,9 +36,13 @@ interface Motion {
 	readonly start: number;
 }
 
-interface PathMotion extends Motion {
-	readonly from: string;
-	readonly to: string;
+/** A path or a colour: a progress from 0 to 1, and the mix it reads. */
+interface StringMotion extends Motion {
+	readonly mix: (progress: number) => string;
+}
+
+interface LeavingMotion extends Motion {
+	readonly guide: LeavingGuide;
 }
 
 type Numeric = Record<string, number>;
@@ -72,7 +87,8 @@ export function createMotionStore(
 ): MotionStore {
 	let target = initial;
 	const numbers = new Map<string, Motion>();
-	const paths = new Map<string, PathMotion>();
+	const strings = new Map<string, StringMotion>();
+	const leaving = new Map<string, LeavingMotion>();
 
 	function generator(from: number, to: number, velocity: number): Generator {
 		return timing.type === "spring"
@@ -90,14 +106,9 @@ export function createMotionStore(
 				});
 	}
 
-	function pathNow(key: string, fallback: string | undefined, now: number) {
-		const motion = paths.get(key);
-		if (!motion) return fallback;
-		return tweenPath(
-			motion.from,
-			motion.to,
-			motion.generator.at(elapsed(motion, now)).value,
-		);
+	function stringNow(key: string, now: number): string | undefined {
+		const motion = strings.get(key);
+		return motion?.mix(motion.generator.at(elapsed(motion, now)).value);
 	}
 
 	function moveNode(
@@ -120,21 +131,17 @@ export function createMotionStore(
 				start,
 			});
 		}
-		if (node.kind === "path") {
-			const from = pathNow(
-				node.key,
-				before?.kind === "path" ? before.d : undefined,
-				now,
-			);
-			paths.delete(node.key);
-			if (from !== undefined && from !== node.d) {
-				paths.set(node.key, {
-					generator: generator(0, 1, 0),
-					start,
-					from,
-					to: node.d,
-				});
-			}
+		for (const channel of STRING_CHANNELS) {
+			const key = channelKey(node.key, channel);
+			const from = stringNow(key, now) ?? stringOf(before, channel);
+			const to = stringOf(node, channel);
+			strings.delete(key);
+			if (from === undefined || to === undefined || from === to) continue;
+			strings.set(key, {
+				generator: generator(0, 1, 0),
+				start,
+				mix: stringMixer(node, channel, from, to),
+			});
 		}
 		const fading = channelKey(node.key, OPACITY);
 		const fade = numbers.get(fading);
@@ -148,7 +155,11 @@ export function createMotionStore(
 		if (node.kind === "group") {
 			return {
 				...node,
-				children: node.children.map((child) => paint(child, now)),
+				children: withLeaving(
+					node.children.map((child) => paint(child, now)),
+					node.key,
+					fading(now),
+				),
 			};
 		}
 		const moved: Numeric = {};
@@ -157,13 +168,13 @@ export function createMotionStore(
 			if (!motion) continue;
 			moved[channel] = motion.generator.at(elapsed(motion, now)).value;
 		}
-		const d = node.kind === "path" ? pathNow(node.key, node.d, now) : undefined;
+		const mixed: Partial<Record<StringChannel, string>> = {};
+		for (const channel of STRING_CHANNELS) {
+			const value = stringNow(channelKey(node.key, channel), now);
+			if (value !== undefined) mixed[channel] = value;
+		}
 		const { [OPACITY]: opacity, ...geometry } = moved;
-		const next = {
-			...node,
-			...geometry,
-			...(d === undefined ? {} : { d }),
-		} as SceneNode;
+		const next = withStrings({ ...node, ...geometry } as SceneNode, mixed);
 		if (opacity === undefined) return next;
 		const shown = Math.min(1, Math.max(0, opacity));
 		const painted = next as Exclude<SceneNode, { kind: "group" }>;
@@ -176,6 +187,18 @@ export function createMotionStore(
 		} as SceneNode;
 	}
 
+	function fading(now: number): Array<readonly [LeavingGuide, number]> {
+		return [...leaving.values()].map((motion) => [
+			motion.guide,
+			Math.max(0, motion.generator.at(elapsed(motion, now)).value),
+		]);
+	}
+
+	/** Every running motion, for pruning and for `settled`. */
+	function all(): Array<Map<string, Motion>> {
+		return [numbers, strings, leaving];
+	}
+
 	return {
 		retarget(scene, now) {
 			const before = flatten(target.nodes);
@@ -184,7 +207,9 @@ export function createMotionStore(
 			const order = new Map(marks.map((node, index) => [node.key, index]));
 			for (const key of before.keys()) {
 				if (after.has(key)) continue;
-				paths.delete(key);
+				for (const channel of STRING_CHANNELS) {
+					strings.delete(channelKey(key, channel));
+				}
 				for (const channel of [
 					...(CHANNELS[before.get(key)?.kind ?? "group"] ?? []),
 					OPACITY,
@@ -198,28 +223,59 @@ export function createMotionStore(
 					order.get(node.key) ?? 0,
 					marks.length,
 				);
-				moveNode(node, before.get(node.key), now + delay * 1000, now);
+				const start = now + delay * 1000;
+				const returning = leaving.get(node.key);
+				moveNode(
+					node,
+					before.get(node.key) ?? returning?.guide.node,
+					start,
+					now,
+				);
+				if (returning) {
+					const from = returning.generator.at(elapsed(returning, now)).value;
+					numbers.set(channelKey(node.key, OPACITY), {
+						generator: generator(Math.max(0, from), 1, 0),
+						start,
+					});
+				}
 			}
+			for (const guide of leavingGuides(target.nodes, (key) =>
+				after.has(key),
+			)) {
+				const shown = numbers.get(channelKey(guide.node.key, OPACITY));
+				const from = shown ? shown.generator.at(elapsed(shown, now)).value : 1;
+				leaving.set(guide.node.key, {
+					generator: generator(from, 0, 0),
+					start: now,
+					guide,
+				});
+			}
+			for (const key of after.keys()) leaving.delete(key);
 			target = scene;
 		},
 		snap(scene) {
-			numbers.clear();
-			paths.clear();
+			for (const motions of all()) motions.clear();
 			target = scene;
 		},
 		frame(now) {
-			for (const [key, motion] of numbers) {
-				if (done(motion, now)) numbers.delete(key);
+			for (const motions of all()) {
+				for (const [key, motion] of motions) {
+					if (done(motion, now)) motions.delete(key);
+				}
 			}
-			for (const [key, motion] of paths) {
-				if (done(motion, now)) paths.delete(key);
-			}
-			if (numbers.size === 0 && paths.size === 0) return target;
-			return { ...target, nodes: target.nodes.map((node) => paint(node, now)) };
+			if (all().every((motions) => motions.size === 0)) return target;
+			return {
+				...target,
+				nodes: withLeaving(
+					target.nodes.map((node) => paint(node, now)),
+					null,
+					fading(now),
+				),
+			};
 		},
 		settled(now) {
-			return [...numbers.values(), ...paths.values()].every((motion) =>
-				done(motion, now),
+			return all().every((motions) =>
+				[...motions.values()].every((motion) => done(motion, now)),
 			);
 		},
 	};

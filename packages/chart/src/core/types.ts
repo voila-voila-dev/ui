@@ -133,7 +133,20 @@ export interface ScenePath extends SceneNodeBase {
 	readonly kind: "path";
 	readonly d: string;
 	readonly paint: ChartPaint;
+	/**
+	 * How an update moves this outline into a new one whose commands differ:
+	 * a country, a contour, a cell. Set by the marks whose shapes have no
+	 * simpler meaning, so the morph only loads with them; without it, paths
+	 * whose commands differ swap at the end.
+	 */
+	readonly morph?: PathMorpher;
 }
+
+/** The outlines between two paths, 0 at `from` and 1 at `to`. */
+export type PathMorpher = (
+	from: string,
+	to: string,
+) => (progress: number) => string;
 
 export interface SceneCircle extends SceneNodeBase {
 	readonly kind: "circle";
