@@ -102,7 +102,7 @@ describe("motion in the SVG renderer", () => {
 				...container.querySelectorAll("[data-slot=chart-svg] [data-role=mark]"),
 			][2];
 		const heights = await sample(
-			1500,
+			4000,
 			() => third()?.getBoundingClientRect().height ?? 0,
 		);
 		const settled = heights.at(-1) ?? 0;
