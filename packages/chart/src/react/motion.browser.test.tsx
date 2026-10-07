@@ -51,6 +51,8 @@ describe("motion in the SVG renderer", () => {
 		const container = await mount(
 			<Chart
 				ariaLabel="Missions"
+				// Slow enough that a busy runner can't finish the draw before the first reading.
+				animate={1500}
 				definition={defineChart({
 					marks: [lineY([4, 8, 6, 9], { enter: "draw", label: "Missions" })],
 				})}
@@ -58,7 +60,7 @@ describe("motion in the SVG renderer", () => {
 		);
 		const line = () =>
 			container.querySelector("[data-slot=chart-svg] path[data-role=mark]");
-		const offsets = await sample(1500, () => {
+		const offsets = await sample(4000, () => {
 			const path = line();
 			return path?.hasAttribute("pathLength")
 				? Number(path.getAttribute("stroke-dashoffset"))
