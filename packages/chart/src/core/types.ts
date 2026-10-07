@@ -151,6 +151,11 @@ export interface ScenePath extends SceneNodeBase {
 	readonly d: string;
 	/** What the shape means, when it has a simple meaning: motion moves that, then redraws `d`. */
 	readonly geometry?: SceneGeometry;
+	/**
+	 * How that geometry moves, brought by the mark that drew it (like
+	 * `morph`), so a chart only loads the motion of the shapes it has.
+	 */
+	readonly motion?: GeometryMotion;
 	readonly paint: ChartPaint;
 	/**
 	 * How an update moves this outline into a new one whose commands differ:
@@ -188,6 +193,39 @@ export type SceneGeometry =
 			readonly startAngle: number;
 			readonly endAngle: number;
 	  };
+
+/**
+ * A geometry in motion: every number it has, by channel name, where each
+ * starts and where it goes, and how to rebuild the shape from the numbers of
+ * one frame. The store springs the numbers; the plan only knows shapes.
+ */
+export interface GeometryPlan {
+	readonly starts: ReadonlyMap<string, number>;
+	readonly targets: ReadonlyMap<string, number>;
+	build(value: (channel: string) => number): SceneGeometry;
+}
+
+/** What the motion store asks of a kind of geometry. */
+export interface GeometryMotion {
+	/** How `from` (what is painted) becomes `to`; undefined to tween the path instead. */
+	plan(from: SceneGeometry, to: SceneGeometry): GeometryPlan | undefined;
+	/** The path data of one frame, through the mark's own builder, so every frame is a valid shape. */
+	draw(geometry: SceneGeometry): string;
+	/** Its length in pixels: what Canvas dashes against to trace a line in. */
+	length?(geometry: SceneGeometry): number;
+	/** The shape a node an update adds grows from; `siblings` is its new list, `known` the old scene. */
+	enter?(
+		node: ScenePath,
+		siblings: readonly SceneNode[],
+		known: ReadonlyMap<string, SceneNode>,
+	): ScenePath | undefined;
+	/** The shape a node an update removes collapses to; `siblings` is its old list, `known` the new scene. */
+	exit?(
+		node: ScenePath,
+		siblings: readonly SceneNode[],
+		known: ReadonlyMap<string, SceneNode>,
+	): ScenePath | undefined;
+}
 
 /** The outlines between two paths, 0 at `from` and 1 at `to`. */
 export type PathMorpher = (

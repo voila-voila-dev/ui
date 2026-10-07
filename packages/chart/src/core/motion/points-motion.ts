@@ -1,38 +1,19 @@
-import { arcPath, areaPath, linePath, polygonPath } from "#/core/paths.ts";
-import type { GeometryPoint, SceneGeometry } from "#/core/types.ts";
-
-/**
- * A geometry in motion: every number it has, by channel name, where each
- * starts and where it goes, and how to rebuild the shape from the numbers of
- * one frame. The store springs the numbers; this module only knows shapes.
- */
-export interface GeometryPlan {
-	readonly starts: ReadonlyMap<string, number>;
-	readonly targets: ReadonlyMap<string, number>;
-	build(value: (channel: string) => number): SceneGeometry;
-}
+import { areaPath, linePath, polygonPath } from "#/core/paths.ts";
+import type {
+	GeometryMotion,
+	GeometryPlan,
+	GeometryPoint,
+	SceneGeometry,
+	ScenePath,
+} from "#/core/types.ts";
 
 type Points = Extract<SceneGeometry, { kind: "points" }>;
-type Arc = Extract<SceneGeometry, { kind: "arc" }>;
 
 const POINT_FIELDS = ["x", "y", "x0", "y0"] as const;
-const ARC_FIELDS = [
-	"cx",
-	"cy",
-	"innerRadius",
-	"outerRadius",
-	"startAngle",
-	"endAngle",
-] as const;
 
-/** The path data of a geometry, drawn by the same builders the marks use, so every frame is a valid shape. */
-export function geometryPath(geometry: SceneGeometry): string {
-	if (geometry.kind === "arc") {
-		return arcPath({
-			...geometry,
-			endAngle: Math.max(geometry.startAngle, geometry.endAngle),
-		});
-	}
+/** A line, an area or a radar outline through its points. */
+export function pointsPath(geometry: SceneGeometry): string {
+	if (geometry.kind !== "points") return "";
 	const { runs, shape, curve } = geometry;
 	if (shape === "polygon") return polygonPath(runs[0] ?? []);
 	return runs
@@ -160,33 +141,8 @@ function pointsPlan(from: Points, to: Points): GeometryPlan | undefined {
 	};
 }
 
-function arcPlan(from: Arc, to: Arc): GeometryPlan {
-	const record = (arc: Arc) =>
-		new Map(ARC_FIELDS.map((field) => [field as string, arc[field]]));
-	return {
-		starts: record(from),
-		targets: record(to),
-		build: (value) =>
-			Object.fromEntries([
-				["kind", "arc"],
-				...ARC_FIELDS.map((field) => [field, value(field)]),
-			]) as Arc,
-	};
-}
-
-/** How `from` (what is painted) becomes `to`, channel by channel. */
-export function geometryPlan(
-	from: SceneGeometry,
-	to: SceneGeometry,
-): GeometryPlan | undefined {
-	if (from.kind === "arc" && to.kind === "arc") return arcPlan(from, to);
-	if (from.kind === "points" && to.kind === "points")
-		return pointsPlan(from, to);
-	return undefined;
-}
-
 /** A line's length along its points: what Canvas dashes against to trace it in. */
-export function geometryLength(geometry: SceneGeometry): number {
+function pointsLength(geometry: SceneGeometry): number {
 	if (geometry.kind !== "points") return 0;
 	let length = 0;
 	for (const run of geometry.runs) {
@@ -199,3 +155,36 @@ export function geometryLength(geometry: SceneGeometry): number {
 	// A curve runs a little longer than its chords; the dash must cover it all.
 	return length * 1.1;
 }
+
+/** An area, or the line over it, grows from its lower edge. */
+function collapsed(node: ScenePath): ScenePath | undefined {
+	const geometry = node.geometry;
+	// A line over an area carries the area's lower edge too, so the two grow as one.
+	if (geometry?.kind !== "points" || geometry.runs[0]?.[0]?.y0 === undefined) {
+		return undefined;
+	}
+	return {
+		...node,
+		geometry: {
+			...geometry,
+			runs: geometry.runs.map((run) =>
+				run.map((point) => ({
+					...point,
+					x: point.x0 ?? point.x,
+					y: point.y0 ?? point.y,
+				})),
+			),
+		},
+	};
+}
+
+/** Lines, areas and radar outlines: points keyed by x (or by axis). */
+export const POINTS_MOTION: GeometryMotion = {
+	plan: (from, to) =>
+		from.kind === "points" && to.kind === "points"
+			? pointsPlan(from, to)
+			: undefined,
+	draw: pointsPath,
+	length: pointsLength,
+	enter: (node) => (node.enter === "grow" ? collapsed(node) : undefined),
+};

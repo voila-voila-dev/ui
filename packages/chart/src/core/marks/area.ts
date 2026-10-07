@@ -14,7 +14,7 @@ import {
 	tips,
 } from "#/core/marks/shared.ts";
 import { stackSegments } from "#/core/marks/stack.ts";
-import { geometryPath } from "#/core/motion/geometry.ts";
+import { POINTS_MOTION, pointsPath } from "#/core/motion/points-motion.ts";
 import { type ChartXY, linePath } from "#/core/paths.ts";
 import { categoryKey } from "#/core/scales/discrete.ts";
 import type {
@@ -189,8 +189,9 @@ function areaMark<TDatum>(
 					key: `${id}:area:${series.key}`,
 					series: series.key,
 					role: "mark",
-					d: geometryPath(area),
+					d: pointsPath(area),
 					geometry: area,
+					motion: POINTS_MOTION,
 					enter,
 					paint: paint({
 						fill: series.color,
@@ -206,6 +207,7 @@ function areaMark<TDatum>(
 						role: "mark",
 						d: shaped.map((run) => linePath(run, options.curve)).join(""),
 						geometry: { ...area, shape: "line" },
+						motion: POINTS_MOTION,
 						enter,
 						paint: paint({
 							fill: "none",

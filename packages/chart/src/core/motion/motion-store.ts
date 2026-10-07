@@ -1,12 +1,6 @@
 import { type Generator, spring, tween } from "@voila.dev/motion";
 import { enterFrom, exitTo } from "#/core/motion/enter-exit.ts";
 import {
-	type GeometryPlan,
-	geometryLength,
-	geometryPath,
-	geometryPlan,
-} from "#/core/motion/geometry.ts";
-import {
 	type LeavingGuide,
 	leavingGuides,
 	withLeaving,
@@ -19,7 +13,12 @@ import {
 	withStrings,
 } from "#/core/motion/strings.ts";
 import { type ChartTiming, staggerDelay } from "#/core/motion/timing.ts";
-import type { ChartScene, SceneNode } from "#/core/types.ts";
+import type {
+	ChartScene,
+	GeometryMotion,
+	GeometryPlan,
+	SceneNode,
+} from "#/core/types.ts";
 
 /**
  * Every moving number of a chart, as springs keyed by node and channel. A
@@ -122,7 +121,10 @@ export function createMotionStore(
 	const numbers = new Map<string, Motion>();
 	const strings = new Map<string, StringMotion>();
 	const guides = new Map<string, GuideMotion>();
-	const shapes = new Map<string, GeometryPlan>();
+	const shapes = new Map<
+		string,
+		{ readonly plan: GeometryPlan; readonly motion: GeometryMotion }
+	>();
 	const leaving = new Map<string, Leaving>();
 
 	function generator(from: number, to: number, velocity: number): Generator {
@@ -214,16 +216,17 @@ export function createMotionStore(
 		const previous = shapes.get(key);
 		shapes.delete(key);
 		strings.delete(channelKey(key, "d"));
+		const motion = to.motion;
 		const plan =
-			from.geometry && to.geometry
-				? geometryPlan(from.geometry, to.geometry)
+			motion && from.geometry && to.geometry
+				? motion.plan(from.geometry, to.geometry)
 				: undefined;
 		if (!plan) {
 			// No meaning to move: the node's own morph, else the numbers of `d`.
 			mixString(from, to, "d", start);
 			return;
 		}
-		for (const channel of previous?.targets.keys() ?? []) {
+		for (const channel of previous?.plan.targets.keys() ?? []) {
 			if (!plan.targets.has(channel)) {
 				numbers.delete(channelKey(key, `g${channel}`));
 			}
@@ -232,7 +235,7 @@ export function createMotionStore(
 			const was = plan.starts.get(channel) ?? goal;
 			spring1(key, `g${channel}`, was, goal, start, now);
 		}
-		shapes.set(key, plan);
+		shapes.set(key, { plan, motion: motion as GeometryMotion });
 	}
 
 	function paintNode(node: SceneNode, now: number): SceneNode {
@@ -252,10 +255,10 @@ export function createMotionStore(
 		let next = { ...node, ...moved } as Exclude<SceneNode, { kind: "group" }>;
 		const shape = shapes.get(key);
 		if (next.kind === "path" && shape) {
-			const geometry = shape.build((channel) =>
-				value(key, `g${channel}`, shape.targets.get(channel) ?? 0, now),
+			const geometry = shape.plan.build((channel) =>
+				value(key, `g${channel}`, shape.plan.targets.get(channel) ?? 0, now),
 			);
-			next = { ...next, geometry, d: geometryPath(geometry) };
+			next = { ...next, geometry, d: shape.motion.draw(geometry) };
 		}
 		const mixed: Partial<Record<StringChannel, string>> = {};
 		for (const channel of STRING_CHANNELS) {
@@ -271,6 +274,8 @@ export function createMotionStore(
 		const drawn = value(key, DRAWN, 1, now);
 		if (opacity === 1 && drawn === 1) return next;
 		const geometry = next.kind === "path" ? next.geometry : undefined;
+		const length =
+			geometry && next.kind === "path" ? next.motion?.length?.(geometry) : 0;
 		return {
 			...next,
 			paint: {
@@ -280,7 +285,7 @@ export function createMotionStore(
 					? {
 							drawn: {
 								fraction: clamp(drawn),
-								length: geometryLength(geometry),
+								length: length ?? 0,
 							},
 						}
 					: {}),

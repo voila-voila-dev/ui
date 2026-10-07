@@ -9,7 +9,7 @@ import {
 	tips,
 	valueOn,
 } from "#/core/marks/shared.ts";
-import { geometryPath } from "#/core/motion/geometry.ts";
+import { POINTS_MOTION, pointsPath } from "#/core/motion/points-motion.ts";
 import { categoryKey } from "#/core/scales/discrete.ts";
 import type {
 	ChartAccessor,
@@ -162,8 +162,9 @@ function lineMark<TDatum>(
 					key: `${id}:line:${series.key}`,
 					series: series.key,
 					role: "mark",
-					d: geometryPath(geometry),
+					d: pointsPath(geometry),
 					geometry,
+					motion: POINTS_MOTION,
 					enter: options.enter,
 					paint: paint({
 						stroke: series.color,

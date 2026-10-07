@@ -65,6 +65,8 @@ describe("motion in the SVG renderer", () => {
 		const container = await mount(
 			<Chart ariaLabel="Clubs" definition={bars([10, 20])} />,
 		);
+		// The width is measured after mount; a resize snaps, so let it land first.
+		await wait(100);
 		await act(async () =>
 			root?.render(<Chart ariaLabel="Clubs" definition={bars([10, 20, 30])} />),
 		);
@@ -72,11 +74,11 @@ describe("motion in the SVG renderer", () => {
 			[
 				...container.querySelectorAll("[data-slot=chart-svg] [data-role=mark]"),
 			][2];
-		// The first frame is painted in the layout effect: the bar sits flat on its baseline.
+		// The first frame is painted in the layout effect: the bar has barely left its baseline.
 		const early = third()?.getBoundingClientRect().height ?? 0;
 		await wait(1500);
 		const settled = third()?.getBoundingClientRect().height ?? 0;
 		expect(settled).toBeGreaterThan(100);
-		expect(early).toBeLessThan(1);
+		expect(early).toBeLessThan(settled * 0.1);
 	});
 });

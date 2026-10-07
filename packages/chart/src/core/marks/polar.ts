@@ -12,6 +12,8 @@ import {
 	seriesResolver,
 	tips,
 } from "#/core/marks/shared.ts";
+import { ARC_MOTION } from "#/core/motion/arc-motion.ts";
+import { POINTS_MOTION } from "#/core/motion/points-motion.ts";
 import {
 	arcPath,
 	type ChartXY,
@@ -182,6 +184,7 @@ export function arc<TDatum>(
 					role: "mark",
 					d: arcPath(shape),
 					geometry: { kind: "arc", ...shape },
+					motion: ARC_MOTION,
 					enter: options.enter ?? "grow",
 					paint: paint({
 						fill: series.color,
@@ -309,6 +312,7 @@ export function radialBar<TDatum>(
 					role: "mark",
 					d: arcPath(shape),
 					geometry: { kind: "arc", ...shape },
+					motion: ARC_MOTION,
 					enter: options.enter ?? "grow",
 					paint: paint({ fill: series.color, opacity: options.opacity }),
 				});
@@ -553,6 +557,7 @@ export function radar<TDatum>(
 					role: "mark",
 					d: polygonPath(geometry.runs[0]),
 					geometry,
+					motion: POINTS_MOTION,
 					enter: options.enter,
 					paint: paint({
 						fill: polygon.color,

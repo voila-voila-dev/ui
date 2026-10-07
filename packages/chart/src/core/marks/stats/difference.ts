@@ -5,7 +5,7 @@ import {
 	readChannel,
 } from "#/core/channel.ts";
 import { markId, paint, valueOn } from "#/core/marks/shared.ts";
-import { geometryPath } from "#/core/motion/geometry.ts";
+import { POINTS_MOTION, pointsPath } from "#/core/motion/points-motion.ts";
 import { areaPath, type ChartXY } from "#/core/paths.ts";
 import { categoryKey } from "#/core/scales/discrete.ts";
 import type {
@@ -13,6 +13,7 @@ import type {
 	ChartMark,
 	ChartPoint,
 	ChartValue,
+	GeometryMotion,
 	SceneGeometry,
 	SceneNode,
 } from "#/core/types.ts";
@@ -41,7 +42,7 @@ interface Sample {
 function keyedLine(
 	samples: readonly (Sample & { readonly key: string })[],
 	edge: "top" | "bottom",
-): { d: string; geometry: SceneGeometry } {
+): { d: string; geometry: SceneGeometry; motion: GeometryMotion } {
 	const geometry: SceneGeometry = {
 		kind: "points",
 		shape: "line",
@@ -53,7 +54,7 @@ function keyedLine(
 			})),
 		],
 	};
-	return { d: geometryPath(geometry), geometry };
+	return { d: pointsPath(geometry), geometry, motion: POINTS_MOTION };
 }
 
 /** Splits the band between two lines into runs of one sign, cut where they cross. */
