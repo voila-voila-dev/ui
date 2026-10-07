@@ -50,7 +50,10 @@ Statistical (no d3): `histogram` `rectY` `boxY` `violinY` `ridgeline`
 
 Behind their own subpath, with the d3 module they need:
 `@voila.dev/chart/contour` (`density2d`, d3-contour),
-`@voila.dev/chart/voronoi` (`voronoi`, d3-delaunay).
+`@voila.dev/chart/voronoi` (`voronoi`, d3-delaunay),
+`@voila.dev/chart/hierarchy` (`treemap`, `sunburst`, `tree`, d3-hierarchy),
+`@voila.dev/chart/sankey` (`sankey`, d3-sankey),
+`@voila.dev/chart/force` (`forceGraph`, d3-force, seeded so it settles the same way every time).
 
 ## Keyboard
 

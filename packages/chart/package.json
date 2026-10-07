@@ -33,7 +33,10 @@
 		"./react": "./src/react/index.ts",
 		"./canvas": "./src/canvas/index.ts",
 		"./contour": "./src/contour/index.ts",
-		"./voronoi": "./src/voronoi/index.ts"
+		"./voronoi": "./src/voronoi/index.ts",
+		"./hierarchy": "./src/hierarchy/index.ts",
+		"./sankey": "./src/sankey/index.ts",
+		"./force": "./src/force/index.ts"
 	},
 	"imports": {
 		"#/*": "./src/*"
@@ -63,6 +66,9 @@
 		"@testing-library/react": "^16.3.3",
 		"@types/d3-contour": "^3.0.6",
 		"@types/d3-delaunay": "^6.0.4",
+		"@types/d3-force": "^3.0.10",
+		"@types/d3-hierarchy": "^3.1.7",
+		"@types/d3-sankey": "^0.12.5",
 		"@types/react": "^19.3.0",
 		"@types/react-dom": "^19.3.0",
 		"@vitest/browser-playwright": "5.0.0",
@@ -79,6 +85,9 @@
 	"sideEffects": false,
 	"dependencies": {
 		"d3-contour": "4.0.2",
-		"d3-delaunay": "6.0.4"
+		"d3-delaunay": "6.0.4",
+		"d3-force": "3.0.0",
+		"d3-hierarchy": "3.1.2",
+		"d3-sankey": "0.12.3"
 	}
 }

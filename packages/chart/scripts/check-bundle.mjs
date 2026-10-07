@@ -20,6 +20,9 @@ const BUDGETS = {
 	stats: 22_000,
 	contour: 18_000,
 	voronoi: 22_000,
+	hierarchy: 19_000,
+	sankey: 18_000,
+	force: 21_000,
 };
 
 const FORBIDDEN = [/node_modules\/d3-/];
