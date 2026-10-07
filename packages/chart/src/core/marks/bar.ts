@@ -10,6 +10,7 @@ import {
 	markId,
 	paint,
 	seriesResolver,
+	tips,
 } from "#/core/marks/shared.ts";
 import { stackSegments } from "#/core/marks/stack.ts";
 import { categoryKey } from "#/core/scales/discrete.ts";
@@ -216,7 +217,7 @@ function barMark<TDatum>(
 								},
 					),
 				});
-				if (options.tip === false) {
+				if (!tips(options.tip, data[bar.index], bar.index)) {
 					continue;
 				}
 				const along = alongStart + alongSize / 2;
