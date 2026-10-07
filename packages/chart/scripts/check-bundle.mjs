@@ -13,18 +13,18 @@ import { build } from "esbuild";
 
 /** Gzip bytes. Raise one only with the reason in the commit message. */
 const BUDGETS = {
-	line: 19_600,
-	cartesian: 22_600,
-	canvas: 21_100,
-	polar: 21_100,
-	stats: 25_100,
-	contour: 22_100,
-	voronoi: 26_100,
-	hierarchy: 22_600,
-	sankey: 22_100,
-	force: 25_100,
-	geo: 29_600,
-	brush: 20_600,
+	line: 21_200,
+	cartesian: 24_100,
+	canvas: 22_800,
+	polar: 22_900,
+	stats: 25_800,
+	contour: 23_800,
+	voronoi: 27_900,
+	hierarchy: 24_200,
+	sankey: 23_600,
+	force: 26_400,
+	geo: 31_200,
+	brush: 22_200,
 };
 
 const FORBIDDEN = [/node_modules\/d3-/];

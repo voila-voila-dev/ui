@@ -92,6 +92,12 @@ export interface ChartPaint {
 	readonly strokeOpacity?: number;
 	/** Fill with diagonal hatching in the fill colour: a value pencilled in, not yet true. */
 	readonly hatch?: boolean;
+	/**
+	 * Only the first `fraction` of the stroke is drawn: a line tracing itself
+	 * in. `length` is the path's length in pixels, which Canvas needs for its
+	 * dash and SVG doesn't (it measures with `pathLength`).
+	 */
+	readonly drawn?: { readonly fraction: number; readonly length: number };
 }
 
 export interface ChartTextPaint extends ChartPaint {
@@ -108,7 +114,16 @@ interface SceneNodeBase {
 	readonly series?: string;
 	/** A role for styling and tests: "mark", "axis", "grid", "label"… */
 	readonly role?: string;
+	/** How the node appears when an update adds it: see `ChartEnter`. Fades by default. */
+	readonly enter?: ChartEnter;
 }
+
+/**
+ * How a data mark appears. "grow" rises from its baseline (bars, areas) or
+ * opens from its neighbour (slices); "draw" traces a line in on the first
+ * render; "fade" fades in; "none" is there at once.
+ */
+export type ChartEnter = "grow" | "draw" | "fade" | "none";
 
 export interface SceneGroup extends SceneNodeBase {
 	readonly kind: "group";
@@ -125,6 +140,8 @@ export interface SceneRect extends SceneNodeBase {
 	readonly width: number;
 	readonly height: number;
 	readonly corners?: ChartCorners;
+	/** The edge a bar grows from and shrinks back to: `y` for a column, `x` for a bar, in pixels. */
+	readonly baseline?: { readonly axis: "x" | "y"; readonly at: number };
 	readonly paint: ChartPaint;
 }
 
@@ -132,8 +149,38 @@ export interface SceneRect extends SceneNodeBase {
 export interface ScenePath extends SceneNodeBase {
 	readonly kind: "path";
 	readonly d: string;
+	/** What the shape means, when it has a simple meaning: motion moves that, then redraws `d`. */
+	readonly geometry?: SceneGeometry;
 	readonly paint: ChartPaint;
 }
+
+/** A point of a line, an area or a radar, keyed by its position so an update can slide it. */
+export interface GeometryPoint {
+	readonly key: string;
+	readonly x: number;
+	readonly y: number;
+	/** The area's lower edge under this point. */
+	readonly x0?: number;
+	readonly y0?: number;
+}
+
+export type SceneGeometry =
+	| {
+			readonly kind: "points";
+			/** One run per unbroken stretch: a gap in the data splits the line. */
+			readonly runs: ReadonlyArray<ReadonlyArray<GeometryPoint>>;
+			readonly shape: "line" | "area" | "polygon";
+			readonly curve?: ChartCurve;
+	  }
+	| {
+			readonly kind: "arc";
+			readonly cx: number;
+			readonly cy: number;
+			readonly innerRadius: number;
+			readonly outerRadius: number;
+			readonly startAngle: number;
+			readonly endAngle: number;
+	  };
 
 export interface SceneCircle extends SceneNodeBase {
 	readonly kind: "circle";
