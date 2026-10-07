@@ -63,6 +63,21 @@ multi-series chart is one stop, the other arrows move inside it), Home and
 End jump to the ends, Enter pins the tooltip and fires `onSelect`, Escape
 unpins then leaves.
 
+## Small multiples, zoom and brush
+
+`defineChart({ facet: facet({ values, marks: (value) => [...] }) })` draws the chart
+once per value on a grid, every cell on the same x, y and colour domains.
+The keyboard walks one cell at a time; the tooltip names the cell.
+
+`<Chart zoom />` zooms a continuous x: the wheel while the chart has focus
+(never while the page scrolls past it), + and −, Shift and the arrows to
+pan, a drag to pan when zoomed, 0 or the reset button to go back. The live
+region says what is on show.
+
+`<Chart brush={brushX({ onBrush })} />` (from `@voila.dev/chart/brush`) selects a range of x by dragging, or
+with two sliders from the keyboard (arrows, Page keys, Home, End, Escape).
+The sliders sit outside the graphic, where assistive tech can reach them.
+
 ## Size budget
 
 `bun run check-bundle` builds each entry in `scripts/bundle-entries` and fails

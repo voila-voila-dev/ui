@@ -37,7 +37,8 @@
 		"./hierarchy": "./src/hierarchy/index.ts",
 		"./sankey": "./src/sankey/index.ts",
 		"./force": "./src/force/index.ts",
-		"./geo": "./src/geo/index.ts"
+		"./geo": "./src/geo/index.ts",
+		"./brush": "./src/brush/index.ts"
 	},
 	"imports": {
 		"#/*": "./src/*"

@@ -110,6 +110,8 @@ interface SceneNodeBase {
 
 export interface SceneGroup extends SceneNodeBase {
 	readonly kind: "group";
+	/** Shifts the children: a facet's cell drawn at its place in the grid. Clips are in the shifted space. */
+	readonly translate?: { readonly x: number; readonly y: number };
 	readonly clip?: ChartRect;
 	readonly children: ReadonlyArray<SceneNode>;
 }
@@ -202,6 +204,8 @@ export interface ChartPoint<TDatum = unknown> {
 	/** Its value, formatted: "1 240". */
 	readonly value: string;
 	readonly hit?: ChartHitShape;
+	/** The facet cell the point belongs to, on a faceted chart. */
+	readonly facet?: string;
 }
 
 export interface ChartLegendItem {
@@ -232,6 +236,12 @@ export interface ChartScene {
 	readonly yLabel: string;
 	readonly theme: ChartTheme;
 	readonly locale: string;
+	/** A faceted chart's cells, each with its own plot, in reading order. */
+	readonly cells?: ReadonlyArray<{
+		readonly key: string;
+		readonly label: string;
+		readonly plot: ChartRect;
+	}>;
 	/** The sequential colour scale's ramp, for its legend: the colours and the ends' labels. */
 	readonly colorRamp?: {
 		readonly stops: ReadonlyArray<string>;
