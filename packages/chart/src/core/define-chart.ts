@@ -3,6 +3,7 @@ import type {
 	ChartMargin,
 	ChartMark,
 	ChartPositionScaleKind,
+	ChartProjection,
 	ChartTheme,
 	ChartValue,
 } from "#/core/types.ts";
@@ -51,6 +52,8 @@ export interface ChartSpec {
 	/** Overrides the margins the axes would reserve, side by side. */
 	readonly margin?: Partial<ChartMargin>;
 	readonly focus?: ChartFocusOrder;
+	/** For maps: how longitude and latitude become pixels. */
+	readonly projection?: ChartProjection;
 	readonly locale?: string;
 	readonly theme?: Partial<ChartTheme>;
 }

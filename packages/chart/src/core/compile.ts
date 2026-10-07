@@ -72,6 +72,22 @@ function distinctBy<T>(
 	});
 }
 
+const RAMP_STOPS = 5;
+
+function rampOf(
+	color: ChartColorScale,
+	format: (value: ChartValue) => string,
+): ChartScene["colorRamp"] {
+	const [low, high] = color.domain.map(toNumber);
+	return {
+		stops: Array.from({ length: RAMP_STOPS }, (_unused, index) =>
+			color.map(low + ((high - low) * index) / (RAMP_STOPS - 1)),
+		),
+		low: format(low),
+		high: format(high),
+	};
+}
+
 function isMark(mark: ChartMark | false | null | undefined): mark is ChartMark {
 	return Boolean(mark);
 }
@@ -316,6 +332,7 @@ export function compileChart(
 	const legend: ChartLegendItem[] = [];
 	const paletteColor = (index: number) =>
 		theme.palette[index % theme.palette.length];
+	const projection = spec.projection?.fit(plot);
 	for (const [markIndex, mark] of marks.entries()) {
 		const rendered = mark.render({
 			scales,
@@ -329,6 +346,7 @@ export function compileChart(
 			formatX,
 			formatY,
 			markIndex,
+			projection,
 		});
 		markNodes.push(...rendered.nodes);
 		points.push(
@@ -381,5 +399,9 @@ export function compileChart(
 			"y",
 		theme,
 		locale,
+		colorRamp:
+			color?.kind === "sequential" && spec.color?.legend !== false
+				? rampOf(color, (value) => formatValue(value, locale))
+				: undefined,
 	};
 }

@@ -4,7 +4,7 @@ import type { ChartDefinition } from "#/core/define-chart.ts";
 import { findNearest, focusStops } from "#/core/nearest.ts";
 import type { ChartPoint } from "#/core/types.ts";
 import { ChartDataTable } from "#/react/chart-data-table.tsx";
-import { ChartLegend } from "#/react/chart-legend.tsx";
+import { ChartColorRamp, ChartLegend } from "#/react/chart-legend.tsx";
 import {
 	ChartTooltip,
 	ChartTooltipContent,
@@ -200,6 +200,9 @@ export function Chart({
 					label={messages.legend}
 					onToggle={toggle}
 				/>
+			) : null}
+			{scene.colorRamp && legend !== false ? (
+				<ChartColorRamp ramp={scene.colorRamp} label={messages.legend} />
 			) : null}
 			{dataTable ? (
 				<ChartDataTable

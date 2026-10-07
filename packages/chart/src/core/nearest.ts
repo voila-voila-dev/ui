@@ -91,6 +91,14 @@ export function contains(hit: ChartHitShape, x: number, y: number): boolean {
 	return sweep >= 360 || offset <= sweep;
 }
 
+function hitArea(hit: ChartHitShape): number {
+	if (hit.kind === "rect") {
+		return hit.rect.width * hit.rect.height;
+	}
+	const sweep = Math.min(360, hit.endAngle - hit.startAngle) / 360;
+	return Math.PI * (hit.outerRadius ** 2 - hit.innerRadius ** 2) * sweep;
+}
+
 export interface ChartHit {
 	readonly stop: number;
 	readonly point: number;
@@ -137,10 +145,20 @@ export function findNearest(
 	}
 	const order = scene.focusOrder;
 	if (order === "point") {
-		const inside = stops.findIndex((stop) => {
+		// Shapes can overlap (a dot over a region, regions' bounding boxes):
+		// the smallest one under the pointer is the one meant.
+		let inside = -1;
+		let insideArea = Number.POSITIVE_INFINITY;
+		for (const [index, stop] of stops.entries()) {
 			const hit = stop.points[0].hit;
-			return hit !== undefined && contains(hit, x, y);
-		});
+			if (hit !== undefined && contains(hit, x, y)) {
+				const area = hitArea(hit);
+				if (area < insideArea) {
+					inside = index;
+					insideArea = area;
+				}
+			}
+		}
 		if (inside !== -1) {
 			return { stop: inside, point: 0 };
 		}

@@ -23,6 +23,7 @@ const BUDGETS = {
 	hierarchy: 19_000,
 	sankey: 18_000,
 	force: 21_000,
+	geo: 26_000,
 };
 
 const FORBIDDEN = [/node_modules\/d3-/];

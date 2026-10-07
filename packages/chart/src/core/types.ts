@@ -232,6 +232,12 @@ export interface ChartScene {
 	readonly yLabel: string;
 	readonly theme: ChartTheme;
 	readonly locale: string;
+	/** The sequential colour scale's ramp, for its legend: the colours and the ends' labels. */
+	readonly colorRamp?: {
+		readonly stops: ReadonlyArray<string>;
+		readonly low: string;
+		readonly high: string;
+	};
 }
 
 // ---------------------------------------------------------------------------
@@ -253,6 +259,27 @@ export interface ChartChannel {
 	readonly padding?: number;
 	/** Outer band padding, when it differs: room for a ridge rising past its row. */
 	readonly paddingOuter?: number;
+}
+
+/**
+ * A map projection, described without naming the library that implements it
+ * (`@voila.dev/chart/geo` does, with d3-geo). Declared once on the
+ * definition and fitted to the plot, so every map mark draws on the same one.
+ */
+export interface ChartProjection {
+	readonly fit: (plot: ChartRect) => ChartFittedProjection;
+}
+
+export interface ChartFittedProjection {
+	/** Longitude and latitude to chart pixels; `undefined` when clipped away. */
+	readonly project: (
+		longitude: number,
+		latitude: number,
+	) => { x: number; y: number } | undefined;
+	/** Path data for a GeoJSON object. */
+	readonly path: (geometry: unknown) => string;
+	readonly centroid: (geometry: unknown) => { x: number; y: number };
+	readonly bounds: (geometry: unknown) => ChartRect;
 }
 
 export type ChartTextMeasurer = (
@@ -285,6 +312,8 @@ export interface ChartMarkContext {
 	readonly formatX: (value: ChartValue) => string;
 	readonly formatY: (value: ChartValue) => string;
 	readonly markIndex: number;
+	/** The definition's projection, fitted to the plot. Map marks need it. */
+	readonly projection?: ChartFittedProjection;
 }
 
 export interface ChartMarkScene {
