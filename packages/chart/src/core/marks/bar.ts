@@ -40,6 +40,11 @@ export interface BarOptions<TDatum> extends ChartMarkOptions<TDatum> {
 	readonly radius?: number;
 	/** Pixels kept clear on each side of the bar inside its band. */
 	readonly inset?: number;
+	/**
+	 * Bars to draw hatched and outlined: projections, stages still in flight,
+	 * anything pencilled in rather than recorded.
+	 */
+	readonly projected?: (datum: TDatum, index: number) => boolean;
 }
 
 const DEFAULT_RADIUS = 4;
@@ -192,13 +197,24 @@ function barMark<TDatum>(
 					role: "mark",
 					...rect,
 					corners: corners(vertical, bar, radius, explicit),
-					paint: paint({
-						fill: series.color,
-						fillOpacity: options.fillOpacity,
-						stroke: options.stroke,
-						strokeDasharray: options.strokeDasharray,
-						opacity: options.opacity,
-					}),
+					paint: paint(
+						options.projected?.(data[bar.index], bar.index)
+							? {
+									fill: series.color,
+									hatch: true,
+									stroke: series.color,
+									strokeWidth: 1,
+									strokeDasharray: "3 2",
+									opacity: options.opacity,
+								}
+							: {
+									fill: series.color,
+									fillOpacity: options.fillOpacity,
+									stroke: options.stroke,
+									strokeDasharray: options.strokeDasharray,
+									opacity: options.opacity,
+								},
+					),
 				});
 				if (options.tip === false) {
 					continue;
