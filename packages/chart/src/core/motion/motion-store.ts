@@ -251,22 +251,19 @@ export function createMotionStore(
 		const opacity = value(key, OPACITY, 1, now);
 		const drawn = value(key, DRAWN, 1, now);
 		if (opacity === 1 && drawn === 1) return next;
-		const geometry = next.kind === "path" ? next.geometry : undefined;
-		const length =
-			geometry && next.kind === "path" ? next.motion?.length?.(geometry) : 0;
 		return {
 			...next,
 			paint: {
 				...next.paint,
 				opacity: (next.paint.opacity ?? 1) * clamp(opacity),
-				...(drawn < 1 && geometry
-					? {
-							drawn: {
-								fraction: clamp(drawn),
-								length: length ?? 0,
-							},
-						}
-					: {}),
+				...(drawn < 1 &&
+					next.kind === "path" &&
+					next.geometry && {
+						drawn: {
+							fraction: clamp(drawn),
+							length: next.motion?.length?.(next.geometry) ?? 0,
+						},
+					}),
 			},
 		} as SceneNode;
 	}
