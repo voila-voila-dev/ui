@@ -178,6 +178,35 @@ describe("sequences", () => {
 	});
 });
 
+describe("sequence duration", () => {
+	it("counts a segment that waits for an earlier one on the same value", () => {
+		const value = motionValue(0);
+		const other = motionValue(0);
+		const tween = { type: "tween", duration: 0.2 } as const;
+		const controls = animate([
+			[value, 10, tween],
+			[value, 20, { ...tween, at: "<" }],
+			[other, 1, { ...tween, at: "<" }],
+			[other, 2, { ...tween, delay: 0.1 }],
+		]);
+		// value runs 0 → 0.2 then 0.2 → 0.4; other starts with its second
+		// segment (0.2 → 0.4), then waits out its delay and runs 0.5 → 0.7.
+		expect(controls.duration).toBeCloseTo(0.7);
+	});
+
+	it("places the segment after a waiting one at its end", () => {
+		const value = motionValue(0);
+		const next = motionValue(0);
+		const tween = { type: "tween", duration: 0.2 } as const;
+		const controls = animate([
+			[value, 10, tween],
+			[value, 20, { ...tween, at: 0 }],
+			[next, 1, tween],
+		]);
+		expect(controls.duration).toBeCloseTo(0.6);
+	});
+});
+
 describe("sequence cursor", () => {
 	it("measures a relative time from the end of the segment just before", () => {
 		const a = motionValue(0);
