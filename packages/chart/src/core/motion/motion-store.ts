@@ -43,11 +43,8 @@ interface Motion {
 	readonly generator: Generator;
 	/** Milliseconds, the delay included. */
 	readonly start: number;
-}
-
-/** A path or a colour: a progress from 0 to 1, and the mix it reads. */
-interface StringMotion extends Motion {
-	readonly mix: (progress: number) => string;
+	/** A path or a colour: the generator runs a progress from 0 to 1, and this reads it. */
+	readonly mix?: (progress: number) => string;
 }
 
 /** A guide fading out where it stood. */
@@ -118,8 +115,7 @@ export function createMotionStore(
 	timing: ChartTiming,
 ): MotionStore {
 	let target = initial;
-	const numbers = new Map<string, Motion>();
-	const strings = new Map<string, StringMotion>();
+	const channels = new Map<string, Motion>();
 	const guides = new Map<string, GuideMotion>();
 	const shapes = new Map<
 		string,
@@ -128,7 +124,7 @@ export function createMotionStore(
 	const leaving = new Map<string, Leaving>();
 
 	function value(node: string, channel: string, fallback: number, now: number) {
-		const motion = numbers.get(channelKey(node, channel));
+		const motion = channels.get(channelKey(node, channel));
 		return motion ? motion.generator.at(elapsed(motion, now)).value : fallback;
 	}
 
@@ -142,13 +138,13 @@ export function createMotionStore(
 		now: number,
 	) {
 		const key = channelKey(node, channel);
-		const running = numbers.get(key);
+		const running = channels.get(key);
 		const velocity = running
 			? running.generator.at(elapsed(running, now)).velocity
 			: 0;
-		numbers.delete(key);
+		channels.delete(key);
 		if (from === to && velocity === 0) return;
-		numbers.set(key, { generator: timing.motion(from, to, velocity), start });
+		channels.set(key, { generator: timing.motion(from, to, velocity), start });
 	}
 
 	/** Mixes one string channel from what is painted to what `to` asks for. */
@@ -159,11 +155,11 @@ export function createMotionStore(
 		start: number,
 	) {
 		const key = channelKey(to.key, channel);
-		strings.delete(key);
+		channels.delete(key);
 		const was = stringOf(from, channel);
 		const goal = stringOf(to, channel);
 		if (was === undefined || goal === undefined || was === goal) return;
-		strings.set(key, {
+		channels.set(key, {
 			generator: timing.motion(0, 1, 0),
 			start,
 			mix: stringMixer(to, channel, was, goal),
@@ -171,10 +167,8 @@ export function createMotionStore(
 	}
 
 	function drop(node: string) {
-		for (const motions of [numbers, strings]) {
-			for (const key of motions.keys()) {
-				if (key.startsWith(node + SEPARATOR)) motions.delete(key);
-			}
+		for (const key of channels.keys()) {
+			if (key.startsWith(node + SEPARATOR)) channels.delete(key);
 		}
 		shapes.delete(node);
 		leaving.delete(node);
@@ -199,7 +193,7 @@ export function createMotionStore(
 		if (to.kind !== "path" || from.kind !== "path") return;
 		const previous = shapes.get(key);
 		shapes.delete(key);
-		strings.delete(channelKey(key, "d"));
+		channels.delete(channelKey(key, "d"));
 		const motion = to.motion;
 		const plan =
 			motion && from.geometry && to.geometry
@@ -212,7 +206,7 @@ export function createMotionStore(
 		}
 		for (const channel of previous?.plan.targets.keys() ?? []) {
 			if (!plan.targets.has(channel)) {
-				numbers.delete(channelKey(key, `g${channel}`));
+				channels.delete(channelKey(key, `g${channel}`));
 			}
 		}
 		for (const [channel, goal] of plan.targets) {
@@ -246,8 +240,8 @@ export function createMotionStore(
 		}
 		const mixed: Partial<Record<StringChannel, string>> = {};
 		for (const channel of STRING_CHANNELS) {
-			const motion = strings.get(channelKey(key, channel));
-			if (motion) {
+			const motion = channels.get(channelKey(key, channel));
+			if (motion?.mix) {
 				mixed[channel] = motion.mix(
 					motion.generator.at(elapsed(motion, now)).value,
 				);
@@ -311,15 +305,13 @@ export function createMotionStore(
 	}
 
 	function prune(now: number) {
-		for (const motions of [numbers, strings, guides]) {
+		for (const motions of [channels, guides]) {
 			for (const [key, motion] of motions) {
 				if (done(motion, now)) motions.delete(key);
 			}
 		}
 		const moving = new Set(
-			[...numbers.keys(), ...strings.keys()].map(
-				(key) => key.split(SEPARATOR)[0],
-			),
+			[...channels.keys()].map((key) => key.split(SEPARATOR)[0]),
 		);
 		for (const key of shapes.keys()) {
 			if (!moving.has(key)) shapes.delete(key);
@@ -345,11 +337,7 @@ export function createMotionStore(
 				after.byKey.has(key),
 			)) {
 				guides.set(guide.node.key, {
-					generator: timing.motion(
-						value(guide.node.key, OPACITY, 1, now),
-						0,
-						0,
-					),
+					generator: timing.motion(value(guide.node.key, OPACITY, 1, now), 0, 0),
 					start: now,
 					guide,
 				});
@@ -389,7 +377,7 @@ export function createMotionStore(
 					old ??
 					enterFrom(node, after.siblings.get(node.key) ?? [], before.byKey);
 				if (from) move(from, node, start, now);
-				const fading = numbers.get(channelKey(node.key, OPACITY));
+				const fading = channels.get(channelKey(node.key, OPACITY));
 				const returning = guides.get(node.key);
 				if ((!from && node.enter !== "none") || fading || returning) {
 					const shown = returning
@@ -416,22 +404,20 @@ export function createMotionStore(
 			return any;
 		},
 		snap(scene) {
-			for (const motions of [numbers, strings, guides, shapes, leaving]) {
+			for (const motions of [channels, guides, shapes, leaving]) {
 				motions.clear();
 			}
 			target = scene;
 		},
 		frame(now) {
 			prune(now);
-			if (numbers.size + strings.size + guides.size === 0) return target;
+			if (channels.size + guides.size === 0) return target;
 			return { ...target, nodes: paintList(target.nodes, null, now) };
 		},
 		settled(now) {
-			return [
-				...numbers.values(),
-				...strings.values(),
-				...guides.values(),
-			].every((motion) => done(motion, now));
+			return [...channels.values(), ...guides.values()].every((motion) =>
+				done(motion, now),
+			);
 		},
 	};
 }
