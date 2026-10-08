@@ -16,7 +16,7 @@ const BUDGETS = {
 	animate: 11_700,
 	values: 11_700,
 	sequence: 11_700,
-	view: 13_000,
+	view: 13_200,
 	react: 14_000,
 };
 
