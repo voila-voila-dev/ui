@@ -10,7 +10,7 @@ import {
 	type StringChannel,
 	stringMixer,
 	stringOf,
-	withStrings,
+	withString,
 } from "#/core/motion/strings.ts";
 import { type ChartTiming, staggerDelay } from "#/core/motion/timing.ts";
 import type {
@@ -240,14 +240,12 @@ export function createMotionStore(
 			);
 			next = { ...next, geometry, d: shape.motion.draw(geometry) };
 		}
-		const mixed: Partial<Record<StringChannel, string>> = {};
 		for (const channel of STRING_CHANNELS) {
 			const motion = channels.get(channelKey(key, channel));
 			if (motion?.mix) {
-				mixed[channel] = motion.mix(sample(motion, now).value);
+				next = withString(next, channel, motion.mix(sample(motion, now).value));
 			}
 		}
-		next = withStrings(next, mixed) as typeof next;
 		const opacity = value(key, OPACITY, 1, now);
 		const drawn = value(key, DRAWN, 1, now);
 		if (opacity === 1 && drawn === 1) return next;
