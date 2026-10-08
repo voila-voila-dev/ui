@@ -11,6 +11,11 @@ type Points = Extract<SceneGeometry, { kind: "points" }>;
 
 const POINT_FIELDS = ["x", "y", "x0", "y0"] as const;
 
+/** Where `point` sits on its area's lower edge. */
+function lowerEdge(point: GeometryPoint): GeometryPoint {
+	return { ...point, x: point.x0 ?? point.x, y: point.y0 ?? point.y };
+}
+
 /** A line, an area or a radar outline through its points. */
 export function pointsPath(geometry: SceneGeometry): string {
 	if (geometry.kind !== "points") return "";
@@ -19,14 +24,7 @@ export function pointsPath(geometry: SceneGeometry): string {
 	return runs
 		.map((run) =>
 			shape === "area"
-				? areaPath(
-						run,
-						run.map((point) => ({
-							x: point.x0 ?? point.x,
-							y: point.y0 ?? point.y,
-						})),
-						curve,
-					)
+				? areaPath(run, run.map(lowerEdge), curve)
 				: linePath(run, curve),
 		)
 		.join("");
@@ -163,13 +161,7 @@ function collapsed(node: ScenePath): ScenePath | undefined {
 		...node,
 		geometry: {
 			...geometry,
-			runs: geometry.runs.map((run) =>
-				run.map((point) => ({
-					...point,
-					x: point.x0 ?? point.x,
-					y: point.y0 ?? point.y,
-				})),
-			),
+			runs: geometry.runs.map((run) => run.map(lowerEdge)),
 		},
 	};
 }
