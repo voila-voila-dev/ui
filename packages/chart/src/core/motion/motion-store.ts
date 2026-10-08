@@ -79,31 +79,34 @@ function first(parent: string | null): string | undefined {
 	return parent === null ? undefined : parent + SEPARATOR;
 }
 
+/** Visits every node with its list and the key it is drawn after when it leaves (see `Leaving`). */
 function walk(
 	nodes: readonly SceneNode[],
 	visit: (
 		node: SceneNode,
 		siblings: readonly SceneNode[],
-		parent: string | null,
+		after: string | undefined,
 	) => void,
 	parent: string | null = null,
 ) {
+	let after = first(parent);
 	for (const node of nodes) {
-		visit(node, nodes, parent);
+		visit(node, nodes, after);
 		if (node.kind === "group") walk(node.children, visit, node.key);
+		after = node.key;
 	}
 }
 
 function index(nodes: readonly SceneNode[]) {
 	const byKey = new Map<string, SceneNode>();
 	const siblings = new Map<string, readonly SceneNode[]>();
-	const parents = new Map<string, string | null>();
-	walk(nodes, (node, list, parent) => {
+	const afters = new Map<string, string | undefined>();
+	walk(nodes, (node, list, after) => {
 		byKey.set(node.key, node);
 		siblings.set(node.key, list);
-		parents.set(node.key, parent);
+		afters.set(node.key, after);
 	});
-	return { byKey, siblings, parents };
+	return { byKey, siblings, afters };
 }
 
 function channelKey(node: string, channel: string): string {
@@ -339,13 +342,9 @@ export function createMotionStore(
 				if (guide) {
 					spring1(key, OPACITY, value(key, OPACITY, 1, now), 0, now, now);
 				}
-				const at = siblings.findIndex((node) => node.key === key);
 				leaving.set(key, {
 					node: goal,
-					after:
-						exit?.after ??
-						siblings[at - 1]?.key ??
-						first(before.parents.get(key) ?? null),
+					after: exit ? exit.after : before.afters.get(key),
 					siblings,
 				});
 			}
