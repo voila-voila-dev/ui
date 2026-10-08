@@ -74,6 +74,38 @@ describe("animate a motion value", () => {
 		expect(value.get()).toBe(100);
 	});
 
+	it("plays backwards at a negative speed and finishes where it started", async () => {
+		const value = motionValue(0);
+		const completed = vi.fn();
+		value.on("animationComplete", completed);
+		const controls = animate(value, [0, 100], {
+			type: "tween",
+			duration: 1,
+			ease: "linear",
+		});
+		clock.advance(500);
+		const halfway = value.get();
+		controls.speed = -1;
+		clock.advance(250);
+		expect(value.get()).toBeLessThan(halfway);
+		expect(controls.state).toBe("running");
+		clock.advance(500);
+		await controls;
+		expect(value.get()).toBe(0);
+		expect(controls.time).toBe(0);
+		expect(completed).toHaveBeenCalledTimes(1);
+	});
+
+	it("completes backwards to the start at a negative speed", async () => {
+		const value = motionValue(0);
+		const controls = animate(value, [0, 100], { type: "tween", duration: 1 });
+		clock.advance(300);
+		controls.speed = -2;
+		controls.complete();
+		await controls;
+		expect(value.get()).toBe(0);
+	});
+
 	it("repeats, reversing every other time", () => {
 		const value = motionValue(0);
 		const controls = animate(value, [0, 10], {

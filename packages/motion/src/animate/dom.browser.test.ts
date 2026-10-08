@@ -87,6 +87,20 @@ describe("animate on elements", () => {
 		expect(element.style.transform).toContain("skew(15deg)");
 	});
 
+	it("plays backwards in the browser and leaves the first keyframe", async () => {
+		const element = box();
+		const controls = animate(
+			element,
+			{ opacity: [0.2, 1], x: [0, 100] },
+			{ type: "tween", duration: 0.4 },
+		);
+		await new Promise((resolve) => setTimeout(resolve, 100));
+		controls.speed = -1;
+		await controls;
+		expect(element.style.opacity).toBe("0.2");
+		expect(translateX(element)).toBe(0);
+	});
+
 	it("can be interrupted mid-flight without a jump", async () => {
 		const element = box();
 		animate(element, { x: 300 }, { duration: 0.8 });

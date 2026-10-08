@@ -66,11 +66,11 @@ Every call returns the same controls, whatever plays the animation:
 const controls = animate(element, { x: 100 });
 controls.pause();
 controls.time = 0.2;   // seconds, delay included
-controls.speed = 0.5;
+controls.speed = 0.5;   // -1 plays it backwards, to finish at the start
 controls.play();
 controls.stop();       // stays where it is
 controls.cancel();     // back to the start
-controls.complete();   // jump to the end
+controls.complete();   // jump to the end (the start when played backwards)
 await controls;        // or controls.finished
 ```
 
