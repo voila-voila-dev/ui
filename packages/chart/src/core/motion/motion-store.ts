@@ -1,4 +1,4 @@
-import { type Generator, spring, tween } from "@voila.dev/motion";
+import type { Generator } from "@voila.dev/motion";
 import { enterFrom, exitTo } from "#/core/motion/enter-exit.ts";
 import {
 	type LeavingGuide,
@@ -127,22 +127,6 @@ export function createMotionStore(
 	>();
 	const leaving = new Map<string, Leaving>();
 
-	function generator(from: number, to: number, velocity: number): Generator {
-		return timing.type === "spring"
-			? spring({
-					from,
-					to,
-					velocity,
-					duration: timing.duration,
-					bounce: timing.bounce,
-				})
-			: tween({
-					keyframes: [from, to],
-					duration: timing.duration,
-					ease: timing.easing,
-				});
-	}
-
 	function value(node: string, channel: string, fallback: number, now: number) {
 		const motion = numbers.get(channelKey(node, channel));
 		return motion ? motion.generator.at(elapsed(motion, now)).value : fallback;
@@ -164,7 +148,7 @@ export function createMotionStore(
 			: 0;
 		numbers.delete(key);
 		if (from === to && velocity === 0) return;
-		numbers.set(key, { generator: generator(from, to, velocity), start });
+		numbers.set(key, { generator: timing.motion(from, to, velocity), start });
 	}
 
 	/** Mixes one string channel from what is painted to what `to` asks for. */
@@ -180,7 +164,7 @@ export function createMotionStore(
 		const goal = stringOf(to, channel);
 		if (was === undefined || goal === undefined || was === goal) return;
 		strings.set(key, {
-			generator: generator(0, 1, 0),
+			generator: timing.motion(0, 1, 0),
 			start,
 			mix: stringMixer(to, channel, was, goal),
 		});
@@ -361,7 +345,11 @@ export function createMotionStore(
 				after.byKey.has(key),
 			)) {
 				guides.set(guide.node.key, {
-					generator: generator(value(guide.node.key, OPACITY, 1, now), 0, 0),
+					generator: timing.motion(
+						value(guide.node.key, OPACITY, 1, now),
+						0,
+						0,
+					),
 					start: now,
 					guide,
 				});
