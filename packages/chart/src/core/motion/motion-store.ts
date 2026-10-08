@@ -102,6 +102,10 @@ function elapsed(motion: Motion, now: number): number {
 	return Math.max(0, (now - motion.start) / 1000);
 }
 
+function sample(motion: Motion, now: number) {
+	return motion.generator.at(elapsed(motion, now));
+}
+
 function done(motion: Motion, now: number): boolean {
 	return elapsed(motion, now) >= motion.generator.duration;
 }
@@ -125,7 +129,7 @@ export function createMotionStore(
 
 	function value(node: string, channel: string, fallback: number, now: number) {
 		const motion = channels.get(channelKey(node, channel));
-		return motion ? motion.generator.at(elapsed(motion, now)).value : fallback;
+		return motion ? sample(motion, now).value : fallback;
 	}
 
 	/** Springs one channel from `from` to `to`, at the speed it already has. */
@@ -139,9 +143,7 @@ export function createMotionStore(
 	) {
 		const key = channelKey(node, channel);
 		const running = channels.get(key);
-		const velocity = running
-			? running.generator.at(elapsed(running, now)).velocity
-			: 0;
+		const velocity = running ? sample(running, now).velocity : 0;
 		channels.delete(key);
 		if (from === to && velocity === 0) return;
 		channels.set(key, { generator: timing.motion(from, to, velocity), start });
@@ -242,9 +244,7 @@ export function createMotionStore(
 		for (const channel of STRING_CHANNELS) {
 			const motion = channels.get(channelKey(key, channel));
 			if (motion?.mix) {
-				mixed[channel] = motion.mix(
-					motion.generator.at(elapsed(motion, now)).value,
-				);
+				mixed[channel] = motion.mix(sample(motion, now).value);
 			}
 		}
 		next = withStrings(next, mixed) as typeof next;
@@ -296,10 +296,7 @@ export function createMotionStore(
 		if (guides.size === 0) return out;
 		const fading = [...guides.values()].map(
 			(motion) =>
-				[
-					motion.guide,
-					Math.max(0, motion.generator.at(elapsed(motion, now)).value),
-				] as const,
+				[motion.guide, Math.max(0, sample(motion, now).value)] as const,
 		);
 		return withLeaving(out, parent, fading);
 	}
@@ -381,7 +378,7 @@ export function createMotionStore(
 				const returning = guides.get(node.key);
 				if ((!from && node.enter !== "none") || fading || returning) {
 					const shown = returning
-						? Math.max(0, returning.generator.at(elapsed(returning, now)).value)
+						? Math.max(0, sample(returning, now).value)
 						: fading
 							? value(node.key, OPACITY, 1, now)
 							: 0;
