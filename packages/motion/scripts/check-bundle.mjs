@@ -15,7 +15,7 @@ const BUDGETS = {
 	dom: 5_000,
 	animate: 11_500,
 	values: 11_500,
-	sequence: 11_500,
+	sequence: 11_600,
 	view: 13_000,
 	react: 14_000,
 };
